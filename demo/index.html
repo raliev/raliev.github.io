@@ -24,6 +24,23 @@
             position: relative;
         }
 
+        #audioToggleBtn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 10;
+        }
+        #audioToggleBtn:hover {
+            background: #0056b3;
+        }
+
         .slide img {
             max-width: calc(100vw - 220px);
             height: auto;
@@ -132,8 +149,14 @@
     </style>
 </head>
 <body>
+<div style="padding: 10px; text-align: center;">
+    <audio id="audioPlayer"></audio>
+</div>
 <div class="container">
     <div class="slide">
+        <button id="audioToggleBtn">
+            Turn Audio On
+        </button>
         <img id="screenshot" src="">
         <!-- Mobile overlay -->
         <div id="mobileOverlay" class="mobile-overlay hidden">
@@ -153,6 +176,26 @@
 
 <script>
     let current = 0;
+    let audioEnabled = false;
+    let userInteracted = false;
+    const audioBtn = document.getElementById('audioToggleBtn');
+    const audioEl = document.getElementById('audioPlayer');
+
+    // Track first user interaction to allow autoplay
+    document.body.addEventListener('click', () => {
+        userInteracted = true;
+    }, { once: true });
+
+    audioBtn.addEventListener('click', () => {
+        audioEnabled = !audioEnabled;
+        if (audioEnabled) {
+            audioBtn.textContent = 'Turn Audio Off';
+        } else {
+            audioBtn.textContent = 'Turn Audio On';
+            audioEl.pause();
+        }
+    });
+
     const steps = [
         { img: 'screenshots/01_start-page.png' },
         { img: 'screenshots/02_before-sandboxes-click.png' },
@@ -193,6 +236,15 @@
             console.error('Error fetching description:', error);
             descriptionEl.textContent = 'Could not load description.';
             mobileDescriptionEl.textContent = 'Could not load description.';
+        }
+
+        // Play audio if enabled and user has interacted
+        if (audioEnabled && userInteracted) {
+            const audioPath = step.img.replace('.png', '.mp3');
+            audioEl.src = audioPath;
+            audioEl.play().catch(err => {
+                console.warn('Audio playback prevented:', err);
+            });
         }
     }
 
