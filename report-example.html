@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Example - TestMySearch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-3.7.2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.7.2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.7.2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .table-auto th, .table-auto td { border: 1px solid #e5e7eb; padding: 0.75rem; }
+        .bk-root .bk-toolbar-button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+<header class="sticky top-0 z-50 shadow-sm" style="background-color: #faf8f5;">
+    <nav class="container mx-auto flex items-center justify-between px-6 py-4">
+        <a href="#"><img src="img/testmysearch-logo.png" alt="TestMySearch Logo" style="height:60px"></a>
+        <div class="hidden items-center space-x-6 md:flex">
+            <a href="#" class="text-gray-600 hover:text-indigo-600">Features</a>
+            <a href="#" class="text-gray-600 hover:text-indigo-600">How It Works</a>
+            <a href="#" class="text-gray-600 hover:text-indigo-600">Demos</a>
+            <a href="#" class="rounded-md bg-indigo-600 px-4 py-2 text-white transition hover:bg-indigo-700">Contact Us</a>
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-6 py-16">
+    <div class="mx-auto max-w-6xl">
+        <div class="text-center">
+            <h1 class="text-4xl font-extrabold text-gray-900">Q3 Search Algorithm Test Report</h1>
+            <p class="mt-2 text-lg text-gray-600">Comparison of <span class="font-semibold text-gray-800">v1-baseline-us</span> vs. <span class="font-semibold text-gray-800">v2-titleboost-us</span> vs. <span class="font-semibold text-gray-800">vector</span></p>
+            <p class="text-sm text-gray-500">Generated on: 2025-08-01 | 200 Queries Analyzed</p>
+        </div>
+
+        <div class="mt-12 rounded-lg bg-white p-8 shadow-lg">
+            <h2 class="text-2xl font-bold text-gray-900">Executive Summary & LLM Judgement</h2>
+            <div class="mt-4 grid gap-8 md:grid-cols-3">
+                <div class="rounded-lg border border-green-200 bg-green-50 p-6 text-center">
+                    <p class="text-sm font-medium text-green-700">WINNER</p>
+                    <p class="text-3xl font-bold text-green-800">v2-titleboost-us</p>
+                </div>
+                <div class="md:col-span-2">
+                    <p class="text-gray-700"><strong class="text-gray-900">LLM Analyst Conclusion:</strong> The <strong class="text-green-700">'v2-titleboost-us'</strong> configuration demonstrates a statistically significant improvement across multiple key relevance metrics, including nDCG@10, Precision, and Recall, when compared to both the baseline and vector models. Although the 'vector' model shows strength in some areas, 'v2-titleboost-us' provides the most balanced and consistent uplift in search quality. It is therefore recommended for deployment.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 rounded-lg bg-white p-8 shadow-lg">
+            <h2 class="text-2xl font-bold text-gray-900">Key Metrics Summary</h2>
+            <div class="mt-4 overflow-x-auto">
+                <table class="w-full table-auto text-left">
+                    <thead class="bg-gray-50">
+                    <tr>
+                        <th class="text-sm font-semibold text-gray-600">Metric</th>
+                        <th class="text-center text-sm font-semibold text-gray-600">v1-baseline-us</th>
+                        <th class="text-center text-sm font-semibold text-gray-600">v2-titleboost-us</th>
+                        <th class="text-center text-sm font-semibold text-gray-600">vector</th>
+                        <th class="text-center text-sm font-semibold text-gray-600">Winner</th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                    <tr><td>Mean nDCG@10</td><td class="text-center font-mono">0.2983</td>
+                        <td class="text-center font-mono font-bold bg-green-50">0.3355</td>
+                        <td class="text-center font-mono">0.2566</td>
+                        <td class="text-center text-green-600">v2-titleboost-us</td>
+                    </tr>
+                    <tr><td>Mean RR</td>
+                        <td class="text-center font-mono">0.4375</td>
+                        <td class="text-center font-mono font-bold bg-green-50">0.4907</td>
+                        <td class="text-center font-mono">0.4165</td>
+                        <td class="text-center text-green-600">v2-titleboost-us</td></tr>
+                    <tr><td>Mean Precision@5</td>
+                        <td class="text-center font-mono">0.2690</td>
+                        <td class="text-center font-mono font-bold bg-green-50">0.3080</td>
+                        <td class="text-center font-mono">0.2430</td>
+                        <td class="text-center text-green-600">v2-titleboost-us</td></tr>
+                    <tr><td>Queries with Zero Results</td>
+                        <td class="text-center font-mono">1</td>
+                        <td class="text-center font-mono">1</td>
+                        <td class="text-center font-mono font-bold bg-green-50">0</td>
+                        <td class="text-center text-green-600">vector</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="reports-container">
+            <!-- Report sections will be dynamically inserted here -->
+        </div>
+    </div>
+</main>
+
+<footer class="bg-gray-800 text-gray-400">
+    <div class="container mx-auto px-6 py-8 text-center">
+        <p>&copy; 2025 TestMySearch. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<script type="text/javascript">
+    function leave_only_trends(docs) {
+        for (const docId in docs) {
+            const doc = docs[docId];
+            if (!doc.roots) continue;
+
+            for (const rootObj of doc.roots) {
+                if (!rootObj.attributes || !rootObj.attributes.renderers) continue;
+
+                // Loop through renderers inside the Figure
+                for (const renderer of rootObj.attributes.renderers) {
+                    if (!renderer.attributes) continue;
+                    const rendererName = renderer.attributes.name || "";
+
+                    // Hide if not a trend series
+                    if (!rendererName.endsWith("_trend")) {
+                        renderer.attributes.visible = false;
+                    }
+                }
+            }
+        }
+    }
+    // URLs for the JSON data files. Please edit these to point to your actual data sources.
+    const JSON_URLS = {
+        dcg_at_10: 'reports/metric_dcg_at_10.csv.json',
+        stats_cg_at_10: 'https://storage.googleapis.com/testmysearch-examples/report_20250712141952_7e1e0af2/summary_metric_cg_at_10_stats.csv.json',
+        pairwise_cg_at_10: 'https://storage.googleapis.com/testmysearch-examples/report_20250712141952_7e1e0af2/summary_metric_cg_at_10_pairwise.csv.json',
+        precision: 'reports/metric_precision.csv.json',
+        recall: 'reports/metric_recall.csv.json',
+        novelty_stats: 'https://storage.googleapis.com/testmysearch-examples/report_20250712141952_7e1e0af2/summary_metric_novelty_stats.csv.json',
+        num_results_stats: 'reports/summary_metric_number_of_results_stats.csv.json',
+        pairwise_stats: 'https://storage.googleapis.com/testmysearch-examples/report_20250712141952_7e1e0af2/summary_metric_rr_pairwise.csv.json' // Example, adjust as needed
+    };
+
+    /**
+     * Fetches JSON data from a given URL.
+     * @param {string} url - The URL to fetch data from.
+     * @returns {Promise<Object>} A promise that resolves with the JSON data.
+     */
+    async function fetchJsonData(url) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error(`Error fetching JSON from ${url}:`, error);
+            return null;
+        }
+    }
+
+    /**
+     * Modifies Bokeh JSON to only show trend lines.
+     * @param {Object} docs - The Bokeh JSON object.
+     */
+    function leaveOnlyTrends(docs) {
+        for (const docId in docs) {
+            const doc = docs[docId];
+            if (!doc.roots) continue;
+            for (const rootObj of doc.roots) {
+                if (!rootObj.attributes || !rootObj.attributes.renderers) continue;
+                for (const renderer of rootObj.attributes.renderers) {
+                    if (!renderer.attributes) continue;
+                    const rendererName = renderer.attributes.name || "";
+                    renderer.attributes.visible = rendererName.endsWith("_trend");
+                }
+            }
+        }
+    }
+
+    /**
+     * Renders a Bokeh plot into a specified container.
+     * @param {string} containerId - The ID of the div to render the plot in.
+     * @param {string} jsonUrl - The URL of the Bokeh JSON data.
+     * @param {boolean} trendsOnly - Whether to apply the leaveOnlyTrends transformation.
+     */
+    async function createBokehPlot(containerId, jsonUrl, trendsOnly = false) {
+        const plotContainer = document.getElementById(containerId);
+        if (!plotContainer) return;
+
+        const data = await fetchJsonData(jsonUrl);
+        if (!data) {
+            plotContainer.innerHTML = `<p class="text-red-500">Failed to load chart data from ${jsonUrl}</p>`;
+            return;
+        }
+
+        const { plot_div, plot_script } = data;
+        plotContainer.innerHTML = plot_div;
+
+        const scriptTag = document.createElement('script');
+        scriptTag.type = 'text/javascript';
+
+        // Extract the core Bokeh embedding logic from the script tag content
+        const scriptContentMatch = plot_script.match(/Bokeh\.safely\(function\(\) {([\s\S]*)}\);/);
+        if (scriptContentMatch) {
+            let scriptLogic = scriptContentMatch[1];
+            if (trendsOnly) {
+                // Inject the transformation function call
+                scriptLogic = scriptLogic.replace('const docs = JSON.parse(docs_json);', 'let docs = JSON.parse(docs_json); leaveOnlyTrends(docs); docs_json = JSON.stringify(docs);');
+            }
+            scriptTag.textContent = `(function() { const fn = function() { Bokeh.safely(function() { ${scriptLogic} }); }; if (document.readyState != "loading") fn(); else document.addEventListener("DOMContentLoaded", fn); })();`;
+            document.body.appendChild(scriptTag);
+        }
+    }
+
+    /**
+     * Creates an HTML table from JSON data.
+     * @param {string} containerId - The ID of the div to render the table in.
+     * @param {string} jsonUrl - The URL of the JSON data for the table.
+     */
+    async function createDataTable(containerId, jsonUrl) {
+        const tableContainer = document.getElementById(containerId);
+        if (!tableContainer) return;
+
+        const data = await fetchJsonData(jsonUrl);
+        if (!data || !data.table_html) {
+            tableContainer.innerHTML = `<p class="text-red-500">Failed to load table data from ${jsonUrl}</p>`;
+            return;
+        }
+        tableContainer.innerHTML = data.table_html;
+    }
+
+    /**
+     * Creates a report section with a title, description, and optional plot/table.
+     * @param {Object} config - The configuration for the report section.
+     */
+    function createReportSection(config) {
+        const { id, title, description, plotUrl, tableUrl, trendsOnly = false } = config;
+        const reportsContainer = document.getElementById('reports-container');
+
+        const sectionId = `section-${id}`;
+        const plotId = `plot-${id}`;
+        const tableId = `table-${id}`;
+
+        const sectionHtml = `
+            <div id="${sectionId}" class="mt-8 rounded-lg bg-white p-8 shadow-lg">
+                <h2 class="text-2xl font-bold text-gray-900">${title}</h2>
+                <p class="mt-2 text-gray-600">${description}</p>
+                <div class="mt-4">
+                    ${plotUrl ? `<div id="${plotId}"></div>` : ''}
+                    ${tableUrl ? `<div id="${tableId}" class="mt-4 overflow-x-auto"></div>` : ''}
+                </div>
+            </div>
+        `;
+        reportsContainer.innerHTML += sectionHtml;
+
+        // Defer rendering to allow the DOM to update
+        setTimeout(() => {
+            if (plotUrl) {
+                createBokehPlot(plotId, plotUrl, trendsOnly);
+            }
+            if (tableUrl) {
+                createDataTable(tableId, tableUrl);
+            }
+        }, 0);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const reports = [
+            {
+                id: 'dcg-at-10',
+                title: 'Discounted Cumulative Gain (DCG@10) Per Query',
+                description: 'This chart plots the DCG@10 score for each of the 200 queries. Higher values indicate better performance.',
+                plotUrl: JSON_URLS.dcg_at_10,
+                tableUrl: JSON_URLS.dcg_at_10
+            },
+            {
+                id: 'precision',
+                title: 'Precision Per Query',
+                description: 'Measures the fraction of relevant documents among the retrieved documents. This plot shows the trend of precision across queries.',
+                plotUrl: JSON_URLS.precision,
+                tableUrl: JSON_URLS.precision,
+                trendsOnly: true
+            },
+            {
+                id: 'recall',
+                title: 'Recall Per Query',
+                description: 'Measures the fraction of the relevant documents that are successfully retrieved. This plot shows the trend of recall across queries.',
+                plotUrl: JSON_URLS.recall,
+                tableUrl: JSON_URLS.recall,
+                trendsOnly: true
+            }
+        ];
+/*
+,
+            {
+                id: 'num-results-stats',
+                title: 'Number of Results Statistics',
+                description: 'Provides descriptive statistics for the number of results returned by each configuration.',
+                plotUrl: JSON_URLS.num_results_stats,
+                tableUrl: JSON_URLS.num_results_stats
+            }
+ */
+        reports.forEach(createReportSection);
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run & Analyze - TestMySearch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+<header class="sticky top-0 z-50 shadow-sm" style="background-color: #faf8f5;">
+    <nav class="container mx-auto flex items-center justify-between px-6 py-4">
+        <a href="/"><img src="/img/testmysearch-logo.png" alt="TestMySearch Logo" style="height:60px"></a>
+        <div class="hidden items-center space-x-6 md:flex">
+            <a href="/#features" class="text-gray-600 hover:text-indigo-600">Features</a>
+            <a href="/#how-it-works" class="text-gray-600 hover:text-indigo-600">How It Works</a>
+            <a href="/#demos" class="text-gray-600 hover:text-indigo-600">Demos</a>
+            <a href="/#contact" class="rounded-md bg-indigo-600 px-4 py-2 text-white transition hover:bg-indigo-700">Contact Us</a>
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-6 py-16">
+    <div class="mx-auto max-w-4xl">
+        <div class="text-center">
+            <h1 class="text-4xl font-extrabold text-gray-900 md:text-5xl">How It Works: Step 2</h1>
+        </div>
+
+        <nav class="my-8" aria-label="Progress">
+            <ol role="list" class="mx-auto flex w-full max-w-lg items-center">
+                <li class="relative flex-1 pr-8 sm:pr-20">
+                    <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                        <div class="h-0.5 w-full bg-indigo-600"></div>
+                    </div>
+                    <a href="upload-configure.html" class="group relative flex h-8 w-8 items-center justify-center rounded-full bg-white ring-2 ring-indigo-600 hover:ring-indigo-700">
+                        <i class="fas fa-check text-indigo-600"></i>
+                    </a>
+                    <div class="absolute top-10 w-max -translate-x-1/2 transform px-2 text-center text-sm text-gray-500">Upload & Configure</div>
+                </li>
+                <li class="relative flex-1 pr-8 sm:pr-20">
+                    <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                        <div class="h-0.5 w-full bg-indigo-600"></div>
+                    </div>
+                    <a href="run-analyze.html" class="relative flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600">
+                        <span class="text-white">2</span>
+                    </a>
+                    <div class="absolute top-10 w-max -translate-x-1/2 transform px-2 text-center text-sm font-semibold text-indigo-600">Run & Analyze</div>
+                </li>
+                <li class="relative flex-shrink">
+                    <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                        <div class="h-0.5 w-full bg-gray-200"></div>
+                    </div>
+                    <a href="visualize-decide.html" class="group relative flex h-8 w-8 items-center justify-center rounded-full border-2 border-gray-300 bg-white hover:border-gray-400">
+                        <span class="text-gray-500 group-hover:text-gray-900">3</span>
+                    </a>
+                    <div class="absolute top-10 w-max -translate-x-1/2 transform px-2 text-center text-sm text-gray-500">Visualize & Decide</div>
+                </li>
+            </ol>
+        </nav>
+
+        <div class="mt-20 rounded-lg bg-white p-8 shadow-lg">
+            <h2 class="text-2xl font-bold text-gray-900">Automated Data Collection at Scale</h2>
+            <p class="mt-4 text-gray-700">Once your configurations and data are in place, you can initiate a <b>Batch Run</b>. The platform takes your query set and systematically sends each query to every search configuration you've selected for the test. This is all done asynchronously in the background, allowing you to test thousands of queries without tying up your machine.</p>
+
+            <div class="mt-8 flex flex-col items-center rounded-lg border border-gray-200 bg-gray-50 p-8 md:flex-row">
+                <div class="flex-shrink-0 text-5xl text-indigo-500"><i class="fas fa-server"></i></div>
+                <div class="mt-4 text-center md:mt-0 md:ml-6 md:text-left">
+                    <h3 class="text-xl font-bold text-gray-900">Fetching and Storing Results</h3>
+                    <p class="mt-2 text-gray-700">For every query and configuration pair, TestMySearch retrieves the ranked list of search results (e.g., the top 50 documents) and stores it. This creates a comprehensive snapshot of your search engine's performance at a specific moment in time.</p>
+                </div>
+            </div>
+
+            <div class="mt-8 flex flex-col items-center rounded-lg border border-gray-200 bg-gray-50 p-8 md:flex-row">
+                <div class="flex-shrink-0 text-5xl text-indigo-500"><i class="fas fa-calculator"></i></div>
+                <div class="mt-4 text-center md:mt-0 md:ml-6 md:text-left">
+                    <h3 class="text-xl font-bold text-gray-900">Automatic Metrics Calculation</h3>
+                    <p class="mt-2 text-gray-700">As results are fetched, the platform immediately compares them against your provided <b>Evaluation Set</b>. It calculates dozens of Information Retrieval metrics for each query, providing instant, objective feedback on performance. You can even trigger recalculations at any time if you update your ground truth data.</p>
+                </div>
+            </div>
+        </div>
+        <div class="mt-12 text-center">
+            <a href="visualize-decide.html" class="transform rounded-lg bg-indigo-600 px-8 py-4 text-lg font-semibold text-white shadow-md transition hover:scale-105 hover:bg-indigo-700">
+                Next Step: Visualize & Decide <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </div>
+</main>
+
+<footer class="bg-gray-800 text-gray-400">
+    <div class="container mx-auto px-6 py-8 text-center">
+        <p>&copy; 2025 TestMySearch. All Rights Reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>
