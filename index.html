@@ -34,31 +34,29 @@
 <body class="bg-gray-50 text-gray-800">
 
 <!-- Header -->
-<header class="bg-white shadow-sm sticky top-0 z-50">
-    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-        <div class="text-2xl font-bold text-indigo-600">
-            <i class="fas fa-search-plus"></i> TestMySearch
+<header class="sticky top-0 z-50 shadow-sm" style="background-color: #faf8f5;">
+    <nav class="container mx-auto flex items-center justify-between px-6 py-4">
+        <a href="/"><img src="/img/testmysearch-logo.png" alt="TestMySearch Logo" style="height:60px"></a>
+        <div class="hidden items-center space-x-6 md:flex">
+            <a href="#features" class="text-gray-600 hover:text-indigo-600">Features</a>
+            <a href="#how-it-works" class="text-gray-600 hover:text-indigo-600">How It Works</a>
+            <a href="#demos" class="text-gray-600 hover:text-indigo-600">Demos</a>
+            <a href="#contact" class="rounded-md bg-indigo-600 px-4 py-2 text-white transition hover:bg-indigo-700">Contact Us</a>
         </div>
-        <ul class="flex items-center space-x-6">
-            <li><a href="#features" class="text-gray-600 hover:text-indigo-600">Features</a></li>
-            <li><a href="#how-it-works" class="text-gray-600 hover:text-indigo-600">How It Works</a></li>
-            <li><a href="#use-cases" class="text-gray-600 hover:text-indigo-600">Use Cases</a></li>
-            <li><a href="#contact" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition">Request a Demo</a></li>
-        </ul>
     </nav>
 </header>
 
 <!-- Hero Section -->
 <section class="relative bg-white pt-20 pb-32">
     <div class="container mx-auto px-6 text-center">
-        <h1 class="text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight">
+        <h1 class="text-5xl font-extrabold leading-tight text-gray-900 md:text-6xl">
             Stop Guessing. <span class="text-indigo-600">Start Improving</span> Your Search.
         </h1>
-        <p class="mt-6 text-lg text-gray-600 max-w-3xl mx-auto">
+        <p class="mx-auto mt-6 max-w-3xl text-lg text-gray-600">
             TestMySearch is the all-in-one platform that takes the guesswork out of search engine optimization. A/B test configurations, visualize performance with advanced metrics, and get data-driven conclusions to confidently deploy changes that work.
         </p>
         <div class="mt-8">
-            <a href="#contact" class="bg-indigo-600 text-white text-lg font-semibold px-8 py-4 rounded-lg shadow-md hover:bg-indigo-700 transition transform hover:scale-105">Get a Demo</a>
+            <a href="#contact" class="transform rounded-lg bg-indigo-600 px-8 py-4 text-lg font-semibold text-white shadow-md transition hover:scale-105 hover:bg-indigo-700">Request a Demo</a>
         </div>
     </div>
     <div class="swoop">
@@ -69,24 +67,24 @@
 </section>
 
 <!-- Problem Section -->
-<section class="py-20 bg-gray-100">
+<section class="bg-gray-100 py-20">
     <div class="container mx-auto px-6">
-        <div class="text-center mb-12">
+        <div class="mb-12 text-center">
             <h2 class="text-4xl font-bold text-gray-900">The Fear of Breaking What Works</h2>
-            <p class="mt-4 text-gray-600 max-w-2xl mx-auto">You have hypotheses to improve your search, but how do you validate them without risking your production environment? Improving one aspect might unknowingly degrade another.</p>
+            <p class="mx-auto mt-4 max-w-2xl text-gray-600">You have hypotheses to improve your search, but how do you validate them without risking your production environment? Improving one aspect might unknowingly degrade another.</p>
         </div>
-        <div class="flex flex-col md:flex-row items-center justify-center space-y-8 md:space-y-0 md:space-x-12">
-            <div class="text-center p-6">
+        <div class="flex flex-col items-center justify-center space-y-8 md:flex-row md:space-y-0 md:space-x-12">
+            <div class="p-6 text-center">
                 <i class="fas fa-question-circle text-4xl text-red-500"></i>
                 <h3 class="mt-4 text-xl font-semibold">Uncertainty</h3>
                 <p class="mt-2 text-gray-600">Are your changes truly improvements? Or are they just different?</p>
             </div>
-            <div class="text-center p-6">
+            <div class="p-6 text-center">
                 <i class="fas fa-balance-scale-right text-4xl text-yellow-500"></i>
                 <h3 class="mt-4 text-xl font-semibold">Hidden Trade-offs</h3>
                 <p class="mt-2 text-gray-600">Improving results for one query set might be hurting another.</p>
             </div>
-            <div class="text-center p-6">
+            <div class="p-6 text-center">
                 <i class="fas fa-chart-line-down text-4xl text-blue-500"></i>
                 <h3 class="mt-4 text-xl font-semibold">Manual Effort</h3>
                 <p class="mt-2 text-gray-600">Endless spreadsheets and manual checks that are slow and error-prone.</p>
@@ -96,31 +94,31 @@
 </section>
 
 <!-- Features Section -->
-<section id="features" class="py-20 bg-white">
+<section id="features" class="bg-white py-20">
     <div class="container mx-auto px-6">
-        <div class="text-center mb-16">
+        <div class="mb-16 text-center">
             <h2 class="text-4xl font-bold text-gray-900">Powerful Features to Drive Better Search</h2>
-            <p class="mt-4 text-gray-600 max-w-2xl mx-auto">TestMySearch provides a complete toolkit for search analysis and optimization.</p>
+            <p class="mx-auto mt-4 max-w-2xl text-gray-600">TestMySearch provides a complete toolkit for search analysis and optimization.</p>
         </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition">
-                <div class="text-indigo-600 text-4xl mb-4"><i class="fas fa-vials"></i></div>
-                <h3 class="text-xl font-bold mb-2">A/B Testing Platform</h3>
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            <div class="rounded-lg bg-gray-50 p-8 shadow-md transition hover:shadow-xl">
+                <div class="mb-4 text-4xl text-indigo-600"><i class="fas fa-vials"></i></div>
+                <h3 class="mb-2 text-xl font-bold">A/B Testing Platform</h3>
                 <p class="text-gray-600">Feed the system thousands of queries and multiple configurations. By morning, get a full report with charts, metrics, and a clear conclusion on which performs better.</p>
             </div>
-            <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition">
-                <div class="text-indigo-600 text-4xl mb-4"><i class="fas fa-chart-pie"></i></div>
-                <h3 class="text-xl font-bold mb-2">Comprehensive Metrics</h3>
+            <div class="rounded-lg bg-gray-50 p-8 shadow-md transition hover:shadow-xl">
+                <div class="mb-4 text-4xl text-indigo-600"><i class="fas fa-chart-pie"></i></div>
+                <h3 class="mb-2 text-xl font-bold">Comprehensive Metrics</h3>
                 <p class="text-gray-600">Calculate NDCG@k, MAP, Precision, Recall, and dozens more. Interactive visualizations make it easy to understand the "why" behind the numbers.</p>
             </div>
-            <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition">
-                <div class="text-indigo-600 text-4xl mb-4"><i class="fas fa-robot"></i></div>
-                <h3 class="text-xl font-bold mb-2">Virtual Search Assessor</h3>
+            <div class="rounded-lg bg-gray-50 p-8 shadow-md transition hover:shadow-xl">
+                <div class="mb-4 text-4xl text-indigo-600"><i class="fas fa-robot"></i></div>
+                <h3 class="mb-2 text-xl font-bold">Virtual Search Assessor</h3>
                 <p class="text-gray-600">Leverage LLMs to evaluate how well each document matches a query. Our non-trivial process of chunking, embeddings, and evaluation delivers reliable relevance scores.</p>
             </div>
-            <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition">
-                <div class="text-indigo-600 text-4xl mb-4"><i class="fas fa-project-diagram"></i></div>
-                <h3 class="text-xl font-bold mb-2">Query Analysis & Clustering</h3>
+            <div class="rounded-lg bg-gray-50 p-8 shadow-md transition hover:shadow-xl">
+                <div class="mb-4 text-4xl text-indigo-600"><i class="fas fa-project-diagram"></i></div>
+                <h3 class="mb-2 text-xl font-bold">Query Analysis & Clustering</h3>
                 <p class="text-gray-600">Analyze and group similar queries to uncover user intent patterns. For example, find brand name variations that should be treated as equivalents.</p>
             </div>
         </div>
@@ -128,30 +126,30 @@
 </section>
 
 <!-- How It Works Section -->
-<section id="how-it-works" class="py-20 bg-gray-100">
+<section id="how-it-works" class="bg-gray-100 py-20">
     <div class="container mx-auto px-6">
-        <div class="text-center mb-16">
+        <div class="mb-16 text-center">
             <h2 class="text-4xl font-bold text-gray-900">A Clear Path to Better Relevancy</h2>
-            <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Our streamlined process makes search testing systematic and repeatable.</p>
+            <p class="mx-auto mt-4 max-w-2xl text-gray-600">Our streamlined process makes search testing systematic and repeatable.</p>
         </div>
         <div class="relative">
             <!-- The connecting line -->
-            <div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-indigo-200 -translate-y-1/2"></div>
+            <div class="absolute top-1/2 left-0 hidden h-0.5 w-full -translate-y-1/2 bg-indigo-200 md:block"></div>
 
-            <div class="grid md:grid-cols-3 gap-12 relative">
-                <div class="text-center bg-white p-8 rounded-lg shadow-lg">
-                    <div class="text-3xl font-bold text-indigo-600 bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">1</div>
-                    <h3 class="text-xl font-semibold mb-2">Upload & Configure</h3>
+            <div class="relative grid gap-12 md:grid-cols-3">
+                <div class="rounded-lg bg-white p-8 text-center shadow-lg">
+                    <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-indigo-100 text-3xl font-bold text-indigo-600">1</div>
+                    <h3 class="mb-2 text-xl font-semibold">Upload & Configure</h3>
                     <p class="text-gray-600">Provide your query sets, ground truth data (evalsets), and connect your search engine configurations (Solr, Elasticsearch, etc.).</p>
                 </div>
-                <div class="text-center bg-white p-8 rounded-lg shadow-lg">
-                    <div class="text-3xl font-bold text-indigo-600 bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">2</div>
-                    <h3 class="text-xl font-semibold mb-2">Run & Analyze</h3>
+                <div class="rounded-lg bg-white p-8 text-center shadow-lg">
+                    <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-indigo-100 text-3xl font-bold text-indigo-600">2</div>
+                    <h3 class="mb-2 text-xl font-semibold">Run & Analyze</h3>
                     <p class="text-gray-600">Execute batch runs. TestMySearch fetches results, calculates IR metrics against your ground truth, and optionally gets LLM judgements on performance.</p>
                 </div>
-                <div class="text-center bg-white p-8 rounded-lg shadow-lg">
-                    <div class="text-3xl font-bold text-indigo-600 bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">3</div>
-                    <h3 class="text-xl font-semibold mb-2">Visualize & Decide</h3>
+                <div class="rounded-lg bg-white p-8 text-center shadow-lg">
+                    <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-indigo-100 text-3xl font-bold text-indigo-600">3</div>
+                    <h3 class="mb-2 text-xl font-semibold">Visualize & Decide</h3>
                     <p class="text-gray-600">Review detailed per-query and summary reports. Compare configurations side-by-side and make informed decisions backed by data.</p>
                 </div>
             </div>
@@ -160,22 +158,22 @@
 </section>
 
 <!-- Use Cases Section -->
-<section id="use-cases" class="py-20 bg-white">
+<section id="use-cases" class="bg-white py-20">
     <div class="container mx-auto px-6">
-        <div class="text-center mb-16">
+        <div class="mb-16 text-center">
             <h2 class="text-4xl font-bold text-gray-900">Built for Teams Who Care About Search</h2>
-            <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Whether you're selling products or surfacing documents, TestMySearch provides the clarity you need.</p>
+            <p class="mx-auto mt-4 max-w-2xl text-gray-600">Whether you're selling products or surfacing documents, TestMySearch provides the clarity you need.</p>
         </div>
-        <div class="grid md:grid-cols-2 gap-8">
-            <div class="bg-gray-50 rounded-lg p-8 flex items-start space-x-6">
-                <div class="text-indigo-600 text-3xl mt-1"><i class="fas fa-shopping-cart"></i></div>
+        <div class="grid gap-8 md:grid-cols-2">
+            <div class="flex items-start space-x-6 rounded-lg bg-gray-50 p-8">
+                <div class="mt-1 text-3xl text-indigo-600"><i class="fas fa-shopping-cart"></i></div>
                 <div>
                     <h3 class="text-2xl font-bold">E-commerce</h3>
                     <p class="mt-2 text-gray-600">Optimize product discovery and increase conversions by testing ranking strategies, synonym configurations, and promotional boosting. Ensure that changes to your catalog search improve, rather than harm, your bottom line.</p>
                 </div>
             </div>
-            <div class="bg-gray-50 rounded-lg p-8 flex items-start space-x-6">
-                <div class="text-indigo-600 text-3xl mt-1"><i class="fas fa-file-alt"></i></div>
+            <div class="flex items-start space-x-6 rounded-lg bg-gray-50 p-8">
+                <div class="mt-1 text-3xl text-indigo-600"><i class="fas fa-file-alt"></i></div>
                 <div>
                     <h3 class="text-2xl font-bold">Document & Knowledge Search</h3>
                     <p class="mt-2 text-gray-600">For intranets, help centers, and content platforms. Validate that your search engine surfaces the most relevant articles, PDFs, and internal documents to help users find information quickly and reduce support tickets.</p>
@@ -185,28 +183,77 @@
     </div>
 </section>
 
-<!-- Technology Section -->
-<section class="bg-gray-100 py-12">
+<!-- Demos Section -->
+<section id="demos" class="bg-gray-100 py-20">
     <div class="container mx-auto px-6">
-        <h3 class="text-center text-gray-600 text-sm font-semibold uppercase tracking-wider">WORKS WITH YOUR FAVORITE SEARCH ENGINES</h3>
-        <div class="flex flex-wrap justify-center items-center mt-6 space-x-8 md:space-x-12">
-            <span class="text-3xl text-gray-500 font-semibold">Solr</span>
-            <span class="text-3xl text-gray-500 font-semibold">Elasticsearch</span>
-            <span class="text-3xl text-gray-500 font-semibold">Coveo</span>
-            <span class="text-3xl text-gray-500 font-semibold">Algolia</span>
-            <span class="text-3xl text-gray-500 font-semibold">& more...</span>
+        <div class="mb-16 text-center">
+            <h2 class="text-4xl font-bold text-gray-900">See It In Action</h2>
+            <p class="mx-auto mt-4 max-w-2xl text-gray-600">Explore our platform through an interactive demo or watch a video walkthrough.</p>
+        </div>
+
+        <!-- Interactive Iframe Demo -->
+        <div>
+            <h3 class="mb-4 text-center text-2xl font-semibold">Interactive Demo</h3>
+            <center><a href="/demo.html" style="font-size:200%; text-decoration:underline">Click here to open in a new window</a></center>
+        </div>
+
+        <!-- Video Demo -->
+        <div class="mt-16">
+            <h3 class="mb-4 text-center text-2xl font-semibold">Video Demonstration</h3>
+            <div class="mx-auto max-w-4xl rounded-lg bg-black p-2 shadow-lg">
+                <video controls class="w-full rounded-md">
+                    <source src="https://hybrismart.com/experiments/testmysearch/demo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
         </div>
     </div>
 </section>
 
 
-<!-- CTA Section -->
-<section id="contact" class="bg-indigo-700 text-white">
-    <div class="container mx-auto px-6 py-20 text-center">
-        <h2 class="text-4xl font-bold">Ready to Reinvent Your Search Testing?</h2>
-        <p class="mt-4 text-indigo-200 max-w-2xl mx-auto">See TestMySearch in action. Schedule a personalized demo with our team to see how you can build a reliable, data-driven process for search improvements.</p>
-        <div class="mt-8">
-            <a href="mailto:rauf.aliev@example.com?subject=TestMySearch Demo Request" class="bg-white text-indigo-600 text-lg font-semibold px-8 py-4 rounded-lg shadow-md hover:bg-gray-200 transition transform hover:scale-105">Request a Demo</a>
+<!-- Technology Section -->
+<section class="bg-white py-12">
+    <div class="container mx-auto px-6">
+        <h3 class="text-center text-sm font-semibold uppercase tracking-wider text-gray-600">WORKS WITH YOUR FAVORITE SEARCH ENGINES</h3>
+        <div class="mt-6 flex flex-wrap items-center justify-center space-x-8 md:space-x-12">
+            <span class="text-3xl font-semibold text-gray-500">Solr</span>
+            <span class="text-3xl font-semibold text-gray-500">Elasticsearch</span>
+            <span class="text-3xl font-semibold text-gray-500">Coveo</span>
+            <span class="text-3xl font-semibold text-gray-500">Algolia</span>
+            <span class="text-3xl font-semibold text-gray-500">& more...</span>
+        </div>
+    </div>
+</section>
+
+
+<!-- Contact Section -->
+<section id="contact" class="bg-gray-100 py-20">
+    <div class="container mx-auto grid gap-12 px-6 md:grid-cols-2">
+        <div>
+            <h2 class="text-4xl font-bold text-gray-900">Ready to Reinvent Your Search Testing?</h2>
+            <p class="mt-4 text-gray-600">See TestMySearch in action. Schedule a personalized demo with our team to see how you can build a reliable, data-driven process for search improvements.</p>
+            <p class="mt-4 text-gray-600">For any inquiries, you can also email us directly at <a href="mailto:info@testmysearch.com" class="font-semibold text-indigo-600">info@testmysearch.com</a>.</p>
+        </div>
+        <div class="rounded-lg bg-white p-8 shadow-lg">
+            <form action="https://api.web3forms.com/submit" method="POST">
+
+                <!-- IMPORTANT: Replace with your Access Key from web3forms.com -->
+                <input type="hidden" name="access_key" value="f6b30689-f174-4819-8739-74a1f5555515">
+
+                <div class="mb-4">
+                    <label for="name" class="mb-2 block font-semibold text-gray-700">Full Name</label>
+                    <input type="text" name="name" id="name" required class="w-full rounded-md border border-gray-300 p-3 focus:border-indigo-500 focus:ring-indigo-500">
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="mb-2 block font-semibold text-gray-700">Email Address</label>
+                    <input type="email" name="email" id="email" required class="w-full rounded-md border border-gray-300 p-3 focus:border-indigo-500 focus:ring-indigo-500">
+                </div>
+                <div class="mb-4">
+                    <label for="message" class="mb-2 block font-semibold text-gray-700">Message</label>
+                    <textarea name="message" id="message" rows="4" required class="w-full rounded-md border border-gray-300 p-3 focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+                </div>
+                <button type="submit" class="w-full transform rounded-lg bg-indigo-600 px-8 py-3 font-semibold text-white shadow-md transition hover:scale-105 hover:bg-indigo-700">Send Message</button>
+            </form>
         </div>
     </div>
 </section>
@@ -214,10 +261,17 @@
 <!-- Footer -->
 <footer class="bg-gray-800 text-gray-400">
     <div class="container mx-auto px-6 py-8 text-center">
-        <p>&copy; 2025 Search Quality Analyzer Platform. All Rights Reserved.</p>
-        <p class="mt-2">Built by Rauf Aliev</p>
+        <p>&copy; 2025 TestMySearch. All Rights Reserved.</p>
     </div>
 </footer>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L74BQSCQC3"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
+    gtag('config', 'G-L74BQSCQC3');
+</script>
 </body>
 </html>
