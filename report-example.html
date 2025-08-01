@@ -16,6 +16,26 @@
         .bk-root .bk-toolbar-button {
             cursor: pointer;
         }
+        /* Style for data tables coming from JSON */
+        .dataframe {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .dataframe th, .dataframe td {
+            border: 1px solid #e5e7eb;
+            padding: 0.5rem 0.75rem;
+            text-align: left;
+        }
+        .dataframe thead {
+            background-color: #f9fafb;
+        }
+        .dataframe th {
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        .dataframe tbody tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -105,37 +125,19 @@
 </footer>
 
 <script type="text/javascript">
-    function leave_only_trends(docs) {
-        for (const docId in docs) {
-            const doc = docs[docId];
-            if (!doc.roots) continue;
-
-            for (const rootObj of doc.roots) {
-                if (!rootObj.attributes || !rootObj.attributes.renderers) continue;
-
-                // Loop through renderers inside the Figure
-                for (const renderer of rootObj.attributes.renderers) {
-                    if (!renderer.attributes) continue;
-                    const rendererName = renderer.attributes.name || "";
-
-                    // Hide if not a trend series
-                    if (!rendererName.endsWith("_trend")) {
-                        renderer.attributes.visible = false;
-                    }
-                }
-            }
-        }
-    }
-    // URLs for the JSON data files. Please edit these to point to your actual data sources.
+    // URLs for the JSON data files.
     const JSON_URLS = {
         dcg_at_10: 'reports/metric_dcg_at_10.csv.json',
-        stats_cg_at_10: 'https://storage.googleapis.com/testmysearch-examples/report_20250712141952_7e1e0af2/summary_metric_cg_at_10_stats.csv.json',
-        pairwise_cg_at_10: 'https://storage.googleapis.com/testmysearch-examples/report_20250712141952_7e1e0af2/summary_metric_cg_at_10_pairwise.csv.json',
         precision: 'reports/metric_precision.csv.json',
         recall: 'reports/metric_recall.csv.json',
-        novelty_stats: 'https://storage.googleapis.com/testmysearch-examples/report_20250712141952_7e1e0af2/summary_metric_novelty_stats.csv.json',
         num_results_stats: 'reports/summary_metric_number_of_results_stats.csv.json',
-        pairwise_stats: 'https://storage.googleapis.com/testmysearch-examples/report_20250712141952_7e1e0af2/summary_metric_rr_pairwise.csv.json' // Example, adjust as needed
+        ap_stats: 'reports/summary_metric_ap_stats.csv.json',
+        precision_stats: 'reports/summary_metric_precision_stats.csv.json',
+        num_results_quality: 'reports/essential_number_of_results_quality.csv.json',
+        overlap: 'reports/essential_overlap.csv.json',
+        rank_correlation: 'reports/essential_rank_correlation.csv.json',
+        top_k_intersection: 'reports/essential_top_k_intersection.csv.json',
+        pairwise_stats: 'reports/pairwise_statistical_tests.csv.json'
     };
 
     /**
@@ -160,7 +162,7 @@
      * Modifies Bokeh JSON to only show trend lines.
      * @param {Object} docs - The Bokeh JSON object.
      */
-    function leaveOnlyTrends(docs) {
+    function leave_only_trends(docs) {
         for (const docId in docs) {
             const doc = docs[docId];
             if (!doc.roots) continue;
@@ -186,8 +188,9 @@
         if (!plotContainer) return;
 
         const data = await fetchJsonData(jsonUrl);
-        if (!data) {
-            plotContainer.innerHTML = `<p class="text-red-500">Failed to load chart data from ${jsonUrl}</p>`;
+        if (!data || !data.plot_div || !data.plot_script) {
+            // If there's no plot data, just clear the container.
+            plotContainer.innerHTML = '';
             return;
         }
 
@@ -197,18 +200,45 @@
         const scriptTag = document.createElement('script');
         scriptTag.type = 'text/javascript';
 
-        // Extract the core Bokeh embedding logic from the script tag content
         const scriptContentMatch = plot_script.match(/Bokeh\.safely\(function\(\) {([\s\S]*)}\);/);
         if (scriptContentMatch) {
             let scriptLogic = scriptContentMatch[1];
-            if (trendsOnly) {
-                // Inject the transformation function call
-                scriptLogic = scriptLogic.replace('const docs = JSON.parse(docs_json);', 'let docs = JSON.parse(docs_json); leaveOnlyTrends(docs); docs_json = JSON.stringify(docs);');
+            // The JSON data is embedded in the script. We need to parse it, potentially transform it, and then stringify it back.
+            const docsJsonMatch = scriptLogic.match(/const docs_json = (JSON\.stringify\(.*\));/);
+            if(docsJsonMatch) {
+                // This is a more robust way to handle the script logic
+                scriptLogic = scriptLogic.replace(
+                    /const docs_json = (JSON\.stringify\(.*\));/,
+                    `
+                    let docs = $1;
+                    if (typeof docs === 'string') { docs = JSON.parse(docs); }
+                    if (${trendsOnly}) {
+                        leaveOnlyTrends(docs);
+                    }
+                    const docs_json = JSON.stringify(docs);
+                    `
+                );
+            } else {
+                const docsJsonMatchSimple = scriptLogic.match(/const docs_json = (\{.*?\});/s);
+                if(docsJsonMatchSimple) {
+                    scriptLogic = scriptLogic.replace(
+                        /const docs_json = (\{.*?\});/s,
+                        `
+                        let docs = $1;
+                        if (${trendsOnly}) {
+                            leaveOnlyTrends(docs);
+                        }
+                        const docs_json = JSON.stringify(docs);
+                        `
+                    );
+                }
             }
+
             scriptTag.textContent = `(function() { const fn = function() { Bokeh.safely(function() { ${scriptLogic} }); }; if (document.readyState != "loading") fn(); else document.addEventListener("DOMContentLoaded", fn); })();`;
             document.body.appendChild(scriptTag);
         }
     }
+
 
     /**
      * Creates an HTML table from JSON data.
@@ -251,7 +281,6 @@
         `;
         reportsContainer.innerHTML += sectionHtml;
 
-        // Defer rendering to allow the DOM to update
         setTimeout(() => {
             if (plotUrl) {
                 createBokehPlot(plotId, plotUrl, trendsOnly);
@@ -286,18 +315,52 @@
                 plotUrl: JSON_URLS.recall,
                 tableUrl: JSON_URLS.recall,
                 trendsOnly: true
+            },
+            {
+                id: 'ap-stats',
+                title: 'Average Precision Statistics',
+                description: 'This table displays summary statistics for the Average Precision (AP) metric across all queries. Average Precision evaluates the quality of ranked search results by considering both the precision and the position of relevant documents. A higher mean AP indicates better overall performance.',
+                tableUrl: JSON_URLS.ap_stats
+            },
+            {
+                id: 'precision-stats',
+                title: 'Precision Statistics',
+                description: 'This table displays summary statistics for the Precision metric. A higher mean precision score indicates that the search results are more relevant to the user\'s query.',
+                tableUrl: JSON_URLS.precision_stats
+            },
+            {
+                id: 'num-results-quality',
+                title: 'Number of Results Quality',
+                description: 'This metric assesses whether the number of search results returned is appropriate for the query. The bar chart shows the distribution of queries across different quality thresholds, while the table provides the raw scores for each query.',
+                plotUrl: JSON_URLS.num_results_quality,
+                tableUrl: JSON_URLS.num_results_quality
+            },
+            {
+                id: 'overlap',
+                title: 'Result Set Overlap (Jaccard Index)',
+                description: 'This table measures the similarity between the result sets of different search configurations using the Jaccard index. A value of 1 means the result sets are identical, while a value of 0 means they have no results in common.',
+                tableUrl: JSON_URLS.overlap
+            },
+            {
+                id: 'rank-correlation',
+                title: 'Rank Correlation (Spearman\'s Rho)',
+                description: "This analysis measures the similarity in the ranking of results between pairs of configurations using Spearman's rank correlation coefficient. A coefficient of +1 indicates a perfect positive correlation (rankings are the same), while 0 indicates no correlation.",
+                tableUrl: JSON_URLS.rank_correlation
+            },
+            {
+                id: 'top-k-intersection',
+                title: 'Top-10 Intersection',
+                description: 'This table shows the number of common results within the top 10 positions for each pair of search configurations, measuring how much the top-most results overlap.',
+                tableUrl: JSON_URLS.top_k_intersection
+            },
+            {
+                id: 'pairwise-stats',
+                title: 'Pairwise Statistical Significance (T-Test)',
+                description: 'This table shows the results of a paired t-test for key metrics. A low p-value (typically < 0.05, shown in bold) suggests that the observed difference between two configurations is statistically significant and not due to random chance.',
+                tableUrl: JSON_URLS.pairwise_stats
             }
         ];
-/*
-,
-            {
-                id: 'num-results-stats',
-                title: 'Number of Results Statistics',
-                description: 'Provides descriptive statistics for the number of results returned by each configuration.',
-                plotUrl: JSON_URLS.num_results_stats,
-                tableUrl: JSON_URLS.num_results_stats
-            }
- */
+
         reports.forEach(createReportSection);
     });
 </script>
