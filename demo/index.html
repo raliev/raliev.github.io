@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App Demo</title>
     <style>
         body {
@@ -78,6 +79,10 @@
 
         /* --- Mobile mode --- */
         @media (max-width: 768px) {
+            .slide img {
+                max-width: 100%;
+                border-radius: 0; /* Необязательно: убирает скругление углов, что лучше смотрится на всю ширину */
+            }
             .mobile-overlay {
                 display: flex !important; /* ensure it shows */
                 position: relative !important; /* flow in document */
