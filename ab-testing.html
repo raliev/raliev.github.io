@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A/B Testing Platform - TestMySearch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+<header class="sticky top-0 z-50 shadow-sm" style="background-color: #faf8f5;">
+    <nav class="container mx-auto flex items-center justify-between px-6 py-4">
+        <a href="/"><img src="/img/testmysearch-logo.png" alt="TestMySearch Logo" style="height:60px"></a>
+        <div class="hidden items-center space-x-6 md:flex">
+            <a href="/#features" class="text-gray-600 hover:text-indigo-600">Features</a>
+            <a href="/#how-it-works" class="text-gray-600 hover:text-indigo-600">How It Works</a>
+            <a href="/#demos" class="text-gray-600 hover:text-indigo-600">Demos</a>
+            <a href="/#contact" class="rounded-md bg-indigo-600 px-4 py-2 text-white transition hover:bg-indigo-700">Contact Us</a>
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-6 py-16">
+    <div class="mx-auto max-w-4xl">
+        <div class="text-center">
+            <i class="fas fa-vials text-5xl text-indigo-600"></i>
+            <h1 class="mt-4 text-4xl font-extrabold text-gray-900 md:text-5xl">A/B Testing Platform</h1>
+            <p class="mt-4 text-lg text-gray-600">Move from risky trial-and-error to a data-driven, linear path to improvement. Test every change before you build.</p>
+        </div>
+
+        <div class="mt-12 rounded-lg bg-white p-8 shadow-lg">
+            <h2 class="text-2xl font-bold text-gray-900">From Hypothesis to Confident Implementation</h2>
+            <p class="mt-4 text-gray-700">Before investing valuable development resources, you need to validate that your ideas for improving search will actually work. Our A/B testing platform provides a fast, cost-effective way to run numerous experiments, compare different configurations, and select the best path forward based on hard data, not just intuition.</p>
+
+            <h3 class="mt-8 text-xl font-semibold text-gray-800">Test What Matters, Quickly</h3>
+            <p class="mt-4 text-gray-700">The platform allows you to test a wide range of search configurations against your typical user queries and expected results. This allows you to see precisely how dramatically the search experience changes with each modification. Common test scenarios include comparing configurations with:</p>
+            <ul class="mt-4 list-inside list-disc space-y-2 text-gray-700">
+                <li>Synonyms turned <strong>on vs. off</strong>.</li>
+                <li>Different <strong>phrase search</strong> boosting settings.</li>
+                <li>Variations in <strong>field weighting</strong> (e.g., boosting the title field).</li>
+                <li>New vs. legacy <strong>ranking algorithms</strong>.</li>
+                <li>Changes in <strong>promotional logic</strong> or personalization.</li>
+            </ul>
+        </div>
+
+        <div class="mt-8 grid gap-8 md:grid-cols-2">
+            <div class="rounded-lg bg-white p-8 shadow-lg">
+                <h3 class="text-xl font-bold text-gray-900"><i class="fas fa-exclamation-triangle mr-2 text-indigo-500"></i>Avoid Unintended Consequences</h3>
+                <p class="mt-2 text-gray-700">A common pitfall in search optimization is fixing one problem only to create five new ones. A seemingly minor change can have a ripple effect, improving results for one query set while degrading them for another. Our platform makes these trade-offs visible, allowing you to make holistic improvements and avoid deploying changes that do more harm than good.</p>
+            </div>
+            <div class="rounded-lg bg-white p-8 shadow-lg">
+                <h3 class="text-xl font-bold text-gray-900"><i class="fas fa-shipping-fast mr-2 text-indigo-500"></i>Accelerate Your Roadmap</h3>
+                <p class="mt-2 text-gray-700">Because testing is fast and essentially free, you can run dozens of experiments to find the optimal approach. This eliminates wasted development cycles on ideas that don't pan out, allowing you to move directly toward your goals instead of navigating a maze of trial and error.</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<section id="features" class="bg-white py-20">
+    <div class="container mx-auto px-6">
+        <div class="mb-16 text-center">
+            <h2 class="text-4xl font-bold text-gray-900">Explore Other Features</h2>
+        </div>
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <a href="metrics.html" class="block rounded-lg bg-gray-50 p-8 shadow-md transition hover:shadow-xl hover:-translate-y-1">
+                <div class="mb-4 text-4xl text-indigo-600"><i class="fas fa-chart-pie"></i></div>
+                <h3 class="mb-2 text-xl font-bold">Comprehensive Metrics</h3>
+                <p class="text-gray-600">Calculate NDCG@k, MAP, Precision, Recall, and dozens more to quantify performance.</p>
+            </a>
+            <a href="virtual-assessor.html" class="block rounded-lg bg-gray-50 p-8 shadow-md transition hover:shadow-xl hover:-translate-y-1">
+                <div class="mb-4 text-4xl text-indigo-600"><i class="fas fa-robot"></i></div>
+                <h3 class="mb-2 text-xl font-bold">Virtual Search Assessor</h3>
+                <p class="text-gray-600">Leverage LLMs to evaluate how well each document matches a query for reliable relevance scores.</p>
+            </a>
+            <a href="query-analysis.html" class="block rounded-lg bg-gray-50 p-8 shadow-md transition hover:shadow-xl hover:-translate-y-1">
+                <div class="mb-4 text-4xl text-indigo-600"><i class="fas fa-project-diagram"></i></div>
+                <h3 class="mb-2 text-xl font-bold">Query Analysis & Clustering</h3>
+                <p class="text-gray-600">Analyze and group similar queries to uncover user intent patterns and improve relevance.</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-gray-800 text-gray-400">
+    <div class="container mx-auto px-6 py-8 text-center">
+        <p>&copy; 2025 TestMySearch. All Rights Reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>

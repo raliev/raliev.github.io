@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Metrics - TestMySearch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+<header class="sticky top-0 z-50 shadow-sm" style="background-color: #faf8f5;">
+    <nav class="container mx-auto flex items-center justify-between px-6 py-4">
+        <a href="/"><img src="/img/testmysearch-logo.png" alt="TestMySearch Logo" style="height:60px"></a>
+        <div class="hidden items-center space-x-6 md:flex">
+            <a href="/#features" class="text-gray-600 hover:text-indigo-600">Features</a>
+            <a href="/#how-it-works" class="text-gray-600 hover:text-indigo-600">How It Works</a>
+            <a href="/#demos" class="text-gray-600 hover:text-indigo-600">Demos</a>
+            <a href="/#contact" class="rounded-md bg-indigo-600 px-4 py-2 text-white transition hover:bg-indigo-700">Contact Us</a>
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-6 py-16">
+    <div class="mx-auto max-w-4xl">
+        <div class="text-center">
+            <i class="fas fa-chart-pie text-5xl text-indigo-600"></i>
+            <h1 class="mt-4 text-4xl font-extrabold text-gray-900 md:text-5xl">Comprehensive Metrics</h1>
+            <p class="mt-4 text-lg text-gray-600">Go beyond simple click-through rates. Understand search performance with industry-standard IR metrics and interactive visualizations.</p>
+        </div>
+
+        <div class="mt-12 rounded-lg bg-white p-8 shadow-lg">
+            <h2 class="text-2xl font-bold text-gray-900">Quantifying Search Relevance</h2>
+            <p class="mt-4 text-gray-700">Metrics are calculated against a <b>"ground truth"</b>, which is called "Expected Results" in our platform. You can have one or more sets, and use all or their subset. This is typically a CSV file you provide, mapping queries to a list of known relevant document URLs. The platform uses this data to automatically calculate a suite of metrics for every test run.</p>
+
+            <h3 class="mt-8 text-xl font-semibold text-gray-800">Key Metrics Supported</h3>
+            <div class="mt-4 grid gap-6 md:grid-cols-2">
+                <div>
+                    <h4 class="font-bold">Precision@K</h4>
+                    <p class="text-gray-600">Measures the exactness of the results by calculating the proportion of relevant documents found in the top K results. A higher score indicates more relevant results were returned at the top of the page.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold">Recall</h4>
+                    <p class="text-gray-600">Measures the completeness of the results, indicating the fraction of ALL relevant documents that were successfully retrieved.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold">nDCG@K (Normalized Discounted Cumulative Gain)</h4>
+                    <p class="text-gray-600">A sophisticated, rank-aware metric that evaluates the quality of the ranking. It rewards relevant documents that appear higher in the search results, making it a powerful indicator of overall performance.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold">Mean Reciprocal Rank (MRR)</h4>
+                    <p class="text-gray-600">Focuses on how quickly the *first* correct answer is found. It's the average of the reciprocal ranks of the first relevant document for a set of queries.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold">Overlap & Diversity</h4>
+                    <p class="text-gray-600">Analyze the similarity between result sets from different configurations using Jaccard index and other overlap metrics. You can also measure result diversity by counting unique domains and titles.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold">Statistical Significance</h4>
+                    <p class="text-gray-600">The platform automatically runs pairwise statistical tests (like the Wilcoxon signed-rank test) to determine if the difference in performance between two configurations is statistically significant, helping you avoid making decisions based on random noise.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<section id="features" class="bg-white py-20">
+    <div class="container mx-auto px-6">
+        <div class="mb-16 text-center">
+            <h2 class="text-4xl font-bold text-gray-900">Powerful Features to Drive Better Search</h2>
+            <p class="mx-auto mt-4 max-w-2xl text-gray-600">TestMySearch provides a complete toolkit for search analysis and optimization.</p>
+        </div>
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <a href="ab-testing.html" class="block rounded-lg bg-gray-50 p-8 shadow-md transition hover:shadow-xl hover:-translate-y-1">
+                <div class="mb-4 text-4xl text-indigo-600"><i class="fas fa-vials"></i></div>
+                <h3 class="mb-2 text-xl font-bold">A/B Testing Platform</h3>
+                <p class="text-gray-600">Feed the system thousands of queries and multiple configurations. By morning, get a full report with charts, metrics, and a clear conclusion on which performs better.</p>
+            </a>
+            <a href="virtual-assessor.html" class="block rounded-lg bg-gray-50 p-8 shadow-md transition hover:shadow-xl hover:-translate-y-1">
+                <div class="mb-4 text-4xl text-indigo-600"><i class="fas fa-robot"></i></div>
+                <h3 class="mb-2 text-xl font-bold">Virtual Search Assessor</h3>
+                <p class="text-gray-600">Leverage LLMs to evaluate how well each document matches a query. Our non-trivial process of chunking, embeddings, and evaluation delivers reliable relevance scores.</p>
+            </a>
+            <a href="query-analysis.html" class="block rounded-lg bg-gray-50 p-8 shadow-md transition hover:shadow-xl hover:-translate-y-1">
+                <div class="mb-4 text-4xl text-indigo-600"><i class="fas fa-project-diagram"></i></div>
+                <h3 class="mb-2 text-xl font-bold">Query Analysis & Clustering</h3>
+                <p class="text-gray-600">Analyze and group similar queries to uncover user intent patterns. For example, find brand name variations that should be treated as equivalents.</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-gray-800 text-gray-400">
+    <div class="container mx-auto px-6 py-8 text-center">
+        <p>&copy; 2025 TestMySearch. All Rights Reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>
