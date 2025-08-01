@@ -1,0 +1,4 @@
+{
+  "description": "A list is already uploaded here, but you can upload your own. The file is essentially an Excel export: the first column contains the query, and the second column contains a list of URLs of relevant documents, products, or site pages. This is how you tell the system that at least these documents, products, or pages from the search results are relevant, and for the others it’s unknown (they may or may not be relevant). How such a file is created will be explained later.",
+  "highlight": true
+}

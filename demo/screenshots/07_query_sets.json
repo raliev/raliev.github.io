@@ -1,0 +1,4 @@
+{
+  "description": "The Query Sets section stores lists of queries that can be used for search testing. You can upload different queries and select those that are suitable for the task. They can be uploaded separately, or generated from the uploaded Expected Results. We have uploaded 200 expected results, and now we have 200 queries for testing.",
+  "highlight": true
+}

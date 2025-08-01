@@ -1,0 +1,4 @@
+{
+  "description": "This menu contains everything that “lives” inside a sandbox. The system can send a list of queries to the search engine, receive a response for each in the form of a list of document or site page links, and build reports from that. It can act as a virtual evaluator of search results quality or generate potential queries for the existing pages. All of this functionality is gathered here. Let’s start with the “Expected Results” section.",
+  "highlight": true
+}
