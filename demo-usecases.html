@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        [hidden] {
+            display: none !important;
+        }
+    </style>
+    <title>Demo - TestMySearch</title>
+</head>
+<body class="bg-gray-100">
+<audio id="audio-player" hidden></audio>
+<header class="sticky top-0 z-50 shadow-sm" style="background-color: #faf8f5;">
+    <nav class="container mx-auto flex items-center justify-between px-6 py-4">
+        <a href="index.html"><img src="/img/testmysearch-logo.png" alt="TestMySearch Logo" style="height:60px"></a>
+        <a href="demos.html" class="transform rounded-lg bg-gray-200 px-6 py-3 text-sm font-semibold text-gray-800 shadow-md transition hover:scale-105 hover:bg-gray-300">
+            <i class="fas fa-arrow-left mr-2"></i>Back to Demos
+        </a>
+    </nav>
+</header>
+
+<main class="py-16">
+    <div class="container mx-auto px-6">
+        <div class="max-w-5xl mx-auto">
+            <h1 id="use-case-title" class="text-4xl font-bold text-gray-900">Loading...</h1>
+            <p id="use-case-description" class="mt-4 text-lg text-gray-600"></p>
+            <a id="toggle-view-link" href="#" class="mt-6 inline-block transform rounded-lg bg-gray-200 px-6 py-3 font-semibold text-gray-800 shadow-md transition hover:scale-105 hover:bg-gray-300"></a>
+
+            <!-- Video View -->
+            <div id="video-view" hidden>
+                <div class="mt-8 rounded-lg bg-black p-2 shadow-lg">
+                    <video id="use-case-video" controls class="w-full rounded-md" key="video-player">
+                        <source src="" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="mt-12 rounded-lg bg-white p-8 shadow-md">
+                    <h2 class="text-2xl font-bold">Step-by-Step Breakdown</h2>
+                    <ol id="video-steps" class="mt-4 list-decimal list-inside space-y-3 text-gray-700"></ol>
+                </div>
+            </div>
+
+            <!-- Interactive View -->
+            <div id="interactive-view" hidden class="mt-8 grid grid-cols-1 md:grid-cols-5 gap-8">
+                <div class="md:col-span-3 rounded-lg bg-white p-4 shadow-lg">
+                    <div id="screenshot-container" class="aspect-video bg-gray-200 rounded-md flex items-center justify-center text-gray-500 overflow-hidden">
+                        <!-- Screenshot will be loaded here -->
+                    </div>
+                </div>
+                <div class="md:col-span-2 rounded-lg bg-white p-8 shadow-md flex flex-col">
+                    <div class="flex-grow">
+                        <h3 id="step-title" class="text-xl font-bold mb-4"></h3>
+
+                        <!-- Navigation Controls -->
+                        <div class="flex justify-between items-center mb-4">
+                            <button id="prev-button" class="rounded-lg bg-gray-300 px-5 py-2 font-semibold text-gray-800">
+                                <i class="fas fa-arrow-left"></i> Prev
+                            </button>
+                            <button id="next-button" class="transform rounded-lg bg-indigo-600 px-5 py-2 font-semibold text-white shadow-md transition hover:scale-105 hover:bg-indigo-700">
+                                Next <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <p id="step-description" class="mt-4 text-gray-600"></p>
+                    </div>
+
+                    <!-- Audio Controls -->
+                    <div class="mt-auto pt-6 border-t border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <button id="audio-toggle-button" class="flex items-center space-x-2 rounded-lg bg-green-500 px-4 py-2 font-semibold text-white transition hover:bg-green-600">
+                                <i id="audio-icon" class="fas fa-volume-up"></i>
+                                <span>AUDIO</span>
+                            </button>
+                            <div id="auto-next-container" class="flex items-center space-x-2" hidden>
+                                <input type="checkbox" id="auto-next-checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="auto-next-checkbox" class="text-gray-700">Auto Next</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<footer class="bg-gray-800 text-gray-400">
+    <div class="container mx-auto px-6 py-8 text-center">
+        <p>&copy; 2025 TestMySearch. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<script>
+    let config = null;
+    let currentUseCaseId = '';
+    let currentView = '';
+    let currentStep = 0;
+    let audioEnabled = false;
+    let autoNextEnabled = false;
+    let userInteracted = false;
+
+    // DOM Elements
+    const titleEl = document.getElementById('use-case-title');
+    const descriptionEl = document.getElementById('use-case-description');
+    const toggleLinkEl = document.getElementById('toggle-view-link');
+    const videoViewEl = document.getElementById('video-view');
+    const interactiveViewEl = document.getElementById('interactive-view');
+    const audioPlayerEl = document.getElementById('audio-player');
+
+    // Video View Elements
+    const videoPlayerEl = document.getElementById('use-case-video');
+    const videoStepsEl = document.getElementById('video-steps');
+
+    // Interactive View Elements
+    const screenshotContainerEl = document.getElementById('screenshot-container');
+    const stepTitleEl = document.getElementById('step-title');
+    const stepDescriptionEl = document.getElementById('step-description');
+    const prevButton = document.getElementById('prev-button');
+    const nextButton = document.getElementById('next-button');
+    const audioToggleButton = document.getElementById('audio-toggle-button');
+    const audioIcon = document.getElementById('audio-icon');
+    const autoNextContainer = document.getElementById('auto-next-container');
+    const autoNextCheckbox = document.getElementById('auto-next-checkbox');
+
+    async function fetchConfig() {
+        if (config) return config;
+        try {
+            const response = await fetch('screenshots/demos-config.json');
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            config = await response.json();
+            return config;
+        } catch (error) {
+            console.error("Could not load demo configuration:", error);
+            titleEl.textContent = 'Error loading configuration.';
+            return null;
+        }
+    }
+
+    function parseHash() {
+        const hash = window.location.hash.substring(1);
+        const params = new URLSearchParams(hash);
+        currentUseCaseId = params.get('uc') || 'use-case-1';
+        currentView = params.get('view') || 'video';
+    }
+
+    function playCurrentAudio() {
+        if (!audioEnabled || !userInteracted) return;
+
+        const stepData = config[currentUseCaseId]?.interactiveSteps[currentStep];
+        if (stepData && stepData.screenshot) {
+            const audioPath = `demo/screenshots/${stepData.screenshot.replace('.png', '.mp3')}`;
+            audioPlayerEl.src = audioPath;
+            audioPlayerEl.play().catch(e => console.warn("Audio playback was prevented.", e));
+        }
+    }
+
+    function handleNext() {
+        const steps = config[currentUseCaseId]?.interactiveSteps || [];
+        if (currentStep < steps.length - 1) {
+            currentStep++;
+            renderInteractiveStep();
+        }
+    }
+
+    function handlePrev() {
+        if (currentStep > 0) {
+            currentStep--;
+            renderInteractiveStep();
+        }
+    }
+
+    function render() {
+        const useCaseData = config[currentUseCaseId];
+        if (!useCaseData) {
+            titleEl.textContent = 'Use Case Not Found';
+            descriptionEl.textContent = 'Please select a valid use case from the demos page.';
+            return;
+        }
+
+        document.title = `${useCaseData.title} - TestMySearch`;
+        titleEl.textContent = useCaseData.title;
+        descriptionEl.textContent = useCaseData.description;
+
+        videoViewEl.hidden = currentView !== 'video';
+        interactiveViewEl.hidden = currentView !== 'interactive';
+
+        if (currentView === 'video') {
+            toggleLinkEl.href = `#uc=${currentUseCaseId}&view=interactive`;
+            toggleLinkEl.innerHTML = `Try Interactive Demo <i class="fas fa-gamepad ml-2"></i>`;
+
+            const source = videoPlayerEl.getElementsByTagName('source')[0];
+            if (source.getAttribute('src') !== useCaseData.videoSrc) {
+                source.setAttribute('src', useCaseData.videoSrc);
+                videoPlayerEl.load();
+            }
+
+            videoStepsEl.innerHTML = '';
+            useCaseData.steps.forEach(stepText => {
+                const li = document.createElement('li');
+                li.innerHTML = stepText;
+                videoStepsEl.appendChild(li);
+            });
+
+        } else {
+            toggleLinkEl.href = `#uc=${currentUseCaseId}&view=video`;
+            toggleLinkEl.innerHTML = `Watch Video Demo <i class="fas fa-video ml-2"></i>`;
+            currentStep = 0;
+            renderInteractiveStep();
+        }
+    }
+
+    function renderInteractiveStep() {
+        const useCaseData = config[currentUseCaseId];
+        if (!useCaseData || !useCaseData.interactiveSteps) return;
+
+        const stepData = useCaseData.interactiveSteps[currentStep];
+        stepTitleEl.textContent = stepData.title;
+        stepDescriptionEl.textContent = stepData.description;
+
+        screenshotContainerEl.innerHTML = `<img src="demo/screenshots/${stepData.screenshot}" alt="${stepData.title}" class="w-full h-full object-contain">`;
+
+        prevButton.disabled = currentStep === 0;
+        prevButton.classList.toggle('opacity-50', prevButton.disabled);
+        prevButton.classList.toggle('cursor-not-allowed', prevButton.disabled);
+
+        nextButton.disabled = currentStep >= useCaseData.interactiveSteps.length - 1;
+        nextButton.classList.toggle('opacity-50', nextButton.disabled);
+        nextButton.classList.toggle('cursor-not-allowed', nextButton.disabled);
+
+        playCurrentAudio();
+    }
+
+    async function init() {
+        await fetchConfig();
+        if (config) {
+            parseHash();
+            render();
+        }
+    }
+
+    // Event Listeners
+    document.body.addEventListener('click', () => { userInteracted = true; }, { once: true });
+
+    prevButton.addEventListener('click', handlePrev);
+    nextButton.addEventListener('click', handleNext);
+
+    audioToggleButton.addEventListener('click', () => {
+        audioEnabled = !audioEnabled;
+        if (audioEnabled) {
+            audioIcon.className = 'fas fa-volume-mute';
+            autoNextContainer.hidden = false;
+            playCurrentAudio();
+        } else {
+            audioIcon.className = 'fas fa-volume-up';
+            autoNextContainer.hidden = true;
+            audioPlayerEl.pause();
+        }
+    });
+
+    autoNextCheckbox.addEventListener('change', (e) => {
+        autoNextEnabled = e.target.checked;
+    });
+
+    audioPlayerEl.addEventListener('ended', () => {
+        if (autoNextEnabled) {
+            handleNext();
+        }
+    });
+
+    window.addEventListener('hashchange', () => {
+        parseHash();
+        render();
+    });
+
+    document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

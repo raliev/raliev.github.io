@@ -1,0 +1,4 @@
+{
+  "description": "This is the list of configurations for the selected search engine. Each search engine has its own configurations, but in general they define how a query is converted into a low-level request to the search engine.",
+  "highlight": true
+}

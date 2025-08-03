@@ -1,0 +1,315 @@
+{
+  "use-case-1": {
+    "title": "Use Case 1: Configuration Tuning & Optimization",
+    "description": "This demo shows how to find the best search configuration by testing multiple variations, from uploading data to creating batch runs.",
+    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo-1.mp4",
+    "steps": [
+      "<strong>Step 1:</strong> This is the start page, from which you can manage test environments and the global (shared for all environments) configuration, such as search engines, search configurations, and LLM engines. Let’s start with the test environments.",
+      "<strong>Step 2:</strong> In our system, they are called Sandboxes because you can create your own sandbox, do anything you like there, and it will be completely isolated from another sandbox. This is especially convenient when multiple people are working with the system.",
+      "<strong>Step 3:</strong> You can create this sandbox using the Add New Sandbox button, but for demo purposes, one has already been created. Let’s click on it.",
+      "<strong>Step 4:</strong> This menu contains everything that “lives” inside a sandbox. We will start with the “Expected Results” section, which contains our ground truth data.",
+      "<strong>Step 5:</strong> A list is already uploaded here. The file is essentially an Excel export: the first column contains the query, and the second column contains a list of URLs of relevant documents, products, or site pages.",
+      "<strong>Step 6:</strong> This is how the uploaded list looks. On the left, you see the queries; on the right, you see the list of relevant pages, products, and documents.",
+      "<strong>Step 7:</strong> The Query Sets section stores lists of queries that can be used for search testing. They can be uploaded separately, or generated from the uploaded Expected Results.",
+      "<strong>Step 8:</strong> If you click on the name of the uploaded query set, you will see this list. You can also edit it here if needed.",
+      "<strong>Step 9:</strong> Now you can create a task for the search engine to process all 200 queries. To do this, go to the Batch Runs section.",
+      "<strong>Step 10:</strong> To add a new task, click the Add Batch Run button. There, we will select the Query Set, the search engine, and the search configuration.",
+      "<strong>Step 11:</strong> In the first step, we select a query set from the uploaded ones. The Query Set determines what we are going to send to the search engine.",
+      "<strong>Step 12:</strong> After making the selection, click the Next button to go to the search engine selection interface.",
+      "<strong>Step 13:</strong> Here is the list of search engines configured for the entire account. Most likely, you will have one or two (for example, legacy and new).",
+      "<strong>Step 14:</strong> After selecting, click the Next button to go to the configuration selection interface.",
+      "<strong>Step 15:</strong> This is the list of configurations for the selected search engine. Each search engine has its own configurations, but in general they define how a query is converted into a low-level request to the search engine.",
+      "<strong>Step 16:</strong> If you check the Trigger Run right after creation option, the task will start immediately and queries will be sent to the search engine right away."
+    ],
+    "interactiveSteps": [
+      {
+        "title": "Step 1",
+        "description": "This is the start page, from which you can manage test environments and the global (shared for all environments) configuration, such as search engines, search configurations, and LLM engines. Let’s start with the test environments.",
+        "screenshot": "01_start-page.png"
+      },
+      {
+        "title": "Step 2",
+        "description": "In our system, they are called Sandboxes because you can create your own sandbox, do anything you like there, and it will be completely isolated from another sandbox. This is especially convenient when multiple people are working with the system.",
+        "screenshot": "02_before-sandboxes-click.png"
+      },
+      {
+        "title": "Step 3",
+        "description": "You can create this sandbox using the Add New Sandbox button, but for demo purposes, one has already been created. Let’s click on it.",
+        "screenshot": "03_before-testsandbox-click.png"
+      },
+      {
+        "title": "Step 4",
+        "description": "This menu contains everything that “lives” inside a sandbox. We will start with the “Expected Results” section, which contains our ground truth data.",
+        "screenshot": "04_before-expected-results-click.png"
+      },
+      {
+        "title": "Step 5",
+        "description": "A list is already uploaded here. The file is essentially an Excel export: the first column contains the query, and the second column contains a list of URLs of relevant documents, products, or site pages.",
+        "screenshot": "05_before-amazon-click.png"
+      },
+      {
+        "title": "Step 6",
+        "description": "This is how the uploaded list looks. On the left, you see the queries; on the right, you see the list of relevant pages, products, and documents.",
+        "screenshot": "06_after-amazon-click.png"
+      },
+      {
+        "title": "Step 7",
+        "description": "The Query Sets section stores lists of queries that can be used for search testing. They can be uploaded separately, or generated from the uploaded Expected Results.",
+        "screenshot": "07_query_sets.png"
+      },
+      {
+        "title": "Step 8",
+        "description": "If you click on the name of the uploaded query set, you will see this list. You can also edit it here if needed.",
+        "screenshot": "08_query_sets_amazon.png"
+      },
+      {
+        "title": "Step 9",
+        "description": "Now you can create a task for the search engine to process all 200 queries. To do this, go to the Batch Runs section.",
+        "screenshot": "09_batch_runs.png"
+      },
+      {
+        "title": "Step 10",
+        "description": "To add a new task, click the Add Batch Run button. There, we will select the Query Set, the search engine, and the search configuration.",
+        "screenshot": "10_add_batch_runs.png"
+      },
+      {
+        "title": "Step 11",
+        "description": "In the first step, we select a query set from the uploaded ones. The Query Set determines what we are going to send to the search engine.",
+        "screenshot": "11_add_batch_runs_step1.png"
+      },
+      {
+        "title": "Step 12",
+        "description": "After making the selection, click the Next button to go to the search engine selection interface.",
+        "screenshot": "12_add_batch_runs_step2.png"
+      },
+      {
+        "title": "Step 13",
+        "description": "Here is the list of search engines configured for the entire account. Most likely, you will have one or two (for example, legacy and new).",
+        "screenshot": "13_add_batch_runs_step3.png"
+      },
+      {
+        "title": "Step 14",
+        "description": "After selecting, click the Next button to go to the configuration selection interface.",
+        "screenshot": "13_add_batch_runs_step3_next.png"
+      },
+      {
+        "title": "Step 15",
+        "description": "This is the list of configurations for the selected search engine. Each search engine has its own configurations, but in general they define how a query is converted into a low-level request to the search engine.",
+        "screenshot": "14_add_batch_runs_step4.png"
+      },
+      {
+        "title": "Step 16",
+        "description": "If you check the Trigger Run right after creation option, the task will start immediately and queries will be sent to the search engine right away.",
+        "screenshot": "15_add_batch_runs_step4_1.png"
+      }
+    ]
+  },
+  "use-case-2": {
+    "title": "Use Case 2: Comparative Search Engine Analysis",
+    "description": "This demo shows how to compare results from different runs, which can represent different search engines or configurations.",
+    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo-2.mp4",
+    "steps": [
+      "<strong>Step 1:</strong> So, we have three \"runs\" of 200 search queries through two search engines — Solr and Elasticsearch. In the case of Solr, two configurations were used: baseline and one with a boosted title.",
+      "<strong>Step 2:</strong> By clicking on \"boosted title x2\" we will see these 200 queries with their search results.",
+      "<strong>Step 3:</strong> You can also view all 600 queries by clicking on All Runs. The advantage of this section is that you can compare search results for the same query across different search engines or configurations.",
+      "<strong>Step 4:</strong> For example, by entering \"intelliseat\" in the filter field, we get all three runs for this query.",
+      "<strong>Step 5:</strong> We can select all three runs and compare them with each other.",
+      "<strong>Step 6:</strong> Click the Compare button and you will see a table where all the links are listed vertically, the columns represent the three configurations, and the intersections show the document’s position in the search results."
+    ],
+    "interactiveSteps": [
+      {
+        "title": "Step 1",
+        "description": "So, we have three \"runs\" of 200 search queries through two search engines — Solr and Elasticsearch. In the case of Solr, two configurations were used: baseline and one with a boosted title.",
+        "screenshot": "16_batch_runs_again.png"
+      },
+      {
+        "title": "Step 2",
+        "description": "By clicking on \"boosted title x2\" we will see these 200 queries with their search results.",
+        "screenshot": "17_batch_runs_again_boosted_title.png"
+      },
+      {
+        "title": "Step 3",
+        "description": "You can also view all 600 queries by clicking on All Runs. The advantage of this section is that you can compare search results for the same query across different search engines or configurations.",
+        "screenshot": "18_all_runs.png"
+      },
+      {
+        "title": "Step 4",
+        "description": "For example, by entering \"intelliseat\" in the filter field, we get all three runs for this query.",
+        "screenshot": "19_all_runs_filtered.png"
+      },
+      {
+        "title": "Step 5",
+        "description": "We can select all three runs and compare them with each other.",
+        "screenshot": "20_all_runs_select.png"
+      },
+      {
+        "title": "Step 6",
+        "description": "Click the Compare button and you will see a table where all the links are listed vertically, the columns represent the three configurations, and the intersections show the document’s position in the search results.",
+        "screenshot": "21_all_runs_compare.png"
+      }
+    ]
+  },
+  "use-case-3": {
+    "title": "Use Case 3: Regression & Drift Testing",
+    "description": "(In progress) Compare search performance over time (e.g., this month vs. last month) to detect degradation or significant changes.",
+    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo-3.mp4",
+    "steps": [],
+    "interactiveSteps": []
+  },
+  "use-case-4": {
+    "title": "Use Case 4: Automated Relevance Assessment & Reporting",
+    "description": "This demo shows how to apply ground truth data to your runs and generate detailed performance reports, including AI-powered judgments.",
+    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo-4.mp4",
+    "steps": [
+      "<strong>Step 1:</strong> To make the comparison useful, we need to apply our ground truth data. Let’s go back to Expected Results and click the \"Apply to batch runs\" button.",
+      "<strong>Step 2:</strong> Select the required items and click Apply to Batch Runs.",
+      "<strong>Step 3:</strong> Select all batch runs and start the metrics calculation by clicking Apply.",
+      "<strong>Step 4:</strong> Now we can go to any query and see what’s new. Let’s go to All Runs and filter for \"stingray corvette mouse pad\".",
+      "<strong>Step 5:</strong> Notice that now one of the items has turned green and has a label on the right. The green color means that this search result is among the relevant ones from our ground truth data.",
+      "<strong>Step 6:</strong> Now we can go and create a report. All our runs contain metrics, we just need to visualize them.",
+      "<strong>Step 7:</strong> To generate a report, click the Generate New Report button.",
+      "<strong>Step 8:</strong> Here we select which runs will be included in the report. This is what we compare with each other.",
+      "<strong>Step 9:</strong> Click Next and proceed to the search engine selection.",
+      "<strong>Step 10:</strong> In the second step, we are shown all unique pairs of search engines and search engine configurations found in the selected runs. Again, select all, and click Next.",
+      "<strong>Step 11:</strong> Next, select the type of reports you want to generate. Essential Reports and Metrics do not involve an LLM. The \"LLM Judgement\" report provides a conclusion from the LLM after it processes the metric-based reports.",
+      "<strong>Step 12:</strong> The report appears instantly after generation. Now I will open a previously generated report.",
+      "<strong>Step 13:</strong> The list of metrics starts with NDCG, Normalized Discounted Cumulative Gain. This metric is widely used to evaluate the quality of a ranked list, which in our case is the search results.",
+      "<strong>Step 14:</strong> To view the detailed report, click on the link.",
+      "<strong>Step 15:</strong> Here we have a single graph showing the results of 200 queries — they are shown on the X-axis. The higher the value on the Y-axis, the better the match with the expected results.",
+      "<strong>Step 16:</strong> After the graph comes a table. It has clickable columns. When a column is selected, the graph is rebuilt so that the values in this column are in descending order.",
+      "<strong>Step 17:</strong> Other reports may include bar charts, or just tables, or plain text. For example, the summary_NDCG@10_stats report shows a bar chart.",
+      "<strong>Step 18:</strong> Before the list of reports, there is a View Consolidated Report button. It gathers some of the most important reports on a single page.",
+      "<strong>Step 19:</strong> This consolidated report starts with AI judgement, if such was selected when generating the report. It also provides a recommendation on which configuration performs better.",
+      "<strong>Step 20:</strong> Next, there are other reports, starting with the static reliability analysis.",
+      "<strong>Step 21:</strong> Then comes the NDCG report for the top 10 search results."
+    ],
+    "interactiveSteps": [
+      {
+        "title": "Step 1",
+        "description": "To make the comparison useful, we need to apply our ground truth data. Let’s go back to Expected Results and click the \"Apply to batch runs\" button.",
+        "screenshot": "22_exp_results.png"
+      },
+      {
+        "title": "Step 2",
+        "description": "Select the required items and click Apply to Batch Runs.",
+        "screenshot": "23_apply_to_batch_runs.png"
+      },
+      {
+        "title": "Step 3",
+        "description": "Select all batch runs and start the metrics calculation by clicking Apply.",
+        "screenshot": "24_select_all_batch_runs.png"
+      },
+      {
+        "title": "Step 4",
+        "description": "Now we can go to any query and see what’s new. Let’s go to All Runs and filter for \"stingray corvette mouse pad\".",
+        "screenshot": "25_all_runs_after_metrics.png"
+      },
+      {
+        "title": "Step 5",
+        "description": "Notice that now one of the items has turned green and has a label on the right. The green color means that this search result is among the relevant ones from our ground truth data.",
+        "screenshot": "26_run_details.png"
+      },
+      {
+        "title": "Step 6",
+        "description": "Now we can go and create a report. All our runs contain metrics, we just need to visualize them.",
+        "screenshot": "27_clicking_reports.png"
+      },
+      {
+        "title": "Step 7",
+        "description": "To generate a report, click the Generate New Report button.",
+        "screenshot": "28_generate_step1.png"
+      },
+      {
+        "title": "Step 8",
+        "description": "Here we select which runs will be included in the report. This is what we compare with each other.",
+        "screenshot": "29_report_runs.png"
+      },
+      {
+        "title": "Step 9",
+        "description": "Click Next and proceed to the search engine selection.",
+        "screenshot": "30_reports_runs_next.png"
+      },
+      {
+        "title": "Step 10",
+        "description": "In the second step, we are shown all unique pairs of search engines and search engine configurations found in the selected runs. Again, select all, and click Next.",
+        "screenshot": "31_report_configurations.png"
+      },
+      {
+        "title": "Step 11",
+        "description": "Next, select the type of reports you want to generate. Essential Reports and Metrics do not involve an LLM. The \"LLM Judgement\" report provides a conclusion from the LLM after it processes the metric-based reports.",
+        "screenshot": "32_report_last.png"
+      },
+      {
+        "title": "Step 12",
+        "description": "The report appears instantly after generation. Now I will open a previously generated report.",
+        "screenshot": "33_report_one.png"
+      },
+      {
+        "title": "Step 13",
+        "description": "The list of metrics starts with NDCG, Normalized Discounted Cumulative Gain. This metric is widely used to evaluate the quality of a ranked list, which in our case is the search results.",
+        "screenshot": "34_metrics_1.png"
+      },
+      {
+        "title": "Step 14",
+        "description": "To view the detailed report, click on the link.",
+        "screenshot": "35_ndcg_10.png"
+      },
+      {
+        "title": "Step 15",
+        "description": "Here we have a single graph showing the results of 200 queries — they are shown on the X-axis. The higher the value on the Y-axis, the better the match with the expected results.",
+        "screenshot": "36_ndcg_int.png"
+      },
+      {
+        "title": "Step 16",
+        "description": "After the graph comes a table. It has clickable columns. When a column is selected, the graph is rebuilt so that the values in this column are in descending order.",
+        "screenshot": "36_ndcg_int_2.png"
+      },
+      {
+        "title": "Step 17",
+        "description": "Other reports may include bar charts, or just tables, or plain text. For example, the summary_NDCG@10_stats report shows a bar chart.",
+        "screenshot": "37_reports_summary.png"
+      },
+      {
+        "title": "Step 18",
+        "description": "Before the list of reports, there is a View Consolidated Report button. It gathers some of the most important reports on a single page.",
+        "screenshot": "38_reports.png"
+      },
+      {
+        "title": "Step 19",
+        "description": "This consolidated report starts with AI judgement, if such was selected when generating the report. It also provides a recommendation on which configuration performs better.",
+        "screenshot": "39_view_consolidated_report_1.png"
+      },
+      {
+        "title": "Step 20",
+        "description": "Next, there are other reports, starting with the static reliability analysis.",
+        "screenshot": "39_view_consolidated_report_2.png"
+      },
+      {
+        "title": "Step 21",
+        "description": "Then comes the NDCG report for the top 10 search results.",
+        "screenshot": "39_view_consolidated_report_3.png"
+      }
+    ]
+  },
+  "use-case-5": {
+    "title": "Use Case 5: AI-Powered Content Discoverability",
+    "description": "(In progress) Let an AI generate queries for your documents, run a search, and report on how effectively your content is discovered.",
+    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo-5.mp4",
+    "steps": [],
+    "interactiveSteps": []
+  },
+  "use-case-6": {
+    "title": "Use Case 6: Query Set Stability Analysis",
+    "description": "(In progress) Create smaller, random samples from a large query log, run searches, and check how consistent results are across subsets.",
+    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo-6.mp4",
+    "steps": [],
+    "interactiveSteps": []
+  },
+  "use-case-7": {
+    "title": "Use Case 7: Query Pattern Clustering",
+    "description": "(In progress) Upload a large query log and use rapid clustering to group them by similar patterns (typos, word order, etc.) for analysis.",
+    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo-7.mp4",
+    "steps": [],
+    "interactiveSteps": []
+  }
+}

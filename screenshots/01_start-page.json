@@ -1,0 +1,4 @@
+{
+  "description": "This is the start page, from which you can manage test environments and the global (shared for all environments) configuration, such as search engines, search configurations, and LLM engines. Let’s start with the test environments.",
+  "highlight": true
+}

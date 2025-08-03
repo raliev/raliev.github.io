@@ -1,0 +1,4 @@
+{
+  "description": "If you check the Trigger Run right after creation option, the task will start immediately and queries will be sent to the search engine right away.",
+  "highlight": true
+}

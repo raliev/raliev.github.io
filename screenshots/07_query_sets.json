@@ -1,0 +1,4 @@
+{
+  "description": "The Query Sets section stores lists of queries that can be used for search testing. They can be uploaded separately, or generated from the uploaded Expected Results.",
+  "highlight": true
+}

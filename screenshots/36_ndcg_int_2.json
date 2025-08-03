@@ -1,0 +1,4 @@
+{
+  "description": "After the graph comes a table. It has clickable columns. When a column is selected, the graph is rebuilt so that the values in this column are in descending order.",
+  "highlight": true
+}

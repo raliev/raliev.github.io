@@ -1,0 +1,4 @@
+{
+  "description": "The list of metrics starts with NDCG, Normalized Discounted Cumulative Gain. This metric is widely used to evaluate the quality of a ranked list, which in our case is the search results.",
+  "highlight": true
+}
