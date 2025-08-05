@@ -3,39 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Report Example - TestMySearch</title>
+    <title>Sample Search Algorithm Test Report - TestMySearch</title>
+    <meta name="description" content="View a sample report comparing multiple search configurations (v1-baseline, v2-titleboost, vector) with an executive summary, LLM judgement, key metrics, and interactive charts.">
+
+    <link rel="canonical" href="https://www.testmysearch.com/report-example.html">
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <meta property="og:title" content="Sample Search Algorithm Test Report - TestMySearch">
+    <meta property="og:description" content="View a sample report comparing multiple search configurations with an LLM judgement and key performance metrics.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.testmysearch.com/report-example.html">
+    <meta property="og:site_name" content="TestMySearch">
+    <meta property="og:image" content="https://www.testmysearch.com/img/social-preview-report.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sample Search Algorithm Test Report - TestMySearch">
+    <meta name="twitter:description" content="View a sample report comparing multiple search configurations with an LLM judgement and key performance metrics.">
+    <meta name="twitter:image" content="https://www.testmysearch.com/img/social-preview-report.png">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Report",
+            "name": "Q3 Search Algorithm Test Report",
+            "description": "Comparison of v1-baseline-us vs. v2-titleboost-us vs. vector",
+            "url": "https://www.testmysearch.com/report-example.html",
+            "reportNumber": "Q3-2025-ALG-TEST",
+            "author": {
+                "@type": "Organization",
+                "name": "TestMySearch"
+            }
+        }
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-3.7.2.min.js"></script>
-    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.7.2.min.js"></script>
-    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.7.2.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
-        .table-auto th, .table-auto td { border: 1px solid #e5e7eb; padding: 0.75rem; }
-        .bk-root .bk-toolbar-button {
-            cursor: pointer;
-        }
-        /* Style for data tables coming from JSON */
-        .dataframe {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .dataframe th, .dataframe td {
-            border: 1px solid #e5e7eb;
-            padding: 0.5rem 0.75rem;
-            text-align: left;
-        }
-        .dataframe thead {
-            background-color: #f9fafb;
-        }
-        .dataframe th {
-            font-weight: 600;
-            font-size: 0.875rem;
-        }
-        .dataframe tbody tr:nth-child(even) {
-            background-color: #f9fafb;
-        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
