@@ -9,6 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
+        .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        table { min-width: 900px; }
+        th, td { white-space: nowrap; }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -26,38 +29,152 @@
 </header>
 
 <main class="container mx-auto px-6 py-16">
-    <div class="mx-auto max-w-4xl">
+    <div class="mx-auto max-w-6xl">
         <div class="text-center">
             <i class="fas fa-chart-pie text-5xl text-indigo-600"></i>
             <h1 class="mt-4 text-4xl font-extrabold text-gray-900 md:text-5xl">Reporting & KPIs</h1>
-            <p class="mt-4 text-lg text-gray-600">Visualize your data and track the key performance indicators that matter.</p>
+            <p class="mt-4 text-lg text-gray-600">Turning search analytics data into actionable business intelligence for product, marketing, and operations teams.</p>
         </div>
 
-        <div class="mt-12 rounded-lg bg-white p-8 shadow-lg space-y-8">
-            <section>
-                <h2 class="text-2xl font-bold text-gray-900">Telling a Story with Data</h2>
-                <p class="mt-4 text-gray-700">The final phase of our search analytics methodology is to transform your processed data into compelling visualizations and trackable Key Performance Indicators (KPIs). The goal is to make it easy for stakeholders across your organization to understand search performance at a glance and make data-driven decisions.</p>
-            </section>
+        <!-- Intro Section -->
+        <section class="mt-12 bg-white rounded-lg shadow-lg p-8 space-y-6">
+            <h2 class="text-2xl font-bold text-gray-900">Why Reporting Matters</h2>
+            <p class="text-gray-700">
+                Raw search analytics data becomes truly valuable only when it is transformed into meaningful reports and KPIs.
+                These outputs help identify issues in your search setup, detect anomalies, and highlight opportunities to improve relevance, conversions, and user satisfaction.
+            </p>
+            <p class="text-gray-700">
+                The reports below are based on real-world implementations (with obfuscated product names). They illustrate
+                the kind of insights that can be generated from detailed search interaction logs.
+            </p>
+        </section>
 
-            <section>
-                <h2 class="text-2xl font-bold text-gray-900">Essential Search KPIs</h2>
-                <ul class="mt-4 list-disc list-inside space-y-2 text-gray-700">
-                    <li><strong>Conversion Rate by Query:</strong> Which search terms are most likely to lead to a purchase?</li>
-                    <li><strong>Zero-Result Search Rate:</strong> What percentage of searches are returning no results?</li>
-                    <li><strong>Average Click Position:</strong> On average, how far down the results page are users clicking?</li>
-                    <li><strong>Search Adoption Rate:</strong> What percentage of your users are engaging with the search feature?</li>
-                </ul>
-                <!--<div class="mt-4 border border-dashed border-gray-400 rounded-lg p-6 text-center text-gray-500">
-                    [Placeholder for an image: A mockup of a search analytics dashboard, with widgets for each of the above KPIs.]
-                </div>-->
-            </section>
+        <!-- Section: Keyword Performance Report -->
+        <section class="mt-12 space-y-6">
+            <h2 class="text-2xl font-bold text-gray-900">1. Keyword Performance Report</h2>
+            <p class="text-gray-700">
+                This report shows how each keyword performs in terms of Add-To-Cart (ATC) and Order conversions, along with
+                positional click behavior.
+            </p>
 
-            <!--<section>
-                <h2 class="text-2xl font-bold text-gray-900">Building Actionable Dashboards</h2>
-                <p class="mt-4 text-gray-700">A well-designed dashboard is the key to making your search analytics accessible and actionable. Consider creating different dashboards for different audiences. For example, your marketing team might be interested in the top converting keywords, while your product team will want to see how a new feature is impacting user engagement.</p>
-            </section>-->
-        </div>
+            <div class="table-scroll">
+                <table class="table-auto border-collapse border border-gray-300 w-full text-sm">
+                    <thead class="bg-gray-50">
+                    <tr>
+                        <th class="border border-gray-300 px-3 py-2">Query</th>
+                        <th class="border border-gray-300 px-3 py-2">Count</th>
+                        <th class="border border-gray-300 px-3 py-2">ATC</th>
+                        <th class="border border-gray-300 px-3 py-2">Order</th>
+                        <th class="border border-gray-300 px-3 py-2">min</th>
+                        <th class="border border-gray-300 px-3 py-2">avg</th>
+                        <th class="border border-gray-300 px-3 py-2">max</th>
+                        <th class="border border-gray-300 px-3 py-2">ATC/Count</th>
+                        <th class="border border-gray-300 px-3 py-2">Order/Count</th>
+                        <th class="border border-gray-300 px-3 py-2">#atcratio</th>
+                        <th class="border border-gray-300 px-3 py-2">#totalratio</th>
+                        <th class="border border-gray-300 px-3 py-2">multipl</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="border border-gray-300 px-3 py-2">iligie (rm)</td>
+                        <td class="border border-gray-300 px-3 py-2">443</td>
+                        <td class="border border-gray-300 px-3 py-2">324</td>
+                        <td class="border border-gray-300 px-3 py-2">241</td>
+                        <td class="border border-gray-300 px-3 py-2">10</td>
+                        <td class="border border-gray-300 px-3 py-2">10</td>
+                        <td class="border border-gray-300 px-3 py-2">132</td>
+                        <td class="border border-gray-300 px-3 py-2">0.73</td>
+                        <td class="border border-gray-300 px-3 py-2">0.74</td>
+                        <td class="border border-gray-300 px-3 py-2">3</td>
+                        <td class="border border-gray-300 px-3 py-2">3</td>
+                        <td class="border border-gray-300 px-3 py-2">9</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-300 px-3 py-2">wernae (rm)</td>
+                        <td class="border border-gray-300 px-3 py-2">395</td>
+                        <td class="border border-gray-300 px-3 py-2">278</td>
+                        <td class="border border-gray-300 px-3 py-2">191</td>
+                        <td class="border border-gray-300 px-3 py-2">19</td>
+                        <td class="border border-gray-300 px-3 py-2">19</td>
+                        <td class="border border-gray-300 px-3 py-2">78</td>
+                        <td class="border border-gray-300 px-3 py-2">0.70</td>
+                        <td class="border border-gray-300 px-3 py-2">0.68</td>
+                        <td class="border border-gray-300 px-3 py-2">7</td>
+                        <td class="border border-gray-300 px-3 py-2">21</td>
+                        <td class="border border-gray-300 px-3 py-2">147</td>
+                    </tr>
+                    <!-- Additional sample rows... -->
+                    </tbody>
+                </table>
+            </div>
 
+            <p class="text-gray-600 text-sm mt-2">
+                <strong>Insight:</strong> For example, "wernae (rm)" shows an unusually high average clicked position of 19,
+                suggesting that relevant products for this keyword appear much deeper in the results than ideal.
+            </p>
+        </section>
+
+        <!-- Section: Product-SKU Performance Report -->
+        <section class="mt-12 space-y-6">
+            <h2 class="text-2xl font-bold text-gray-900">2. Product Performance by SKU</h2>
+            <p class="text-gray-700">
+                This report maps SKUs to the keywords that drive clicks and conversions, showing positional data for the
+                most frequent query per product.
+            </p>
+
+            <div class="table-scroll">
+                <table class="table-auto border-collapse border border-gray-300 w-full text-sm">
+                    <thead class="bg-gray-50">
+                    <tr>
+                        <th class="border border-gray-300 px-3 py-2">SKU#</th>
+                        <th class="border border-gray-300 px-3 py-2">Count</th>
+                        <th class="border border-gray-300 px-3 py-2">Queries</th>
+                        <th class="border border-gray-300 px-3 py-2">MostFreqQueryRM</th>
+                        <th class="border border-gray-300 px-3 py-2">CountQ</th>
+                        <th class="border border-gray-300 px-3 py-2">QueryM</th>
+                        <th class="border border-gray-300 px-3 py-2">MinPos</th>
+                        <th class="border border-gray-300 px-3 py-2">Average</th>
+                        <th class="border border-gray-300 px-3 py-2">MaxPos</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="border border-gray-300 px-3 py-2">000000F2015010600324</td>
+                        <td class="border border-gray-300 px-3 py-2">346</td>
+                        <td class="border border-gray-300 px-3 py-2">frasposua (tl)[114], frasposua (rm)</td>
+                        <td class="border border-gray-300 px-3 py-2">frasposua (rm)</td>
+                        <td class="border border-gray-300 px-3 py-2">99</td>
+                        <td class="border border-gray-300 px-3 py-2">1</td>
+                        <td class="border border-gray-300 px-3 py-2">1</td>
+                        <td class="border border-gray-300 px-3 py-2">1</td>
+                        <td class="border border-gray-300 px-3 py-2">1</td>
+                    </tr>
+                    <!-- Additional sample rows... -->
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="text-gray-600 text-sm mt-2">
+                <strong>Insight:</strong> This view allows you to detect products that have good conversion rates despite
+                poor visibility, or identify SKUs that need better keyword coverage.
+            </p>
+        </section>
+
+        <!-- Section: Zero-Result & Abandoned Searches -->
+        <section class="mt-12 space-y-6">
+            <h2 class="text-2xl font-bold text-gray-900">3. Zero-Result and Abandoned Searches</h2>
+            <p class="text-gray-700">
+                These reports help identify high-frequency queries that fail to produce results or that produce results
+                but fail to engage users.
+            </p>
+            <ul class="list-disc list-inside text-gray-700 space-y-2">
+                <li><strong>Zero-Result Searches:</strong> Often caused by gaps in catalog data or missing synonyms.</li>
+                <li><strong>Abandoned Searches:</strong> Suggest that results may be irrelevant or unattractive (e.g., poor pricing, missing promotions).</li>
+            </ul>
+        </section>
+
+        <!-- Navigation -->
         <div class="mt-12 flex justify-between">
             <a href="data-processing.html" class="transform rounded-lg bg-gray-300 px-6 py-3 text-lg font-semibold text-gray-700 shadow-md transition hover:scale-105 hover:bg-gray-400">
                 <i class="fas fa-arrow-left mr-2"></i> Back to Data Processing
