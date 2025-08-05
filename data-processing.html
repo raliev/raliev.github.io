@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Processing for Search Analytics - TestMySearch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+<header class="sticky top-0 z-50 shadow-sm" style="background-color: #faf8f5;">
+    <nav class="container mx-auto flex items-center justify-between px-6 py-4">
+        <a href="/"><img src="/img/testmysearch-logo.png" alt="TestMySearch Logo" style="height:60px"></a>
+        <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
+            <a href="demos.html" class="text-gray-600 hover:text-indigo-600">Demos</a>
+            <a href="index.html#features" class="text-gray-600 hover:text-indigo-600">Features</a>
+            <a href="index.html#how-it-works" class="text-gray-600 hover:text-indigo-600">How It Works</a>
+            <a href="index.html#contact" class="rounded-md bg-indigo-600 px-4 py-2 text-white transition hover:bg-indigo-700">Contact Us</a>
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-6 py-16">
+    <div class="mx-auto max-w-4xl">
+        <div class="text-center">
+            <i class="fas fa-cogs text-5xl text-indigo-600"></i>
+            <h1 class="mt-4 text-4xl font-extrabold text-gray-900 md:text-5xl">Data Processing</h1>
+            <p class="mt-4 text-lg text-gray-600">Turning raw data into structured insights for analysis.</p>
+        </div>
+
+        <div class="mt-12 rounded-lg bg-white p-8 shadow-lg space-y-8">
+            <section>
+                <h2 class="text-2xl font-bold text-gray-900">From Chaos to Clarity</h2>
+                <p class="mt-4 text-gray-700">Raw event logs from your website are often messy, incomplete, and difficult to work with. The data processing phase is where we bring order to this chaos, transforming the raw data into a clean, structured format that is ready for analysis. This is a critical step that should not be overlooked.</p>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-gray-900">Key Processing Steps</h2>
+                <ul class="mt-4 list-disc list-inside space-y-2 text-gray-700">
+                    <li><strong>Cleaning and Normalization —</strong> Removing duplicate entries, correcting typos, and standardizing data formats (e.g., converting all text to lowercase).</li>
+                    <li><strong>Sessionization —</strong> Grouping all of a user's actions into a single session to understand the complete user journey.</li>
+                    <li><strong>Data Enrichment —</strong> Adding additional context to your data, such as product category information or user demographics.</li>
+                    <li><strong>Aggregation —</strong> Summarizing the data to calculate key metrics, such as click-through rates and conversion rates for each query.</li>
+                </ul>
+                <!--<div class="mt-4 border border-dashed border-gray-400 rounded-lg p-6 text-center text-gray-500">
+                    [Placeholder for an infographic: A visual representation of the data processing pipeline, from raw logs to a structured data table.]
+                </div>-->
+            </section>
+
+            <!--<section>
+                <h2 class="text-2xl font-bold text-gray-900">The Importance of a Data Schema</h2>
+                <p class="mt-4 text-gray-700">Defining a clear data schema is essential for ensuring consistency and accuracy in your analysis. Your schema should define all of the fields you are collecting, their data types, and any relationships between them. This will make it much easier to query your data and build meaningful reports.</p>
+            </section>-->
+        </div>
+
+        <div class="mt-12 flex justify-between">
+            <a href="data-collection-strategies.html" class="transform rounded-lg bg-gray-300 px-6 py-3 text-lg font-semibold text-gray-700 shadow-md transition hover:scale-105 hover:bg-gray-400">
+                <i class="fas fa-arrow-left mr-2"></i> Back to Data Collection
+            </a>
+            <a href="reporting-and-kpis.html" class="transform rounded-lg bg-indigo-600 px-6 py-3 text-lg font-semibold text-white shadow-md transition hover:scale-105 hover:bg-indigo-700">
+                Next: Reporting & KPIs <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </div>
+</main>
+
+<footer class="bg-gray-800 text-gray-400">
+    <div class="container mx-auto px-6 py-8 text-center">
+        <p>&copy; 2025 TestMySearch. All Rights Reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>

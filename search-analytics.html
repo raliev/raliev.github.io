@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Analytics - TestMySearch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+<header class="sticky top-0 z-50 shadow-sm" style="background-color: #faf8f5;">
+    <nav class="container mx-auto flex items-center justify-between px-6 py-4">
+        <a href="/"><img src="/img/testmysearch-logo.png" alt="TestMySearch Logo" style="height:60px"></a>
+        <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
+            <a href="demos.html" class="text-gray-600 hover:text-indigo-600">Demos</a>
+            <a href="index.html#features" class="text-gray-600 hover:text-indigo-600">Features</a>
+            <a href="index.html#how-it-works" class="text-gray-600 hover:text-indigo-600">How It Works</a>
+            <a href="index.html#contact" class="rounded-md bg-indigo-600 px-4 py-2 text-white transition hover:bg-indigo-700">Contact Us</a>
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-6 py-16">
+    <div class="mx-auto max-w-4xl">
+        <div class="text-center">
+            <i class="fas fa-chart-line text-5xl text-indigo-600"></i>
+            <h1 class="mt-4 text-4xl font-extrabold text-gray-900 md:text-5xl">Search Analytics</h1>
+            <p class="mt-4 text-lg text-gray-600">Using analytics to make your site search more responsive to business requirements and user expectations.</p>
+        </div>
+
+        <div class="mt-12 rounded-lg bg-white p-8 shadow-lg space-y-8">
+            <section>
+                <h2 class="text-2xl font-bold text-gray-900">Introduction</h2>
+                <p class="mt-4 text-gray-700">It’s common to give too much attention to technical search issues, especially with the advent of machine learning and AI. However, the most impactful problems often have simpler solutions that lie closer to the surface. This is especially true in e-commerce, where search performance directly affects conversions.</p>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-gray-900">Why Search Analytics Matters</h2>
+                <p class="mt-4 text-gray-700">Small configuration tweaks can ripple across your search experience — sometimes degrading it without obvious signs until sales drop. Search analytics helps you identify and understand these impacts before they harm your business.</p>
+                <!--<div class="mt-4 border border-dashed border-gray-400 rounded-lg p-6 text-center text-gray-500">
+                    [Placeholder for diagram: Example of how a small search configuration change can impact conversions]
+                </div>-->
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-gray-900">Why General Analytics Tools Fall Short</h2>
+                <p class="mt-4 text-gray-700">
+                    While platforms like Google Analytics, Adobe Analytics, and similar tools are excellent for tracking
+                    general web traffic and conversions, they are not designed to capture the nuances of search behavior.
+                    Search is not just another page view—it’s a sequence of actions, refinements, and interactions that
+                    require specialized tracking and interpretation.
+                </p>
+                <ul class="mt-4 list-disc list-inside space-y-2 text-gray-700">
+                    <li><strong>Session Context Is Lost — </strong> Standard analytics tools often treat each search as an isolated event,
+                        without linking it to subsequent refinements, filter usage, or the final conversion.</li>
+                    <li><strong>Limited Search-Specific Metrics —</strong> KPIs like query refinement rate, zero-results rate, or
+                        ranking position shifts are not natively available in these platforms.</li>
+                    <li><strong>Inflexible Data Model —</strong> Search interaction data is structured differently from generic
+                        page views and clicks, making it hard to store and analyze in traditional analytics dashboards.</li>
+                    <li><strong>No Built-in Relevance Measurement —</strong> General analytics cannot tell you if results were
+                        actually relevant, nor can they compare multiple search configurations.</li>
+                </ul>
+                <p class="mt-4 text-gray-700">
+                    To effectively improve search, you need tools that can capture and interpret the complete search journey—
+                    from the first query to the final purchase or abandonment—and connect those patterns directly to your
+                    business KPIs.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-gray-900">A Structured Approach to Search Analytics</h2>
+                <p class="mt-4 text-gray-700">To truly master search analytics, we need to break down the process into manageable stages. Our approach is based on a proven, three-phase methodology that ensures you're not just collecting data, but turning it into actionable insights. In the following pages, we'll explore each of these phases in detail:</p>
+                <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-gray-50 p-6 rounded-lg text-center">
+                        <i class="fas fa-database text-3xl text-indigo-600"></i>
+                        <h3 class="mt-4 text-xl font-bold text-gray-900">1. Data Collection</h3>
+                        <p class="mt-2 text-gray-600">Learn what data to collect and how to capture the full user journey.</p>
+                        <a href="data-collection-strategies.html" class="mt-4 inline-block text-indigo-600 font-semibold hover:underline">Read More &rarr;</a>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg text-center">
+                        <i class="fas fa-cogs text-3xl text-indigo-600"></i>
+                        <h3 class="mt-4 text-xl font-bold text-gray-900">2. Data Processing</h3>
+                        <p class="mt-2 text-gray-600">Transform raw data into structured insights for analysis.</p>
+                        <a href="data-processing.html" class="mt-4 inline-block text-indigo-600 font-semibold hover:underline">Read More &rarr;</a>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg text-center">
+                        <i class="fas fa-chart-pie text-3xl text-indigo-600"></i>
+                        <h3 class="mt-4 text-xl font-bold text-gray-900">3. Reporting & KPIs</h3>
+                        <p class="mt-2 text-gray-600">Visualize your data and track key performance indicators.</p>
+                        <a href="reporting-and-kpis.html" class="mt-4 inline-block text-indigo-600 font-semibold hover:underline">Read More &rarr;</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</main>
+
+<footer class="bg-gray-800 text-gray-400">
+    <div class="container mx-auto px-6 py-8 text-center">
+        <p>&copy; 2025 TestMySearch. All Rights Reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Collection Strategies - TestMySearch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+<header class="sticky top-0 z-50 shadow-sm" style="background-color: #faf8f5;">
+    <nav class="container mx-auto flex items-center justify-between px-6 py-4">
+        <a href="/"><img src="/img/testmysearch-logo.png" alt="TestMySearch Logo" style="height:60px"></a>
+        <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
+            <a href="demos.html" class="text-gray-600 hover:text-indigo-600">Demos</a>
+            <a href="index.html#features" class="text-gray-600 hover:text-indigo-600">Features</a>
+            <a href="index.html#how-it-works" class="text-gray-600 hover:text-indigo-600">How It Works</a>
+            <a href="index.html#contact" class="rounded-md bg-indigo-600 px-4 py-2 text-white transition hover:bg-indigo-700">Contact Us</a>
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-6 py-16">
+    <div class="mx-auto max-w-4xl">
+        <div class="text-center">
+            <i class="fas fa-database text-5xl text-indigo-600"></i>
+            <h1 class="mt-4 text-4xl font-extrabold text-gray-900 md:text-5xl">Data Collection Strategies</h1>
+            <p class="mt-4 text-lg text-gray-600">Capturing the right data is the foundation of effective search analytics.</p>
+        </div>
+
+        <div class="mt-12 rounded-lg bg-white p-8 shadow-lg space-y-8">
+            <section>
+                <h2 class="text-2xl font-bold text-gray-900">Beyond the Search Box</h2>
+                <p class="mt-4 text-gray-700">To truly understand search performance, you need to look beyond the initial query. It's crucial to capture the entire user journey, from the moment they land on your site to the final conversion. This means tracking not just what users search for, but also how they interact with the results.</p>
+            </section>
+            <img src="img/analytics-diagram.png">
+            <section>
+                <h2 class="text-2xl font-bold text-gray-900">Key Data Points to Collect</h2>
+                <ul class="mt-4 list-disc list-inside space-y-2 text-gray-700">
+                    <li><strong>User and Session IDs:</strong> To connect all of a user's actions within a single visit.</li>
+                    <li><strong>Search Queries:</strong> Including the original query and any refinements.</li>
+                    <li><strong>Clicks on Search Results:</strong> Which products are users clicking on, and in what position?</li>
+                    <li><strong>Filters and Facets:</strong> How are users narrowing down their search results?</li>
+                    <li><strong>Add-to-Cart Actions:</strong> Which products are being added to the cart directly from the search results?</li>
+                    <li><strong>Conversions:</strong> Did the user ultimately make a purchase after using search?</li>
+                </ul>
+            </section>
+
+
+            <section>
+                <h2 class="text-2xl font-bold text-gray-900">Connecting Search to Business Outcomes</h2>
+                <p class="mt-4 text-gray-700">In an e-commerce context, it's vital to link search behavior to tangible business outcomes. By connecting search data with transaction data, you can start to answer critical questions like, "Which search queries are driving the most revenue?" and "How does the use of filters impact average order value?"</p>
+            </section>
+        </div>
+
+        <div class="mt-12 flex justify-between">
+            <a href="search-analytics.html" class="transform rounded-lg bg-gray-300 px-6 py-3 text-lg font-semibold text-gray-700 shadow-md transition hover:scale-105 hover:bg-gray-400">
+                <i class="fas fa-arrow-left mr-2"></i> Back to Analytics
+            </a>
+            <a href="data-processing.html" class="transform rounded-lg bg-indigo-600 px-6 py-3 text-lg font-semibold text-white shadow-md transition hover:scale-105 hover:bg-indigo-700">
+                Next: Data Processing <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </div>
+</main>
+
+<footer class="bg-gray-800 text-gray-400">
+    <div class="container mx-auto px-6 py-8 text-center">
+        <p>&copy; 2025 TestMySearch. All Rights Reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>
