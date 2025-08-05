@@ -30,37 +30,47 @@
 
 <!-- Main Content -->
 <main>
+    <!-- Section: Use Cases First -->
     <section class="bg-white py-20">
         <div class="container mx-auto px-6">
-            <div class="mb-16 text-center">
-                <h1 class="text-5xl font-extrabold text-gray-900">See TestMySearch in Action</h1>
-                <p class="mx-auto mt-6 max-w-3xl text-lg text-gray-600">
-                    Watch our comprehensive video demo to get a full overview of the platform, or dive into specific use cases to see how TestMySearch can solve your unique challenges.
+            <div class="mb-8 text-center">
+                <!-- Secondary button for All-in-One Video -->
+                <a href="#all-in-one-video"
+                   class="inline-flex items-center rounded-md border border-indigo-200 bg-white px-4 py-2 text-sm font-medium text-indigo-600 shadow-sm hover:bg-indigo-50">
+                    <i class="fas fa-video mr-2"></i>
+                    Watch All-in-One Video
+                </a>
+            </div>
+
+            <div class="mb-12 text-center">
+                <h1 class="text-5xl font-extrabold text-gray-900">Try TestMySearch Interactively</h1>
+                <p class="mx-auto mt-4 max-w-3xl text-lg text-gray-600">
+                    Explore specific use cases through interactive demos. Change queries, tweak configurations,
+                    and see metrics in real time.
                 </p>
             </div>
 
-            <!-- All-in-One Demo Video -->
-            <div>
-                <h2 class="mb-6 text-center text-3xl font-bold">All-in-One Demo</h2>
-                <div class="mx-auto max-w-4xl rounded-lg bg-black p-2 shadow-lg">
-                    <video controls class="w-full rounded-md">
-                        <source src="https://hybrismart.com/experiments/testmysearch/demo.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
+            <!-- Use Case Grid -->
+            <div id="use-case-grid" class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <p class="col-span-full text-center text-gray-600">Loading demos...</p>
             </div>
         </div>
     </section>
 
-    <section class="bg-gray-100 py-20">
+    <!-- Section: All-in-One Video Below -->
+    <section id="all-in-one-video" class="bg-gray-100 py-20">
         <div class="container mx-auto px-6">
-            <div class="mb-16 text-center">
-                <h2 class="text-4xl font-bold text-gray-900">Explore by Use Case</h2>
-                <p class="mx-auto mt-4 max-w-2xl text-gray-600">Click on any scenario to watch a focused video or try an interactive walkthrough.</p>
+            <div class="mb-8 text-center">
+                <h2 class="text-4xl font-bold text-gray-900">All-in-One Demo Video</h2>
+                <p class="mx-auto mt-4 max-w-2xl text-gray-600">
+                    Watch the full overview of TestMySearch in a single video demonstration.
+                </p>
             </div>
-            <div id="use-case-grid" class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                <!-- Use cases will be dynamically inserted here by JavaScript -->
-                <p class="col-span-full text-center text-gray-600">Loading demos...</p>
+            <div class="mx-auto max-w-5xl rounded-lg bg-black p-2 shadow-lg">
+                <video controls class="w-full rounded-md">
+                    <source src="https://hybrismart.com/experiments/testmysearch/demo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
         </div>
     </section>
