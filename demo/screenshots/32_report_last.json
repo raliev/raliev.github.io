@@ -1,0 +1,4 @@
+{
+  "description": "Next, select the type of reports you want to generate. Essential Reports and Metrics do not involve an LLM. The \"LLM Judgement\" report provides a conclusion from the LLM after it processes the metric-based reports.",
+  "highlight": true
+}

@@ -1,0 +1,4 @@
+{
+  "description": "Notice that now one of the items has turned green and has a label on the right. The green color means that this search result is among the relevant ones from our ground truth data.",
+  "highlight": true
+}

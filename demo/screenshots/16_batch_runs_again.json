@@ -1,0 +1,4 @@
+{
+  "description": "So, we have three \"runs\" of 200 search queries through two search engines — Solr and Elasticsearch. In the case of Solr, two configurations were used: baseline and one with a boosted title.",
+  "highlight": true
+}

@@ -1,0 +1,4 @@
+{
+  "description": "Here we have a single graph showing the results of 200 queries — they are shown on the X-axis. The higher the value on the Y-axis, the better the match with the expected results.",
+  "highlight": true
+}
