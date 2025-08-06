@@ -1,0 +1,121 @@
+{
+  "use-case-1": {
+    "title": "Use Case 1: Configuration Tuning & Optimization",
+    "description": "This demo shows how to find the best search configuration by testing multiple variations.",
+    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo.mp4",
+    "steps": [
+      "<strong>Upload Query Set:</strong> Start by uploading a CSV file containing the queries you want to test.",
+      "<strong>Define Configurations:</strong> Create multiple search configurations, for example, one with default settings and another with boosted fields.",
+      "<strong>Execute Batch Run:</strong> Launch a run that executes all queries against each configuration.",
+      "<strong>Generate Report:</strong> Once complete, generate a comparative report.",
+      "<strong>Analyze Results:</strong> The report shows key metrics side-by-side, making it easy to see which configuration performed best."
+    ],
+    "interactiveSteps": [
+      { "title": "Step 1: Upload Query Set", "description": "Start by uploading a CSV file with your queries. This forms the basis of your test.", "screenshot": "07_query_sets.png" },
+      { "title": "Step 2: Define Configurations", "description": "Create multiple configurations to compare, for instance, with different field weights.", "screenshot": "11_add_batch_runs_step1.png" },
+      { "title": "Step 3: Launch Analysis", "description": "Execute the batch run to have the system test all queries against all configurations.", "screenshot": "12_add_batch_runs_step2.png" },
+      { "title": "Step 4: Review Report", "description": "Analyze the final report with its metrics to decide on the best-performing configuration.", "screenshot": "14_add_batch_runs_step4.png" }
+    ]
+  },
+  "use-case-2": {
+    "title": "Use Case 2: Comparative Search Engine Analysis",
+    "description": "This demo shows how to A/B test two different search engines, like a keyword search vs. a new vector search.",
+    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo.mp4",
+    "steps": [
+      "<strong>Upload Query Set:</strong> Provide a standard set of queries to ensure a fair comparison.",
+      "<strong>Configure Search Engines:</strong> Set up two different search engine endpoints (e.g., 'Engine A' vs 'Engine B').",
+      "<strong>Execute A/B Test Run:</strong> Run the queries against both engines simultaneously.",
+      "<strong>Generate Comparison Report:</strong> The system generates a report that directly compares metrics.",
+      "<strong>Analyze Differences:</strong> Use the report to determine if the new engine provides a statistically significant improvement."
+    ],
+    "interactiveSteps": [
+      { "title": "Step 1: Configure Endpoints", "description": "Define the two search backends to compare, providing the API endpoint for both 'Engine A' (production) and 'Engine B' (candidate).", "screenshot": "11_add_batch_runs_step1.png" },
+      { "title": "Step 2: Launch A/B Test", "description": "Execute the same query set against both systems.", "screenshot": "09_batch_runs.png" },
+      { "title": "Step 3: Analyze Results", "description": "Compare the performance metrics side-by-side in the generated report.", "screenshot": "15_add_batch_runs_step4_1.png" }
+    ]
+  },
+  "use-case-3": {
+    "title": "Use Case 3: Regression & Drift Testing",
+    "description": "This demo illustrates how to monitor search quality over time to catch regressions before they impact users.",
+    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo.mp4",
+    "steps": [
+      "<strong>Use a Golden Query Set:</strong> Select a standardized query set that represents typical user behavior.",
+      "<strong>Schedule Regular Runs:</strong> Set up a recurring job (e.g., weekly) to execute a search run.",
+      "<strong>Load Reports:</strong> Load the report from the current week and the previous week.",
+      "<strong>Compare Reports:</strong> The tool highlights changes in key metrics, immediately spotting if average NDCG has dropped.",
+      "<strong>Investigate Deltas:</strong> Drill down into the queries with the largest performance drop to find the root cause."
+    ],
+    "interactiveSteps": [
+      { "title": "Step 1: Load Two Reports", "description": "The interface allows you to load two different reports for comparison. Here, we load 'Run-W30' and 'Run-W31'.", "screenshot": "01_start-page.png"},
+      { "title": "Step 2: Compare Metrics", "description": "The system automatically highlights statistically significant changes in key metrics.", "screenshot": "14_add_batch_runs_step4.png"},
+      { "title": "Step 3: Drill Down", "description": "Investigate the queries with the largest changes to understand the cause of the regression.", "screenshot": "08_query_sets_amazon.png"}
+    ]
+  },
+  "use-case-4": {
+    "title": "Use Case 4: Automated Relevance Assessment",
+    "description": "This demo shows how to use an AI-powered Virtual Assessor to grade search results automatically.",
+    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo.mp4",
+    "steps": [
+      "<strong>Run Search:</strong> Execute a search run to get the results from your search engine.",
+      "<strong>Configure Virtual Assessor:</strong> Choose a large language model (LLM) and provide it with instructions on how to grade relevance.",
+      "<strong>Launch Assessment:</strong> The Virtual Assessor iterates through each query and its results, using the LLM to assign a relevance score.",
+      "<strong>Generate Report:</strong> A report is created with AI-generated relevance labels.",
+      "<strong>Calculate Metrics:</strong> These labels are used to automatically calculate metrics like NDCG and Precision."
+    ],
+    "interactiveSteps": [
+      { "title": "Step 1: Configure Assessor Prompt", "description": "Write the instructions for the AI. You define the relevance scale (e.g., 0-4) and provide examples to guide the model.", "screenshot": "04_before-expected-results-click.png"},
+      { "title": "Step 2: Launch Assessment", "description": "Start the process, and the LLM will grade each result for every query.", "screenshot": "05_before-amazon-click.png"},
+      { "title": "Step 3: Use Labels", "description": "The generated relevance labels can now be used to calculate NDCG and other metrics.", "screenshot": "06_after-amazon-click.png"}
+    ]
+  },
+  "use-case-5": {
+    "title": "Use Case 5: AI-Powered Content Discoverability",
+    "description": "This demo shows how to test if your products or documents are easily found by generating likely user queries with AI.",
+    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo.mp4",
+    "steps": [
+      "<strong>Provide Content:</strong> Specify the documents or product IDs you want to test.",
+      "<strong>Generate Queries:</strong> Use an AI model to generate a set of likely user queries for the specified content.",
+      "<strong>Execute Search:</strong> Run a search using the AI-generated queries.",
+      "<strong>Assess Results:</strong> For each query, check if the target document appears in the search results, and at what rank.",
+      "<strong>Generate Report:</strong> The report shows the 'discoverability score' for your content."
+    ],
+    "interactiveSteps": [
+      { "title": "Step 1: Select Content", "description": "First, you select the content to analyze by uploading a file or providing a list of product IDs.", "screenshot": "03_before-testsandbox-click.png"},
+      { "title": "Step 2: Generate Queries", "description": "The AI creates a list of likely queries that users might employ to find this content.", "screenshot": "07_query_sets.png"},
+      { "title": "Step 3: Analyze Report", "description": "The report shows how often the target content appeared in the top search results.", "screenshot": "08_query_sets_amazon.png"}
+    ]
+  },
+  "use-case-6": {
+    "title": "Use Case 6: Query Set Stability Analysis",
+    "description": "This demo shows how to check if your search results are consistent across different samples of user queries.",
+    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo.mp4",
+    "steps": [
+      "<strong>Upload Large Query Log:</strong> Start with a large, realistic log of user queries.",
+      "<strong>Sample and Split:</strong> Create several smaller, non-overlapping query sets from the main log.",
+      "<strong>Run Search for Each Sample:</strong> Execute search runs for each of the smaller query sets.",
+      "<strong>Generate Stability Report:</strong> Compare the results from each sample run.",
+      "<strong>Analyze Consistency:</strong> A high degree of similarity indicates that your search performance is stable."
+    ],
+    "interactiveSteps": [
+      { "title": "Step 1: Perform Splitting", "description": "After uploading a large query log, select the 'Split' operation and choose to create 3 smaller, non-overlapping query sets.", "screenshot": "02_before-sandboxes-click.png"},
+      { "title": "Step 2: Launch Tests", "description": "Execute separate tests for each of the generated query sets.", "screenshot": "09_batch_runs.png"},
+      { "title": "Step 3: Compare Reports", "description": "The stability report shows the result set intersection and correlation between the sets.", "screenshot": "15_add_batch_runs_step4_1.png"}
+    ]
+  },
+  "use-case-7": {
+    "title": "Use Case 7: Query Pattern Clustering",
+    "description": "This demo shows how to automatically group similar queries to understand user intent patterns and find valuable synonyms.",
+    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo.mp4",
+    "steps": [
+      "<strong>Upload Large Query Log:</strong> Start with a raw log of thousands of user queries.",
+      "<strong>Initiate Clustering:</strong> Select the query log and start the fast clustering process.",
+      "<strong>Review Clusters:</strong> The tool presents groups of queries, such as 'iphone 15 pro', 'iphone15pro', and 'IPHONE 15 PRO'.",
+      "<strong>Analyze and Act:</strong> Use these clusters to identify common misspellings or different ways users search for the same thing."
+    ],
+    "interactiveSteps": [
+      { "title": "Step 1: View Query Clusters", "description": "The screenshot shows the output of the clustering algorithm. You can see a list of clusters.", "screenshot": "08_query_sets_amazon.png"},
+      { "title": "Step 2: Analyze a Cluster", "description": "Expand a cluster to see all the similar queries it contains, such as those with typos or synonyms.", "screenshot": "10_add_batch_runs.png"},
+      { "title": "Step 3: Create Rules", "description": "Based on the clusters, you can create synonym rules or typo corrections.", "screenshot": "13_add_batch_runs_step3.png"}
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "description": "The basket can contain one or several items. Note the buttons at the top — Extract Intents, Schedule Query Generation, Schedule Assessment Run. These actions are applied to the basket or to individual selected items. Let’s start with Schedule Assessment Run.",
+  "highlight": true
+}

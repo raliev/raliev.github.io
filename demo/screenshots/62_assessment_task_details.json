@@ -1,0 +1,4 @@
+{
+  "description": "We will show later how to launch such tasks; for now, let’s look at the result. The system numerically evaluates the relevance of a specific document, web page, or product to a particular search query. Since documents can be large, you cannot simply send them to the AI to check their relevance — the context window will not be enough. Moreover, to get the document, you first need to load it from somewhere — that is the first step. Then it is split into fragments; the system uses embeddings to find the fragments most relevant to the query, and only then are the top fragments sent to the LLM, with the highest score being chosen.",
+  "highlight": true
+}

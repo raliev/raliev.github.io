@@ -1,0 +1,4 @@
+{
+  "description": "Documents from the specified runs that have been assessed receive their score there as well. This score can be used to create an Expected Set — either automatically or after manual review. To improve accuracy, it is recommended to first create intents for existing queries, since in this case the system will not mistake unknown brand names for product characteristics but will treat the brand as a brand.",
+  "highlight": true
+}

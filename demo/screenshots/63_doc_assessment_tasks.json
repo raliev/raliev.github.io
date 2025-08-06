@@ -1,0 +1,4 @@
+{
+  "description": "To assess all 10 results for each query, 10 such tasks are created. For hundreds or thousands of queries, the system may work for hours or days, but it operates completely automatically. The calculated score is assigned to the document, and reports can be built based on it.",
+  "highlight": true
+}

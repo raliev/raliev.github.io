@@ -1,0 +1,4 @@
+{
+  "description": "Here you select the assessment parameters. Since documents must be split into fragments, or chunks, you set the chunk size and their overlap here. You also set a size limit above which documents should be ignored — otherwise, document assessment might take hours. The last parameter, Top N, specifies how many of the most relevant fragments should be selected for LLM evaluation from the total number.",
+  "highlight": true
+}

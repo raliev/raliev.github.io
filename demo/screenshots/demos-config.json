@@ -35,7 +35,7 @@
       {
         "title": "Step 3",
         "description": "You can create this sandbox using the Add New Sandbox button, but for demo purposes, one has already been created. Let’s click on it.",
-        "screenshot": "03_before-testsandbox-click.png"
+        "screenshot": "03_before-demo_sandbox-click.png"
       },
       {
         "title": "Step 4",
@@ -110,7 +110,7 @@
     "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo-2.mp4",
     "steps": [
       "<strong>Step 1:</strong> So, we have three \"runs\" of 200 search queries through two search engines — Solr and Elasticsearch. In the case of Solr, two configurations were used: baseline and one with a boosted title.",
-      "<strong>Step 2:</strong> By clicking on \"boosted title x2\" we will see these 200 queries with their search results.",
+      "<strong>Step 2:</strong> By clicking on \"title boost x2\" we will see these 200 queries with their search results.",
       "<strong>Step 3:</strong> You can also view all 600 queries by clicking on All Runs. The advantage of this section is that you can compare search results for the same query across different search engines or configurations.",
       "<strong>Step 4:</strong> For example, by entering \"intelliseat\" in the filter field, we get all three runs for this query.",
       "<strong>Step 5:</strong> We can select all three runs and compare them with each other.",
@@ -124,7 +124,7 @@
       },
       {
         "title": "Step 2",
-        "description": "By clicking on \"boosted title x2\" we will see these 200 queries with their search results.",
+        "description": "By clicking on \"title boost x2\" we will see these 200 queries with their search results.",
         "screenshot": "17_batch_runs_again_boosted_title.png"
       },
       {
@@ -292,18 +292,136 @@
     ]
   },
   "use-case-5": {
-    "title": "Use Case 5: AI-Powered Content Discoverability",
-    "description": "(In progress) Let an AI generate queries for your documents, run a search, and report on how effectively your content is discovered.",
+    "title": "Use Case 5: AI-Powered Content Analysis",
+    "description": "Let an AI generate queries for your documents, assess the search results,  and report on how effectively your content is discovered.",
     "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo-5.mp4",
-    "steps": [],
-    "interactiveSteps": []
+    "steps": [
+      "<strong>Step 1:</strong> For relatively slow tasks involving an LLM, the system uses the concept of asynchronous tasks. For example, if you need to assess search results for 200 runs, each consisting of 10 documents, you will need to assess a total of 2000 documents.",
+      "<strong>Step 2:</strong> This process takes some time and, in the case of subscription-based AI systems, may also cost something. Therefore, such operations are performed asynchronously, and the task batch is launched manually.",
+      "<strong>Step 3:</strong> The screen now shows three groups of tasks of three different types. The first group is Doc Assessment tasks — evaluating how relevant a single specific search result is to the query.",
+      "<strong>Step 4:</strong> We will show later how to launch such tasks; for now, let’s look at the result. The system numerically evaluates the relevance of a specific document, web page, or product to a particular search query. Since documents can be large, you cannot simply send them to the AI to check their relevance — the context window will not be enough. Moreover, to get the document, you first need to load it from somewhere — that is the first step. Then it is split into fragments; the system uses embeddings to find the fragments most relevant to the query, and only then are the top fragments sent to the LLM, with the highest score being chosen.",
+      "<strong>Step 5:</strong> To assess all 10 results for each query, 10 such tasks are created. For hundreds or thousands of queries, the system may work for hours or days, but it operates completely automatically. The calculated score is assigned to the document, and reports can be built based on it.",
+      "<strong>Step 6:</strong> To place a document in the queue for assessment, you need to open a run and add an individual document, the entire run, or even the entire batch to the basket.",
+      "<strong>Step 7:</strong> To place a document in the queue for assessment, open a run and add an individual document, the entire run, or even the entire batch to the basket, then apply the \"Assess a document\" operation to the basket.",
+      "<strong>Step 8:</strong> Once an item is placed in the basket, it will be displayed on the basket tab. More precisely, it will appear in the tab for the selected basket — there can be several of them.",
+      "<strong>Step 9:</strong> On the Baskets page, we can see one or more baskets, but only one is selected as the default. In this case, the basket is named \"default basket,\" although it could have been named anything. Multiple baskets are useful when working on several tasks in parallel. Let’s open default_basket.",
+      "<strong>Step 10:</strong> The basket can contain one or several items. Note the buttons at the top — Extract Intents, Schedule Query Generation, Schedule Assessment Run. These actions are applied to the basket or to individual selected items. Let’s start with Schedule Assessment Run.",
+      "<strong>Step 11:</strong> Here you select the assessment parameters. Since documents must be split into fragments, or chunks, you set the chunk size and their overlap here. You also set a size limit above which documents should be ignored — otherwise, document assessment might take hours. The last parameter, Top N, specifies how many of the most relevant fragments should be selected for LLM evaluation from the total number.",
+      "<strong>Step 12:</strong> At the very top of the form, you select the LLM. This choice determines both the system responsible for embeddings and the Large Language Model for evaluating the document’s relevance to the query. By the way, relevance assessment also involves the intent, which can be generated separately — this feature will be discussed later.",
+      "<strong>Step 13:</strong> Documents from the specified runs that have been assessed receive their score there as well. This score can be used to create an Expected Set — either automatically or after manual review. To improve accuracy, it is recommended to first create intents for existing queries, since in this case the system will not mistake unknown brand names for product characteristics but will treat the brand as a brand."
+    ],
+    "interactiveSteps": [
+      {
+        "title": "Step 1",
+        "description": "For relatively slow tasks involving an LLM, the system uses the concept of asynchronous tasks. For example, if you need to assess search results for 200 runs, each consisting of 10 documents, you will need to assess a total of 2000 documents.",
+        "screenshot": "60_doc_assessment_tasks.png"
+      },
+      {
+        "title": "Step 2",
+        "description": "This process takes some time and, in the case of subscription-based AI systems, may also cost something. Therefore, such operations are performed asynchronously, and the task batch is launched manually.",
+        "screenshot": "60_1_doc_assessment_tasks.png"
+      },
+      {
+        "title": "Step 3",
+        "description": "The screen now shows three groups of tasks of three different types. The first group is Doc Assessment tasks — evaluating how relevant a single specific search result is to the query.",
+        "screenshot": "61_assessment_task.png"
+      },
+      {
+        "title": "Step 4",
+        "description": "We will show later how to launch such tasks; for now, let’s look at the result. The system numerically evaluates the relevance of a specific document, web page, or product to a particular search query. Since documents can be large, you cannot simply send them to the AI to check their relevance — the context window will not be enough. Moreover, to get the document, you first need to load it from somewhere — that is the first step. Then it is split into fragments; the system uses embeddings to find the fragments most relevant to the query, and only then are the top fragments sent to the LLM, with the highest score being chosen.",
+        "screenshot": "62_assessment_task_details.png"
+      },
+      {
+        "title": "Step 5",
+        "description": "To assess all 10 results for each query, 10 such tasks are created. For hundreds or thousands of queries, the system may work for hours or days, but it operates completely automatically. The calculated score is assigned to the document, and reports can be built based on it.",
+        "screenshot": "63_doc_assessment_tasks.png"
+      },
+      {
+        "title": "Step 6",
+        "description": "To place a document in the queue for assessment, you need to open a run and add an individual document, the entire run, or even the entire batch to the basket.",
+        "screenshot": "64_docs_assessment.png"
+      },
+      {
+        "title": "Step 7",
+        "description": "To place a document in the queue for assessment, open a run and add an individual document, the entire run, or even the entire batch to the basket, then apply the \"Assess a document\" operation to the basket.",
+        "screenshot": "65_docs_assessment_basket.png"
+      },
+      {
+        "title": "Step 8",
+        "description": "Once an item is placed in the basket, it will be displayed on the basket tab. More precisely, it will appear in the tab for the selected basket — there can be several of them.",
+        "screenshot": "66_doc_assessment_basket_2.png"
+      },
+      {
+        "title": "Step 9",
+        "description": "On the Baskets page, we can see one or more baskets, but only one is selected as the default. In this case, the basket is named \"default basket,\" although it could have been named anything. Multiple baskets are useful when working on several tasks in parallel. Let’s open default_basket.",
+        "screenshot": "67_basket.png"
+      },
+      {
+        "title": "Step 10",
+        "description": "The basket can contain one or several items. Note the buttons at the top — Extract Intents, Schedule Query Generation, Schedule Assessment Run. These actions are applied to the basket or to individual selected items. Let’s start with Schedule Assessment Run.",
+        "screenshot": "68_basket1.png"
+      },
+      {
+        "title": "Step 11",
+        "description": "Here you select the assessment parameters. Since documents must be split into fragments, or chunks, you set the chunk size and their overlap here. You also set a size limit above which documents should be ignored — otherwise, document assessment might take hours. The last parameter, Top N, specifies how many of the most relevant fragments should be selected for LLM evaluation from the total number.",
+        "screenshot": "69_schedule_asssessment.png"
+      },
+      {
+        "title": "Step 12",
+        "description": "At the very top of the form, you select the LLM. This choice determines both the system responsible for embeddings and the Large Language Model for evaluating the document’s relevance to the query. By the way, relevance assessment also involves the intent, which can be generated separately — this feature will be discussed later.",
+        "screenshot": "70_schedule_asssessment.png"
+      },
+      {
+        "title": "Step 13",
+        "description": "Documents from the specified runs that have been assessed receive their score there as well. This score can be used to create an Expected Set — either automatically or after manual review. To improve accuracy, it is recommended to first create intents for existing queries, since in this case the system will not mistake unknown brand names for product characteristics but will treat the brand as a brand.",
+        "screenshot": "71_doc_assessment_tasks.png"
+      }
+    ]
   },
   "use-case-6": {
-    "title": "Use Case 6: Query Set Stability Analysis",
-    "description": "(In progress) Create smaller, random samples from a large query log, run searches, and check how consistent results are across subsets.",
+    "title": "Use Case 6: AI-powered intents for queries",
+    "description": "Some queries may be ambiguous for the search engine, but virtual assessor accuracy improves when given likely user intent derived from existing judgments.",
     "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo-6.mp4",
-    "steps": [],
-    "interactiveSteps": []
+    "steps": [
+      "<strong>Step 1:</strong> Как я уже говорил в секции про assessment tasks, это список задач, которые создаются из корзины по одной из команд. В прошлый раз мы обсуждали функцию virtual assessor, помогающую численно оценить соответствие документа запросу. В этой демонстрации сосредоточимся на intent extraction",
+      "<strong>Step 2:</strong> Эту команду можно применить на элементы корзины типа expected results. То есть, системе нужны уже какие-то эталонные результаты поиска для запроса, чтобы обработать их и оценить, что имел ввиду пользователь под лаконичным запросом — ведь мы знаем, что за товары он посчитал релевантными. Со страницы корзины нужно нажать на кнопку Extract Intents",
+      "<strong>Step 3:</strong> Каждая генерация будет приводить к появлению вот такой записи в списке. Нажмем на эту, чтобы посмотреть что внутри",
+      "<strong>Step 4:</strong> Если задачи уже отработали, выводится блок Generated Intent для запроса. Как это работает - для запроса у нас есть набор Expected Results, то есть, предполагается, что это релевантные документы, товары или страницы для запроса. Их содержание помогает понять, что пользователь имел ввиду в своем запросе. Например, если там фигурирует бренд, система поймет, что это бренд, а не характеризующее слово",
+      "<strong>Step 5:</strong> Если задачи уже отработали, выводится блок Generated Intent для запроса. Как это работает - для запроса у нас есть набор Expected Results, то есть, предполагается, что это релевантные документы, товары или страницы для запроса. Их содержание помогает понять, что пользователь имел ввиду в своем запросе. Например, если там фигурирует бренд, система поймет, что это бренд, а не характеризующее слово. Нажмем теперь на query, чтобы получить все runs",
+      "<strong>Step 6:</strong> Теперь в разделе Expected Results в группе amazon мы можем поискать наш запрос и увидим, что к нему теперь прицеплен intent. Дальше можно сгенерировать новый queryset, в котором у этого запроса будет intent. Этот intent будет использоваться by Virtual Assessor для оценки релевантности документа запросу."
+    ],
+    "interactiveSteps": [
+      {
+        "title": "Step 1",
+        "description": "Как я уже говорил в секции про assessment tasks, это список задач, которые создаются из корзины по одной из команд. В прошлый раз мы обсуждали функцию virtual assessor, помогающую численно оценить соответствие документа запросу. В этой демонстрации сосредоточимся на intent extraction",
+        "screenshot": "90_doc_assessment_tasks.png"
+      },
+      {
+        "title": "Step 2",
+        "description": "Эту команду можно применить на элементы корзины типа expected results. То есть, системе нужны уже какие-то эталонные результаты поиска для запроса, чтобы обработать их и оценить, что имел ввиду пользователь под лаконичным запросом — ведь мы знаем, что за товары он посчитал релевантными. Со страницы корзины нужно нажать на кнопку Extract Intents",
+        "screenshot": "911_basket_intent.png"
+      },
+      {
+        "title": "Step 3",
+        "description": "Каждая генерация будет приводить к появлению вот такой записи в списке. Нажмем на эту, чтобы посмотреть что внутри",
+        "screenshot": "912_docs_assessment.png"
+      },
+      {
+        "title": "Step 4",
+        "description": "Если задачи уже отработали, выводится блок Generated Intent для запроса. Как это работает - для запроса у нас есть набор Expected Results, то есть, предполагается, что это релевантные документы, товары или страницы для запроса. Их содержание помогает понять, что пользователь имел ввиду в своем запросе. Например, если там фигурирует бренд, система поймет, что это бренд, а не характеризующее слово",
+        "screenshot": "913_docs_assessment.png"
+      },
+      {
+        "title": "Step 5",
+        "description": "Если задачи уже отработали, выводится блок Generated Intent для запроса. Как это работает - для запроса у нас есть набор Expected Results, то есть, предполагается, что это релевантные документы, товары или страницы для запроса. Их содержание помогает понять, что пользователь имел ввиду в своем запросе. Например, если там фигурирует бренд, система поймет, что это бренд, а не характеризующее слово. Нажмем теперь на query, чтобы получить все runs",
+        "screenshot": "914_docs_assessment.png"
+      },
+      {
+        "title": "Step 6",
+        "description": "Теперь в разделе Expected Results в группе amazon мы можем поискать наш запрос и увидим, что к нему теперь прицеплен intent. Дальше можно сгенерировать новый queryset, в котором у этого запроса будет intent. Этот intent будет использоваться by Virtual Assessor для оценки релевантности документа запросу.",
+        "screenshot": "915_docs_assessment.png"
+      }
+    ]
   },
   "use-case-7": {
     "title": "Use Case 7: Query Pattern Clustering",

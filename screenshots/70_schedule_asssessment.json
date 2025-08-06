@@ -1,0 +1,4 @@
+{
+  "description": "At the very top of the form, you select the LLM. This choice determines both the system responsible for embeddings and the Large Language Model for evaluating the document’s relevance to the query. By the way, relevance assessment also involves the intent, which can be generated separately — this feature will be discussed later.",
+  "highlight": true
+}

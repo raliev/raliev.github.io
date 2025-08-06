@@ -1,0 +1,4 @@
+{
+  "description": "On the Baskets page, we can see one or more baskets, but only one is selected as the default. In this case, the basket is named \"default basket,\" although it could have been named anything. Multiple baskets are useful when working on several tasks in parallel. Let’s open default_basket.",
+  "highlight": true
+}

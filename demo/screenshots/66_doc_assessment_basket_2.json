@@ -1,0 +1,4 @@
+{
+  "description": "Once an item is placed in the basket, it will be displayed on the basket tab. More precisely, it will appear in the tab for the selected basket — there can be several of them.",
+  "highlight": true
+}

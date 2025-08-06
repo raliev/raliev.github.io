@@ -1,0 +1,4 @@
+{
+  "description": "This process takes some time and, in the case of subscription-based AI systems, may also cost something. Therefore, such operations are performed asynchronously, and the task batch is launched manually.",
+  "highlight": true
+}
