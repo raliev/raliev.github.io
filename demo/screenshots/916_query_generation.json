@@ -1,4 +1,4 @@
 {
-  "description": "Простейший способ создать ground truth или, как он называется в системе, expected results set, это его сгенерировать на основе документов. Для каждого запроса в этом случае будет только проассоциирован только один документ, но дальше можно попробовать объединить близкие запросы и объеднить документы. Тут я покажу, как сгенерировать для конкретного документа или документов",
+  "description": "The simplest way to create ground truth — or, as it is called in the system, an expected results set — is to generate it based on documents. In this case, each query will be associated with only one document, but later you can try to merge similar queries and combine documents. Here I will show how to generate it for a specific document or documents.",
   "highlight": true
 }

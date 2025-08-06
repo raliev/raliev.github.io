@@ -1,4 +1,4 @@
 {
-  "description": "Для генерации подход тот же самый, как в и случае Intent Extraction и Assessment Docs. Мы сначала помещаем желаемые элементы в корзину, а дальше нажимаем кнопку Schedule Query Generation на странице корзины, выбираем там LLM, и указываем параметры. Для генерации документы сначала скачиваются, затем разбиваются на фрагменты, затем каждый фрагмент отправляется в LLM, где для него формируются queries, и далее из полученного большого набора queries выбирается десять, наиболее подходящих документу.",
+  "description": "The generation process is the same as for Intent Extraction and Assessment Docs. First, we put the desired elements into the basket, then click the \"Schedule Query Generation\" button on the basket page, select the LLM there, and set the parameters. For generation, the documents are first downloaded, then split into fragments, then each fragment is sent to the LLM where queries are generated for it, and then from the resulting large set of queries, ten most relevant to the document are selected.",
   "highlight": true
 }

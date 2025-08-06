@@ -1,4 +1,4 @@
 {
-  "description": "Если задачи уже отработали, выводится блок Generated Intent для запроса. Как это работает - для запроса у нас есть набор Expected Results, то есть, предполагается, что это релевантные документы, товары или страницы для запроса. Их содержание помогает понять, что пользователь имел ввиду в своем запросе. Например, если там фигурирует бренд, система поймет, что это бренд, а не характеризующее слово",
+  "description": "If the tasks have already completed, a \"Generated Intent\" block for the query is displayed. How it works: for the query, we have a set of Expected Results — meaning these are presumed relevant documents, products, or pages for the query. Their content helps to understand what the user meant in their query. For example, if a brand name appears there, the system will recognize it as a brand, not as a descriptive word.",
   "highlight": true
 }

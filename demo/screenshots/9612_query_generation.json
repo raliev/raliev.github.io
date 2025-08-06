@@ -1,4 +1,4 @@
 {
-  "description": "На этой странице задача уже отработала, и как мы можем видеть, Query Generation завершилась удачно, сохранив 20 queries, из которых 10 обычных, традиционных, и 10 — natural language queries. Сами же сгенерированные Queries находятся в разделе Generated Queries.",
+  "description": "On this page, the task has already been completed, and as we can see, Query Generation finished successfully, saving 20 queries — 10 traditional and 10 natural language queries. The generated queries themselves can be found in the \"Generated Queries\" section.",
   "highlight": true
 }

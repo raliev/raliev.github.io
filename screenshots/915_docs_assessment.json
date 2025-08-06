@@ -1,4 +1,4 @@
 {
-  "description": "Теперь в разделе Expected Results в группе amazon мы можем поискать наш запрос и увидим, что к нему теперь прицеплен intent. Дальше можно сгенерировать новый queryset, в котором у этого запроса будет intent. Этот intent будет использоваться by Virtual Assessor для оценки релевантности документа запросу.",
+  "description": "Now, in the Expected Results section under the amazon group, we can search for our query and see that it now has an attached intent. Next, we can generate a new queryset where this query will have an intent. This intent will be used by the Virtual Assessor to evaluate the document’s relevance to the query.",
   "highlight": true
 }

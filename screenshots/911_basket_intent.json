@@ -1,4 +1,4 @@
 {
-  "description": "Эту команду можно применить на элементы корзины типа expected results. То есть, системе нужны уже какие-то эталонные результаты поиска для запроса, чтобы обработать их и оценить, что имел ввиду пользователь под лаконичным запросом — ведь мы знаем, что за товары он посчитал релевантными. Со страницы корзины нужно нажать на кнопку Extract Intents",
+  "description": "This command can be applied to basket elements of the \"expected results\" type. That is, the system needs some reference search results for the query in order to process them and understand what the user meant by their concise query — since we already know which items they considered relevant. On the basket page, click the \"Extract Intents\" button.",
   "highlight": true
 }

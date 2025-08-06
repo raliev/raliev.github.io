@@ -383,42 +383,42 @@
     "description": "Some queries may be ambiguous for the search engine, but virtual assessor accuracy improves when given likely user intent derived from existing judgments.",
     "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo-6.mp4",
     "steps": [
-      "<strong>Step 1:</strong> Как я уже говорил в секции про assessment tasks, это список задач, которые создаются из корзины по одной из команд. В прошлый раз мы обсуждали функцию virtual assessor, помогающую численно оценить соответствие документа запросу. В этой демонстрации сосредоточимся на intent extraction",
-      "<strong>Step 2:</strong> Эту команду можно применить на элементы корзины типа expected results. То есть, системе нужны уже какие-то эталонные результаты поиска для запроса, чтобы обработать их и оценить, что имел ввиду пользователь под лаконичным запросом — ведь мы знаем, что за товары он посчитал релевантными. Со страницы корзины нужно нажать на кнопку Extract Intents",
-      "<strong>Step 3:</strong> Каждая генерация будет приводить к появлению вот такой записи в списке. Нажмем на эту, чтобы посмотреть что внутри",
-      "<strong>Step 4:</strong> Если задачи уже отработали, выводится блок Generated Intent для запроса. Как это работает - для запроса у нас есть набор Expected Results, то есть, предполагается, что это релевантные документы, товары или страницы для запроса. Их содержание помогает понять, что пользователь имел ввиду в своем запросе. Например, если там фигурирует бренд, система поймет, что это бренд, а не характеризующее слово",
-      "<strong>Step 5:</strong> Если задачи уже отработали, выводится блок Generated Intent для запроса. Как это работает - для запроса у нас есть набор Expected Results, то есть, предполагается, что это релевантные документы, товары или страницы для запроса. Их содержание помогает понять, что пользователь имел ввиду в своем запросе. Например, если там фигурирует бренд, система поймет, что это бренд, а не характеризующее слово. Нажмем теперь на query, чтобы получить все runs",
-      "<strong>Step 6:</strong> Теперь в разделе Expected Results в группе amazon мы можем поискать наш запрос и увидим, что к нему теперь прицеплен intent. Дальше можно сгенерировать новый queryset, в котором у этого запроса будет intent. Этот intent будет использоваться by Virtual Assessor для оценки релевантности документа запросу."
+      "<strong>Step 1:</strong> As I mentioned in the section about assessment tasks, this is a list of tasks created from the basket using one of the commands. Last time, we discussed the virtual assessor function, which helps numerically evaluate how well a document matches the query. In this demonstration, we will focus on intent extraction.",
+      "<strong>Step 2:</strong> This command can be applied to basket elements of the \"expected results\" type. That is, the system needs some reference search results for the query in order to process them and understand what the user meant by their concise query — since we already know which items they considered relevant. On the basket page, click the \"Extract Intents\" button.",
+      "<strong>Step 3:</strong> Each generation will result in such a record appearing in the list. Let’s click on this one to see what’s inside.",
+      "<strong>Step 4:</strong> If the tasks have already completed, a \"Generated Intent\" block for the query is displayed. How it works: for the query, we have a set of Expected Results — meaning these are presumed relevant documents, products, or pages for the query. Their content helps to understand what the user meant in their query. For example, if a brand name appears there, the system will recognize it as a brand, not as a descriptive word.",
+      "<strong>Step 5:</strong> If the tasks have already completed, a \"Generated Intent\" block for the query is displayed. How it works: for the query, we have a set of Expected Results — meaning these are presumed relevant documents, products, or pages for the query. Their content helps to understand what the user meant in their query. For example, if a brand name appears there, the system will recognize it as a brand, not as a descriptive word. Now, let’s click on the query to get all runs.",
+      "<strong>Step 6:</strong> Now, in the Expected Results section under the amazon group, we can search for our query and see that it now has an attached intent. Next, we can generate a new queryset where this query will have an intent. This intent will be used by the Virtual Assessor to evaluate the document’s relevance to the query."
     ],
     "interactiveSteps": [
       {
         "title": "Step 1",
-        "description": "Как я уже говорил в секции про assessment tasks, это список задач, которые создаются из корзины по одной из команд. В прошлый раз мы обсуждали функцию virtual assessor, помогающую численно оценить соответствие документа запросу. В этой демонстрации сосредоточимся на intent extraction",
+        "description": "As I mentioned in the section about assessment tasks, this is a list of tasks created from the basket using one of the commands. Last time, we discussed the virtual assessor function, which helps numerically evaluate how well a document matches the query. In this demonstration, we will focus on intent extraction.",
         "screenshot": "90_doc_assessment_tasks.png"
       },
       {
         "title": "Step 2",
-        "description": "Эту команду можно применить на элементы корзины типа expected results. То есть, системе нужны уже какие-то эталонные результаты поиска для запроса, чтобы обработать их и оценить, что имел ввиду пользователь под лаконичным запросом — ведь мы знаем, что за товары он посчитал релевантными. Со страницы корзины нужно нажать на кнопку Extract Intents",
+        "description": "This command can be applied to basket elements of the \"expected results\" type. That is, the system needs some reference search results for the query in order to process them and understand what the user meant by their concise query — since we already know which items they considered relevant. On the basket page, click the \"Extract Intents\" button.",
         "screenshot": "911_basket_intent.png"
       },
       {
         "title": "Step 3",
-        "description": "Каждая генерация будет приводить к появлению вот такой записи в списке. Нажмем на эту, чтобы посмотреть что внутри",
+        "description": "Each generation will result in such a record appearing in the list. Let’s click on this one to see what’s inside.",
         "screenshot": "912_docs_assessment.png"
       },
       {
         "title": "Step 4",
-        "description": "Если задачи уже отработали, выводится блок Generated Intent для запроса. Как это работает - для запроса у нас есть набор Expected Results, то есть, предполагается, что это релевантные документы, товары или страницы для запроса. Их содержание помогает понять, что пользователь имел ввиду в своем запросе. Например, если там фигурирует бренд, система поймет, что это бренд, а не характеризующее слово",
+        "description": "If the tasks have already completed, a \"Generated Intent\" block for the query is displayed. How it works: for the query, we have a set of Expected Results — meaning these are presumed relevant documents, products, or pages for the query. Their content helps to understand what the user meant in their query. For example, if a brand name appears there, the system will recognize it as a brand, not as a descriptive word.",
         "screenshot": "913_docs_assessment.png"
       },
       {
         "title": "Step 5",
-        "description": "Если задачи уже отработали, выводится блок Generated Intent для запроса. Как это работает - для запроса у нас есть набор Expected Results, то есть, предполагается, что это релевантные документы, товары или страницы для запроса. Их содержание помогает понять, что пользователь имел ввиду в своем запросе. Например, если там фигурирует бренд, система поймет, что это бренд, а не характеризующее слово. Нажмем теперь на query, чтобы получить все runs",
+        "description": "If the tasks have already completed, a \"Generated Intent\" block for the query is displayed. How it works: for the query, we have a set of Expected Results — meaning these are presumed relevant documents, products, or pages for the query. Their content helps to understand what the user meant in their query. For example, if a brand name appears there, the system will recognize it as a brand, not as a descriptive word. Now, let’s click on the query to get all runs.",
         "screenshot": "914_docs_assessment.png"
       },
       {
         "title": "Step 6",
-        "description": "Теперь в разделе Expected Results в группе amazon мы можем поискать наш запрос и увидим, что к нему теперь прицеплен intent. Дальше можно сгенерировать новый queryset, в котором у этого запроса будет intent. Этот intent будет использоваться by Virtual Assessor для оценки релевантности документа запросу.",
+        "description": "Now, in the Expected Results section under the amazon group, we can search for our query and see that it now has an attached intent. Next, we can generate a new queryset where this query will have an intent. This intent will be used by the Virtual Assessor to evaluate the document’s relevance to the query.",
         "screenshot": "915_docs_assessment.png"
       }
     ]

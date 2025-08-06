@@ -1,4 +1,4 @@
 {
-  "description": "Как я уже говорил в секции про assessment tasks, это список задач, которые создаются из корзины по одной из команд. В прошлый раз мы обсуждали функцию virtual assessor, помогающую численно оценить соответствие документа запросу. В этой демонстрации сосредоточимся на intent extraction",
+  "description": "As I mentioned in the section about assessment tasks, this is a list of tasks created from the basket using one of the commands. Last time, we discussed the virtual assessor function, which helps numerically evaluate how well a document matches the query. In this demonstration, we will focus on intent extraction.",
   "highlight": true
 }
