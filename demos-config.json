@@ -1,121 +1,433 @@
 {
   "use-case-1": {
     "title": "Use Case 1: Configuration Tuning & Optimization",
-    "description": "This demo shows how to find the best search configuration by testing multiple variations.",
-    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo.mp4",
+    "description": "This demo shows how to find the best search configuration by testing multiple variations, from uploading data to creating batch runs.",
+    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo-1.mp4",
     "steps": [
-      "<strong>Upload Query Set:</strong> Start by uploading a CSV file containing the queries you want to test.",
-      "<strong>Define Configurations:</strong> Create multiple search configurations, for example, one with default settings and another with boosted fields.",
-      "<strong>Execute Batch Run:</strong> Launch a run that executes all queries against each configuration.",
-      "<strong>Generate Report:</strong> Once complete, generate a comparative report.",
-      "<strong>Analyze Results:</strong> The report shows key metrics side-by-side, making it easy to see which configuration performed best."
+      "<strong>Step 1:</strong> This is the start page, from which you can manage test environments and the global (shared for all environments) configuration, such as search engines, search configurations, and LLM engines. Let’s start with the test environments.",
+      "<strong>Step 2:</strong> In our system, they are called Sandboxes because you can create your own sandbox, do anything you like there, and it will be completely isolated from another sandbox. This is especially convenient when multiple people are working with the system.",
+      "<strong>Step 3:</strong> You can create this sandbox using the Add New Sandbox button, but for demo purposes, one has already been created. Let’s click on it.",
+      "<strong>Step 4:</strong> This menu contains everything that “lives” inside a sandbox. We will start with the “Expected Results” section, which contains our ground truth data.",
+      "<strong>Step 5:</strong> A list is already uploaded here. The file is essentially an Excel export: the first column contains the query, and the second column contains a list of URLs of relevant documents, products, or site pages.",
+      "<strong>Step 6:</strong> This is how the uploaded list looks. On the left, you see the queries; on the right, you see the list of relevant pages, products, and documents.",
+      "<strong>Step 7:</strong> The Query Sets section stores lists of queries that can be used for search testing. They can be uploaded separately, or generated from the uploaded Expected Results.",
+      "<strong>Step 8:</strong> If you click on the name of the uploaded query set, you will see this list. You can also edit it here if needed.",
+      "<strong>Step 9:</strong> Now you can create a task for the search engine to process all 200 queries. To do this, go to the Batch Runs section.",
+      "<strong>Step 10:</strong> To add a new task, click the Add Batch Run button. There, we will select the Query Set, the search engine, and the search configuration.",
+      "<strong>Step 11:</strong> In the first step, we select a query set from the uploaded ones. The Query Set determines what we are going to send to the search engine.",
+      "<strong>Step 12:</strong> After making the selection, click the Next button to go to the search engine selection interface.",
+      "<strong>Step 13:</strong> Here is the list of search engines configured for the entire account. Most likely, you will have one or two (for example, legacy and new).",
+      "<strong>Step 14:</strong> After selecting, click the Next button to go to the configuration selection interface.",
+      "<strong>Step 15:</strong> This is the list of configurations for the selected search engine. Each search engine has its own configurations, but in general they define how a query is converted into a low-level request to the search engine.",
+      "<strong>Step 16:</strong> If you check the Trigger Run right after creation option, the task will start immediately and queries will be sent to the search engine right away."
     ],
     "interactiveSteps": [
-      { "title": "Step 1: Upload Query Set", "description": "Start by uploading a CSV file with your queries. This forms the basis of your test.", "screenshot": "07_query_sets.png" },
-      { "title": "Step 2: Define Configurations", "description": "Create multiple configurations to compare, for instance, with different field weights.", "screenshot": "11_add_batch_runs_step1.png" },
-      { "title": "Step 3: Launch Analysis", "description": "Execute the batch run to have the system test all queries against all configurations.", "screenshot": "12_add_batch_runs_step2.png" },
-      { "title": "Step 4: Review Report", "description": "Analyze the final report with its metrics to decide on the best-performing configuration.", "screenshot": "14_add_batch_runs_step4.png" }
+      {
+        "title": "Step 1",
+        "description": "This is the start page, from which you can manage test environments and the global (shared for all environments) configuration, such as search engines, search configurations, and LLM engines. Let’s start with the test environments.",
+        "screenshot": "01_start-page.png"
+      },
+      {
+        "title": "Step 2",
+        "description": "In our system, they are called Sandboxes because you can create your own sandbox, do anything you like there, and it will be completely isolated from another sandbox. This is especially convenient when multiple people are working with the system.",
+        "screenshot": "02_before-sandboxes-click.png"
+      },
+      {
+        "title": "Step 3",
+        "description": "You can create this sandbox using the Add New Sandbox button, but for demo purposes, one has already been created. Let’s click on it.",
+        "screenshot": "03_before-demo_sandbox-click.png"
+      },
+      {
+        "title": "Step 4",
+        "description": "This menu contains everything that “lives” inside a sandbox. We will start with the “Expected Results” section, which contains our ground truth data.",
+        "screenshot": "04_before-expected-results-click.png"
+      },
+      {
+        "title": "Step 5",
+        "description": "A list is already uploaded here. The file is essentially an Excel export: the first column contains the query, and the second column contains a list of URLs of relevant documents, products, or site pages.",
+        "screenshot": "05_before-amazon-click.png"
+      },
+      {
+        "title": "Step 6",
+        "description": "This is how the uploaded list looks. On the left, you see the queries; on the right, you see the list of relevant pages, products, and documents.",
+        "screenshot": "06_after-amazon-click.png"
+      },
+      {
+        "title": "Step 7",
+        "description": "The Query Sets section stores lists of queries that can be used for search testing. They can be uploaded separately, or generated from the uploaded Expected Results.",
+        "screenshot": "07_query_sets.png"
+      },
+      {
+        "title": "Step 8",
+        "description": "If you click on the name of the uploaded query set, you will see this list. You can also edit it here if needed.",
+        "screenshot": "08_query_sets_amazon.png"
+      },
+      {
+        "title": "Step 9",
+        "description": "Now you can create a task for the search engine to process all 200 queries. To do this, go to the Batch Runs section.",
+        "screenshot": "09_batch_runs.png"
+      },
+      {
+        "title": "Step 10",
+        "description": "To add a new task, click the Add Batch Run button. There, we will select the Query Set, the search engine, and the search configuration.",
+        "screenshot": "10_add_batch_runs.png"
+      },
+      {
+        "title": "Step 11",
+        "description": "In the first step, we select a query set from the uploaded ones. The Query Set determines what we are going to send to the search engine.",
+        "screenshot": "11_add_batch_runs_step1.png"
+      },
+      {
+        "title": "Step 12",
+        "description": "After making the selection, click the Next button to go to the search engine selection interface.",
+        "screenshot": "12_add_batch_runs_step2.png"
+      },
+      {
+        "title": "Step 13",
+        "description": "Here is the list of search engines configured for the entire account. Most likely, you will have one or two (for example, legacy and new).",
+        "screenshot": "13_add_batch_runs_step3.png"
+      },
+      {
+        "title": "Step 14",
+        "description": "After selecting, click the Next button to go to the configuration selection interface.",
+        "screenshot": "13_add_batch_runs_step3_next.png"
+      },
+      {
+        "title": "Step 15",
+        "description": "This is the list of configurations for the selected search engine. Each search engine has its own configurations, but in general they define how a query is converted into a low-level request to the search engine.",
+        "screenshot": "14_add_batch_runs_step4.png"
+      },
+      {
+        "title": "Step 16",
+        "description": "If you check the Trigger Run right after creation option, the task will start immediately and queries will be sent to the search engine right away.",
+        "screenshot": "15_add_batch_runs_step4_1.png"
+      }
     ]
   },
   "use-case-2": {
     "title": "Use Case 2: Comparative Search Engine Analysis",
-    "description": "This demo shows how to A/B test two different search engines, like a keyword search vs. a new vector search.",
-    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo.mp4",
+    "description": "This demo shows how to compare results from different runs, which can represent different search engines or configurations.",
+    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo-2.mp4",
     "steps": [
-      "<strong>Upload Query Set:</strong> Provide a standard set of queries to ensure a fair comparison.",
-      "<strong>Configure Search Engines:</strong> Set up two different search engine endpoints (e.g., 'Engine A' vs 'Engine B').",
-      "<strong>Execute A/B Test Run:</strong> Run the queries against both engines simultaneously.",
-      "<strong>Generate Comparison Report:</strong> The system generates a report that directly compares metrics.",
-      "<strong>Analyze Differences:</strong> Use the report to determine if the new engine provides a statistically significant improvement."
+      "<strong>Step 1:</strong> So, we have three \"runs\" of 200 search queries through two search engines — Solr and Elasticsearch. In the case of Solr, two configurations were used: baseline and one with a boosted title.",
+      "<strong>Step 2:</strong> By clicking on \"title boost x2\" we will see these 200 queries with their search results.",
+      "<strong>Step 3:</strong> You can also view all 600 queries by clicking on All Runs. The advantage of this section is that you can compare search results for the same query across different search engines or configurations.",
+      "<strong>Step 4:</strong> For example, by entering \"intelliseat\" in the filter field, we get all three runs for this query.",
+      "<strong>Step 5:</strong> We can select all three runs and compare them with each other.",
+      "<strong>Step 6:</strong> Click the Compare button and you will see a table where all the links are listed vertically, the columns represent the three configurations, and the intersections show the document’s position in the search results."
     ],
     "interactiveSteps": [
-      { "title": "Step 1: Configure Endpoints", "description": "Define the two search backends to compare, providing the API endpoint for both 'Engine A' (production) and 'Engine B' (candidate).", "screenshot": "11_add_batch_runs_step1.png" },
-      { "title": "Step 2: Launch A/B Test", "description": "Execute the same query set against both systems.", "screenshot": "09_batch_runs.png" },
-      { "title": "Step 3: Analyze Results", "description": "Compare the performance metrics side-by-side in the generated report.", "screenshot": "15_add_batch_runs_step4_1.png" }
+      {
+        "title": "Step 1",
+        "description": "So, we have three \"runs\" of 200 search queries through two search engines — Solr and Elasticsearch. In the case of Solr, two configurations were used: baseline and one with a boosted title.",
+        "screenshot": "16_batch_runs_again.png"
+      },
+      {
+        "title": "Step 2",
+        "description": "By clicking on \"title boost x2\" we will see these 200 queries with their search results.",
+        "screenshot": "17_batch_runs_again_boosted_title.png"
+      },
+      {
+        "title": "Step 3",
+        "description": "You can also view all 600 queries by clicking on All Runs. The advantage of this section is that you can compare search results for the same query across different search engines or configurations.",
+        "screenshot": "18_all_runs.png"
+      },
+      {
+        "title": "Step 4",
+        "description": "For example, by entering \"intelliseat\" in the filter field, we get all three runs for this query.",
+        "screenshot": "19_all_runs_filtered.png"
+      },
+      {
+        "title": "Step 5",
+        "description": "We can select all three runs and compare them with each other.",
+        "screenshot": "20_all_runs_select.png"
+      },
+      {
+        "title": "Step 6",
+        "description": "Click the Compare button and you will see a table where all the links are listed vertically, the columns represent the three configurations, and the intersections show the document’s position in the search results.",
+        "screenshot": "21_all_runs_compare.png"
+      }
     ]
   },
   "use-case-3": {
     "title": "Use Case 3: Regression & Drift Testing",
-    "description": "This demo illustrates how to monitor search quality over time to catch regressions before they impact users.",
-    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo.mp4",
-    "steps": [
-      "<strong>Use a Golden Query Set:</strong> Select a standardized query set that represents typical user behavior.",
-      "<strong>Schedule Regular Runs:</strong> Set up a recurring job (e.g., weekly) to execute a search run.",
-      "<strong>Load Reports:</strong> Load the report from the current week and the previous week.",
-      "<strong>Compare Reports:</strong> The tool highlights changes in key metrics, immediately spotting if average NDCG has dropped.",
-      "<strong>Investigate Deltas:</strong> Drill down into the queries with the largest performance drop to find the root cause."
-    ],
-    "interactiveSteps": [
-      { "title": "Step 1: Load Two Reports", "description": "The interface allows you to load two different reports for comparison. Here, we load 'Run-W30' and 'Run-W31'.", "screenshot": "01_start-page.png"},
-      { "title": "Step 2: Compare Metrics", "description": "The system automatically highlights statistically significant changes in key metrics.", "screenshot": "14_add_batch_runs_step4.png"},
-      { "title": "Step 3: Drill Down", "description": "Investigate the queries with the largest changes to understand the cause of the regression.", "screenshot": "08_query_sets_amazon.png"}
-    ]
+    "description": "(In progress) Compare search performance over time (e.g., this month vs. last month) to detect degradation or significant changes.",
+    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo-3.mp4",
+    "steps": [],
+    "interactiveSteps": []
   },
   "use-case-4": {
-    "title": "Use Case 4: Automated Relevance Assessment",
-    "description": "This demo shows how to use an AI-powered Virtual Assessor to grade search results automatically.",
-    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo.mp4",
+    "title": "Use Case 4: Automated Relevance Assessment & Reporting",
+    "description": "This demo shows how to apply ground truth data to your runs and generate detailed performance reports, including AI-powered judgments.",
+    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo-4.mp4",
     "steps": [
-      "<strong>Run Search:</strong> Execute a search run to get the results from your search engine.",
-      "<strong>Configure Virtual Assessor:</strong> Choose a large language model (LLM) and provide it with instructions on how to grade relevance.",
-      "<strong>Launch Assessment:</strong> The Virtual Assessor iterates through each query and its results, using the LLM to assign a relevance score.",
-      "<strong>Generate Report:</strong> A report is created with AI-generated relevance labels.",
-      "<strong>Calculate Metrics:</strong> These labels are used to automatically calculate metrics like NDCG and Precision."
+      "<strong>Step 1:</strong> To make the comparison useful, we need to apply our ground truth data. Let’s go back to Expected Results and click the \"Apply to batch runs\" button.",
+      "<strong>Step 2:</strong> Select the required items and click Apply to Batch Runs.",
+      "<strong>Step 3:</strong> Select all batch runs and start the metrics calculation by clicking Apply.",
+      "<strong>Step 4:</strong> Now we can go to any query and see what’s new. Let’s go to All Runs and filter for \"stingray corvette mouse pad\".",
+      "<strong>Step 5:</strong> Notice that now one of the items has turned green and has a label on the right. The green color means that this search result is among the relevant ones from our ground truth data.",
+      "<strong>Step 6:</strong> Now we can go and create a report. All our runs contain metrics, we just need to visualize them.",
+      "<strong>Step 7:</strong> To generate a report, click the Generate New Report button.",
+      "<strong>Step 8:</strong> Here we select which runs will be included in the report. This is what we compare with each other.",
+      "<strong>Step 9:</strong> Click Next and proceed to the search engine selection.",
+      "<strong>Step 10:</strong> In the second step, we are shown all unique pairs of search engines and search engine configurations found in the selected runs. Again, select all, and click Next.",
+      "<strong>Step 11:</strong> Next, select the type of reports you want to generate. Essential Reports and Metrics do not involve an LLM. The \"LLM Judgement\" report provides a conclusion from the LLM after it processes the metric-based reports.",
+      "<strong>Step 12:</strong> The report appears instantly after generation. Now I will open a previously generated report.",
+      "<strong>Step 13:</strong> The list of metrics starts with NDCG, Normalized Discounted Cumulative Gain. This metric is widely used to evaluate the quality of a ranked list, which in our case is the search results.",
+      "<strong>Step 14:</strong> To view the detailed report, click on the link.",
+      "<strong>Step 15:</strong> Here we have a single graph showing the results of 200 queries — they are shown on the X-axis. The higher the value on the Y-axis, the better the match with the expected results.",
+      "<strong>Step 16:</strong> After the graph comes a table. It has clickable columns. When a column is selected, the graph is rebuilt so that the values in this column are in descending order.",
+      "<strong>Step 17:</strong> Other reports may include bar charts, or just tables, or plain text. For example, the summary_NDCG@10_stats report shows a bar chart.",
+      "<strong>Step 18:</strong> Before the list of reports, there is a View Consolidated Report button. It gathers some of the most important reports on a single page.",
+      "<strong>Step 19:</strong> This consolidated report starts with AI judgement, if such was selected when generating the report. It also provides a recommendation on which configuration performs better.",
+      "<strong>Step 20:</strong> Next, there are other reports, starting with the static reliability analysis.",
+      "<strong>Step 21:</strong> Then comes the NDCG report for the top 10 search results."
     ],
     "interactiveSteps": [
-      { "title": "Step 1: Configure Assessor Prompt", "description": "Write the instructions for the AI. You define the relevance scale (e.g., 0-4) and provide examples to guide the model.", "screenshot": "04_before-expected-results-click.png"},
-      { "title": "Step 2: Launch Assessment", "description": "Start the process, and the LLM will grade each result for every query.", "screenshot": "05_before-amazon-click.png"},
-      { "title": "Step 3: Use Labels", "description": "The generated relevance labels can now be used to calculate NDCG and other metrics.", "screenshot": "06_after-amazon-click.png"}
+      {
+        "title": "Step 1",
+        "description": "To make the comparison useful, we need to apply our ground truth data. Let’s go back to Expected Results and click the \"Apply to batch runs\" button.",
+        "screenshot": "22_exp_results.png"
+      },
+      {
+        "title": "Step 2",
+        "description": "Select the required items and click Apply to Batch Runs.",
+        "screenshot": "23_apply_to_batch_runs.png"
+      },
+      {
+        "title": "Step 3",
+        "description": "Select all batch runs and start the metrics calculation by clicking Apply.",
+        "screenshot": "24_select_all_batch_runs.png"
+      },
+      {
+        "title": "Step 4",
+        "description": "Now we can go to any query and see what’s new. Let’s go to All Runs and filter for \"stingray corvette mouse pad\".",
+        "screenshot": "25_all_runs_after_metrics.png"
+      },
+      {
+        "title": "Step 5",
+        "description": "Notice that now one of the items has turned green and has a label on the right. The green color means that this search result is among the relevant ones from our ground truth data.",
+        "screenshot": "26_run_details.png"
+      },
+      {
+        "title": "Step 6",
+        "description": "Now we can go and create a report. All our runs contain metrics, we just need to visualize them.",
+        "screenshot": "27_clicking_reports.png"
+      },
+      {
+        "title": "Step 7",
+        "description": "To generate a report, click the Generate New Report button.",
+        "screenshot": "28_generate_step1.png"
+      },
+      {
+        "title": "Step 8",
+        "description": "Here we select which runs will be included in the report. This is what we compare with each other.",
+        "screenshot": "29_report_runs.png"
+      },
+      {
+        "title": "Step 9",
+        "description": "Click Next and proceed to the search engine selection.",
+        "screenshot": "30_reports_runs_next.png"
+      },
+      {
+        "title": "Step 10",
+        "description": "In the second step, we are shown all unique pairs of search engines and search engine configurations found in the selected runs. Again, select all, and click Next.",
+        "screenshot": "31_report_configurations.png"
+      },
+      {
+        "title": "Step 11",
+        "description": "Next, select the type of reports you want to generate. Essential Reports and Metrics do not involve an LLM. The \"LLM Judgement\" report provides a conclusion from the LLM after it processes the metric-based reports.",
+        "screenshot": "32_report_last.png"
+      },
+      {
+        "title": "Step 12",
+        "description": "The report appears instantly after generation. Now I will open a previously generated report.",
+        "screenshot": "33_report_one.png"
+      },
+      {
+        "title": "Step 13",
+        "description": "The list of metrics starts with NDCG, Normalized Discounted Cumulative Gain. This metric is widely used to evaluate the quality of a ranked list, which in our case is the search results.",
+        "screenshot": "34_metrics_1.png"
+      },
+      {
+        "title": "Step 14",
+        "description": "To view the detailed report, click on the link.",
+        "screenshot": "35_ndcg_10.png"
+      },
+      {
+        "title": "Step 15",
+        "description": "Here we have a single graph showing the results of 200 queries — they are shown on the X-axis. The higher the value on the Y-axis, the better the match with the expected results.",
+        "screenshot": "36_ndcg_int.png"
+      },
+      {
+        "title": "Step 16",
+        "description": "After the graph comes a table. It has clickable columns. When a column is selected, the graph is rebuilt so that the values in this column are in descending order.",
+        "screenshot": "36_ndcg_int_2.png"
+      },
+      {
+        "title": "Step 17",
+        "description": "Other reports may include bar charts, or just tables, or plain text. For example, the summary_NDCG@10_stats report shows a bar chart.",
+        "screenshot": "37_reports_summary.png"
+      },
+      {
+        "title": "Step 18",
+        "description": "Before the list of reports, there is a View Consolidated Report button. It gathers some of the most important reports on a single page.",
+        "screenshot": "38_reports.png"
+      },
+      {
+        "title": "Step 19",
+        "description": "This consolidated report starts with AI judgement, if such was selected when generating the report. It also provides a recommendation on which configuration performs better.",
+        "screenshot": "39_view_consolidated_report_1.png"
+      },
+      {
+        "title": "Step 20",
+        "description": "Next, there are other reports, starting with the static reliability analysis.",
+        "screenshot": "39_view_consolidated_report_2.png"
+      },
+      {
+        "title": "Step 21",
+        "description": "Then comes the NDCG report for the top 10 search results.",
+        "screenshot": "39_view_consolidated_report_3.png"
+      }
     ]
   },
   "use-case-5": {
-    "title": "Use Case 5: AI-Powered Content Discoverability",
-    "description": "This demo shows how to test if your products or documents are easily found by generating likely user queries with AI.",
-    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo.mp4",
+    "title": "Use Case 5: AI-Powered Content Analysis",
+    "description": "Let an AI generate queries for your documents, assess the search results,  and report on how effectively your content is discovered.",
+    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo-5.mp4",
     "steps": [
-      "<strong>Provide Content:</strong> Specify the documents or product IDs you want to test.",
-      "<strong>Generate Queries:</strong> Use an AI model to generate a set of likely user queries for the specified content.",
-      "<strong>Execute Search:</strong> Run a search using the AI-generated queries.",
-      "<strong>Assess Results:</strong> For each query, check if the target document appears in the search results, and at what rank.",
-      "<strong>Generate Report:</strong> The report shows the 'discoverability score' for your content."
+      "<strong>Step 1:</strong> For relatively slow tasks involving an LLM, the system uses the concept of asynchronous tasks. For example, if you need to assess search results for 200 runs, each consisting of 10 documents, you will need to assess a total of 2000 documents.",
+      "<strong>Step 2:</strong> This process takes some time and, in the case of subscription-based AI systems, may also cost something. Therefore, such operations are performed asynchronously, and the task batch is launched manually.",
+      "<strong>Step 3:</strong> The screen now shows three groups of tasks of three different types. The first group is Doc Assessment tasks — evaluating how relevant a single specific search result is to the query.",
+      "<strong>Step 4:</strong> We will show later how to launch such tasks; for now, let’s look at the result. The system numerically evaluates the relevance of a specific document, web page, or product to a particular search query. Since documents can be large, you cannot simply send them to the AI to check their relevance — the context window will not be enough. Moreover, to get the document, you first need to load it from somewhere — that is the first step. Then it is split into fragments; the system uses embeddings to find the fragments most relevant to the query, and only then are the top fragments sent to the LLM, with the highest score being chosen.",
+      "<strong>Step 5:</strong> To assess all 10 results for each query, 10 such tasks are created. For hundreds or thousands of queries, the system may work for hours or days, but it operates completely automatically. The calculated score is assigned to the document, and reports can be built based on it.",
+      "<strong>Step 6:</strong> To place a document in the queue for assessment, you need to open a run and add an individual document, the entire run, or even the entire batch to the basket.",
+      "<strong>Step 7:</strong> To place a document in the queue for assessment, open a run and add an individual document, the entire run, or even the entire batch to the basket, then apply the \"Assess a document\" operation to the basket.",
+      "<strong>Step 8:</strong> Once an item is placed in the basket, it will be displayed on the basket tab. More precisely, it will appear in the tab for the selected basket — there can be several of them.",
+      "<strong>Step 9:</strong> On the Baskets page, we can see one or more baskets, but only one is selected as the default. In this case, the basket is named \"default basket,\" although it could have been named anything. Multiple baskets are useful when working on several tasks in parallel. Let’s open default_basket.",
+      "<strong>Step 10:</strong> The basket can contain one or several items. Note the buttons at the top — Extract Intents, Schedule Query Generation, Schedule Assessment Run. These actions are applied to the basket or to individual selected items. Let’s start with Schedule Assessment Run.",
+      "<strong>Step 11:</strong> Here you select the assessment parameters. Since documents must be split into fragments, or chunks, you set the chunk size and their overlap here. You also set a size limit above which documents should be ignored — otherwise, document assessment might take hours. The last parameter, Top N, specifies how many of the most relevant fragments should be selected for LLM evaluation from the total number.",
+      "<strong>Step 12:</strong> At the very top of the form, you select the LLM. This choice determines both the system responsible for embeddings and the Large Language Model for evaluating the document’s relevance to the query. By the way, relevance assessment also involves the intent, which can be generated separately — this feature will be discussed later.",
+      "<strong>Step 13:</strong> Documents from the specified runs that have been assessed receive their score there as well. This score can be used to create an Expected Set — either automatically or after manual review. To improve accuracy, it is recommended to first create intents for existing queries, since in this case the system will not mistake unknown brand names for product characteristics but will treat the brand as a brand."
     ],
     "interactiveSteps": [
-      { "title": "Step 1: Select Content", "description": "First, you select the content to analyze by uploading a file or providing a list of product IDs.", "screenshot": "03_before-testsandbox-click.png"},
-      { "title": "Step 2: Generate Queries", "description": "The AI creates a list of likely queries that users might employ to find this content.", "screenshot": "07_query_sets.png"},
-      { "title": "Step 3: Analyze Report", "description": "The report shows how often the target content appeared in the top search results.", "screenshot": "08_query_sets_amazon.png"}
+      {
+        "title": "Step 1",
+        "description": "For relatively slow tasks involving an LLM, the system uses the concept of asynchronous tasks. For example, if you need to assess search results for 200 runs, each consisting of 10 documents, you will need to assess a total of 2000 documents.",
+        "screenshot": "60_doc_assessment_tasks.png"
+      },
+      {
+        "title": "Step 2",
+        "description": "This process takes some time and, in the case of subscription-based AI systems, may also cost something. Therefore, such operations are performed asynchronously, and the task batch is launched manually.",
+        "screenshot": "60_1_doc_assessment_tasks.png"
+      },
+      {
+        "title": "Step 3",
+        "description": "The screen now shows three groups of tasks of three different types. The first group is Doc Assessment tasks — evaluating how relevant a single specific search result is to the query.",
+        "screenshot": "61_assessment_task.png"
+      },
+      {
+        "title": "Step 4",
+        "description": "We will show later how to launch such tasks; for now, let’s look at the result. The system numerically evaluates the relevance of a specific document, web page, or product to a particular search query. Since documents can be large, you cannot simply send them to the AI to check their relevance — the context window will not be enough. Moreover, to get the document, you first need to load it from somewhere — that is the first step. Then it is split into fragments; the system uses embeddings to find the fragments most relevant to the query, and only then are the top fragments sent to the LLM, with the highest score being chosen.",
+        "screenshot": "62_assessment_task_details.png"
+      },
+      {
+        "title": "Step 5",
+        "description": "To assess all 10 results for each query, 10 such tasks are created. For hundreds or thousands of queries, the system may work for hours or days, but it operates completely automatically. The calculated score is assigned to the document, and reports can be built based on it.",
+        "screenshot": "63_doc_assessment_tasks.png"
+      },
+      {
+        "title": "Step 6",
+        "description": "To place a document in the queue for assessment, you need to open a run and add an individual document, the entire run, or even the entire batch to the basket.",
+        "screenshot": "64_docs_assessment.png"
+      },
+      {
+        "title": "Step 7",
+        "description": "To place a document in the queue for assessment, open a run and add an individual document, the entire run, or even the entire batch to the basket, then apply the \"Assess a document\" operation to the basket.",
+        "screenshot": "65_docs_assessment_basket.png"
+      },
+      {
+        "title": "Step 8",
+        "description": "Once an item is placed in the basket, it will be displayed on the basket tab. More precisely, it will appear in the tab for the selected basket — there can be several of them.",
+        "screenshot": "66_doc_assessment_basket_2.png"
+      },
+      {
+        "title": "Step 9",
+        "description": "On the Baskets page, we can see one or more baskets, but only one is selected as the default. In this case, the basket is named \"default basket,\" although it could have been named anything. Multiple baskets are useful when working on several tasks in parallel. Let’s open default_basket.",
+        "screenshot": "67_basket.png"
+      },
+      {
+        "title": "Step 10",
+        "description": "The basket can contain one or several items. Note the buttons at the top — Extract Intents, Schedule Query Generation, Schedule Assessment Run. These actions are applied to the basket or to individual selected items. Let’s start with Schedule Assessment Run.",
+        "screenshot": "68_basket1.png"
+      },
+      {
+        "title": "Step 11",
+        "description": "Here you select the assessment parameters. Since documents must be split into fragments, or chunks, you set the chunk size and their overlap here. You also set a size limit above which documents should be ignored — otherwise, document assessment might take hours. The last parameter, Top N, specifies how many of the most relevant fragments should be selected for LLM evaluation from the total number.",
+        "screenshot": "69_schedule_asssessment.png"
+      },
+      {
+        "title": "Step 12",
+        "description": "At the very top of the form, you select the LLM. This choice determines both the system responsible for embeddings and the Large Language Model for evaluating the document’s relevance to the query. By the way, relevance assessment also involves the intent, which can be generated separately — this feature will be discussed later.",
+        "screenshot": "70_schedule_asssessment.png"
+      },
+      {
+        "title": "Step 13",
+        "description": "Documents from the specified runs that have been assessed receive their score there as well. This score can be used to create an Expected Set — either automatically or after manual review. To improve accuracy, it is recommended to first create intents for existing queries, since in this case the system will not mistake unknown brand names for product characteristics but will treat the brand as a brand.",
+        "screenshot": "71_doc_assessment_tasks.png"
+      }
     ]
   },
   "use-case-6": {
-    "title": "Use Case 6: Query Set Stability Analysis",
-    "description": "This demo shows how to check if your search results are consistent across different samples of user queries.",
-    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo.mp4",
+    "title": "Use Case 6: AI-powered intents for queries",
+    "description": "Some queries may be ambiguous for the search engine, but virtual assessor accuracy improves when given likely user intent derived from existing judgments.",
+    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo-6.mp4",
     "steps": [
-      "<strong>Upload Large Query Log:</strong> Start with a large, realistic log of user queries.",
-      "<strong>Sample and Split:</strong> Create several smaller, non-overlapping query sets from the main log.",
-      "<strong>Run Search for Each Sample:</strong> Execute search runs for each of the smaller query sets.",
-      "<strong>Generate Stability Report:</strong> Compare the results from each sample run.",
-      "<strong>Analyze Consistency:</strong> A high degree of similarity indicates that your search performance is stable."
+      "<strong>Step 1:</strong> Как я уже говорил в секции про assessment tasks, это список задач, которые создаются из корзины по одной из команд. В прошлый раз мы обсуждали функцию virtual assessor, помогающую численно оценить соответствие документа запросу. В этой демонстрации сосредоточимся на intent extraction",
+      "<strong>Step 2:</strong> Эту команду можно применить на элементы корзины типа expected results. То есть, системе нужны уже какие-то эталонные результаты поиска для запроса, чтобы обработать их и оценить, что имел ввиду пользователь под лаконичным запросом — ведь мы знаем, что за товары он посчитал релевантными. Со страницы корзины нужно нажать на кнопку Extract Intents",
+      "<strong>Step 3:</strong> Каждая генерация будет приводить к появлению вот такой записи в списке. Нажмем на эту, чтобы посмотреть что внутри",
+      "<strong>Step 4:</strong> Если задачи уже отработали, выводится блок Generated Intent для запроса. Как это работает - для запроса у нас есть набор Expected Results, то есть, предполагается, что это релевантные документы, товары или страницы для запроса. Их содержание помогает понять, что пользователь имел ввиду в своем запросе. Например, если там фигурирует бренд, система поймет, что это бренд, а не характеризующее слово",
+      "<strong>Step 5:</strong> Если задачи уже отработали, выводится блок Generated Intent для запроса. Как это работает - для запроса у нас есть набор Expected Results, то есть, предполагается, что это релевантные документы, товары или страницы для запроса. Их содержание помогает понять, что пользователь имел ввиду в своем запросе. Например, если там фигурирует бренд, система поймет, что это бренд, а не характеризующее слово. Нажмем теперь на query, чтобы получить все runs",
+      "<strong>Step 6:</strong> Теперь в разделе Expected Results в группе amazon мы можем поискать наш запрос и увидим, что к нему теперь прицеплен intent. Дальше можно сгенерировать новый queryset, в котором у этого запроса будет intent. Этот intent будет использоваться by Virtual Assessor для оценки релевантности документа запросу."
     ],
     "interactiveSteps": [
-      { "title": "Step 1: Perform Splitting", "description": "After uploading a large query log, select the 'Split' operation and choose to create 3 smaller, non-overlapping query sets.", "screenshot": "02_before-sandboxes-click.png"},
-      { "title": "Step 2: Launch Tests", "description": "Execute separate tests for each of the generated query sets.", "screenshot": "09_batch_runs.png"},
-      { "title": "Step 3: Compare Reports", "description": "The stability report shows the result set intersection and correlation between the sets.", "screenshot": "15_add_batch_runs_step4_1.png"}
+      {
+        "title": "Step 1",
+        "description": "Как я уже говорил в секции про assessment tasks, это список задач, которые создаются из корзины по одной из команд. В прошлый раз мы обсуждали функцию virtual assessor, помогающую численно оценить соответствие документа запросу. В этой демонстрации сосредоточимся на intent extraction",
+        "screenshot": "90_doc_assessment_tasks.png"
+      },
+      {
+        "title": "Step 2",
+        "description": "Эту команду можно применить на элементы корзины типа expected results. То есть, системе нужны уже какие-то эталонные результаты поиска для запроса, чтобы обработать их и оценить, что имел ввиду пользователь под лаконичным запросом — ведь мы знаем, что за товары он посчитал релевантными. Со страницы корзины нужно нажать на кнопку Extract Intents",
+        "screenshot": "911_basket_intent.png"
+      },
+      {
+        "title": "Step 3",
+        "description": "Каждая генерация будет приводить к появлению вот такой записи в списке. Нажмем на эту, чтобы посмотреть что внутри",
+        "screenshot": "912_docs_assessment.png"
+      },
+      {
+        "title": "Step 4",
+        "description": "Если задачи уже отработали, выводится блок Generated Intent для запроса. Как это работает - для запроса у нас есть набор Expected Results, то есть, предполагается, что это релевантные документы, товары или страницы для запроса. Их содержание помогает понять, что пользователь имел ввиду в своем запросе. Например, если там фигурирует бренд, система поймет, что это бренд, а не характеризующее слово",
+        "screenshot": "913_docs_assessment.png"
+      },
+      {
+        "title": "Step 5",
+        "description": "Если задачи уже отработали, выводится блок Generated Intent для запроса. Как это работает - для запроса у нас есть набор Expected Results, то есть, предполагается, что это релевантные документы, товары или страницы для запроса. Их содержание помогает понять, что пользователь имел ввиду в своем запросе. Например, если там фигурирует бренд, система поймет, что это бренд, а не характеризующее слово. Нажмем теперь на query, чтобы получить все runs",
+        "screenshot": "914_docs_assessment.png"
+      },
+      {
+        "title": "Step 6",
+        "description": "Теперь в разделе Expected Results в группе amazon мы можем поискать наш запрос и увидим, что к нему теперь прицеплен intent. Дальше можно сгенерировать новый queryset, в котором у этого запроса будет intent. Этот intent будет использоваться by Virtual Assessor для оценки релевантности документа запросу.",
+        "screenshot": "915_docs_assessment.png"
+      }
     ]
   },
   "use-case-7": {
     "title": "Use Case 7: Query Pattern Clustering",
-    "description": "This demo shows how to automatically group similar queries to understand user intent patterns and find valuable synonyms.",
-    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo.mp4",
-    "steps": [
-      "<strong>Upload Large Query Log:</strong> Start with a raw log of thousands of user queries.",
-      "<strong>Initiate Clustering:</strong> Select the query log and start the fast clustering process.",
-      "<strong>Review Clusters:</strong> The tool presents groups of queries, such as 'iphone 15 pro', 'iphone15pro', and 'IPHONE 15 PRO'.",
-      "<strong>Analyze and Act:</strong> Use these clusters to identify common misspellings or different ways users search for the same thing."
-    ],
-    "interactiveSteps": [
-      { "title": "Step 1: View Query Clusters", "description": "The screenshot shows the output of the clustering algorithm. You can see a list of clusters.", "screenshot": "08_query_sets_amazon.png"},
-      { "title": "Step 2: Analyze a Cluster", "description": "Expand a cluster to see all the similar queries it contains, such as those with typos or synonyms.", "screenshot": "10_add_batch_runs.png"},
-      { "title": "Step 3: Create Rules", "description": "Based on the clusters, you can create synonym rules or typo corrections.", "screenshot": "13_add_batch_runs_step3.png"}
-    ]
+    "description": "(In progress) Upload a large query log and use rapid clustering to group them by similar patterns (typos, word order, etc.) for analysis.",
+    "videoSrc": "https://hybrismart.com/experiments/testmysearch/demo-7.mp4",
+    "steps": [],
+    "interactiveSteps": []
   }
 }
