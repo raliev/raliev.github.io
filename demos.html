@@ -143,8 +143,8 @@
             // Populate Use Case Grid
             grid.innerHTML = '';
             for (const key in config) {
-                if (Object.hasOwnProperty.call(config, key) && key !== 'overview') {
-                    const useCase = config[key];
+                if (Object.hasOwnProperty.call(config, key) && key !== 'overview' && config.hasOwnProperty(key) && config [key].title && config [key].description) {
+                    const useCase = config [key];
                     // Check if the use case is ready or in progress
                     const isReady = useCase.interactiveSteps && useCase.interactiveSteps.length > 0;
                     let cardHtml;
