@@ -1,4 +1,7 @@
 {
+  "overview": {
+    "url": "https://youtu.be/34RaohR38wA"
+  },
   "use-case-1": {
     "title": "Use Case 1: Configuration Tuning & Optimization",
     "description": "This demo shows how to find the best search configuration by testing multiple variations, from uploading data to creating batch runs.",
@@ -102,7 +105,8 @@
         "description": "If you check the Trigger Run right after creation option, the task will start immediately and queries will be sent to the search engine right away.",
         "screenshot": "15_add_batch_runs_step4_1.png"
       }
-    ]
+    ],
+    "url": "https://youtu.be/6TZpjXvnWFc"
   },
   "use-case-2": {
     "title": "Use Case 2: Comparative Search Engine Analysis",
@@ -147,7 +151,8 @@
         "description": "Click the Compare button and you will see a table where all the links are listed vertically, the columns represent the three configurations, and the intersections show the document’s position in the search results.",
         "screenshot": "21_all_runs_compare.png"
       }
-    ]
+    ],
+    "url": "https://youtu.be/vPnEs9qRE40"
   },
   "use-case-3": {
     "title": "Use Case 3: Regression & Drift Testing",
@@ -289,7 +294,8 @@
         "description": "Then comes the NDCG report for the top 10 search results.",
         "screenshot": "39_view_consolidated_report_3.png"
       }
-    ]
+    ],
+    "url": "https://youtu.be/wqu0HScXoRI"
   },
   "use-case-5": {
     "title": "Use Case 5: AI-Powered Content Analysis",
@@ -376,7 +382,8 @@
         "description": "Documents from the specified runs that have been assessed receive their score there as well. This score can be used to create an Expected Set — either automatically or after manual review. To improve accuracy, it is recommended to first create intents for existing queries, since in this case the system will not mistake unknown brand names for product characteristics but will treat the brand as a brand.",
         "screenshot": "71_doc_assessment_tasks.png"
       }
-    ]
+    ],
+    "url": "https://youtu.be/2p-PHgdlLeg"
   },
   "use-case-6": {
     "title": "Use Case 6: AI-powered intents for queries",
@@ -421,7 +428,8 @@
         "description": "Now, in the Expected Results section under the amazon group, we can search for our query and see that it now has an attached intent. Next, we can generate a new queryset where this query will have an intent. This intent will be used by the Virtual Assessor to evaluate the document’s relevance to the query.",
         "screenshot": "915_docs_assessment.png"
       }
-    ]
+    ],
+    "url": "https://youtu.be/z_eYO5VkOdg"
   },
   "use-case-7": {
     "title": "Use Case 7: Query Pattern Clustering",

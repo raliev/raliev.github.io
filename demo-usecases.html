@@ -57,6 +57,19 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         [hidden] { display: none !important; }
+        .aspect-video {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        }
+        .aspect-video iframe,
+        .aspect-video video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -77,13 +90,10 @@
             <p id="use-case-description" class="mt-4 text-lg text-gray-600"></p>
             <a id="toggle-view-link" href="#" class="mt-6 inline-block transform rounded-lg bg-gray-200 px-6 py-3 font-semibold text-gray-800 shadow-md transition hover:scale-105 hover:bg-gray-300"></a>
 
-            <!-- Video View -->
             <div id="video-view" hidden>
                 <div class="mt-8 rounded-lg bg-black p-2 shadow-lg">
-                    <video id="use-case-video" controls class="w-full rounded-md" key="video-player">
-                        <source src="" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+                    <div id="video-container" class="aspect-video">
+                    </div>
                 </div>
                 <div class="mt-12 rounded-lg bg-white p-8 shadow-md">
                     <h2 class="text-2xl font-bold">Step-by-Step Breakdown</h2>
@@ -91,18 +101,14 @@
                 </div>
             </div>
 
-            <!-- Interactive View -->
             <div id="interactive-view" hidden class="mt-8 grid grid-cols-1 md:grid-cols-5 gap-8">
                 <div class="md:col-span-3 rounded-lg bg-white p-4 shadow-lg">
                     <div id="screenshot-container" class="aspect-video bg-gray-200 rounded-md flex items-center justify-center text-gray-500 overflow-hidden">
-                        <!-- Screenshot will be loaded here -->
                     </div>
                 </div>
                 <div class="md:col-span-2 rounded-lg bg-white p-8 shadow-md flex flex-col">
                     <div class="flex-grow">
                         <h3 id="step-title" class="text-xl font-bold mb-4"></h3>
-
-                        <!-- Navigation Controls -->
                         <div class="flex justify-between items-center mb-4">
                             <button id="prev-button" class="rounded-lg bg-gray-300 px-5 py-2 font-semibold text-gray-800">
                                 <i class="fas fa-arrow-left"></i> Prev
@@ -111,11 +117,9 @@
                                 Next <i class="fas fa-arrow-right"></i>
                             </button>
                         </div>
-
                         <p id="step-description" class="mt-4 text-gray-600"></p>
                     </div>
 
-                    <!-- Audio Controls -->
                     <div class="mt-auto pt-6 border-t border-gray-200">
                         <div class="flex items-center justify-between">
                             <button id="audio-toggle-button" class="flex items-center space-x-2 rounded-lg bg-green-500 px-4 py-2 font-semibold text-white transition hover:bg-green-600">
@@ -157,12 +161,7 @@
     const videoViewEl = document.getElementById('video-view');
     const interactiveViewEl = document.getElementById('interactive-view');
     const audioPlayerEl = document.getElementById('audio-player');
-
-    // Video View Elements
-    const videoPlayerEl = document.getElementById('use-case-video');
     const videoStepsEl = document.getElementById('video-steps');
-
-    // Interactive View Elements
     const screenshotContainerEl = document.getElementById('screenshot-container');
     const stepTitleEl = document.getElementById('step-title');
     const stepDescriptionEl = document.getElementById('step-description');
@@ -187,6 +186,32 @@
         }
     }
 
+    /**
+     * Parses a YouTube URL and returns the correct embed URL.
+     * @param {string} url - The original YouTube URL.
+     * @returns {string|null} The embeddable URL or null.
+     */
+    function getYoutubeEmbedUrl(url) {
+        let videoId = null;
+        try {
+            const urlObj = new URL(url);
+            if (urlObj.hostname === 'youtu.be') {
+                videoId = urlObj.pathname.slice(1);
+            } else if (urlObj.hostname.includes('youtube.com')) {
+                videoId = urlObj.searchParams.get('v');
+            }
+        } catch (e) {
+            console.error("Invalid URL for YouTube parsing:", url, e);
+            return null;
+        }
+
+        if (videoId) {
+            return `https://www.youtube.com/embed/${videoId}`;
+        }
+        return null;
+    }
+
+
     function parseHash() {
         const hash = window.location.hash.substring(1);
         const params = new URLSearchParams(hash);
@@ -196,7 +221,6 @@
 
     function playCurrentAudio() {
         if (!audioEnabled || !userInteracted) return;
-
         const stepData = config[currentUseCaseId]?.interactiveSteps[currentStep];
         if (stepData && stepData.screenshot) {
             const audioPath = `demo/screenshots/${stepData.screenshot.replace('.png', '.mp3')}`;
@@ -239,10 +263,31 @@
             toggleLinkEl.href = `#uc=${currentUseCaseId}&view=interactive`;
             toggleLinkEl.innerHTML = `Try Interactive Demo <i class="fas fa-gamepad ml-2"></i>`;
 
-            const source = videoPlayerEl.getElementsByTagName('source')[0];
-            if (source.getAttribute('src') !== useCaseData.videoSrc) {
-                source.setAttribute('src', useCaseData.videoSrc);
-                videoPlayerEl.load();
+            const videoContainer = document.getElementById('video-container');
+            const videoUrl = useCaseData.url || useCaseData.videoSrc;
+
+            if (videoUrl) {
+                const embedUrl = getYoutubeEmbedUrl(videoUrl);
+                if (embedUrl) {
+                    // It's a YouTube video, use iframe
+                    videoContainer.innerHTML = `
+                        <iframe class="w-full h-full rounded-md"
+                                src="${embedUrl}"
+                                title="YouTube video player"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen>
+                        </iframe>`;
+                } else {
+                    // It's a direct video link (.mp4), use video tag
+                    videoContainer.innerHTML = `
+                        <video controls class="w-full h-full rounded-md">
+                            <source src="${videoUrl}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>`;
+                }
+            } else {
+                videoContainer.innerHTML = '<p class="text-white text-center p-4">Video not available.</p>';
             }
 
             videoStepsEl.innerHTML = '';
@@ -251,7 +296,6 @@
                 li.innerHTML = stepText;
                 videoStepsEl.appendChild(li);
             });
-
         } else {
             toggleLinkEl.href = `#uc=${currentUseCaseId}&view=video`;
             toggleLinkEl.innerHTML = `Watch Video Demo <i class="fas fa-video ml-2"></i>`;
@@ -267,7 +311,6 @@
         const stepData = useCaseData.interactiveSteps[currentStep];
         stepTitleEl.textContent = stepData.title;
         stepDescriptionEl.textContent = stepData.description;
-
         screenshotContainerEl.innerHTML = `<img src="demo/screenshots/${stepData.screenshot}" alt="${stepData.title}" class="w-full h-full object-contain">`;
 
         prevButton.disabled = currentStep === 0;
@@ -291,7 +334,6 @@
 
     // Event Listeners
     document.body.addEventListener('click', () => { userInteracted = true; }, { once: true });
-
     prevButton.addEventListener('click', handlePrev);
     nextButton.addEventListener('click', handleNext);
 

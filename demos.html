@@ -28,19 +28,19 @@
             "@context": "https://schema.org",
             "@type": "WebPage",
             "name": "Demos & Use Cases",
-        "description": "Explore specific use cases through interactive demos. Change queries, tweak configurations, and see metrics in real time.",
-        "url": "https://www.testmysearch.com/demos.html",
-        "mainEntity": {
-        "@type": "SoftwareApplication",
-        "name": "TestMySearch",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Web",
-        "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-        }
-        }
+            "description": "Explore specific use cases through interactive demos. Change queries, tweak configurations, and see metrics in real time.",
+            "url": "https://www.testmysearch.com/demos.html",
+            "mainEntity": {
+                "@type": "SoftwareApplication",
+                "name": "TestMySearch",
+                "applicationCategory": "DeveloperApplication",
+                "operatingSystem": "Web",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD"
+                }
+            }
         }
     </script>
 
@@ -55,7 +55,6 @@
 </head>
 <body class="bg-gray-100 text-gray-800">
 
-<!-- Header -->
 <header class="sticky top-0 z-50 shadow-sm" style="background-color: #faf8f5;">
     <nav class="container mx-auto flex items-center justify-between px-6 py-4">
         <a href="index.html"><img src="/img/testmysearch-logo.png" alt="TestMySearch Logo" style="height:60px"></a>
@@ -68,13 +67,10 @@
     </nav>
 </header>
 
-<!-- Main Content -->
 <main>
-    <!-- Section: Use Cases First -->
     <section class="bg-white py-20">
         <div class="container mx-auto px-6">
             <div class="mb-8 text-center">
-                <!-- Secondary button for All-in-One Video -->
                 <a href="#all-in-one-video"
                    class="inline-flex items-center rounded-md border border-indigo-200 bg-white px-4 py-2 text-sm font-medium text-indigo-600 shadow-sm hover:bg-indigo-50">
                     <i class="fas fa-video mr-2"></i>
@@ -90,14 +86,12 @@
                 </p>
             </div>
 
-            <!-- Use Case Grid -->
             <div id="use-case-grid" class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
                 <p class="col-span-full text-center text-gray-600">Loading demos...</p>
             </div>
         </div>
     </section>
 
-    <!-- Section: All-in-One Video Below -->
     <section id="all-in-one-video" class="bg-gray-100 py-20">
         <div class="container mx-auto px-6">
             <div class="mb-8 text-center">
@@ -107,8 +101,8 @@
                 </p>
             </div>
             <div class="mx-auto max-w-5xl rounded-lg bg-black p-2 shadow-lg">
-                <video controls class="w-full rounded-md">
-                    <source src="https://hybrismart.com/experiments/testmysearch/demo.mp4" type="video/mp4">
+                <video id="overview-video" controls class="w-full rounded-md">
+                    <source id="overview-video-source" src="" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
@@ -116,7 +110,6 @@
     </section>
 </main>
 
-<!-- Footer -->
 <footer class="bg-gray-800 text-gray-400">
     <div class="container mx-auto px-6 py-8 text-center">
         <p>&copy; 2025 TestMySearch. All Rights Reserved.</p>
@@ -125,10 +118,13 @@
 
 <script>
     /**
-     * Fetches the use case configuration from the JSON file and populates the grid.
+     * Fetches the use case configuration from the JSON file and populates the page.
      */
-    async function populateUseCases() {
+    async function populateContent() {
         const grid = document.getElementById('use-case-grid');
+        const overviewVideo = document.getElementById('overview-video');
+        const overviewVideoSource = document.getElementById('overview-video-source');
+
         try {
             const response = await fetch('screenshots/demos-config.json');
             if (!response.ok) {
@@ -136,15 +132,21 @@
             }
             const config = await response.json();
 
+            // Populate Overview Video
+            if (config.overview && config.overview.url) {
+                overviewVideoSource.src = config.overview.url;
+                overviewVideo.load();
+            } else {
+                console.warn("Overview video URL not found in config.");
+            }
+
+            // Populate Use Case Grid
             grid.innerHTML = '';
-
             for (const key in config) {
-                if (Object.hasOwnProperty.call(config, key)) {
+                if (Object.hasOwnProperty.call(config, key) && key !== 'overview') {
                     const useCase = config[key];
-
                     // Check if the use case is ready or in progress
                     const isReady = useCase.interactiveSteps && useCase.interactiveSteps.length > 0;
-
                     let cardHtml;
 
                     if (isReady) {
@@ -178,12 +180,12 @@
                 }
             }
         } catch (error) {
-            console.error("Could not fetch or populate use cases:", error);
+            console.error("Could not fetch or populate content:", error);
             grid.innerHTML = '<p class="text-center text-red-500 col-span-full">Could not load use cases. Please check the console for more details.</p>';
         }
     }
 
-    document.addEventListener('DOMContentLoaded', populateUseCases);
+    document.addEventListener('DOMContentLoaded', populateContent);
 </script>
 
 </body>
