@@ -13,28 +13,38 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
-        /* Styles for the interactive diagram viewer */
+        .full-bleed {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+        }
+
+        /* [UPDATED] Use Flexbox to center the diagram */
         .diagram-scroller {
-            overflow-x: auto; /* Enables horizontal scrolling */
-            cursor: grab;
+            overflow-x: auto;
+            display: flex;
+            justify-content: center; /* Center diagram horizontally */
         }
         .diagram-content {
             transition: transform 0.2s ease-in-out;
-            transform-origin: 0 0; /* Zoom from the top-left corner */
+            transform-origin: center; /* [UPDATED] Zoom from the center */
         }
         .diagram-content img {
-            max-width: none; /* Allows the image to exceed its container's width */
+            max-width: none;
         }
         .zoom-controls button {
             width: 40px;
             height: 40px;
-            background-color: rgba(17, 24, 39, 0.75); /* bg-gray-900 with opacity */
+            background-color: rgba(17, 24, 39, 0.75);
             color: white;
-            border: 1px solid rgba(75, 85, 99, 0.75); /* border-gray-600 with opacity */
-            border-radius: 9999px; /* rounded-full */
-            font-size: 1.25rem; /* text-xl */
+            border: 1px solid rgba(75, 85, 99, 0.75);
+            border-radius: 9999px;
+            font-size: 1.25rem;
             font-weight: bold;
             display: inline-flex;
             align-items: center;
@@ -42,7 +52,7 @@
             transition: background-color 0.2s;
         }
         .zoom-controls button:hover {
-            background-color: rgba(31, 41, 55, 0.9); /* bg-gray-800 with opacity */
+            background-color: rgba(31, 41, 55, 0.9);
         }
     </style>
 </head>
@@ -75,59 +85,71 @@
             </div>
         </div>
 
-        <div class="mt-20 rounded-lg bg-white p-8 shadow-lg">
-            <h2 class="text-2xl font-bold text-gray-900">Detailed System Architecture</h2>
-            <p class="mt-4 text-gray-700">This diagram provides a granular view of the services, data stores, and message queues that power the TestMySearch platform. Use the controls to zoom in and scroll horizontally to explore the details.</p>
-
-            <div class="mt-8 relative rounded-lg border border-gray-300 bg-gray-800 overflow-hidden">
-                <div class="zoom-controls absolute top-4 right-4 z-10 space-x-2">
-                    <button id="zoom-in-btn" title="Zoom In">+</button>
-                    <button id="zoom-out-btn" title="Zoom Out">-</button>
-                    <button id="zoom-reset-btn" title="Reset Zoom"><i class="fas fa-sync-alt"></i></button>
+        <div class="mt-20 full-bleed">
+            <div class="bg-white py-12 shadow-lg">
+                <div class="container mx-auto max-w-5xl px-6">
+                    <h2 class="text-2xl font-bold text-gray-900">Detailed System Architecture</h2>
+                    <p class="mt-4 text-gray-700">This diagram provides a granular view of the services, data stores, and message queues that power the TestMySearch platform. Use the controls to zoom in and scroll horizontally to explore the details.</p>
                 </div>
-
-                <div id="diagram-scroller" class="diagram-scroller">
-                    <div id="diagram-content" class="diagram-content">
-                        <img src="img/testmysearch2.png" alt="A highly detailed system architecture diagram for the TestMySearch platform." style="width: 2377px; height: 629px;">
+                <div class="mt-8 relative border-t border-b border-gray-200 bg-gray-800">
+                    <div class="zoom-controls absolute top-4 right-4 z-10 space-x-2">
+                        <button id="zoom-in-btn" title="Zoom In">+</button>
+                        <button id="zoom-out-btn" title="Zoom Out">-</button>
+                        <button id="zoom-reset-btn" title="Reset Zoom"><i class="fas fa-sync-alt"></i></button>
+                    </div>
+                    <div id="diagram-scroller" class="diagram-scroller">
+                        <div id="diagram-content" class="diagram-content">
+                            <img src="img/testmysearch2.png" alt="A highly detailed system architecture diagram for the TestMySearch platform." style="width: 2377px; height: 629px;">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="mt-12 rounded-lg bg-white p-8 shadow-lg">
             <h2 class="text-2xl font-bold text-gray-900">Architectural Breakdown</h2>
             <p class="mt-4 text-gray-700">
-                The platform is organized around two scopes — <b>Account</b> and <b>Sandbox</b> — with a processing pipeline that turns queries and known results into scored runs, derived insights, and reports. At the Account scope we provision shared registries (search connectors and LLM configurations); at the Sandbox scope we keep all experiment data isolated behind namespaced indices. The diagram shows how those scopes link to orchestration, workers, and reporting.  ￼
-            </p><p class="mt-4 text-gray-700">
-                <b>Account Service</b> establishes cross-sandbox foundations. When an account is created, the service initializes account-level storage and account-level configuration (LLM and search connectors). LLM connectors define what LLM to use and how, and search connectors define the interfaces to search engines as well as define the way how to convert a query to a call to a search engine. These capabilities make search engine options and LLM settings centrally discoverable to all sandboxes under the account.  ￼  ￼
-            </p><p class="mt-4 text-gray-700">
-                <b>Sandbox Service</b> provides isolation and namespacing. Every sandbox stores its artifacts in its own set of entities (e.g., pages, chunks, vectors, evaluations) so you can run aggressive experiments without polluting other environments. Operational code that wipes or rebuilds a sandbox touches only its entities, reinforcing that boundary.  ￼  ￼
-        </p><p class="mt-4 text-gray-700">
-                The <b>Search Connector Registry and LLM Catalog</b> live at the Account scope but are consumed inside sandboxes. During run creation, users choose a search engine plus configuration from the Account, and downstream assessment steps read the chosen LLM configuration. This keeps selection consistent and auditable while still letting teams iterate rapidly in their own sandboxes.  ￼
-        </p><p class="mt-4 text-gray-700">
-                <b>Query Sets</b> are the canonical inputs for test execution. We persist a dataset-level document and bulk store the individual queries as items. When needed, Query Sets can be created programmatically from CSV or by exporting from other parts of the system.  ￼  ￼  ￼
-        </p><p class="mt-4 text-gray-700">
-                <b>Expected Results</b> hold the ground-truth mappings for evaluation. You can apply them to <i>Batch Runs</i> to compute metrics, or feed them into intent extraction when they’re placed in the <i>Basket</i>. These sets are sandbox-local, which ensures metrics and derived artifacts reflect exactly the data that was intended for a given experiment.  ￼  ￼
-        </p><p class="mt-4 text-gray-700">
-                The <b>Batch Run Orchestrator</b> plans and tracks executions across chosen <i>Query Sets</i> and connector configurations. A run progresses through well-defined phases—download → chunk → vectorize → evaluate → update_run—and produces per-result evaluation scores that can be visualized or used later in <i>Reports</i>. Run creation also offers options such as auto-start and auto-applying Expected Results on completion.  ￼  ￼
-        </p><p class="mt-4 text-gray-700">
-                <b>Processors</b> are pluggable pre- and post-processing hooks for queries and results. They are defined per sandbox and can be applied during <i>Batch Runs</i>, which makes it straightforward to test normalization, query rewriting, or custom ranking tweaks without forking the core pipeline.  ￼
-        </p><p class="mt-4 text-gray-700">
-                The <b>Basket</b> is the cross-cutting staging area that turns selections into work. Teams can collect items from <i>Expected Results</i>, entire runs, or individual run results and then trigger <i>Assessment Runs</i>, <i>Intent Extraction</i>, or <i>Query Generation</i>. Each operation spawns an Assessment Task group with child items and status tracking, and the outputs (generated queries, intents, or scores) are written back to their respective sections.  ￼  ￼
-        </p><p class="mt-4 text-gray-700">
-            The <b>Assessment Task Orchestrator</b> materializes a parent “group” task and many “doc” tasks, each with explicit phase statuses that mirror the worker pipeline. This structure allows independent progress across items, resilient retries, and aggregation of child states back to the group for monitoring and control.  ￼  ￼
-        </p><p class="mt-4 text-gray-700">
-                The <b>Worker Pipeline</b> executes the heavy lifting asynchronously. Workers consume tasks, perform downloading, chunking, vectorization, and evaluation, then update the associated run with scores. Because the phases are explicit, the system can surface partial progress, rerun failed steps, and maintain a reliable audit of how each result was produced.  ￼
-        </p><p class="mt-4 text-gray-700">
-                <b>Generated Queries</b> are another output surface of the pipeline. From assessments or query-generation workflows, you can export the selected generated queries either to a new <i>Expected Results</i> set (turning them into judged targets) or into a new <i>Query Set</i> (reusing them as inputs for future runs). Both export flows are implemented as in-memory CSV builds followed by bulk index writes.  ￼  ￼  ￼
-        </p><p class="mt-4 text-gray-700">
-                Finally, <b>Reporting</b> reads from <i>Batch Runs</i> and assessments to generate comparative and clustering outputs. The catalog includes summary tables, query-by-configuration views, specialized clustering, and a broad set of ranking metrics—NDCG@5/10, Precision@5/10, Reciprocal Rank, Recall—as well as domain overlap, correlation, intersection, and even LLM-judgment reports when summaries are in play.  ￼  ￼  ￼
-        </p><p class="mt-4 text-gray-700">
+                The platform is organized around two scopes — <b>Account</b> and <b>Sandbox</b> — with a processing pipeline that turns queries and known results into scored runs, derived insights, and reports. At the Account scope we provision shared registries (search connectors and LLM configurations); at the Sandbox scope we keep all experiment data isolated behind namespaced indices. The diagram shows how those scopes link to orchestration, workers, and reporting.
+            </p>
+            <p class="mt-4 text-gray-700">
+                <b>Account Service</b> establishes cross-sandbox foundations. When an account is created, the service initializes account-level storage and account-level configuration (LLM and search connectors). LLM connectors define what LLM to use and how, and search connectors define the interfaces to search engines as well as define the way how to convert a query to a call to a search engine. These capabilities make search engine options and LLM settings centrally discoverable to all sandboxes under the account.
+            </p>
+            <p class="mt-4 text-gray-700">
+                <b>Sandbox Service</b> provides isolation and namespacing. Every sandbox stores its artifacts in its own set of entities (e.g., pages, chunks, vectors, evaluations) so you can run aggressive experiments without polluting other environments. Operational code that wipes or rebuilds a sandbox touches only its entities, reinforcing that boundary.
+            </p>
+            <p class="mt-4 text-gray-700">
+                The <b>Search Connector Registry and LLM Catalog</b> live at the Account scope but are consumed inside sandboxes. During run creation, users choose a search engine plus configuration from the Account, and downstream assessment steps read the chosen LLM configuration. This keeps selection consistent and auditable while still letting teams iterate rapidly in their own sandboxes.
+            </p>
+            <p class="mt-4 text-gray-700">
+                <b>Query Sets</b> are the canonical inputs for test execution. We persist a dataset-level document and bulk store the individual queries as items. When needed, Query Sets can be created programmatically from CSV or by exporting from other parts of the system.
+            </p>
+            <p class="mt-4 text-gray-700">
+                <b>Expected Results</b> hold the ground-truth mappings for evaluation. You can apply them to <i>Batch Runs</i> to compute metrics, or feed them into intent extraction when they’re placed in the <i>Basket</i>. These sets are sandbox-local, which ensures metrics and derived artifacts reflect exactly the data that was intended for a given experiment.
+            </p>
+            <p class="mt-4 text-gray-700">
+                The <b>Batch Run Orchestrator</b> plans and tracks executions across chosen <i>Query Sets</i> and connector configurations. A run progresses through well-defined phases—download → chunk → vectorize → evaluate → update_run—and produces per-result evaluation scores that can be visualized or used later in <i>Reports</i>. Run creation also offers options such as auto-start and auto-applying Expected Results on completion.
+            </p>
+            <p class="mt-4 text-gray-700">
+                <b>Processors</b> are pluggable pre- and post-processing hooks for queries and results. They are defined per sandbox and can be applied during <i>Batch Runs</i>, which makes it straightforward to test normalization, query rewriting, or custom ranking tweaks without forking the core pipeline.
+            </p>
+            <p class="mt-4 text-gray-700">
+                The <b>Basket</b> is the cross-cutting staging area that turns selections into work. Teams can collect items from <i>Expected Results</i>, entire runs, or individual run results and then trigger <i>Assessment Runs</i>, <i>Intent Extraction</i>, or <i>Query Generation</i>. Each operation spawns an Assessment Task group with child items and status tracking, and the outputs (generated queries, intents, or scores) are written back to their respective sections.
+            </p>
+            <p class="mt-4 text-gray-700">
+                The <b>Assessment Task Orchestrator</b> materializes a parent “group” task and many “doc” tasks, each with explicit phase statuses that mirror the worker pipeline. This structure allows independent progress across items, resilient retries, and aggregation of child states back to the group for monitoring and control.
+            </p>
+            <p class="mt-4 text-gray-700">
+                The <b>Worker Pipeline</b> executes the heavy lifting asynchronously. Workers consume tasks, perform downloading, chunking, vectorization, and evaluation, then update the associated run with scores. Because the phases are explicit, the system can surface partial progress, rerun failed steps, and maintain a reliable audit of how each result was produced.
+            </p>
+            <p class="mt-4 text-gray-700">
+                <b>Generated Queries</b> are another output surface of the pipeline. From assessments or query-generation workflows, you can export the selected generated queries either to a new <i>Expected Results</i> set (turning them into judged targets) or into a new <i>Query Set</i> (reusing them as inputs for future runs). Both export flows are implemented as in-memory CSV builds followed by bulk index writes.
+            </p>
+            <p class="mt-4 text-gray-700">
+                Finally, <b>Reporting</b> reads from <i>Batch Runs</i> and assessments to generate comparative and clustering outputs. The catalog includes summary tables, query-by-configuration views, specialized clustering, and a broad set of ranking metrics—NDCG@5/10, Precision@5/10, Reciprocal Rank, Recall—as well as domain overlap, correlation, intersection, and even LLM-judgment reports when summaries are in play.
+            </p>
+            <p class="mt-4 text-gray-700">
                 Together, these components form a reproducible, auditable feedback loop: accounts publish shared capabilities; sandboxes isolate experiments; orchestrated runs and assessment tasks produce metrics and derived assets; and reporting closes the loop with rigorous analytics. The result is a system where search quality work can scale from quick tests to large, multi-run studies without sacrificing clarity or control.
-        </p>
             </p>
         </div>
-
 
         <div class="mt-12 text-center">
             <a href="index.html#how-it-works" class="transform rounded-lg bg-indigo-600 px-8 py-4 text-lg font-semibold text-white shadow-md transition hover:scale-105 hover:bg-indigo-700">
@@ -156,7 +178,6 @@
         const scaleStep = 0.2;
 
         function applyZoom() {
-            // Clamp the scale to the min/max values
             currentScale = Math.max(minScale, Math.min(maxScale, currentScale));
             diagramContent.style.transform = `scale(${currentScale})`;
         }
