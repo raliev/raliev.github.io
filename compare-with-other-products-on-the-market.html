@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Compare with Other Products on the Market - TestMySearch</title>
+  <meta name="description" content="Vendor-neutral comparison: TestMySearch vs. engine-agnostic IR and LLM evaluation tools." />
+  <link rel="canonical" href="https://www.testmysearch.com/compare-with-other-products-on-the-market.html" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>body{font-family:'Inter',sans-serif}</style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <header class="sticky top-0 z-40 shadow-sm" style="background-color:#faf8f5;">
+    <nav class="container mx-auto flex items-center justify-between px-6 py-4">
+      <a href="/"><img src="/img/testmysearch-logo.png" alt="TestMySearch Logo" style="height:60px" /></a>
+      <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
+        <a href="demos.html" class="text-gray-600 hover:text-indigo-600">Demos</a>
+        <a href="index.html#features" class="text-gray-600 hover:text-indigo-600">Features</a>
+        <a href="index.html#how-it-works" class="text-gray-600 hover:text-indigo-600">How It Works</a>
+        <a href="index.html#contact" class="rounded-md bg-indigo-600 px-4 py-2 text-white transition hover:bg-indigo-700">Contact Us</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container mx-auto px-6 py-16">
+    <div class="mx-auto max-w-5xl">
+      <div class="text-center">
+        <h1 class="text-4xl font-extrabold text-gray-900 md:text-5xl">Compare with<br>Other Products on the Market</h1>
+        <p class="mt-4 text-lg text-gray-600">
+          Brief overview of engine-agnostic tools for search and LLM evaluation — and how they differ from TestMySearch.
+        </p>
+      </div>
+
+      <!-- Our product summary -->
+      <section class="mt-12 rounded-lg bg-white p-8 shadow-lg">
+        <h2 class="text-2xl font-bold text-gray-900">TestMySearch (highlights)</h2>
+        <ul class="mt-4 grid gap-4 md:grid-cols-2 text-gray-700">
+          <li class="rounded-lg border border-gray-200 bg-gray-50 p-4"><span class="font-semibold">Engine-agnostic batch runner.</span> Fetches results from multiple search engines/configurations and evaluates them together.</li>
+          <li class="rounded-lg border border-gray-200 bg-gray-50 p-4"><span class="font-semibold">IR metrics & stats.</span> nDCG, MAP, Precision/Recall, overlap/rank-correlation, and pairwise statistical tests with clear visuals.</li>
+          <li class="rounded-lg border border-gray-200 bg-gray-50 p-4"><span class="font-semibold">LLM-powered assessment.</span> Optional LLM judging of document relevance and automatic query generation to expand coverage.</li>
+          <li class="rounded-lg border border-gray-200 bg-gray-50 p-4"><span class="font-semibold">Reports & workflow.</span> Sandboxes, Baskets, and Generated Reports for side-by-side comparisons and decision-ready summaries.</li>
+        </ul>
+        <p class="mt-3 text-sm text-gray-500">See details: <a class="text-indigo-600 hover:underline" href="metrics.html">Metrics</a> · <a class="text-indigo-600 hover:underline" href="virtual-assessor.html">Virtual Assessor</a> · <a class="text-indigo-600 hover:underline" href="ab-testing.html">A/B Testing</a></p>
+      </section>
+
+      <!-- Comparison table -->
+      <section class="mt-12">
+        <h2 class="text-2xl font-bold text-gray-900">Engine-agnostic tools considered</h2>
+        <div class="mt-4 overflow-x-auto rounded-lg bg-white shadow-lg">
+          <table class="min-w-full text-left text-sm">
+            <thead class="bg-gray-50 text-gray-700">
+              <tr>
+                <th class="px-5 py-3 font-semibold">Product</th>
+                <th class="px-5 py-3 font-semibold">Primary focus</th>
+                <th class="px-5 py-3 font-semibold">IR metrics</th>
+                <th class="px-5 py-3 font-semibold">LLM-based eval</th>
+                <th class="px-5 py-3 font-semibold">Monitoring</th>
+                <th class="px-5 py-3 font-semibold">Missing vs. <span class="whitespace-nowrap">our product</span></th>
+                <th class="px-5 py-3 font-semibold">Links</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr class="align-top">
+                <td class="px-5 py-4 font-medium text-gray-900">Evidently</td>
+                <td class="px-5 py-4">Open-source evaluation & observability for ML/LLM systems (drift, quality checks, test suites).</td>
+                <td class="px-5 py-4">General-purpose metrics (classification, regression, NLP). IR metrics require custom setup.</td>
+                <td class="px-5 py-4">Yes — supports LLM judges and model-graded checks.</td>
+                <td class="px-5 py-4">Yes — dashboards and monitoring.</td>
+                <td class="px-5 py-4">
+                  <ul class="list-disc pl-5 space-y-1">
+                    <li>No built-in multi-engine search batch runner.</li>
+                    <li>No search-specific side-by-side configuration reports.</li>
+                    <li>No integrated Expected Results & Query Sets workflow.</li>
+                  </ul>
+                </td>
+                <td class="px-5 py-4"><a class="text-indigo-600 hover:underline" href="https://github.com/evidentlyai/evidently" target="_blank" rel="noopener">GitHub</a> · <a class="text-indigo-600 hover:underline" href="https://www.evidentlyai.com/" target="_blank" rel="noopener">Website</a></td>
+              </tr>
+
+              <tr class="align-top">
+                <td class="px-5 py-4 font-medium text-gray-900">Promptfoo</td>
+                <td class="px-5 py-4">Open-source LLM evals, red teaming, guardrails; model-graded scoring.</td>
+                <td class="px-5 py-4">Generic scoring; not IR-focused by default.</td>
+                <td class="px-5 py-4">Yes — model-graded evals and adversarial tests.</td>
+                <td class="px-5 py-4">Primarily testing, not monitoring.</td>
+                <td class="px-5 py-4">
+                  <ul class="list-disc pl-5 space-y-1">
+                    <li>No orchestration to fetch results from multiple search engines.</li>
+                    <li>No standard IR metric suite or pairwise statistical tests.</li>
+                    <li>No reporting layer for search configuration comparisons.</li>
+                  </ul>
+                </td>
+                <td class="px-5 py-4"><a class="text-indigo-600 hover:underline" href="https://www.promptfoo.dev/" target="_blank" rel="noopener">Website</a> · <a class="text-indigo-600 hover:underline" href="https://github.com/promptfoo/promptfoo" target="_blank" rel="noopener">GitHub</a></td>
+              </tr>
+
+              <tr class="align-top">
+                <td class="px-5 py-4 font-medium text-gray-900">DeepEval</td>
+                <td class="px-5 py-4">Open-source LLM evaluation framework (pytest‑like).</td>
+                <td class="px-5 py-4">Generic LLM metrics (e.g., hallucination, relevancy, RAGAS); not IR‑specific by default.</td>
+                <td class="px-5 py-4">Yes — uses LLMs and local NLP models.</td>
+                <td class="px-5 py-4">Evaluation-first; hosted monitoring via Confident AI.</td>
+                <td class="px-5 py-4">
+                  <ul class="list-disc pl-5 space-y-1">
+                    <li>No multi-engine search batch runner or connectors.</li>
+                    <li>No integrated Expected Results & side-by-side IR reports.</li>
+                  </ul>
+                </td>
+                <td class="px-5 py-4"><a class="text-indigo-600 hover:underline" href="https://github.com/confident-ai/deepeval" target="_blank" rel="noopener">GitHub</a> · <a class="text-indigo-600 hover:underline" href="https://www.confident-ai.com/" target="_blank" rel="noopener">Confident AI</a></td>
+              </tr>
+
+              <tr class="align-top">
+                <td class="px-5 py-4 font-medium text-gray-900">pytrec_eval</td>
+                <td class="px-5 py-4">Python bindings for the classic TREC evaluation measures.</td>
+                <td class="px-5 py-4">Yes — nDCG, MAP, Precision@k, etc. (via trec_eval).</td>
+                <td class="px-5 py-4">No — not LLM‑graded.</td>
+                <td class="px-5 py-4">No — library only.</td>
+                <td class="px-5 py-4">
+                  <ul class="list-disc pl-5 space-y-1">
+                    <li>No result collection from search engines.</li>
+                    <li>No LLM-powered assessments or query generation.</li>
+                    <li>No reporting/visual comparison across configurations.</li>
+                  </ul>
+                </td>
+                <td class="px-5 py-4"><a class="text-indigo-600 hover:underline" href="https://github.com/cvangysel/pytrec_eval" target="_blank" rel="noopener">GitHub</a> · <a class="text-indigo-600 hover:underline" href="https://pypi.org/project/pytrec-eval/" target="_blank" rel="noopener">PyPI</a></td>
+              </tr>
+
+              <tr class="align-top">
+                <td class="px-5 py-4 font-medium text-gray-900">trec_eval</td>
+                <td class="px-5 py-4">Reference IR evaluation tool used by the TREC community.</td>
+                <td class="px-5 py-4">Yes — canonical TREC measures (MAP, nDCG, etc.).</td>
+                <td class="px-5 py-4">No — not LLM‑graded.</td>
+                <td class="px-5 py-4">No — CLI tool.</td>
+                <td class="px-5 py-4">
+                  <ul class="list-disc pl-5 space-y-1">
+                    <li>No orchestration of queries or results fetching.</li>
+                    <li>No LLM assessments or query generation.</li>
+                    <li>No dashboarding or side-by-side reporting.</li>
+                  </ul>
+                </td>
+                <td class="px-5 py-4"><a class="text-indigo-600 hover:underline" href="https://github.com/usnistgov/trec_eval" target="_blank" rel="noopener">GitHub</a></td>
+              </tr>
+
+              <tr class="align-top">
+                <td class="px-5 py-4 font-medium text-gray-900">Pyserini</td>
+                <td class="px-5 py-4">Lucene‑based IR toolkit for reproducible baselines with datasets, indexes, and evaluation scripts.</td>
+                <td class="px-5 py-4">Yes — supports standard benchmarks (e.g., BEIR) with evaluation utilities.</td>
+                <td class="px-5 py-4">No — not focused on LLM‑graded evals.</td>
+                <td class="px-5 py-4">No — toolkit/library.</td>
+                <td class="px-5 py-4">
+                  <ul class="list-disc pl-5 space-y-1">
+                    <li>Not a multi-engine production A/B and reporting layer.</li>
+                    <li>No LLM assessors or query generation workflow.</li>
+                    <li>No Sandboxes/Baskets/Reports workflow for decision-making.</li>
+                  </ul>
+                </td>
+                <td class="px-5 py-4"><a class="text-indigo-600 hover:underline" href="https://github.com/castorini/pyserini" target="_blank" rel="noopener">GitHub</a></td>
+              </tr>
+
+              <tr class="align-top">
+                <td class="px-5 py-4 font-medium text-gray-900">Quepid</td>
+                <td class="px-5 py-4">Human-in-the-loop relevance tuning and test cases across engines.</td>
+                <td class="px-5 py-4">Yes — calculates metrics over judged queries/test cases.</td>
+                <td class="px-5 py-4">No — no built-in LLM assessor or query generation.</td>
+                <td class="px-5 py-4">Limited — primarily tuning rather than monitoring.</td>
+                <td class="px-5 py-4">
+                  <ul class="list-disc pl-5 space-y-1">
+                    <li>No automated multi-engine batch runner for large query sets.</li>
+                    <li>No statistical pairwise tests and domain-overlap/rank-correlation visualizations.</li>
+                    <li>No integrated LLM Judgement reports.</li>
+                  </ul>
+                </td>
+                <td class="px-5 py-4"><a class="text-indigo-600 hover:underline" href="https://www.quepidapp.com/" target="_blank" rel="noopener">Website</a> · <a class="text-indigo-600 hover:underline" href="https://github.com/o19s/quepid" target="_blank" rel="noopener">GitHub</a></td>
+              </tr>
+
+              <tr class="align-top">
+                <td class="px-5 py-4 font-medium text-gray-900">RRE (Rated Ranking Evaluator)</td>
+                <td class="px-5 py-4">Open-source offline IR evaluation framework for search quality.</td>
+                <td class="px-5 py-4">Yes — supports standard IR measures (nDCG, MAP, etc.).</td>
+                <td class="px-5 py-4">No — no LLM‑based judging.</td>
+                <td class="px-5 py-4">No — framework, not a monitoring suite.</td>
+                <td class="px-5 py-4">
+                  <ul class="list-disc pl-5 space-y-1">
+                    <li>No built-in connectors and batch orchestration across multiple engines.</li>
+                    <li>No visual side-by-side configuration reports with pairwise significance.</li>
+                    <li>No LLM query generation or judgment reports.</li>
+                  </ul>
+                </td>
+                <td class="px-5 py-4"><a class="text-indigo-600 hover:underline" href="https://github.com/SeaseLtd/rated-ranking-evaluator" target="_blank" rel="noopener">GitHub</a> · <a class="text-indigo-600 hover:underline" href="https://sease.io/2021/01/offline-search-quality-evaluation-rated-ranking-evaluator-rre.html" target="_blank" rel="noopener">Overview</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-3 text-sm text-gray-500">Last updated 2025-08-12.</p>
+      </section>
+
+      <!-- Why we stand out -->
+      <section class="mt-12 rounded-lg bg-white p-8 shadow-lg">
+        <h2 class="text-2xl font-bold text-gray-900">Why to pick TestMySearch</h2>
+        <div class="mt-4 grid gap-6 md:grid-cols-2">
+          <div class="rounded-lg border border-gray-200 bg-gray-50 p-6">
+            <h3 class="text-xl font-semibold text-gray-900">Multi-engine, offline-first</h3>
+            <p class="mt-2 text-gray-700">Run batch tests across engines/configs safely, then ship with confidence. Complement with online A/B as needed.</p>
+          </div>
+          <div class="rounded-lg border border-gray-200 bg-gray-50 p-6">
+            <h3 class="text-xl font-semibold text-gray-900">LLM judgments & query generation</h3>
+            <p class="mt-2 text-gray-700">Bootstrap or expand coverage with LLM-generated queries and document-level LLM assessors.</p>
+          </div>
+          <div class="rounded-lg border border-gray-200 bg-gray-50 p-6">
+            <h3 class="text-xl font-semibold text-gray-900">Rich reports</h3>
+            <p class="mt-2 text-gray-700">NDCG/MAP, precision/recall, overlap, rank-correlation, and pairwise tests — all in decision-ready views.</p>
+          </div>
+          <div class="rounded-lg border border-gray-200 bg-gray-50 p-6">
+            <h3 class="text-xl font-semibold text-gray-900">Pragmatic workflow</h3>
+            <p class="mt-2 text-gray-700">Accounts, Sandboxes, Baskets and Processors streamline end‑to‑end evaluation.</p>
+          </div>
+        </div>
+        <div class="mt-6">
+          <a href="index.html#contact" class="inline-flex items-center rounded-lg bg-indigo-600 px-6 py-3 text-white font-semibold shadow-md hover:bg-indigo-700 transition">
+            Talk to us about your use case
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bg-gray-800 text-gray-400">
+    <div class="container mx-auto px-6 py-8 text-center">
+      <p>&copy; 2025 TestMySearch. All Rights Reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
