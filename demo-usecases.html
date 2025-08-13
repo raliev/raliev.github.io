@@ -57,6 +57,7 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         [hidden] { display: none !important; }
+        /* Стили для видео остаются без изменений */
         .aspect-video {
             position: relative;
             width: 100%;
@@ -103,7 +104,7 @@
 
             <div id="interactive-view" hidden class="mt-8 grid grid-cols-1 md:grid-cols-5 gap-8">
                 <div class="md:col-span-3 rounded-lg bg-white p-4 shadow-lg">
-                    <div id="screenshot-container" class="aspect-video bg-gray-200 rounded-md flex items-center justify-center text-gray-500 overflow-hidden">
+                    <div id="screenshot-container" class="bg-gray-200 rounded-md flex items-center justify-center">
                     </div>
                 </div>
                 <div class="md:col-span-2 rounded-lg bg-white p-8 shadow-md flex flex-col">
@@ -223,7 +224,7 @@
         if (!audioEnabled || !userInteracted) return;
         const stepData = config[currentUseCaseId]?.interactiveSteps[currentStep];
         if (stepData && stepData.screenshot) {
-            const audioPath = `demo/screenshots/${stepData.screenshot.replace('.png', '.mp3')}`;
+            const audioPath = `screenshots/${stepData.screenshot.replace('.png', '.mp3')}`;
             audioPlayerEl.src = audioPath;
             audioPlayerEl.play().catch(e => console.warn("Audio playback was prevented.", e));
         }
@@ -311,7 +312,16 @@
         const stepData = useCaseData.interactiveSteps[currentStep];
         stepTitleEl.textContent = stepData.title;
         stepDescriptionEl.textContent = stepData.description;
-        screenshotContainerEl.innerHTML = `<img src="demo/screenshots/${stepData.screenshot}" alt="${stepData.title}" class="w-full h-full object-contain">`;
+        const screenshotPath = `screenshots/${stepData.screenshot}`;
+
+        /*
+            КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ:
+            Вместо object-contain, который требует правильно настроенного контейнера,
+            мы используем `w-full h-auto`. Это заставит изображение занимать всю ширину
+            и автоматически подбирать высоту, сохраняя пропорции. Это самый надежный способ
+            показать всё изображение.
+        */
+        screenshotContainerEl.innerHTML = `<img src="${screenshotPath}" alt="${stepData.title}" class="w-full h-auto rounded-md">`;
 
         prevButton.disabled = currentStep === 0;
         prevButton.classList.toggle('opacity-50', prevButton.disabled);
