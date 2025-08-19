@@ -1,0 +1,74 @@
+[
+  {
+    "acronym": "SIGIR",
+    "name": "ACM SIGIR Conference on Research and Development in Information Retrieval",
+    "description": "The premier international forum for the presentation of new research results and for the demonstration of new systems and techniques in the broad field of information retrieval (IR). It is the top and most prestigious conference in the field.",
+    "url": "https://sigir.org/",
+    "organizer": "ACM SIGIR",
+    "frequency": "Annual",
+    "location_info": "Rotates globally (e.g., Washington D.C., Taipei, Madrid)"
+  },
+  {
+    "acronym": "TheWebConf",
+    "name": "The ACM Web Conference",
+    "description": "Formerly known as WWW, this is a top-tier annual conference on the topic of the World Wide Web. It covers a wide range of topics, including search, data mining, web science, and user behavior, attracting both academia and industry leaders.",
+    "url": "https://thewebconf.org/",
+    "organizer": "ACM SIGWEB",
+    "frequency": "Annual",
+    "location_info": "Rotates globally (e.g., Singapore, Austin, Lyon)"
+  },
+  {
+    "acronym": "WSDM",
+    "name": "ACM International Conference on Web Search and Data Mining",
+    "description": "A highly-ranked academic conference that publishes original research on search, data mining, and related topics. It is known for its strong technical papers and is a key venue for the web search community.",
+    "url": "http://www.wsdm-conference.org/",
+    "organizer": "ACM",
+    "frequency": "Annual",
+    "location_info": "Rotates globally (e.g., Merida, Singapore, Phoenix)"
+  },
+  {
+    "acronym": "CIKM",
+    "name": "ACM International Conference on Information and Knowledge Management",
+    "description": "A major conference that brings together leading researchers from the database, information retrieval, and knowledge management communities. It covers a broad range of topics including search, NLP, and data management.",
+    "url": "https://cikm2025.org/",
+    "organizer": "ACM",
+    "frequency": "Annual",
+    "location_info": "Rotates globally (e.g., Boise, Atlanta, Taipei)"
+  },
+  {
+    "acronym": "ECIR",
+    "name": "European Conference on Information Retrieval",
+    "description": "The primary European forum for the presentation of new research in the field of Information Retrieval. While European-focused, it has a strong international presence and reputation.",
+    "url": "https://ecir2025.eu/",
+    "organizer": "BCS-IRSG",
+    "frequency": "Annual",
+    "location_info": "Primarily in Europe (e.g., Glasgow, Dublin, Stavanger)"
+  },
+  {
+    "acronym": "ICTIR",
+    "name": "ACM SIGIR International Conference on the Theory of Information Retrieval",
+    "description": "A conference focused on the theoretical aspects of IR, including models, algorithms, and evaluation methodologies. It is a key venue for foundational research in the search domain.",
+    "url": "https://ictir2025.cs.umass.edu/",
+    "organizer": "ACM SIGIR",
+    "frequency": "Annual",
+    "location_info": "Rotates globally"
+  },
+  {
+    "acronym": "RecSys",
+    "name": "ACM Conference on Recommender Systems",
+    "description": "The premier international forum for the presentation of new research results, systems and techniques in the broad field of recommender systems. It's a sister field to search with significant overlap.",
+    "url": "https://recsys.acm.org/",
+    "organizer": "ACM",
+    "frequency": "Annual",
+    "location_info": "Rotates globally (e.g., Bari, Singapore, Seattle)"
+  },
+  {
+    "acronym": "Haystack",
+    "name": "Haystack - The Search Relevance Conference",
+    "description": "An industry-focused conference dedicated to improving search relevance. It brings together engineers and practitioners to share case studies, best practices, and new techniques for tuning search engines like Solr and Elasticsearch.",
+    "url": "https://haystackconf.com/",
+    "organizer": "OpenSource Connections",
+    "frequency": "Annual",
+    "location_info": "Primarily in the USA (e.g., Charlottesville, VA)"
+  }
+]

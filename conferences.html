@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search & IR Conferences - TestMySearch</title>
+    <meta name="description" content="A curated list of the world's leading academic and industry conferences on Information Retrieval, Search, and Recommender Systems.">
+
+    <link rel="canonical" href="https://www.testmysearch.com/conferences.html">
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+<header class="sticky top-0 z-50 shadow-sm" style="background-color: #faf8f5;">
+    <nav class="container mx-auto flex items-center justify-between px-6 py-4">
+        <a href="/"><img src="/img/testmysearch-logo.png" alt="TestMySearch Logo" style="height:60px"></a>
+        <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
+            <a href="demos.html" class="text-gray-600 hover:text-indigo-600">Demos</a>
+            <a href="index.html#features" class="text-gray-600 hover:text-indigo-600">Features</a>
+            <a href="index.html#how-it-works" class="text-gray-600 hover:text-indigo-600">How It Works</a>
+            <a href="index.html#contact" class="rounded-md bg-indigo-600 px-4 py-2 text-white transition hover:bg-indigo-700">Contact Us</a>
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-6 py-16">
+    <div class="mx-auto max-w-4xl">
+        <div class="text-center">
+            <i class="fas fa-calendar-alt text-5xl text-indigo-600"></i>
+            <h1 class="mt-4 text-4xl font-extrabold text-gray-900 md:text-5xl">Information Retrieval & Search Conferences</h1>
+            <p class="mt-4 text-lg text-gray-600">A list of the most important annual events for the global search community.</p>
+            <div class="mt-6 rounded-md bg-indigo-50 p-4 text-center">
+                <p class="text-indigo-800">
+                    <i class="fas fa-book-reader mr-2"></i>Looking for more? Check out our curated list of <a href="search-web-resources.html" class="font-semibold underline hover:text-indigo-600">technical blogs and resources on Search & IR</a>.
+                </p>
+            </div>
+        </div>
+
+        <div id="conference-list" class="mt-12 space-y-6">
+        </div>
+
+    </div>
+</main>
+
+<footer class="bg-gray-800 text-gray-400">
+    <div class="container mx-auto px-6 py-8 text-center">
+        <p>&copy; 2025 TestMySearch. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const listContainer = document.getElementById('conference-list');
+
+        async function fetchConferences() {
+            try {
+                const response = await fetch('conferences.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const conferences = await response.json();
+                renderConferences(conferences);
+            } catch (error) {
+                listContainer.innerHTML = `<p class="text-red-500 text-center">Could not load conference data.</p>`;
+                console.error("Failed to fetch conferences:", error);
+            }
+        }
+
+        function renderConferences(conferences) {
+            if (!conferences || conferences.length === 0) {
+                listContainer.innerHTML = `<p class="text-gray-500 text-center">No conferences to display.</p>`;
+                return;
+            }
+
+            listContainer.innerHTML = '';
+
+            conferences.forEach(conf => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-lg shadow-lg p-6 transition hover:shadow-xl';
+
+                card.innerHTML = `
+                <div class="flex flex-col md:flex-row justify-between md:items-center">
+                    <div>
+                        <span class="inline-block bg-indigo-100 text-indigo-800 text-sm font-semibold px-3 py-1 rounded-full">${conf.acronym}</span>
+                        <h2 class="text-2xl font-bold text-gray-900 mt-2">${conf.name}</h2>
+                    </div>
+                    <div class="mt-4 md:mt-0 md:ml-6 flex-shrink-0">
+                        <a href="${conf.url}" target="_blank" rel="noopener noreferrer" class="inline-block rounded-md bg-indigo-600 px-5 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                            Visit Website <i class="fas fa-external-link-alt ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+                <p class="mt-4 text-gray-700">${conf.description}</p>
+                <div class="mt-5 pt-4 border-t border-gray-200 flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-600">
+                    <span><strong>Organizer:</strong> ${conf.organizer}</span>
+                    <span><strong>Frequency:</strong> ${conf.frequency}</span>
+                    <span><strong>Location:</strong> ${conf.location_info}</span>
+                </div>
+            `;
+                listContainer.appendChild(card);
+            });
+        }
+
+        fetchConferences();
+    });
+</script>
+
+</body>
+</html>

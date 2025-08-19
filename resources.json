@@ -1,0 +1,306 @@
+[
+  {
+    "title": "Softwaredoug.com by Doug Turnbull",
+    "description": "Doug Turnbull’s blog on search and relevance engineering—practical posts on lexical, hybrid, and vector search, RAG pitfalls, and evaluation. It also aggregates his talks, training, and slide decks.",
+    "url": "https://softwaredoug.com/",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fsoftwaredoug.com%2F&screenshot=true&embed=screenshot.url",
+    "type": "Person",
+    "tags": ["IR", "AI/RAG/LLM", "Lucene", "Solr", "Elasticsearch"]
+  },
+  {
+    "title": "Daniel Tunkelang's Blog (Query Understanding)",
+    "description": "Daniel Tunkelang is a veteran of the search industry (ex-Google, ex-LinkedIn). His blog offers high-level, insightful essays on the challenges of search, query understanding, and the future of information retrieval.",
+    "url": "https://queryunderstanding.com/",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fqueryunderstanding.com%2F&screenshot=true&embed=screenshot.url",
+    "type": "Person",
+    "tags": ["IR"]
+  },
+  {
+    "title": "Simon Willison's Blog",
+    "description": "While not exclusively a search blog, Simon's work on LLMs, vector search, and creative data applications is essential reading. He provides practical, code-first tutorials on building with modern AI and search tools.",
+    "url": "https://simonwillison.net/",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fsimonwillison.net%2F&screenshot=true&embed=screenshot.url",
+    "type": "Person",
+    "tags": ["AI/RAG/LLM", "IR"]
+  },
+  {
+    "title": "Lilian Weng's Blog",
+    "description": "An AI researcher (formerly at OpenAI) providing incredibly detailed and well-researched posts on the foundational models and algorithms that power modern search, including transformers, embeddings, and agent architectures.",
+    "url": "https://lilianweng.github.io/posts/",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Flilianweng.github.io%2Fposts%2F&screenshot=true&embed=screenshot.url",
+    "type": "Person",
+    "tags": ["AI/RAG/LLM", "IR"]
+  },
+  {
+    "title": "Eugene Yan's Blog",
+    "description": "An applied scientist's blog focusing on the practical application of machine learning for search and recommendation systems. Excellent, detailed posts on system design, ranking, and evaluation.",
+    "url": "https://eugeneyan.com/",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Feugeneyan.com%2F&screenshot=true&embed=screenshot.url",
+    "type": "Person",
+    "tags": ["IR", "AI/RAG/LLM"]
+  },
+  {
+    "title": "OpenSource Connections",
+    "description": "The official blog of OpenSource Connections (OSC), a leading search relevance consultancy. Features deep dives into Elasticsearch, Solr, and vector search, written by a team of relevance experts.",
+    "url": "https://opensourceconnections.com/blog/",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fopensourceconnections.com%2Fblog%2F&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["Elasticsearch", "Solr", "IR", "AI/RAG/LLM", "Lucene"]
+  },
+  {
+    "title": "Sease",
+    "description": "Sease is a European search and AI consultancy. Their blog covers topics like offline evaluation (creators of the RRE framework), vector search, and tuning strategies for e-commerce and knowledge search.",
+    "url": "https://sease.io/blog/",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fsease.io%2Fblog%2F&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["IR", "AI/RAG/LLM"]
+  },
+  {
+    "title": "Algolia Blog",
+    "description": "The official blog from the SaaS search provider Algolia. Covers a wide range of topics from UX best practices in e-commerce search to technical articles on AI search and performance optimization.",
+    "url": "https://www.algolia.com/blog/",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fwww.algolia.com%2Fblog%2F&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["IR", "AI/RAG/LLM"]
+  },
+  {
+    "title": "Elastic Blog",
+    "description": "The official source for news and deep dives on Elasticsearch, the Elastic Stack, and Elastic's cloud offerings. Essential reading for anyone working within the Elastic ecosystem, covering everything from vectors to security.",
+    "url": "https://www.elastic.co/blog/",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fwww.elastic.co%2Fblog%2F&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["Elasticsearch", "IR", "AI/RAG/LLM", "Lucene"]
+  },
+  {
+    "title": "Vespa.ai Blog",
+    "description": "The engineering blog for Vespa, the open-source big data serving engine. Features advanced articles on real-time search, ranking, recommendation systems, and large-scale distributed architecture.",
+    "url": "https://blog.vespa.ai/",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fblog.vespa.ai%2F&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["IR", "AI/RAG/LLM"]
+  },
+  {
+    "title": "Pinecone Blog",
+    "description": "A go-to resource for vector search. The blog provides deep, educational content on vector databases, embeddings, algorithms (like HNSW), and the practical application of semantic search and RAG.",
+    "url": "https://www.pinecone.io/learn/",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fwww.pinecone.io%2Flearn%2F&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["AI/RAG/LLM", "IR"]
+  },
+  {
+    "title": "Weaviate Blog",
+    "description": "From the creators of the Weaviate vector database, this blog covers topics from the fundamentals of vector search to advanced concepts like generative feedback loops and multi-tenancy in AI applications.",
+    "url": "https://weaviate.io/blog",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fweaviate.io%2Fblog&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["AI/RAG/LLM", "IR"]
+  },
+  {
+    "title": "Sematext Blog",
+    "description": "A rich source of practical, hands-on tutorials and best practices for Elasticsearch, Solr, and the broader observability space. Great for troubleshooting and performance tuning.",
+    "url": "https://sematext.com/blog/",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fsematext.com%2Fblog%2F&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["Elasticsearch", "Solr", "IR", "Lucene"]
+  },
+  {
+    "title": "Lucidworks Blog",
+    "description": "While a corporate blog, it features many deep technical articles on Solr, vector search, and machine learning for relevance from engineers and committers behind the Lucidworks Fusion platform.",
+    "url": "https://lucidworks.com/blog/",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Flucidworks.com%2Fblog%2F&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["Solr", "IR", "AI/RAG/LLM", "Lucene"]
+  },
+  {
+    "title": "Marqo AI Blog",
+    "description": "Focuses on tensor search, a method of searching through vector embeddings directly within an end-to-end system. The blog has technical tutorials on multimodal and generative AI search applications.",
+    "url": "https://www.marqo.ai/blog",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fwww.marqo.ai%2Fblog&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["AI/RAG/LLM", "IR"]
+  },
+  {
+    "title": "Coveo Blog",
+    "description": "Blog from Coveo, a search and AI company, covering search engines vs vector DB for RAG, relevance in search, and AI applications.",
+    "url": "https://www.coveo.com/blog/",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fwww.coveo.com%2Fblog%2F&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["IR", "AI/RAG/LLM"]
+  },
+  {
+    "title": "Hebbia Blog",
+    "description": "Blog from Hebbia, focusing on solving information retrieval for LLMs, advanced RAG alternatives, and AI platform developments.",
+    "url": "https://www.hebbia.com/blog",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fwww.hebbia.com%2Fblog&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["IR", "AI/RAG/LLM"]
+  },
+  {
+    "title": "Relevance AI Blog",
+    "description": "Blog on advanced RAG techniques, information retrieval with generative models, and AI workflows.",
+    "url": "https://relevanceai.com/blog",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Frelevanceai.com%2Fblog&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["AI/RAG/LLM", "IR"]
+  },
+  {
+    "title": "Meilisearch Blog",
+    "description": "Blog from Meilisearch, discussing search engines for RAG, vector databases, and fast search implementations.",
+    "url": "https://www.meilisearch.com/blog",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fwww.meilisearch.com%2Fblog&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["IR", "AI/RAG/LLM"]
+  },
+  {
+    "title": "Glean Blog",
+    "description": "Blog on hybrid search vs RAG, vector search differences, and enterprise search solutions.",
+    "url": "https://www.glean.com/blog",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fwww.glean.com%2Fblog&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["IR", "AI/RAG/LLM"]
+  },
+  {
+    "title": "Fuzzy Labs Blog",
+    "description": "Blog on improving RAG performance, hybrid search, and optimizing LLM systems.",
+    "url": "https://www.fuzzylabs.ai/blog",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fwww.fuzzylabs.ai%2Fblog&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["AI/RAG/LLM", "IR"]
+  },
+  {
+    "title": "OpenSearch Blog",
+    "description": "Blog on RAG with OpenSearch vector DB, integrations, and search technologies.",
+    "url": "https://opensearch.org/blog",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fopensearch.org%2Fblog&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["IR", "AI/RAG/LLM", "Elasticsearch"]
+  },
+  {
+    "title": "Netflix Technology Blog",
+    "description": "Features articles detailing Netflix's approach to personalization, search, and recommendation at a massive scale. Posts often cover the evolution of their search architecture and machine learning models.",
+    "url": "https://netflixtechblog.com/",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fnetflixtechblog.com%2F&screenshot=true&embed=screenshot.url",
+    "type": "Company (non-Search-centric)",
+    "tags": ["IR", "AI/RAG/LLM"]
+  },
+  {
+    "title": "Spotify Engineering",
+    "description": "Discover how Spotify handles music discovery and recommendations. Posts cover their use of vector search (Annoy), natural language processing for podcast search, and the infrastructure that powers it all.",
+    "url": "https://engineering.atspotify.com/",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fengineering.atspotify.com%2F&screenshot=true&embed=screenshot.url",
+    "type": "Company (non-Search-centric)",
+    "tags": ["IR", "AI/RAG/LLM"]
+  },
+  {
+    "title": "Pinterest Engineering Blog",
+    "description": "A treasure trove of articles on visual search, recommendations, and knowledge graphs. Pinterest's posts detail how they solve search problems on a dataset of billions of images.",
+    "url": "https://medium.com/pinterest-engineering",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fmedium.com%2Fpinterest-engineering&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["IR", "AI/RAG/LLM"]
+  },
+  {
+    "title": "LinkedIn Engineering Blog",
+    "description": "Insights from a company that has historically pushed the boundaries of search and information retrieval. Topics range from real-time search infrastructure to the machine learning models that rank feeds and people.",
+    "url": "https://engineering.linkedin.com/blog",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fengineering.linkedin.com%2Fblog&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["IR", "AI/RAG/LLM"]
+  },
+  {
+    "title": "Shopify Engineering Blog",
+    "description": "Provides a look into the challenges of building and scaling e-commerce search. Posts cover topics like query understanding, infrastructure, and the specific relevance problems of online retail.",
+    "url": "https://shopify.engineering",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fshopify.engineering&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["IR"]
+  },
+  {
+    "title": "eBay Tech Blog",
+    "description": "Learn about search at one of the world's largest e-commerce marketplaces. Articles discuss everything from the core search engine technology to the NLP and computer vision models used to enhance listings.",
+    "url": "https://tech.ebayinc.com",
+    "screenshotUrl": "https://api.microlink.io/?url=https://innovation.ebayinc.com/&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["IR", "AI/RAG/LLM"]
+  },
+  {
+    "title": "DoorDash Engineering Blog",
+    "description": "Focuses on the search and recommendation problems of local commerce, including store and item ranking, personalization, and using ML to predict delivery times and availability.",
+    "url": "https://doordash.engineering/category/search-and-relevance/",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fdoordash.engineering%2Fcategory%2Fsearch-and-relevance%2F&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["IR", "AI/RAG/LLM"]
+  },
+  {
+    "title": "Amazon Science",
+    "description": "The portal for Amazon's research, featuring many papers and articles on product search, question answering, and recommendation systems. Highly academic and rigorous content.",
+    "url": "https://www.amazon.science/",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fwww.amazon.science%2F&screenshot=true&embed=screenshot.url",
+    "type": "Research",
+    "tags": ["IR", "AI/RAG/LLM"]
+  },
+  {
+    "title": "Google Cloud Blog",
+    "description": "Blog on RAG powered by Google Search technology, AI, machine learning, and cloud-based search solutions.",
+    "url": "https://cloud.google.com/blog",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fcloud.google.com%2Fblog&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["IR", "AI/RAG/LLM"]
+  },
+  {
+    "title": "NVIDIA Technical Blog",
+    "description": "Technical blog on enhancing RAG pipelines, re-ranking, AI hardware for search, and GPU-accelerated retrieval.",
+    "url": "https://developer.nvidia.com/blog",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fdeveloper.nvidia.com%2Fblog&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["AI/RAG/LLM", "IR"]
+  },
+  {
+    "title": "Stack Overflow Blog",
+    "description": "Blog on RAG, keeping LLMs relevant, practical tips for retrieval-augmented generation, and developer tools.",
+    "url": "https://stackoverflow.blog",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fstackoverflow.blog&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["AI/RAG/LLM", "IR"]
+  },
+  {
+    "title": "Neptune.ai Blog",
+    "description": "Blog on building LLM apps with vector DBs, RAG systems, and ML experiment tracking relevant to search.",
+    "url": "https://neptune.ai/blog",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fneptune.ai%2Fblog&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["AI/RAG/LLM", "IR"]
+  },
+  {
+    "title": "AWS Machine Learning Blog",
+    "description": "Lessons learned from building real-world RAGs, fabric patterns, and ML for search.",
+    "url": "https://aws.amazon.com/blogs/machine-learning/",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Faws.amazon.com%2Fblogs%2Fmachine-learning%2F&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["AI/RAG/LLM", "IR"]
+  },
+  {
+    "title": "HumanLoop Blog",
+    "description": "Blog on RAG architectures for generative AI, LLM workflows, and retrieval systems.",
+    "url": "https://humanloop.com/blog",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fhumanloop.com%2Fblog&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["AI/RAG/LLM", "IR"]
+  },
+  {
+    "title": "Evidently AI Blog",
+    "description": "Blog on machine learning monitoring, best ML blogs, and topics intersecting with IR and RAG evaluation.",
+    "url": "https://www.evidentlyai.com/blog",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fwww.evidentlyai.com%2Fblog&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["AI/RAG/LLM"]
+  },
+  {
+    "title": "FalkorDB Blog",
+    "description": "Blog on advanced RAG techniques, graph-based retrieval, and AI applications.",
+    "url": "https://falkordb.com/blog",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Ffalkordb.com%2Fblog&screenshot=true&embed=screenshot.url",
+    "type": "Company",
+    "tags": ["AI/RAG/LLM", "IR"]
+  }
+]
