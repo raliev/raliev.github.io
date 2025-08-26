@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rauf Aliev - Information Retrieval Specialist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lora:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px 40px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        header {
+            text-align: center;
+            border-bottom: 1px solid #e9ecef;
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+        }
+        header h1 {
+            font-family: 'Lora', serif;
+            font-size: 2.5rem;
+            margin: 0;
+            color: #212529;
+        }
+        header p {
+            font-size: 1.2rem;
+            color: #495057;
+            margin-top: 5px;
+        }
+        .profile-section {
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+        }
+        .profile-section img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border: 3px solid #e9ecef;
+        }
+        .profile-section .bio {
+            flex: 1;
+        }
+        h2 {
+            font-family: 'Lora', serif;
+            font-size: 1.6rem;
+            color: #0056b3;
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 8px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        ul li {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%230056b3" class="bi bi-arrow-right-short" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/></svg>') no-repeat left 6px;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+        .project-highlight {
+            background-color: #f8f9fa;
+            border-left: 4px solid #0056b3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .project-highlight h3 {
+            margin-top: 0;
+            color: #212529;
+        }
+        a {
+            color: #0056b3;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        a:hover {
+            color: #003d7c;
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            .profile-section {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Rauf Aliev</h1>
+        <p>Information Retrieval Specialist & Search Technology Expert</p>
+        <p><a href="mailto:r.aliev@gmail.com">r.aliev@gmail.com</a> | +1 571 342 84 92 </p>
+    </header>
+
+    <section class="profile-section">
+        <img src="me.jpg" alt="Rauf Aliev">
+        <div class="bio">
+            <p>
+                I am a dedicated specialist in the field of Information Retrieval (IR) with extensive experience in designing, building, and optimizing complex search engine solutions. My work focuses on the intersection of theoretical IR principles and their practical application in large-scale systems, particularly in e-commerce and knowledge management. I am passionate about developing data-driven methodologies to systematically evaluate and enhance search relevance and the overall user experience.
+            </p>
+        </div>
+    </section>
+
+    <section id="research-interests">
+        <h2>Research Interests & Areas of Expertise</h2>
+        <ul>
+            <li><strong>Search Relevance and Ranking:</strong> Developing and fine-tuning ranking algorithms that incorporate textual relevance signals, business metrics, and user behavior data.</li>
+            <li><strong>Offline Evaluation & A/B Testing:</strong> Establishing rigorous, repeatable offline evaluation frameworks as a cost-effective and low-risk alternative to live A/B testing for search algorithm validation.</li>
+            <li><strong>Information Retrieval Metrics:</strong> Practical application and analysis of rank-aware metrics such as nDCG, MAP, and MRR to quantify search quality.</li>
+            <li><strong>LLMs for Search Evaluation:</strong> Utilizing Large Language Models (LLMs) to automate and scale the creation of ground-truth data (judgement lists) and to perform qualitative analysis of search results.</li>
+            <li><strong>Query Understanding and Analysis:</strong> Employing techniques for query clustering, typo-tolerance, and semantic analysis to better comprehend user intent.</li>
+        </ul>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="project-highlight">
+            <h3>Founder & Chief Architect, TestMySearch.com</h3>
+            <p>
+                TestMySearch is a comprehensive, engine-agnostic platform I created for search quality analysis and optimization. It provides a systematic, data-driven workflow for relevance engineers to evaluate and compare different search configurations. The platform operationalizes many of my core research interests.
+            </p>
+            <p>
+                <strong>Key Features:</strong>
+            </p>
+            <ul>
+                <li>An integrated A/B testing platform for running thousands of queries against multiple search backends (e.g., Solr, Elasticsearch) in offline batch runs.</li>
+                <li>Automated calculation and visualization of a wide array of IR metrics.</li>
+                <li>A "Virtual Search Assessor" that leverages LLMs to evaluate document-to-query relevance and generate new test queries.</li>
+            </ul>
+            <p><a href="https://www.testmysearch.com" target="_blank">Visit TestMySearch.com</a></p>
+        </div>
+    </section>
+
+    <section id="publications">
+        <h2>Selected Publications & Writings</h2>
+        <p>
+            I have authored numerous technical articles on search implementation and optimization. My work aims to bridge the gap between complex search concepts and real-world engineering challenges. A selection of my articles on implementing Apache Solr in enterprise environments can be found on my website, HybrisMartin.
+        </p>
+        <ul>
+            <li>
+                <strong>Topic: Apache Solr Search in SAP Hybris</strong><br>
+                A collection of deep-dive articles covering indexing strategies, relevance tuning, and performance optimization for Apache Solr.
+                <br>
+                <a href="https://hybrismart.com/apache-solr-search-in-sap-hybris/" target="_blank">Read the articles on hybrismart.com</a>
+            </li>
+        </ul>
+    </section>
+
+    <section id="contact">
+        <h2>Professional Links</h2>
+        <p>For more details on my professional background and experience, please refer to my LinkedIn profile.</p>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/raufaliev" target="_blank">LinkedIn Profile</a></li>
+            <li><a href="https://www.testmysearch.com" target="_blank">TestMySearch.com</a></li>
+            <li><a href="https://hybrismart.com" target="_blank">HybrisMartin.com</a></li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>Rauf Aliev</p>
+    </footer>
+</div>
+
+</body>
+</html>
