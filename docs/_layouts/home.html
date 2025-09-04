@@ -30,7 +30,7 @@ layout: default
         <div class="mt-4 flex items-center justify-between">
             <a href="{{ post.url | relative_url }}" class="font-semibold text-indigo-600 hover:underline">Read more →</a>
             {% if post.pdf_link %}
-            <a href="{{ post.pdf_link | relative_url }}" class="inline-flex items-center rounded-md bg-red-600 px-3 py-1 text-sm font-medium text-white hover:bg-red-700" target="_blank" rel="noopener noreferrer">
+            <a href="{{ post.pdf_link }}" class="inline-flex items-center rounded-md bg-red-600 px-3 py-1 text-sm font-medium text-white hover:bg-red-700" target="_blank" rel="noopener noreferrer">
                 <i class="fa-solid fa-file-pdf mr-2"></i>
                 Download PDF
             </a>
