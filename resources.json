@@ -40,6 +40,14 @@
     "tags": ["IR", "AI/RAG/LLM"]
   },
   {
+    "title": "Aaron Tay's Musings about librarianship",
+    "description": "posts on search and information retrieval",
+    "url": "https://musingsaboutlibrarianship.blogspot.com/",
+    "screenshotUrl": "https://api.microlink.io/?url=https%3A%2F%2Fmusingsaboutlibrarianship.blogspot.com%2F&screenshot=true&embed=screenshot.url",
+    "type": "Person",
+    "tags": ["IR", "AI/RAG/LLM"]
+  },
+  {
     "title": "OpenSource Connections",
     "description": "The official blog of OpenSource Connections (OSC), a leading search relevance consultancy. Features deep dives into Elasticsearch, Solr, and vector search, written by a team of relevance experts.",
     "url": "https://opensourceconnections.com/blog/",

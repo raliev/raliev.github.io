@@ -1,0 +1,28 @@
+---
+layout: default
+title: Browse Tags
+permalink: /tags/
+---
+
+<div class="rounded-lg bg-white p-8 shadow-lg">
+    <h1 class="mb-6 text-3xl font-extrabold text-gray-900">Browse by Topic</h1>
+    {% assign groups = site.data.tag_groups %}
+
+    {% for g in groups %}
+    <section class="mb-8">
+        <h2 class="mb-3 text-lg font-semibold text-gray-800">{{ g.group }}</h2>
+        <ul class="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
+            {% for label in g.items %}
+            {% assign count = site.tags[label] | size %}
+            <li>
+                <a href="{{ site.baseurl }}/tags-{{ label | slugify }}/"
+                   class="flex items-center justify-between rounded-md border px-3 py-2 hover:bg-gray-50">
+                    <span class="truncate">{{ label }}</span>
+                    <span class="rounded-full bg-gray-200 px-2 py-0.5 text-xs">{{ count }}</span>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+    {% endfor %}
+</div>

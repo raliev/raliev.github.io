@@ -1,0 +1,77 @@
+# _data/tag_groups.yml
+# This maps your “rubrics” into themed groups for the dropdown + /tags index.
+
+- group: Core Concepts & Foundations
+  items:
+  - Relevance
+  - Ranking
+  - Indexing
+  - Crawling
+  - Query Processing
+  - Lexical Search
+  - Keyword Search
+  - Search Theory
+  - Information Retrieval (IR)
+  - Core Concepts
+
+- group: Modern & AI-Driven Search
+  items:
+  - Semantic Search
+  - Neural Search
+  - Large Language Models (LLMs)
+  - Retrieval-Augmented Generation (RAG)
+  - Generative Search
+  - Conversational AI
+  - Question Answering (QA)
+  - Query Understanding (NLU)
+  - Personalization
+  - Multimodal Search (Text, Image, Audio)
+  - Responsible AI
+  - Search Ethics
+
+- group: Algorithms & Models
+  items:
+  - Vector Space Model
+  - TF-IDF
+  - BM25
+  - Embeddings (Word2Vec, GloVe, etc.)
+  - Sentence-BERT (SBERT)
+  - Transformers
+  - BERT
+  - Dense Retrieval
+  - Sparse Retrieval
+  - Hybrid Search
+  - Learning to Rank (LTR)
+  - Graph Algorithms
+  - Knowledge Graphs
+
+- group: Recommendations
+  items:
+  - Recommender Systems
+  - Collaborative Filtering
+  - Content-Based Filtering
+  - Hybrid Recommenders
+  - Matrix Factorization
+  - Cold Start Problem
+  - Personalized Ranking
+  - Recommendations
+
+- group: System Components & Architecture
+  items:
+  - Vector Databases
+  - Search Index
+  - Search Pipelines
+  - Real-time Indexing
+  - Distributed Search
+  - Data Engineering
+  - MLOps
+
+- group: User-Facing Features
+  items:
+  - Search Suggestions
+  - Autocomplete
+  - Faceted Search
+  - Filtering
+  - Did You Mean?
+  - Snippets
+  - Search UI/UX

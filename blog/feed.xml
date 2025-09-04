@@ -1,4 +1,1327 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://www.testmysearch.com/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.testmysearch.com/blog/" rel="alternate" type="text/html" /><updated>2025-09-03T23:13:14-04:00</updated><id>https://www.testmysearch.com/blog/feed.xml</id><title type="html">TestMySearch Blog</title><subtitle>The official blog for TestMySearch. Articles and insights on search quality,  information retrieval, and relevance engineering from Rauf Aliev.</subtitle><author><name>Rauf Aliev</name></author><entry><title type="html">Building Trust in Search and Recommendation</title><link href="https://www.testmysearch.com/blog/ai/trust/recommendation/search/2025/09/03/search-trust.html" rel="alternate" type="text/html" title="Building Trust in Search and Recommendation" /><published>2025-09-03T00:00:00-04:00</published><updated>2025-09-03T00:00:00-04:00</updated><id>https://www.testmysearch.com/blog/ai/trust/recommendation/search/2025/09/03/search-trust</id><content type="html" xml:base="https://www.testmysearch.com/blog/ai/trust/recommendation/search/2025/09/03/search-trust.html"><![CDATA[<p>When we think about search engines or recommender systems, the default measure of quality is often relevance: does the system return what I asked for? Yet over time, it has become clear that accuracy alone does not create confidence. These systems don’t just retrieve information—they curate visibility, shape opportunity, and implicitly set the terms of what users come to rely on. That’s why the discussion has shifted toward a broader question: <strong>can we trust the ranking we see?</strong></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://www.testmysearch.com/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.testmysearch.com/blog/" rel="alternate" type="text/html" /><updated>2025-09-04T11:18:25-04:00</updated><id>https://www.testmysearch.com/blog/feed.xml</id><title type="html">TestMySearch Blog</title><subtitle>The official blog for TestMySearch. Articles and insights on search quality,  information retrieval, and relevance engineering from Rauf Aliev.</subtitle><author><name>Rauf Aliev</name></author><entry><title type="html">The Challenges of Chinese and Japanese Searching</title><link href="https://www.testmysearch.com/blog/2025/09/03/chinese-japanese-search.html" rel="alternate" type="text/html" title="The Challenges of Chinese and Japanese Searching" /><published>2025-09-03T00:00:00-04:00</published><updated>2025-09-03T00:00:00-04:00</updated><id>https://www.testmysearch.com/blog/2025/09/03/chinese-japanese-search</id><content type="html" xml:base="https://www.testmysearch.com/blog/2025/09/03/chinese-japanese-search.html"><![CDATA[<p>Today I want to talk about tailoring website search functionality for Chinese and Japanese languages. When it comes to entering “the East”, companies often face many challenges they could not have experienced before. Everything is different in China and Japan including the way how websites are built and how the users interact with them. In this article, I will cover one aspect of these challenges: how to adapt product/content search to work with Japanese and Chinese languages.</p>
+
+<p>Before I start, I’d like to say a lot of thanks to my co-authors who helped me go through the linguistic quirks and idiosyncrasies, revise and extend this writing, and eventually having me come off looking like a pro. Thanks to <strong>Timofey Klyubin</strong> who is a guru in Japanese, and <strong>Dmitry Antonov</strong> who gave me valuable feedback, great tips, and pointers on Chinese.</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+  <li><a href="#Introduction">Introduction</a></li>
+  <li><a href="#LanguageDetection">Language Detection</a></li>
+  <li>Language Variants
+    <ul>
+      <li><a href="#Dialects">Dialects</a></li>
+      <li><a href="#Scripts">Scripts</a></li>
+    </ul>
+  </li>
+  <li><a href="#CharacterVariants">Character Variants</a></li>
+  <li><a href="#Conversion">Conversion Between the Systems</a></li>
+  <li><a href="#WordSegmentation">Word Segmentation</a>
+    <ul>
+      <li><a href="#ChineseTokenizers">Chinese Tokenizers</a>
+        <ul>
+          <li><a href="#CJKAnalyzer">CJKAnalyzer</a></li>
+          <li><a href="#SmartChineseAnalyzer">Smart Chinese Analyzer</a></li>
+          <li><a href="#HanLPTokenizer">HanLPTokenizer</a></li>
+        </ul>
+      </li>
+      <li><a href="#JapaneseTokenizers">Japanese Tokenizers</a>
+        <ul>
+          <li><a href="#JapaneseTokenizer">JapaneseTokenizer (Kuromoji)</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#WordNormalization">Word Normalization</a>
+    <ul>
+      <li><a href="#SolrFilters">Solr Filters for Chinese and Japanese</a>
+        <ul>
+          <li><a href="#JapaneseIterationMarks">Japanese Iteration Marks</a></li>
+          <li><a href="#HalfWidthFilter">HalfWidth Filter</a></li>
+          <li><a href="#JapaneseBaseFormFilter">Japanese Base Form Filter</a></li>
+          <li><a href="#JapaneseNonMeaningfulTermsRemovalFilter">Japanese Non-meaningful Terms Removal Filter</a></li>
+          <li><a href="#JapaneseKatakanaStemming">Japanese Katakana Stemming</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#Numerals">Numerals</a></li>
+  <li><a href="#Synonyms">Synonyms</a></li>
+  <li><a href="#Homophones">Homophones</a></li>
+  <li><a href="#SearchByPronunciation">Search by Pronunciation</a></li>
+  <li><a href="#PunctuationMarks">Punctuation marks</a></li>
+  <li><a href="#SearchUI">Search UI observations</a>
+    <ul>
+      <li><a href="#ReviewedChineseStores">Reviewed Chinese Online Stores</a></li>
+      <li><a href="#ReviewedJapaneseStores">Reviewed Japanese Online Stores</a></li>
+      <li><a href="#InputMethods">Quick Overview of Chinese and Japanese Input Methods</a></li>
+      <li><a href="#LessSearch">Less search, more navigation</a></li>
+      <li><a href="#VoiceSearch">Voice search</a></li>
+      <li><a href="#ContextAwareQueryRecommendations">Context-aware query recommendations</a></li>
+      <li><a href="#VisualSearch">Visual search</a></li>
+      <li><a href="#FacetPanel">Facet panel</a></li>
+    </ul>
+  </li>
+  <li><a href="#Recommendations">Recommendations</a>
+    <ul>
+      <li><a href="#WebTypography">Web typography recommendations</a></li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+<p><a id="Introduction"></a></p>
+<h2 id="introduction">Introduction</h2>
+<p>There are three languages traditionally considered together in the context of information retrieval, internationalization, and localization. These languages are Chinese, Japanese, and Korean. Their writing systems are based entirely or partly on Chinese characters.</p>
+
+<p>This research can be useful for the internationalization, localization and information retrieval components and projects. Internationalization is mainly about support for multiple languages and cultures. Localization stands for adaptation of language, content, and design to specific countries, regions, or cultures. Cross-lingual information retrieval deals with documents in one or more different languages, and the techniques for indexing, searching, and retrieving information from large multi-language collections.</p>
+
+<p>From the perspective of information retrieval, the Chinese and Japanese present numerous challenges. The major issue is their highly irregular orthography and language variants. In this article, I collected the most important ones we need to take into account when implementing the language-aware full text search as well as how to address them.</p>
+
+<hr />
+<p><a id="LanguageDetection"></a></p>
+<h2 id="language-detection">Language Detection</h2>
+<p>When and where possible, the website should allow the user to specify unambiguously what language is going to be used for entering a search query and presenting the results. Normally, the users enter search queries in the same language as the website’s interface is set to.</p>
+
+<p>However, our observations show that the customers use their native language if the website is advertised in their country even if the localized version of the website is not pre-selected, automatically or manually. If the first-level domain is from the local pool (.cn for China or .jp for Japan), the user’s intent of using the native language is even stronger. To address this case, there are AI and statistical techniques to determine the likely language.</p>
+
+<p>The automatic language detection is a very challenging task especially if the analyzed string is short. For example, if it is has a mix of Latin and Chinese characters from Japanese Kanji set may indicate that the text is either in Japanese or Chinese which can be too abstract.</p>
+
+<hr />
+<p><a id="Dialects"></a></p>
+<h2 id="language-variants-dialects">Language variants: Dialects</h2>
+<p>There are many more dialects in Chinese than Japanese. Both full of specificities interesting to us in regard to the topic.</p>
+
+<p>The thing is Chinese is not a single language, it is a family of spoken languages. China has a lot of dialects, but the most popular is Mandarin (or “Standard Chinese”, over 1 billion speakers) and Cantonese (or Yue, over 100 million of speakers).</p>
+
+<p>In Japan, there are two major types of the Japanese language: the Tokyo-type (or Eastern) and the Kyoto-Osaka type (or Western). The form that is considered the standard is called “Standard Japanese”. Unlike Traditional and Simplified Chinese, the standard Japanese has become prevalent nationwide.</p>
+
+<hr />
+<p><a id="Scripts"></a></p>
+<h2 id="language-variants-scripts">Language Variants: Scripts</h2>
+<h4 id="japanese-kana-and-kanji">Japanese: Kana and Kanji</h4>
+<p>There are two typical Japanese scripts, Kana and Kanji.</p>
+
+<ul>
+  <li><strong>Kanji</strong> is logographic Chinese scripts, Chinese characters adapted to write Japanese words. There are thousands of kanji in Japanese</li>
+  <li><strong>Kana</strong> is a collective term for Japanese syllabaries, Hiragana (46 characters) and Katakana (48 characters). They are derived by simplifying Chinese characters selected to represent syllables of Japanese.</li>
+</ul>
+
+<p>The same Japanese word can be written in either kana or kanji:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"><strong>English word</strong></th>
+      <th style="text-align: left"><strong>Japanese (Kanji)</strong></th>
+      <th style="text-align: left"><strong>Japanese (Katakana)</strong></th>
+      <th style="text-align: left"><strong>Japanese (Hiragana)</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">fox</td>
+      <td style="text-align: left">狐</td>
+      <td style="text-align: left">キツネ</td>
+      <td style="text-align: left">きつね</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This complexity is also illustrated by the sentence 金の卵を産む鶏 (“A hen that lays golden eggs”). The word ‘egg’ has four variants (卵, 玉子, たまご, タマゴ), ‘chicken’ has three (鶏, にわとり, ニワトリ) and ‘giving birth to’ has two (産む, 生む), which expands to 24 permutations. In many contexts only one option is correct.</p>
+
+<p>Japanese has a large number of loan words or <a href="https://en.wikipedia.org/wiki/Gairaigo">gairaigo</a>. The considerable portion of them is derived from English. In written Japanese, gairaigos are usually written in katakana. Many gairaigos have native equivalents in Japanese. Sometimes a Japanese person can use either a native form or its English equivalent written in katakana. This is especially the case of proper names or science terms. If you are not familiar with the native variant, you will probably use a syllabic construct.</p>
+
+<p>Some examples:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"><strong>English word</strong></th>
+      <th style="text-align: left"><strong>Japanese (native word)</strong></th>
+      <th style="text-align: left"><strong>Japanese (English loan word)</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">door</td>
+      <td style="text-align: left">扉 /tobira/, 戸 /to/</td>
+      <td style="text-align: left">ドア <em>/doa/</em></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">mobile phone/cell phone</td>
+      <td style="text-align: left">携帯 /keitai/ – “mobile phone”, “handheld”, 携帯電話 /keitaidenwa/ – “mobile phone”</td>
+      <td style="text-align: left">モバイルフォン /mobairufon/, セルラー電話 /serurā denwa/</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>School kids use hiragana more commonly since they might not have learned the kanji equivalents yet.</p>
+
+<p>Additionally, there is Romaji which uses Latin script to represent Japanese.</p>
+
+<h4 id="chinese-traditional-and-simplified">Chinese: Traditional and Simplified</h4>
+<p>Along with the sheer complexity and size of the character set, Chinese has several related language variants. In Taiwan, Hong Kong, and Macao, Traditional Chinese characters are predominant over the Simplified Chinese variant which is used mainly in Mainland China, Singapore, and Malaysia.</p>
+
+<p>Some traditional Chinese characters, or derivatives of them, are also found in Japanese writing. So there is a subset of characters common for different languages. These shared Chinese, Japanese, and Korean characters constitute a set named CJK Unified Ideographs. It is huge: the CJK part of Unicode defines a total of 87,887 characters. The characters needed for everyday use by the users is much smaller.</p>
+
+<p>For the search, queries can be in either traditional or simplified characters or a combination of the two; search results should contain all matching resources, whether traditional or simplified.</p>
+
+<p>Below is a random text to demonstrate the differences between the writing systems. Characters highlighted by yellow marker have different spelling in Simplified (输入简体字点下面繁体字按钮进行在线转换) and Traditional (輸入簡體字點下面繁體字按鈕進行在線轉換) Chinese.</p>
+
+<p><img src="https://hybrismart.com/wp-content/uploads/2019/08/Screen-Shot-2019-08-19-at-6.39.18-AM.png" alt="Simplified and Traditional Chinese comparison" /></p>
+
+<hr />
+<p><a id="CharacterVariants"></a></p>
+<h2 id="character-variants">Character variants</h2>
+<p>Chinese and Japanese characters don’t use upper or lower cases. They have only a single representation independent of context.</p>
+
+<p>The majority of letters are monospaced.</p>
+
+<p>There are no additional decorations for the letters as it is in Arabic, for example.</p>
+
+<hr />
+<p><a id="Conversion"></a></p>
+<h2 id="conversion-between-the-systems">Conversion between the systems</h2>
+<p>The conversion is important when either a user or a document use a mix of Chinese writing systems. For example, Given a user query 舊小說 (‘old fiction’ in Traditional Chinese), the results should include matches for 舊小說 (traditional) and 旧小说 (simplified characters for ‘old fiction’). That means that conversion should be done at the query level.</p>
+
+<p>The accurate conversion between Simplified Chinese and Traditional Chinese, a deceptively simple but in fact extremely difficult computational task. If your search is used by millions, the system will be much more resource-intensive comparing with the setup for the European languages.</p>
+
+<p>There are three methods of conversion:</p>
+
+<ul>
+  <li><strong>Code conversion (codepoint-to-codepoint)</strong>. This method is based on the mapping table and considered as the most unreliable because of the numerous one-to-many mappings (in both directions). The rate of conversion failure is unacceptably high.</li>
+  <li><strong>Orthographic conversion</strong>. In this method, the meaningful linguistic units, especially compounds and phrases, are considered. Orthographic mapping tables enable conversion on the word or phrase level rather than the codepoint level. An excellent example is the Chinese word “computer.” (see examples below).</li>
+  <li><strong>Lexemic conversion</strong>. A more sophisticated, and more challenging, approach to conversion. In this method, the mapping table contains lexemes that are semantically, rather than orthographically, equivalent. This is similar to the difference between <em>lorry</em> in British English and <em>truck</em> in American English. The complexity of this method in lexemic differences between Simplified and Traditional Chinese, especially in technical terms and proper nouns.</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"><strong>Simplified Chinese</strong></th>
+      <th style="text-align: left"><strong>Traditional Chinese</strong></th>
+      <th style="text-align: left"><strong>Translation</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">干</td>
+      <td style="text-align: left">幹 or 乾 or 榦</td>
+      <td style="text-align: left">(dry, make, surname)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">电话</td>
+      <td style="text-align: left">電話</td>
+      <td style="text-align: left">(telephone)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">软件</td>
+      <td style="text-align: left">軟體 (Taiwan)</td>
+      <td style="text-align: left">(software)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">计算机 (“calculating machine”)</td>
+      <td style="text-align: left">電脳 (“electronic brain”)</td>
+      <td style="text-align: left">(computer)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>In Japanese, the kanji characters may or may not have the same-looking Chinese character.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"><strong>Chinese (Simplified)</strong></th>
+      <th style="text-align: left"><strong>Chinese (Traditional)</strong></th>
+      <th style="text-align: left"><strong>Japanese</strong></th>
+      <th style="text-align: left"><strong>Japanese</strong></th>
+      <th style="text-align: left"><strong>Translation</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">两</td>
+      <td style="text-align: left">兩</td>
+      <td style="text-align: left">両</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">(both)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">龟</td>
+      <td style="text-align: left">龜</td>
+      <td style="text-align: left">亀</td>
+      <td style="text-align: left">カメ</td>
+      <td style="text-align: left">(tortoise)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>It is generally believed that the top priority for Chinese discovery improvements is to equate Traditional characters with simplified characters. For Japanese, there is also a problem of equating Modern Kanji characters with Traditional Kanji characters, but it is not so strong as it is in Chinese where you deal with two different scripts. There is a priority for Japanese discovery improvements to equate all scripts used in the language: Kanji, Hiragana, Katakana, and Romaji.</p>
+
+<p>In Apache Solr, the only other relevant ICU script translation is a mapping between Hiragana and Katakana. This is a straightforward one-to-one character mapping working in both directions.</p>
+
+<p><small>(Here I mentioned Apache Solr for the first time. For those who are not familiar with Solr, it is one of the most comprehensive opensource search engines. SAP Commerce Cloud uses Apache Solr for product and content search. One of the goals of this article is to give recommendations on how to configure Solr properly for Chinese and Japanese search)</small></p>
+
+<p>Consider making Simplified Chinese and traditional Chinese inter-searchable. If one searches for 计算机 (computer, Simplified) or 電脳 (computer, Traditional) , the results should contain the records with both 计算机 and 電脳. At least measure how often each of these writing systems is used by your customers to make an educated decision on how to make search better.</p>
+
+<h2 id="word-segmentation">Word segmentation</h2>
+
+<p>Chinese and Japanese are written in a style that does not delimit word boundaries. Typical Chinese sentences include only Chinese characters, along with a select few punctuation marks and symbols. Typical Japanese sentences include mostly Japanese kana and some adopted Chinese characters that are used in the Japanese writing system. So, how does one decide how to break up the words when there are no separators in between?</p>
+
+<p>As for spaces, they delineate words inconsistently and with variation among writers. Formally, there must always be a space between English words and Chinese words, but in fact this rule is not strict and many neglect it. There is no space between the Arabic numbers and Chinese characters.</p>
+
+<p>Coming back to word segmentation, there are different approaches for splitting the text into the word units. The most common algorithms use dictionaries and, additionally, a set of rules. This topic is still an area of considerable research among the machine learning community. All of these are not perfect: this segmentation cannot be done unambiguously, but different methods show acceptable results for the specific areas. For example, for scientific texts, the dictionary-based methods may show poorer results than the statistical or machine-learning.</p>
+
+<p>For example, the word “中华人民共和国” (People’s Republic of China) is seven characters long and has smaller words within: “人民” (people) and “共和国” (republic country). The first two characters,“中华” are usually not be used as a word independently in modern Chinese, though it can be used as a word in ancient Chinese. Digging further, within the word “人民” (people), “人” is a word (human), but “民” (civilian or folk) is not a standalone word. These components can be organized in the hierarchy. As another example, while the proper segmentation of “中华人民共和国外交部” (Ministry of Foreign Affairs of the PRC) is “中华人民共和国 / 外交 部”, another word, “国外” (overseas), could also be erroneously extracted. Consequently, a search for “国 外” should most likely not match the string “中华人民共和国外交部” but a query for “外 交部” should.</p>
+
+<p>A group of characters might be segmented in different ways resulting in different meanings. For example, In Japanese, the compound 造船所 (shipyard) consists of the word 造船 (‘shipbuilding’, 造 is ‘to make, build’ and 船 is ‘a ship’) followed by the suffix 所 which is ‘a place’. In Chinese, the situation is completely the same. There are Chinese jokes based on these ambiguities. Teahan in its “A compression-based algorithm for Chinese word segmentation” illustrates this with the following funny example:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>A sentence in Chinese</th>
+      <th>我喜欢新西兰花</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Interpretation #1</strong></td>
+      <td>I like New Zealand flower</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>我</th>
+      <th>喜欢</th>
+      <th>新西兰</th>
+      <th>花</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>I</td>
+      <td>like</td>
+      <td>New Zealand</td>
+      <td>flower</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>| <strong>Interpretation #2</strong> | I like new broccoli |
+|—|—|</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>我</th>
+      <th>喜欢</th>
+      <th>新</th>
+      <th>西兰花</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>I</td>
+      <td>like</td>
+      <td>new</td>
+      <td>broccoli</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>(This situation happens only in speaking language. A Chinese writer will use separator 的 to clarify what he means. 我喜欢新的西兰花 for the case 1 And 我喜欢新西兰的花 for the case 2)</p>
+
+<p>The next example illustrates what happens when each character in a query is treated as a single-character word. The intended query is “physics” or “physicist.” The first character returns documents about such things as “evidence,” “products,” “body,” “image,” “prices”; while the second returns documents about “theory,” “barber,” and so on.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>物理学 means</th>
+      <th>物 means</th>
+      <th>理 means</th>
+      <th>学 means</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Physics</strong></td>
+      <td>Physics <br /> Evidence <br /> Products <br /> Price <br /> Body <br /> Image</td>
+      <td>Theory <br /> Barber <br /> Science <br /> Reason <br /> Understand <br /> …</td>
+      <td>School <br /> Study <br /> Subject <br /> School</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>It creates a lot of irrelevant documents causing the precision of information retrieval to decrease greatly.</p>
+
+<p>So, the challenge is how to extract the meaningful units of knowledge from the text for indexing to return better results at the query phase.</p>
+
+<p>There are three approaches on how to perform text segmentation for indexing and querying:</p>
+
+<ul>
+  <li><strong>Unigrams</strong>: treat individual Chinese characters as tokens</li>
+  <li><strong>Bigrams</strong>: treat overlapping groups of two adjacent Chinese characters as tokens</li>
+  <li><strong>By part of speech or meaningful words</strong>: performs word segmentation and indexes word units as tokens.</li>
+</ul>
+
+<p>For example, for the string “我是中国人” (“I’m a Chinese”),</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th><strong>Unigrams</strong></th>
+      <th><strong>Bigrams</strong></th>
+      <th><strong>Word segmentation</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Token 1</strong></td>
+      <td>我</td>
+      <td>我是</td>
+      <td>我 (“I”)</td>
+    </tr>
+    <tr>
+      <td><strong>Token 2</strong></td>
+      <td>是</td>
+      <td>是中</td>
+      <td>是 (“right”)</td>
+    </tr>
+    <tr>
+      <td><strong>Token 3</strong></td>
+      <td>中</td>
+      <td>中国</td>
+      <td>中国 (“China”)</td>
+    </tr>
+    <tr>
+      <td><strong>Token 4</strong></td>
+      <td>国</td>
+      <td>国人</td>
+      <td>人 (“man”)</td>
+    </tr>
+    <tr>
+      <td><strong>Token 5</strong></td>
+      <td>人</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>For the string “私は日本人です” (“I’m Japanese”),</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th><strong>Word segmentation</strong></th>
+      <th><strong>Meaning</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Token 1</strong></td>
+      <td>私</td>
+      <td>“I”</td>
+    </tr>
+    <tr>
+      <td><strong>Token 2</strong></td>
+      <td>は</td>
+      <td>(particle)</td>
+    </tr>
+    <tr>
+      <td><strong>Token 3</strong></td>
+      <td>日本人</td>
+      <td>“Japanese”</td>
+    </tr>
+    <tr>
+      <td><strong>Token 4</strong></td>
+      <td>です</td>
+      <td>“am”</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The third approach is the most challenging. How to extract word units efficiently?</p>
+
+<p>The simplest method is dictionary-based. This is called the <strong>maximum forward match heuristic</strong>. Given a dictionary of frequently used Chinese words, an input string and the indexing text are compared with words in the dictionary to find the one that matches the greatest number of characters. The alternative approach is maximum backward match heuristic when the text scanned in the backward direction. This method is not accurate enough and creates a lot of false matches.</p>
+
+<p>The alternative method is statistical. This method concentrates on two-character words (because two-character is the most common word length in Chinese) and detects the words based on the frequency of characters and bigrams.</p>
+
+<p>In order to improve the process, there are a lot of other methods too. These methods are based on probabilistic automata and machine learning.</p>
+
+<p>The best and the most universal of these methods are included in Apache Solr, and being part of Solr, in SAP Commerce Cloud as well.</p>
+
+<p>Solr supports various methods of word segmentation both for Chinese and Japanese. Each method treats the text differently.</p>
+
+<h3 id="chinese-tokenizers-for-apache-solr-and-sap-commerce-cloud">Chinese: Tokenizers for Apache Solr (and SAP Commerce Cloud)</h3>
+
+<p>For Chinese,</p>
+
+<ul>
+  <li><strong>Standard Analyzer</strong> is based on unigram indexing</li>
+  <li><strong>ChineseAnalyzer</strong> index unigrams,</li>
+  <li><strong>CJKAnalyzer</strong> indexes bigrams,</li>
+  <li><strong>SmartChineseAnalyzer</strong> indexes words based on dictionary and heuristics. It only deals with Simplified Chinese.</li>
+  <li><strong>HanLPTokenizer (<a href="https://github.com/hankcs/hanlp-lucene-plugin">https://github.com/hankcs/hanlp-lucene-plugin</a>, <a href="http://www.hankcs.com/">http://www.hankcs.com/</a>)</strong></li>
+  <li><strong>Paoding (<a href="https://stanbol.apache.org/docs/trunk/components/enhancer/nlp/paoding">https://stanbol.apache.org/docs/trunk/components/enhancer/nlp/paoding</a>)</strong> – possibly, it has issues with the latest versions of Apache Solr.</li>
+</ul>
+
+<p>Let’s have a look at how the analyzers split the “我喜欢新西兰花” (from the example above) into terms.</p>
+
+<h4 id="chinese-cjkanalyzer">Chinese: CJKAnalyzer</h4>
+
+<p>This analyzer has a simple bigram tokenizer. This is the fastest option, but the search recall will be the worst.</p>
+
+<p><strong>Bigramming</strong> doesn’t require any linguistic resources such as dictionaries or statistical tables. Every overlapping two-character sequence is placed into the index. Many bigrams are real words in Chinese and Japanese that may skew the results if the characters from the different words are combined together in the index. There is a common practice is to index Chinese texts simultaneously as words and as overlapping bigrams. The methods can be combined in a weighted fashion to improve accuracy.</p>
+
+<p><img src="https://hybrismart.com/wp-content/uploads/2019/08/image2.png" alt="CJKAnalyzer example" /></p>
+
+<h4 id="chinese-smartchineseanalyzer">Chinese: SmartChineseAnalyzer</h4>
+
+<p>This analyzer has <strong><em>HMMChineseTokenizer</em></strong> which uses probabilistic knowledge to find the optimal word segmentation for <strong>Simplified Chinese</strong> text. The text is first broken into sentences, then each sentence is segmented into words.</p>
+
+<p>Segmentation is based upon the <a href="http://en.wikipedia.org/wiki/Hidden_Markov_Model">Hidden Markov Model</a>.</p>
+
+<p>A large training corpus was used to calculate Chinese word frequency probability.</p>
+
+<p>This analyzer requires a dictionary to provide statistical data. SmartChineseAnalyzer has an included dictionary out-of-box. The included dictionary data is from <a href="http://www.ictclas.org">ICTCLAS1.0</a>.</p>
+
+<p><strong><em>SmartChineseAnalyzer</em></strong> creates four terms (I + like + New Zealand (新西兰) + flower).</p>
+
+<p><img src="https://hybrismart.com/wp-content/uploads/2019/08/image3.png" alt="SmartChineseAnalyzer example" /></p>
+
+<h4 id="chinese-hanlptokenizer-viterbi-algorithm">Chinese: HanLPTokenizer: Viterbi Algorithm</h4>
+
+<p>For our example, <strong>HanLPTokenizer</strong> creates six terms (I + like + New Zealand (新西兰) + Zealand(西兰) + flower):</p>
+
+<p><img src="https://hybrismart.com/wp-content/uploads/2019/08/image4.png" alt="HanLPTokenizer example" /></p>
+
+<p>HanLPTokenizer supports the following algorithms for word segmentation:</p>
+
+<ul>
+  <li><strong>Viterbi</strong> (default): The best balance of efficiency and effectiveness. It is also the shortest path word segmentation, and the HanLP shortest path solution uses the Viterbi algorithm.</li>
+  <li><strong>Double array trie tree</strong> (dat): Extreme speed dictionary participle, tens of characters per second (may not get part of speech, depending on your dictionary)</li>
+  <li><strong>Conditional random field</strong> (crf): segmentation, part-of-speech tagging and named entity recognition accuracy are high, suitable for higher-demand NLP tasks</li>
+  <li><strong>Perceptron</strong>: word segmentation, part-of-speech tagging and named entity recognition, support for online learning</li>
+  <li><strong>N shortest</strong> (nshort): Named entity recognition is slightly better, sacrificing speed</li>
+</ul>
+
+<p>Unlike SmartChineseAnalyzer, HanLPTokenizer can support Traditional Chinese as well.</p>
+
+<h3 id="japanese-tokenizers-for-apache-solr-and-sap-commerce-cloud">Japanese: Tokenizers for Apache Solr (and SAP Commerce Cloud)</h3>
+
+<p>For Japanese,</p>
+
+<ul>
+  <li><strong>CJKAnalyzer</strong> indexes bigrams,</li>
+  <li><strong>Japanese Tokenizer</strong> splits the text into word units using morphological analysis, and annotates each term with part-of-speech, base form (a.k.a. lemma), reading and pronunciation.</li>
+</ul>
+
+<h4 id="japanese-cjkanalyzer">Japanese: CJKAnalyzer</h4>
+
+<p>This analyzer creates bigrams in the same way as shown above for Chinese.</p>
+
+<h4 id="japanese-japanese-tokenizer-kuromoji">Japanese: Japanese Tokenizer (Kuromoji)</h4>
+
+<p>This morphological tokenizer uses a rolling Viterbi search to find the least cost segmentation (path) of the incoming characters.</p>
+
+<p>This tokenizer is also known as Kuromoji Japanese Morphological Analyzer (<a href="https://www.atilika.org/">https://www.atilika.org/</a>)</p>
+
+<p>For our test query “私は日本人です” (“I’m Japanese”), it returns four terms (“I + particle + Japanese + am)</p>
+
+<p><img src="https://hybrismart.com/wp-content/uploads/2019/08/image5.png" alt="Kuromoji example 1" /></p>
+
+<p>Let’s take a look at a bit more complicated sentence: 韓国に住んでいていい人に聞いた。(I asked a good person, who lives in South Korea). It consists of the following parts:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Element</strong></th>
+      <th><strong>Pronounced as</strong></th>
+      <th><strong>Meaning</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>韓国</td>
+      <td>/kankoku/</td>
+      <td>“South Korea”</td>
+    </tr>
+    <tr>
+      <td>に</td>
+      <td>/ni/</td>
+      <td>/grammatical particle/</td>
+    </tr>
+    <tr>
+      <td>住んでいて</td>
+      <td>/sundeite/</td>
+      <td>the continuous form of the verb 住む meaning “to live”. It consists of two parts: the conjugation 住んで and a special form of the auxiliary verb いて – to be.</td>
+    </tr>
+    <tr>
+      <td>いい</td>
+      <td>/ii/</td>
+      <td>adjective, meaning “good”.</td>
+    </tr>
+    <tr>
+      <td>人</td>
+      <td>/hito/</td>
+      <td>“person”</td>
+    </tr>
+    <tr>
+      <td>に</td>
+      <td>/ni/</td>
+      <td>/grammatical particle/</td>
+    </tr>
+    <tr>
+      <td>聞いた</td>
+      <td>/kiita/</td>
+      <td>past form of the verb “to ask”</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The Japanese Tokenizer gives the following output:</p>
+
+<p><img src="https://hybrismart.com/wp-content/uploads/2019/08/image6.png" alt="Kuromoji example 2" /></p>
+
+<p>So, actually, we have a bit more parts than we should have, but that is really not a bad thing. The key point is that we still have correct base forms of core words of the original phrase, so that the meaning is preserved. Those additional tokens like て and で can be removed during stop-words filter, along with the grammatical particles.</p>
+
+<p>In Japanese, it’s often useful to do the additional splitting of words to make sure you get hits when searching compounds nouns. For example, if you want to search for 空港 (airport) to match 関西国際空港 (Kansai International Airport), the analyzers won’t allow this since 関西国際空港 tend to be a single token meaning this specific airport. This problems is also applicable to katakana compounds such as シニアソフトウェアエンジニア (Senior Software Engineer). For that, the tokenizer supports different modes:</p>
+
+<ul>
+  <li><strong>Normal</strong> – regular segmentation</li>
+  <li><strong>Search</strong> – use a heuristic to do additional segmentation useful for search</li>
+  <li><strong>Extended</strong> – similar to search mode, but also unigram unknown words (experimental)</li>
+</ul>
+
+<p>For some applications, it might be good to use search mode for indexing and normal mode for queries to increase precision and prevent parts of compounds from being matched and highlighted.</p>
+
+<h2 id="word-normalization">Word Normalization</h2>
+
+<p>Word normalization refers to the process that maps a word to some canonical form. For example, in English the canonical form for “are”, “is”, and “being” is “be”. This normalization being performed at both index time and query time improves the accuracy of search results.</p>
+
+<p>Solr uses two approaches to normalize word variations:</p>
+
+<ul>
+  <li><strong>Stemming</strong>. The approach to reduce the word to its root form.</li>
+  <li><strong>Lemmatization</strong>. The identification of the dictionary form of a word based on its context.</li>
+</ul>
+
+<h3 id="solr-filters-for-chinese-and-japanese">Solr Filters for Chinese and Japanese</h3>
+
+<h4 id="japanese-iteration-marks">Japanese Iteration Marks</h4>
+
+<p>For stemming in Japanese, Solr provides <strong><em>JapaneseIterationMarkCharFilter</em></strong> which normalizes horizontal iteration marks (々, odoriji) to their expanded form. These marks are used to represent a duplicated character representing the same morpheme. For example, hitobito, “people”, is usually written 人々, using the kanji for 人 with an iteration mark, 々, rather than 人人, using the same kanji twice (this latter is also allowed, and in this simple case might be used because it is easier to write). By contrast, while 日々 hibi “daily, day after day” is written with the iteration mark, as the morpheme is duplicated, 日日 hinichi “number of days, date” is written with the character duplicated, because it represents different morphemes (hi and nichi).</p>
+
+<h4 id="halfwidth-filter">HalfWidth Filter</h4>
+
+<p>By convention, 1/2 Em wide characters are called “halfwidth”; the others are called correspondingly “fullwidth” characters. <strong><em>CJKWidthFilter</em></strong> folds <a href="https://www.htmlsymbols.xyz/ascii-symbols/fullwidth-ascii-variants">fullwidth ASCII variants</a> into the equivalent basic latin (“ＩｊＩ” -&gt; “IjI”) and <a href="https://en.wikipedia.org/wiki/Half-width_kana">halfwidth Katakana variants</a> into the equivalent Japanese kana (ｶ -&gt; カ).</p>
+
+<h4 id="japanese-base-form-filter">Japanese Base Form Filter</h4>
+
+<p><em>JapaneseBaseFormFilter</em> reduces inflected Japanese verbs and adjectives to their base/dictionary forms.</p>
+
+<p><img src="https://hybrismart.com/wp-content/uploads/2019/08/image7.png" alt="Japanese Base Form Filter example" /></p>
+
+<p>For example, for the phrase “それをください。” (That one, please.), the tokenizer will combine last characters together into a polite form of “ください” (“please do for me”). The BaseFormFilter converts it into the base form, “くださる”.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Before</strong></th>
+      <th><strong>After</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ください</td>
+      <td>くださる</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="japanese-non-meaningful-terms-removal-filter">Japanese Non-meaningful Terms Removal Filter</h4>
+
+<p><em>JapanesePartOfSpeechStopFilterFactory</em> removes token with certain part-of-speech tags (created by the JapaneseTokenizer). For example, “を”, the direct object particle, will be removed by this filter from the token stream.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Before</strong></th>
+      <th><strong>After</strong></th>
+      <th><strong>Comments</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>(それ), (を), (ください)</td>
+      <td>(それ), (ください)</td>
+      <td>“を” is an auxiliary word, a Japanese particle. It is attached to the end of a word それ to signify that that word is the direct object of the verb.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="japanese-katakana-stemming">Japanese Katakana Stemming</h4>
+
+<p><em>JapaneseKatakanaStemFilter</em> normalizes common katakana spelling variations ending in a long sound character (U+30FC, “ー “) by removing the long sound character. Only katakana words longer than four characters are processed.</p>
+
+<p>For example, for the phrase “明後日パーティーに行く予定がある。図書館で資料をコピーしました。” (“I plan to go to a party the day after tomorrow. I copied the materials in the library.”), the word パーティー (“party”) has a long sound character in the middle and at the end. The ending symbol is removed by this filter.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Before</strong></th>
+      <th><strong>After</strong></th>
+      <th><strong>Comments</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>パーティー</td>
+      <td>パーティ</td>
+      <td>This word is “party”. It is borrowed from English.</td>
+    </tr>
+    <tr>
+      <td>コピー</td>
+      <td>コピー</td>
+      <td>Shorter than 4</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="apache-solr-processing-flow-for-japanese">Apache Solr processing flow for Japanese</h2>
+
+<p><img src="https://hybrismart.com/wp-content/uploads/2019/08/schem1.png" alt="Solr processing flow for Japanese" /></p>
+
+<h2 id="apache-solr-processing-flow-for-chinese">Apache Solr Processing Flow for Chinese</h2>
+
+<p><img src="https://hybrismart.com/wp-content/uploads/2019/08/chinese-japanese.png" alt="Solr processing flow for Chinese" /></p>
+
+<h2 id="numerals">Numerals</h2>
+
+<p>In Japan and China, most people and institutions primarily use Arabic numerals. Chinese numerals in the web forms are used too (both in China and Japan) but much less frequently. However, this does not rule out the necessity to support Chinese and Japanese specifics in using numerals.</p>
+
+<p>For Chinese, it is obvious that combinations of numbers and characters can be used, but it is preferred to use the shortest written way:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>English</strong></th>
+      <th><strong>preferable</strong></th>
+      <th><strong>secondary preferable</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>one</td>
+      <td>一</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>two</td>
+      <td>二</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>tree</td>
+      <td>三</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>one thousand</td>
+      <td>一千</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>ten thousands</td>
+      <td>一万</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>一</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>二</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>3</td>
+      <td>三</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>十</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>100</td>
+      <td>100</td>
+      <td>一百</td>
+    </tr>
+    <tr>
+      <td>1000</td>
+      <td>一千</td>
+      <td>1000</td>
+    </tr>
+    <tr>
+      <td>1500</td>
+      <td>1500</td>
+      <td>一千五</td>
+    </tr>
+    <tr>
+      <td>2000</td>
+      <td>2千</td>
+      <td>两千</td>
+    </tr>
+    <tr>
+      <td>10000</td>
+      <td>一万</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>100000</td>
+      <td>十万</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>25000000</td>
+      <td>2500万</td>
+      <td>两千五百万</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Japanese numerals are often written using a combination of kanji and Arabic numbers with various kinds of punctuation. For example, ３．２千 means 3200. Other examples are listed in the table below.</p>
+
+<p>Apache Solr comes with the <em>JapaneseNumberFilter</em> which normalizes Japanese numbers to regular Arabic decimal numbers. This filter does this kind of normalization and allows a search for 3200 to match ３．２千 in text, but can also be used to make range facets based on the normalized numbers and so on.</p>
+
+<p>The table below shows the examples of conversions supported by the JapaneseNumberFilter:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Before</strong></th>
+      <th><strong>After</strong></th>
+      <th><strong>Comments</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>〇〇七</td>
+      <td>7</td>
+      <td><a href="https://en.wiktionary.org/wiki/%E3%80%87">〇</a> <em>(maru) is the same as numeral 0 in English.</em></td>
+    </tr>
+    <tr>
+      <td>一〇〇〇</td>
+      <td>1000</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>三千2百２十三</td>
+      <td>3223</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>兆六百万五千</td>
+      <td>1000006005001</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>３．２千</td>
+      <td>3200</td>
+      <td>千 means 1000 <br /> “．” is a double-byte point</td>
+    </tr>
+    <tr>
+      <td>１．２万３４５．６７</td>
+      <td>12345.67</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>4,647.100</td>
+      <td>4647.1</td>
+      <td>“,” is ignored (removed)</td>
+    </tr>
+    <tr>
+      <td>15,7</td>
+      <td>157</td>
+      <td>“,” is ignored (removed)</td>
+    </tr>
+    <tr>
+      <td>2,500万</td>
+      <td>25000000</td>
+      <td>万 means 10000</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The last example shows one of the weaknesses of the filter you need aware of. Commas are almost arbitrary and mean nothing.</p>
+
+<p>This filter may in some cases normalize tokens that are not numbers. For example, 田中京一 is a name and means Tanaka Kyōichi, but 京一 (Kyōichi) out of context can strictly speaking also represent the number 10000000000000001. This filter respects the KeywordAttribute which can be used to prevent specific normalizations from happening.</p>
+
+<p>Japanese formal numbers (daiji), accounting numbers and decimal fractions are currently not supported by the filter.</p>
+
+<h2 id="synonyms">Synonyms</h2>
+
+<p>In Japanese, as well as in many other languages, for the same concept you can find more than one word:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Concept: to cause to die</strong> <br /> <strong>English:</strong></th>
+      <th><strong>Japanese:</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>to kill</td>
+      <td>殺す</td>
+    </tr>
+    <tr>
+      <td>to commit murder</td>
+      <td>殺人を犯す</td>
+    </tr>
+    <tr>
+      <td>to murder</td>
+      <td>殺害する</td>
+    </tr>
+    <tr>
+      <td>to shoot to death</td>
+      <td>射殺する</td>
+    </tr>
+    <tr>
+      <td>to assassinate</td>
+      <td>暗殺する</td>
+    </tr>
+    <tr>
+      <td>to execute</td>
+      <td>処刑する</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Apache Solr supports synonyms, but the dictionary of the synonymous words is user-defined.</p>
+
+<h2 id="homophones">Homophones</h2>
+
+<p>Homophones are one of two or more words that are pronounced the same but differ in writing and usually in meaning. In English, the examples are “principal” and “principle”.</p>
+
+<p>Jack Halpern in “The Complexities of Japanese Homophones” illustrates this with the phrase “A Mansion with no Sunshine”. There are twelve legitimate ways (some more likely than others) of how to write this:</p>
+
+<ul>
+  <li>日の差さない屋敷 (standard dictionary form)</li>
+  <li>日の射さない屋敷</li>
+  <li>日のささない屋敷</li>
+  <li>日の射さない邸</li>
+  <li>日の差さない邸</li>
+  <li>日のささない邸</li>
+  <li>陽の射さない屋敷</li>
+  <li>陽の差さない屋敷</li>
+  <li>陽のささない屋敷</li>
+  <li>陽の射さない邸</li>
+  <li>陽の差さない邸</li>
+  <li>陽のささない邸</li>
+</ul>
+
+<p>Halpern surveyed six native Japanese speakers, some of whom are professional translators and writers, asking them how they would write the above phrase. He reports that there were six different answers, none of which matched the “standard” form found in dictionaries.</p>
+
+<p>Japanese has orthographic variants based on phonetic substitution. Jack Halpern in its “<a href="http://www.cjk.org/cjk/joa/joapaper.htm#2">The Challenges of Intelligent Japanese Searching</a>” mentioned the following example of that: 盲 is interchangeable with 妄 in such compounds as 妄想 (=盲想) ‘wild idea’, but not in 盲従 moojuu ‘blind obedience’.</p>
+
+<p>Every written Japanese and Chinese word has at least two completely different spellings.</p>
+
+<p>Such diversity naturally causes diversity in the ways how users formulate the query.</p>
+
+<p>Because of a small stock of phonemes in Japanese and Chinese, the number of homophones is very large. Since many homophones are nearly synonymous or even identical in meaning, they are easily confused.</p>
+
+<p>You need to have a semantically classified database of homophones to implement cross-homophone searching. The major issue is that for many homophones, a universally-accepted orthography does not exist. The choice of character should be based on meaning, but in fact it is often unpredictable and governed by the personal preferences of the writer.</p>
+
+<p>For example, Jack Halpern in “The Complexities of Japanese Homophones” illustrates this problem with the following example:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>English</strong></th>
+      <th><strong>Standard</strong></th>
+      <th><strong>Sometimes</strong></th>
+      <th><strong>Often also</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>to offer</td>
+      <td>差す</td>
+      <td>さす</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>to hold up</td>
+      <td>差す</td>
+      <td>さす</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>to pour into</td>
+      <td>差す</td>
+      <td>注す</td>
+      <td>さす</td>
+    </tr>
+    <tr>
+      <td>to color</td>
+      <td>差す</td>
+      <td>注す</td>
+      <td>さす</td>
+    </tr>
+    <tr>
+      <td>to shine on</td>
+      <td>差す</td>
+      <td>射す</td>
+      <td>さす</td>
+    </tr>
+    <tr>
+      <td>to aim at</td>
+      <td>指す</td>
+      <td>差す</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>to point to</td>
+      <td>指す</td>
+      <td>さす</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>to stab</td>
+      <td>刺す</td>
+      <td>さす</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>to leave unfinished</td>
+      <td>さす</td>
+      <td>止す</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Since similar terms can be spelled different ways, people sometimes purposely use the wrong Kanji because it took too long to type a proper one. The local and global Internet search services (Google Japan, Baidu, Google Hong Kong, and others) can handle such cases. The users are getting used to such a response and use the same pattern at the websites. The search engines integrated into the e-stores are not so smart and the search results aren’t going to be as fruitful.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Synonym</strong></th>
+      <th><strong>Synonym</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>fox</td>
+      <td>フォックス</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>キツネ</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="search-by-pronunciation">Search by pronunciation</h2>
+
+<p>In Japanese, the pronunciation is directly mapped to the written words. For example, Google, when searching by “とうきょうえ” (tōkyōe) correctly suggests “東京駅” (<strong>tōkyōe</strong>ki) (Tokyo station). While they are written in completely different characters, their pronunciation starts with the same syllables. And the other reason is that this is how Japanese people type: they type words in hiragana and then convert them to kanji or katakana by pressing a hotkey several times until the desired conversion variant is in place.</p>
+
+<p><img src="https://hybrismart.com/wp-content/uploads/2019/08/image8.png" alt="Google suggest for Japanese pronunciation" /></p>
+
+<p>Another example, searching for 京都大学図書館 – “Kyoto University Library”</p>
+
+<p><img src="https://hybrismart.com/wp-content/uploads/2019/08/image9.png" alt="Kyoto University Library search" /></p>
+
+<h2 id="punctuation-marks">Punctuation marks</h2>
+
+<p>There are punctuation marks specific for Japanese and Chinese. Some of them have similar-looking equivalents in European languages which are not always interchangeable.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Punctuation marks</strong></th>
+      <th><strong>Example</strong></th>
+      <th><strong>Explanation</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>〜</td>
+      <td>1〜2</td>
+      <td>Wavy dash, for ranges</td>
+    </tr>
+    <tr>
+      <td><strong>。</strong></td>
+      <td> </td>
+      <td>Full stop (=”.”)</td>
+    </tr>
+    <tr>
+      <td><strong>、</strong></td>
+      <td>a、b、c</td>
+      <td>Enumeration comma</td>
+    </tr>
+    <tr>
+      <td><strong>「　」</strong></td>
+      <td>「あいうえお」</td>
+      <td>The Japanese equivalent of quotation marks (“”) in other languages.</td>
+    </tr>
+    <tr>
+      <td><strong>・</strong></td>
+      <td>ジョン・ドゥ /John Doe/</td>
+      <td>Japanese specific: 中点(<em>nakaten</em>) is used to indicate a break in foreign names and phrases. Most commonly it is placed between the first name and the last name written in katakana.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="search-ui-observations">Search UI observations</h2>
+
+<h3 id="reviewed-chinese-online-stores">Reviewed Chinese Online Stores</h3>
+
+<ul>
+  <li><a href="http://suning.com">Suning.com</a>.</li>
+  <li><a href="http://gome.com.cn">Gome.com.cn</a></li>
+  <li><a href="http://taobao.com">Taobao.com</a></li>
+  <li><a href="http://tmall.com">Tmall.com</a></li>
+  <li><a href="http://jd.com">Jd.com</a></li>
+  <li><a href="http://vip.com">Vip.com</a></li>
+  <li><a href="http://dangdang.com">Dangdang.com</a></li>
+  <li><a href="http://fanli.com">Fanli.com</a></li>
+  <li><a href="http://ly.com">Ly.com</a></li>
+  <li><a href="http://1688.com">1688.com</a></li>
+  <li><a href="http://zhe800.com">Zhe800.com</a></li>
+  <li><a href="http://mizhe.com">mizhe.com</a></li>
+</ul>
+
+<h3 id="reviewed-japanese-online-stores">Reviewed Japanese Online Stores</h3>
+
+<ul>
+  <li><a href="http://rakuten.co.jp">Rakuten.co.jp</a></li>
+  <li><a href="http://zozo.jp">zozo.jp</a></li>
+  <li><a href="http://wowma.jp">Wowma.jp</a></li>
+  <li><a href="http://qoo10.jp">Qoo10.jp</a></li>
+  <li><a href="https://www.mercari.com/jp/">mercari.com/jp/</a></li>
+  <li><a href="http://fril.jp">Fril.jp</a></li>
+  <li><a href="http://minne.com">Minne.com</a></li>
+  <li><a href="http://kakaku.com">Kakaku.com</a></li>
+  <li><a href="http://dmm.com">Dmm.com</a></li>
+</ul>
+
+<p>There are some points which are differently valued by users when compared with western user interface design.</p>
+
+<p>Chinese and Japanese websites have much less negative space, tiny images (and few of them), and a totally different content presentation with a focus on content rather than on its style. The density of information is higher than we got used to dealing with. Possibly , this layout style is connected to Kanban culture with its tendency to content efficiency: placing a maximum amount of content within a minimum space.</p>
+
+<h3 id="chinese-and-japanese-input-methods">Chinese and Japanese Input Methods</h3>
+
+<h4 id="text-input-in-chinese">Text Input in Chinese</h4>
+
+<p>Chinese websites rely on different ways of input in Chinese characters: Pinyin (a system of Latin transcription of Chinese characters), Sequence of Strokes, Wubi (5 Basic Strokes), Handwriting, Image recognition, and voice input. The computer converts the Pinyin spelled, handwritten, captured or voiced sentence into the correct Chinese character sequence on the screen. Below is functionality offered by the default Chinese version of Android (I should say that it matches input methods in windows):</p>
+
+<p><img src="https://hybrismart.com/wp-content/uploads/2019/08/Screen-Shot-2019-08-19-at-7.54.54-AM.png" alt="Chinese input methods on Android" /></p>
+
+<p>Below I tried to input 2 characters (十 – ten and 百 – hundred) by using a different method.</p>
+
+<p><strong>Wubi (5 strokes).</strong> Wubi is the fastest method, but the most challenging. With Wubi, all characters can be written reliably with no more than 5 keystrokes. The method requires only 2 clicks on a keyboard to spell most of the characters. But it requires to memorize a table to map strokes to keys on keyboard. Pinyin knowledge is not required, so it is widely used among Chinese who don’t know Pinyin.</p>
+
+<p><img src="https://hybrismart.com/wp-content/uploads/2019/08/Screen-Shot-2019-08-19-at-7.56.13-AM.png" alt="Wubi input method" /></p>
+
+<p><strong>Pinyin (with 26 English keys).</strong> Pinyin the slowest method, I clicked 4 times before I go get each of the characters. Once a word has been typed in Pinyin, the computer will suggest words matching this pronunciation in a pop-up window. Selecting the intended word from the list can slow down the typing process considerably. But this method is commonly used among young generation who usually learn Pinyin at school. Also, the most popular method among foreigners, because it doesn’t require large vocabulary.</p>
+
+<p><img src="https://hybrismart.com/wp-content/uploads/2019/08/Screen-Shot-2019-08-19-at-7.56.13-AM-1.png" alt="Pinyin input method" /></p>
+
+<p><strong>Handwriting.</strong> This method is widely used among them who don’t know Latin alphabets or by those who enjoy calligraphy.</p>
+
+<p><img src="https://hybrismart.com/wp-content/uploads/2019/08/Screen-Shot-2019-08-19-at-7.58.03-AM.png" alt="Handwriting input method" /></p>
+
+<p><strong>Stroke sequence.</strong> This method is widely used among them who don’t know Latin alphabets and not that good with handwriting. Originally method used in traditional mobile phones with small non-responsive screens. As far as strokes are grouped, the sequence might be long which slows down the process.</p>
+
+<p><img src="https://hybrismart.com/wp-content/uploads/2019/08/Screen-Shot-2019-08-19-at-7.58.57-AM.png" alt="Stroke sequence input method" /></p>
+
+<p><strong>Image recognition</strong>. This method is great for the larger amount of data, doesn’t require any special knowledge.</p>
+
+<p><img src="https://hybrismart.com/wp-content/uploads/2019/08/Screen-Shot-2019-08-19-at-8.00.34-AM.png" alt="Image recognition input method" /></p>
+
+<p><strong>Voice recognition</strong></p>
+
+<p>Quite popular in China, but the methodology is facing a challenge because of many variant dialects causing pronunciation differences. Voice recognition projects are presumingly supported by the government as part of countrywide Putonghua popularization. Dmitry Antonov: “In my case, it used Baidu engine (AI/ML) and it smartly returned me it’s brand name Baidu when I pronounced “bai” – hundred in Pinyin, so it is commercialized advertising?”.</p>
+
+<p><img src="https://hybrismart.com/wp-content/uploads/2019/08/Screen-Shot-2019-08-19-at-8.01.37-AM.png" alt="Voice recognition input method" /></p>
+
+<h4 id="text-input-in-japanese">Text Input in Japanese</h4>
+
+<p>There are two main methods of inputting Japanese: Romaji, via a romanized version of Japanese, and Kana. The keyboards sold in Japan usually look like this:</p>
+
+<p><img src="https://hybrismart.com/wp-content/uploads/2019/08/image10.png" alt="Japanese keyboard layout" /></p>
+
+<p>The primary input method is typing words by their reading in kana and then convert them to kanji. For example, let’s see how to type phrase 日本語を勉強するのが好きです — “I like studying Japanese”.</p>
+
+<ol>
+  <li>
+    <p>You type your sentence in hiragana first, at this step it looks like this:
+<img src="https://hybrismart.com/wp-content/uploads/2019/08/image011.jpg" alt="Typing in Hiragana" /></p>
+  </li>
+  <li>
+    <p>Then you press the conversion key and it converts the current word to the kanji or katakana representation. Because there are many homonyms, often you will see the little window pop up with a list of conversion variants. It looks like this:
+<img src="https://hybrismart.com/wp-content/uploads/2019/08/image012.jpg" alt="Converting Hiragana to Kanji" /></p>
+  </li>
+  <li>
+    <p>Then you convert each part until you get the needed result.</p>
+  </li>
+</ol>
+
+<p>On a typical Japanese keyboard there are five helper keys:</p>
+
+<ul>
+  <li>変換 — /henkan/, meaning “conversion”. Converts kana to kanji.</li>
+  <li>無変換 — /muhenkan/, “no conversion”. Leaves the kana as it is.</li>
+  <li>かな, or simply “kana” — kana mode. Also there may be keys for specific kana modes: ひらがな(hiragana), カタカナ(katakana) or ローマ字(romaji).</li>
+  <li>英数 — /eisu/, alphanumeric mode.</li>
+  <li>半角/全角 — /hankaku, zenkaku/, half-width and full-width mode for inputting latin characters.</li>
+</ul>
+
+<p>If one doesn’t have a keyboard with kana support, they can type in romaji. The process is exactly the same, except the first step: instead of typing hiragana directly, you type kana readings in romaji and they are automatically converted into hiragana:</p>
+
+<ol>
+  <li><img src="https://hybrismart.com/wp-content/uploads/2019/08/image013.jpg" alt="Typing Romaji" /></li>
+  <li><img src="https://hybrismart.com/wp-content/uploads/2019/08/image014.jpg" alt="Romaji converted to Hiragana" /></li>
+</ol>
+
+<p><strong>Less search, more navigation</strong></p>
+
+<p>It is common to find the search field a lot less highlighted on the Japanese and Chinese websites. According to Alex Zito-Wolf, “<a href="https://medium.com/@alexzitowolf/chinese-ui-trends-mobile-application-text-search-flows-4884d5f688a">Chinese UI Trends</a>”, Chinese apps and websites tend to prioritize navigation over search. With the Japanese keyboard, it takes about 20+ keypresses to type a few Japanese characters, so it is often faster to get to a particular link than typing something in search.</p>
+
+<p>Zito-Wolf also highlights that many apps use a focus page which is activated once the user clicks on the search bar. The author believes that “Chinese apps create strong hooks to allow users to be routed away from using text search at the beginning of the search process,  allowing these users a faster search completion and more time spent browsing other pages.” This focus page contains the tags which are meant to help the user find the fastest way to construct a search, as well as educate them on how to effectively write search queries improving search efficiency in the long run.</p>
+
+<p><img src="https://hybrismart.com/wp-content/uploads/2019/08/image15.png" alt="Suning.com search UI" />
+(Suning.com)</p>
+
+<p>The mobile version of Suning.com redirects the user to a designated search page (/search.html) when a user clicks on the search bar.</p>
+
+<p><img src="https://hybrismart.com/wp-content/uploads/2019/08/image16.png" alt="Suning.com mobile search page" /></p>
+
+<p>Zito-Wolf draws attention to the high role of tags in the search process. “For the query 咖啡 (“Coffee”) (…) like a guessing tree, the system starts with broad additional tags, 价格比高 “Good cost/value ratio”, 交通方便 “Convenient transportation” and 就餐空间大 “Spacious atmosphere”.</p>
+
+<p><img src="https://hybrismart.com/wp-content/uploads/2019/08/image17.png" alt="Search tags for coffee query" /></p>
+
+<p><strong>Voice search</strong></p>
+
+<p>The UX/UI Designer Pavlo Plakhotia <a href="https://mlsdev.com/blog/mobile-design-for-chinese-market">notices</a> that the implementation of the voice message function is very common for Chinese mobile design. “Voice control is much easier than manual text input, especially for the older audience, who do not always have sufficient skills to work with mobile applications and various ways of entering the set of Chinese hieroglyphs. At present, there is also a trend among users to exploit voice input for search queries instead of typing.”</p>
+
+<p>Gome.com.cn:
+<img src="https://hybrismart.com/wp-content/uploads/2019/08/image18.png" alt="Voice search icon" /></p>
+
+<h2 id="context-aware-query-recommendations">Context-aware query recommendations</h2>
+
+<p>Many websites show the context/recommended queries under the search bar. This list depends on context and customer behavior. For example, after searching “iphone”, the system understands that the user wants a mobile phone, and recommends other brands too (Huawei, Samsung, Oppo, Vivo)</p>
+
+<p>Tmail.com:
+<img src="https://hybrismart.com/wp-content/uploads/2019/08/image21.png" alt="Tmail recommended queries" /></p>
+
+<p>Dianping.com:
+<img src="https://hybrismart.com/wp-content/uploads/2019/08/image22.png" alt="Dianping recommended queries" /></p>
+
+<p>The recommendations can be even placed inside the search box (this is travel e-shop, and recommendations are destinations, Suzhou and Shanghai)
+<img src="https://hybrismart.com/wp-content/uploads/2019/08/image23.png" alt="In-box recommendations" /></p>
+
+<p>In Japanese stores there are also related queries (qoo10.jp, the query is “vans”):
+<img src="https://hybrismart.com/wp-content/uploads/2019/08/image24.png" alt="Qoo10 related queries" /></p>
+
+<h2 id="visual-search">Visual search</h2>
+
+<p>The trend in more and more shops implement visual search.</p>
+
+<p>1688.com:
+<img src="https://hybrismart.com/wp-content/uploads/2019/08/image25.png" alt="1688.com visual search icon" /></p>
+
+<p>JD.com:
+<img src="https://hybrismart.com/wp-content/uploads/2019/08/image26.png" alt="JD.com visual search icon" /></p>
+
+<p>The image I used for search:
+<img src="https://hybrismart.com/wp-content/uploads/2019/08/image27.png" alt="Image used for visual search" /></p>
+
+<p>The results:
+<img src="https://hybrismart.com/wp-content/uploads/2019/08/image28.png" alt="Visual search results" /></p>
+
+<p><strong>No alpha sorting</strong></p>
+
+<p>In Chinese, there is no meaning to sort the search items or facets by alphabet because there is no alphabet. Theoretically, the items can be sorted by the character’s rendering into Pinyin based on Pinyin alphabetical order in the manner as many dictionaries do.</p>
+
+<p>In other aspects, the search box and search results page follow the general market-agnostic UI/UX recommendations.</p>
+
+<h3 id="facet-panel">Facet panel</h3>
+
+<p>Facets are often arranged horizontally because of the Chinese and Japanese script is much denser. However, that is more a characteristic of Chinese websites:</p>
+
+<p><img src="https://hybrismart.com/wp-content/uploads/2019/08/image29.png" alt="Horizontal facets example 1" /></p>
+
+<p>Zhe800.com:
+<img src="https://hybrismart.com/wp-content/uploads/2019/08/image30.png" alt="Zhe800.com horizontal facets" /></p>
+
+<p>JD.com:
+<img src="https://hybrismart.com/wp-content/uploads/2019/08/image31.png" alt="JD.com horizontal facets" /></p>
+
+<p>Gone.com.cn:
+<img src="https://hybrismart.com/wp-content/uploads/2019/08/image32.png" alt="Gone.com.cn horizontal facets" /></p>
+
+<p>All important facets are open by default, all others are collapsed. You can expand them on hover. In the next screenshot, the facet with the list of tags is opened:
+<img src="https://hybrismart.com/wp-content/uploads/2019/08/image33.png" alt="Expanded facet tags" /></p>
+
+<p>In Japan, vertical facets are more common:</p>
+
+<p>Rakuten.co.jp:
+<img src="https://hybrismart.com/wp-content/uploads/2019/08/image34.png" alt="Rakuten vertical facets" /></p>
+
+<p>Zozo.jp:
+<img src="https://hybrismart.com/wp-content/uploads/2019/08/image35.png" alt="Zozo.jp vertical facets" /></p>
+
+<p>Wowma.jp:
+<img src="https://hybrismart.com/wp-content/uploads/2019/08/image36.png" alt="Wowma.jp vertical facets" /></p>
+
+<p>Horizontal facets are used too on Japan’s websites, but it is not so common.
+<img src="https://hybrismart.com/wp-content/uploads/2019/08/image37.png" alt="Horizontal facets on a Japanese site" /></p>
+
+<h3 id="recommendations">Recommendations</h3>
+
+<p>If your website is available in different language versions, you need to have answers to the following questions:</p>
+
+<ul>
+  <li>What languages can be used on what language versions? Can I search in Chinese on the English website and vice versa?</li>
+  <li>Can we mix English and Chinese in the same query? It is especially important for brands and proper names (Sony / ソニー).</li>
+  <li>What language variants are supported?</li>
+</ul>
+
+<h2 id="web-typography-recommendations">Web typography recommendations</h2>
+
+<p>The best line length is 15-40 characters per line (CPL) for the computer display and 15-21 CPL for the smartphone display (~2 times shorter than it is recommended for English)</p>
+
+<p>In Japanese, Serif (with decorative elements) is called “Mincho” (明朝) and Sans-Serif (plain) is called “Gothic” (ゴシック).</p>
+
+<p>In Chinese, the two most commonly used classifications are Song (宋體, 宋体) or Ming (明體 / 明体), which you could think of as the Chinese serif, and hei (黑體 / 黑体), similar to a sans-serif.</p>
+
+<p>In English, the 3rd party font files have a very small impact to the page loading speed because the character set is relatively small. And the designers embed them into the pages. In Chinese and Japanese, extra fonts can be one of the reasons for a slow-loading page.</p>
+
+<p>Italics is technically supported, but it not recommended to use it with Japanese and Chinese characters. It skews them so that they become unreadable.</p>
+
+<p>Don’t use a font size smaller than 12pt. It’s always better to set your font size by “em” or “%” and take the user preferences into account. If your website targets older people, consider 16pt font size.</p>
+
+<p>Meiryo, MS Gothic, MS Mincho, Yu Gothic, and Yu Mincho fonts are pre-installed in Windows. “Hiragino Kaku Gothic ProN” and “Hiragino Mincho ProN” are pre-installed in MacOS. “HiraKakuProN-W3” and “HiraMinProN-W3” are used in iOS.</p>
+
+<p>If you want to get typography better, Noto will be a good solution. Noto is a Google font family that supports all languages including Chinese and Japanese.</p>
+
+<h2 id="conclusions">Conclusions</h2>
+
+<p>In the above, we’ve touched different aspects of Japanese and Chinese searching. We demonstrated that the challenges are addressable. We also demonstrated that the solutions are still evolving and there are always matters outstanding for deeper research.</p>
+
+<p>Because of the complexities and irregularities of the Chinese and Japanese writing systems, you need not only computational linguistic tools such as morphological analyzers, but also lexical databases fine-tuned to the needs of particular project goals and content. Both analyzers and databases are constantly improving, and it is important to keep an eye on the latest breakthroughs in information retrieval and apply them to your solution to keep delivering better user experience and</p>]]></content><author><name>Rauf Aliev</name></author><category term="Ranking" /><category term="Relevance" /><summary type="html"><![CDATA[Today I want to talk about tailoring website search functionality for Chinese and Japanese languages. When it comes to entering “the East”, companies often face many challenges they could not have experienced before. Everything is different in China and Japan including the way how websites are built and how the users interact with them. In this article, I will cover one aspect of these challenges: how to adapt product/content search to work with Japanese and Chinese languages.]]></summary></entry><entry><title type="html">Building Trust in Search and Recommendation</title><link href="https://www.testmysearch.com/blog/2025/09/02/search-trust.html" rel="alternate" type="text/html" title="Building Trust in Search and Recommendation" /><published>2025-09-02T00:00:00-04:00</published><updated>2025-09-02T00:00:00-04:00</updated><id>https://www.testmysearch.com/blog/2025/09/02/search-trust</id><content type="html" xml:base="https://www.testmysearch.com/blog/2025/09/02/search-trust.html"><![CDATA[<p>When we think about search engines or recommender systems, the default measure of quality is often relevance: does the system return what I asked for? Yet over time, it has become clear that accuracy alone does not create confidence. These systems don’t just retrieve information—they curate visibility, shape opportunity, and implicitly set the terms of what users come to rely on. That’s why the discussion has shifted toward a broader question: <strong>can we trust the ranking we see?</strong></p>
 
 <h2 id="why-trust-matters">Why Trust Matters</h2>
 
@@ -45,4 +1368,4 @@
 
 <p>Platforms are beginning to address these issues explicitly. Efforts range from clearer disclosures in advertising to algorithmic audits of recommendation pipelines. The challenge is cultural as much as technical: trust has to be earned continuously, not declared once.</p>
 
-<p>Search and recommendation are not only about retrieval; they are about shaping how people see the world. Framing evaluation through the lens of trust makes us ask harder questions: not only <em>did the system work</em>, but <em>does it deserve to be believed</em>?</p>]]></content><author><name>Rauf Aliev</name></author><category term="ai" /><category term="trust" /><category term="recommendation" /><category term="search" /><summary type="html"><![CDATA[When we think about search engines or recommender systems, the default measure of quality is often relevance: does the system return what I asked for? Yet over time, it has become clear that accuracy alone does not create confidence. These systems don’t just retrieve information—they curate visibility, shape opportunity, and implicitly set the terms of what users come to rely on. That’s why the discussion has shifted toward a broader question: can we trust the ranking we see?]]></summary></entry></feed>
+<p>Search and recommendation are not only about retrieval; they are about shaping how people see the world. Framing evaluation through the lens of trust makes us ask harder questions: not only <em>did the system work</em>, but <em>does it deserve to be believed</em>?</p>]]></content><author><name>Rauf Aliev</name></author><category term="Responsible AI" /><category term="Search Ethics" /><category term="Recommender Systems" /><category term="Recommendations" /><category term="Ranking" /><category term="Relevance" /><category term="Personalization" /><summary type="html"><![CDATA[When we think about search engines or recommender systems, the default measure of quality is often relevance: does the system return what I asked for? Yet over time, it has become clear that accuracy alone does not create confidence. These systems don’t just retrieve information—they curate visibility, shape opportunity, and implicitly set the terms of what users come to rely on. That’s why the discussion has shifted toward a broader question: can we trust the ranking we see?]]></summary></entry></feed>

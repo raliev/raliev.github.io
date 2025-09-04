@@ -17,7 +17,17 @@ layout: default
         <div class="mt-4 text-gray-700">
             {{ post.excerpt }}
         </div>
-        <a href="{{ post.url | relative_url }}" class="mt-4 inline-block font-semibold text-indigo-600 hover:underline">Read more &rarr;</a>
+        {% if post.tags %}
+        <div class="mt-4 flex flex-wrap gap-2">
+            {% for t in post.tags %}
+            <a href="{{ site.baseurl }}/tags-{{ t | slugify }}/"
+               class="inline-block rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-700 hover:bg-gray-200">
+                {{ t }}
+            </a>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <a href="{{ post.url | relative_url }}" class="mt-4 inline-block font-semibold text-indigo-600 hover:underline">Read more →</a>
     </div>
     {%- endfor -%}
     {%- else -%}

@@ -1,10 +1,16 @@
 <header class="sticky top-0 z-50 shadow-sm" style="background-color: #faf8f5;">
     <nav class="container mx-auto flex items-center justify-between px-6 py-4">
         <a href="/blog"><img src="/img/testmysearch-blog-logo.png" alt="TestMySearch Logo" style="height:60px"></a>
-        <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
+
+        <!-- Right side nav -->
+        <div class="flex items-center space-x-4">
+            <!-- Existing links -->
             <a href="/demos.html" class="text-gray-600 hover:text-indigo-600">Demos</a>
             <a href="/index.html#features" class="text-gray-600 hover:text-indigo-600">Features</a>
             <a href="/index.html#how-it-works" class="text-gray-600 hover:text-indigo-600">How It Works</a>
+
+            <!-- Topics dropdown -->
+            {% include tag_dropdown.html %}
         </div>
     </nav>
 </header>
