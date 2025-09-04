@@ -1,58 +1,30 @@
-# .github/workflows/pages.yml
-
-name: Build and Deploy Jekyll Site to Pages
+name: Build and Deploy Jekyll Site
 
 on:
   push:
     branches:
-      - main # Убедитесь, что это ваша основная ветка
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
+      - master  # Или ваша основная ветка
 
 jobs:
-  build:
+  build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout 🛎️
         uses: actions/checkout@v4
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Build Jekyll site from /docs folder
-        uses: actions/jekyll-build-pages@v1
+      - name: Setup Ruby and Jekyll 💎
+        uses: ruby/setup-ruby@v1
         with:
-          source: ./docs
-          destination: ./_site
+          ruby-version: '3.1' # Версия Ruby, совместимая с вашим Jekyll
+          bundler-cache: true
 
-      - name: Fix permissions
-        run: sudo chown -R $USER:$USER _site
+      - name: Build Jekyll site ⚙️
+        # Собираем сайт и указываем, что результат нужно положить в папку /blog
+        run: JEKYLL_ENV=production bundle exec jekyll build --destination ./blog
 
-      - name: Move site to subpath
-        run: |
-          mv _site temp_site
-          mkdir -p _site/blog
-          mv temp_site/* _site/blog/
-          rm -rf temp_site
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Deploy to GitHub Pages 🚀
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: . # Публикуем ВЕСЬ репозиторий, включая папку /blog
+          # keep_files: true # Раскомментируйте, если нужно сохранять файлы в ветке gh-pages
