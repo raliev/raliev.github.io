@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://www.testmysearch.com/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.testmysearch.com/blog/" rel="alternate" type="text/html" /><updated>2025-09-04T12:54:46-04:00</updated><id>https://www.testmysearch.com/blog/feed.xml</id><title type="html">TestMySearch Blog</title><subtitle>The official blog for TestMySearch. Articles and insights on search quality,  information retrieval, and relevance engineering from Rauf Aliev.</subtitle><author><name>Rauf Aliev</name></author><entry><title type="html">The Challenges of Chinese and Japanese Searching</title><link href="https://www.testmysearch.com/blog/2025/09/03/chinese-japanese-search.html" rel="alternate" type="text/html" title="The Challenges of Chinese and Japanese Searching" /><published>2025-09-03T00:00:00-04:00</published><updated>2025-09-03T00:00:00-04:00</updated><id>https://www.testmysearch.com/blog/2025/09/03/chinese-japanese-search</id><content type="html" xml:base="https://www.testmysearch.com/blog/2025/09/03/chinese-japanese-search.html"><![CDATA[<p>Today I want to talk about tailoring website search functionality for Chinese and Japanese languages. When it comes to entering “the East”, companies often face many challenges they could not have experienced before. Everything is different in China and Japan including the way how websites are built and how the users interact with them. In this article, I will cover one aspect of these challenges: how to adapt product/content search to work with Japanese and Chinese languages.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://www.testmysearch.com/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.testmysearch.com/blog/" rel="alternate" type="text/html" /><updated>2025-09-04T14:38:18-04:00</updated><id>https://www.testmysearch.com/blog/feed.xml</id><title type="html">TestMySearch Blog</title><subtitle>The official blog for TestMySearch. Articles and insights on search quality,  information retrieval, and relevance engineering from Rauf Aliev.</subtitle><author><name>Rauf Aliev</name></author><entry><title type="html">The Challenges of Chinese and Japanese Searching</title><link href="https://www.testmysearch.com/blog/2025/09/03/chinese-japanese-search.html" rel="alternate" type="text/html" title="The Challenges of Chinese and Japanese Searching" /><published>2025-09-03T00:00:00-04:00</published><updated>2025-09-03T00:00:00-04:00</updated><id>https://www.testmysearch.com/blog/2025/09/03/chinese-japanese-search</id><content type="html" xml:base="https://www.testmysearch.com/blog/2025/09/03/chinese-japanese-search.html"><![CDATA[<p>Today I want to talk about tailoring website search functionality for Chinese and Japanese languages. When it comes to entering “the East”, companies often face many challenges they could not have experienced before. Everything is different in China and Japan including the way how websites are built and how the users interact with them. In this article, I will cover one aspect of these challenges: how to adapt product/content search to work with Japanese and Chinese languages.</p>
 
 <p>Read/Download PDF: <a href="/pdfs/2025-09-03-chinese-japanese-search.pdf">PDF version</a></p>
 
-<p>Before I start, I’d like to say a lot of thanks to my co-authors who helped me go through the linguistic quirks and idiosyncrasies, revise and extend this writing, and eventually having me come off looking like a pro. Thanks to <strong>Timofey Klyubin</strong> who is a guru in Japanese, and <strong>Dmitry Antonov</strong> who gave me valuable feedback, great tips, and pointers on Chinese.</p>
+<p>Before I start, I thank my colleagues for their help in reviewing linguistic details and extending the analysis. I am grateful to <strong>Timofey Klyubin</strong> for expertise in Japanese and to <strong>Dmitry Antonov</strong> for valuable feedback, practical tips, and pointers on Chinese.</p>
 
 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
@@ -257,11 +257,9 @@
   </tbody>
 </table>
 
-<p>It is generally believed that the top priority for Chinese discovery improvements is to equate Traditional characters with simplified characters. For Japanese, there is also a problem of equating Modern Kanji characters with Traditional Kanji characters, but it is not so strong as it is in Chinese where you deal with two different scripts. There is a priority for Japanese discovery improvements to equate all scripts used in the language: Kanji, Hiragana, Katakana, and Romaji.</p>
+<p>It is generally believed that the top priority for Chinese discovery improvements is to equate Traditional characters with simplified characters. For Japanese, equating Modern (<em>Shinjitai</em>) and Traditional (<em>Kyūjitai</em>) Kanji is also important—particularly for historical texts, proper nouns, and names—and should not be overlooked in normalization pipelines. There is a priority for Japanese discovery improvements to equate all scripts used in the language: Kanji, Hiragana, Katakana, and Romaji.</p>
 
-<p>In Apache Solr, the only other relevant ICU script translation is a mapping between Hiragana and Katakana. This is a straightforward one-to-one character mapping working in both directions.</p>
-
-<p><small>(Here I mentioned Apache Solr for the first time. For those who are not familiar with Solr, it is one of the most comprehensive opensource search engines. SAP Commerce Cloud uses Apache Solr for product and content search. One of the goals of this article is to give recommendations on how to configure Solr properly for Chinese and Japanese search)</small></p>
+<p>In Apache Solr, the only other relevant ICU script translation is a mapping between Hiragana and Katakana. This is a straightforward one-to-one character mapping working in both directions. For context, Apache Solr is a widely used open-source search engine platform; the recommendations below assume familiarity with Solr’s analysis pipeline.</p>
 
 <p>Consider making Simplified Chinese and traditional Chinese inter-searchable. If one searches for 计算机 (computer, Simplified) or 電脳 (computer, Traditional) , the results should contain the records with both 计算机 and 電脳. At least measure how often each of these writing systems is used by your customers to make an educated decision on how to make search better.</p>
 
@@ -464,21 +462,18 @@
 <p>For Chinese,</p>
 
 <ul>
-  <li><strong>Standard Analyzer</strong> is based on unigram indexing</li>
-  <li><strong>ChineseAnalyzer</strong> index unigrams,</li>
-  <li><strong>CJKAnalyzer</strong> indexes bigrams,</li>
-  <li><strong>SmartChineseAnalyzer</strong> indexes words based on dictionary and heuristics. It only deals with Simplified Chinese.</li>
-  <li><strong>HanLPTokenizer (<a href="https://github.com/hankcs/hanlp-lucene-plugin">https://github.com/hankcs/hanlp-lucene-plugin</a>, <a href="http://www.hankcs.com/">http://www.hankcs.com/</a>)</strong></li>
-  <li><strong>Paoding (<a href="https://stanbol.apache.org/docs/trunk/components/enhancer/nlp/paoding">https://stanbol.apache.org/docs/trunk/components/enhancer/nlp/paoding</a>)</strong> – possibly, it has issues with the latest versions of Apache Solr.</li>
+  <li><strong>Standard Analyzer</strong>: character-based (unigram-like) tokenization; useful as a baseline.</li>
+  <li><strong>ChineseAnalyzer</strong> (deprecated): retained for backward compatibility in older Lucene/Solr versions and not recommended for new deployments.</li>
+  <li><strong>CJKAnalyzer</strong>: indexes bigrams; simple and fast, yielding high recall but low precision as noted below.</li>
+  <li><strong>SmartChineseAnalyzer</strong> (Simplified Chinese only): dictionary + HMM-based; effective for general Simplified Chinese, but limited for Traditional Chinese and often outperformed by modern third‑party libraries.</li>
+  <li><strong>HanLPTokenizer</strong> (<a href="https://github.com/hankcs/hanlp-lucene-plugin">https://github.com/hankcs/hanlp-lucene-plugin</a>, <a href="http://www.hankcs.com/">http://www.hankcs.com/</a>): modern algorithms (e.g., Viterbi) with strong support for both Simplified and Traditional Chinese; requires separate installation/configuration and typically provides higher accuracy at increased operational complexity.</li>
+  <li><strong>Paoding</strong> (<a href="https://stanbol.apache.org/docs/trunk/components/enhancer/nlp/paoding">https://stanbol.apache.org/docs/trunk/components/enhancer/nlp/paoding</a>) (legacy/third‑party): an older analyzer that is no longer commonly maintained; generally not recommended for recent Solr versions.
+Let’s have a look at how the analyzers split the “我喜欢新西兰花” (from the example above) into terms.</li>
 </ul>
-
-<p>Let’s have a look at how the analyzers split the “我喜欢新西兰花” (from the example above) into terms.</p>
 
 <h4 id="chinese-cjkanalyzer">Chinese: CJKAnalyzer</h4>
 
-<p>This analyzer has a simple bigram tokenizer. This is the fastest option, but the search recall will be the worst.</p>
-
-<p><strong>Bigramming</strong> doesn’t require any linguistic resources such as dictionaries or statistical tables. Every overlapping two-character sequence is placed into the index. Many bigrams are real words in Chinese and Japanese that may skew the results if the characters from the different words are combined together in the index. There is a common practice is to index Chinese texts simultaneously as words and as overlapping bigrams. The methods can be combined in a weighted fashion to improve accuracy.</p>
+<p>This analyzer has a simple bigram tokenizer. It indexes every overlapping two-character sequence without linguistic resources (e.g., “中国人” → “中国”, “国人”). In practice, this yields <em>high recall</em> because many queries will find a matching bigram, but <em>low precision</em> because unrelated strings can share bigrams. For example, a search for “京都” (Kyoto) can match “東京都” (Tokyo Metropolis) due to the shared bigram “京都”. Likewise, as discussed earlier, one would not want “国外” to match “中华人民共和国外交部”, but bigramming tends to over‑match in such cases. A common production practice is to index Chinese simultaneously as words and as overlapping bigrams and combine the methods in a weighted fashion to mitigate noise.</p>
 
 <p><img src="https://hybrismart.com/wp-content/uploads/2019/08/image2.png" alt="CJKAnalyzer example" /></p>
 
@@ -492,7 +487,7 @@
 
 <p>This analyzer requires a dictionary to provide statistical data. SmartChineseAnalyzer has an included dictionary out-of-box. The included dictionary data is from <a href="http://www.ictclas.org">ICTCLAS1.0</a>.</p>
 
-<p><strong><em>SmartChineseAnalyzer</em></strong> creates four terms (I + like + New Zealand (新西兰) + flower).</p>
+<p><strong><em>SmartChineseAnalyzer</em></strong> creates four terms (I + like + New Zealand (新西兰) + flower). It performs well on general Simplified Chinese but does not support Traditional Chinese as effectively as modern external libraries.</p>
 
 <p><img src="https://hybrismart.com/wp-content/uploads/2019/08/image3.png" alt="SmartChineseAnalyzer example" /></p>
 
@@ -512,7 +507,16 @@
   <li><strong>N shortest</strong> (nshort): Named entity recognition is slightly better, sacrificing speed</li>
 </ul>
 
-<p>Unlike SmartChineseAnalyzer, HanLPTokenizer can support Traditional Chinese as well.</p>
+<p>Unlike SmartChineseAnalyzer, HanLPTokenizer can support Traditional Chinese as well. Deployments typically require adding HanLP as an external dependency and managing its models, which increases operational complexity relative to built‑in analyzers.</p>
+
+<h3 id="domain-specific-dictionaries-and-ongoing-maintenance">Domain-Specific Dictionaries and Ongoing Maintenance</h3>
+
+<p>A critical determinant of segmentation quality is the dictionary itself. General-purpose lexicons perform poorly on specialized corpora such as e-commerce product catalogs, biomedical texts, or legal documents. Production systems should plan for:<br />
+(1) <em>Domain customization</em>: seed dictionaries with brand names, SKUs, technical terms, and common compounds;<br />
+(2) <em>Feedback loops</em>: mine query and click logs to identify unknown terms and mis-segmentations;<br />
+(3) <em>Versioning and evaluation</em>: maintain curated releases of dictionaries with regression tests to prevent quality drift.</p>
+
+<p>These practices usually yield larger gains than swapping tokenizers alone, and they are essential regardless of the analyzer chosen.</p>
 
 <h3 id="japanese-tokenizers-for-apache-solr-and-sap-commerce-cloud">Japanese: Tokenizers for Apache Solr (and SAP Commerce Cloud)</h3>
 

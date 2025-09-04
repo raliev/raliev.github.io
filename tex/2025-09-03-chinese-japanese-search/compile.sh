@@ -1,0 +1,1 @@
+ /usr/local/texlive/2025/bin/universal-darwin/xelatex 2025-09-03-chinese-japanese-search.tex

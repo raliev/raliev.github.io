@@ -17,7 +17,7 @@ Today I want to talk about tailoring website search functionality for Chinese an
 
 Read/Download PDF: [PDF version](/pdfs/2025-09-03-chinese-japanese-search.pdf)
 
-Before I start, I’d like to say a lot of thanks to my co-authors who helped me go through the linguistic quirks and idiosyncrasies, revise and extend this writing, and eventually having me come off looking like a pro. Thanks to **Timofey Klyubin** who is a guru in Japanese, and **Dmitry Antonov** who gave me valuable feedback, great tips, and pointers on Chinese.
+Before I start, I thank my colleagues for their help in reviewing linguistic details and extending the analysis. I am grateful to **Timofey Klyubin** for expertise in Japanese and to **Dmitry Antonov** for valuable feedback, practical tips, and pointers on Chinese.
 
 ## Table of Contents
 * [Introduction](#Introduction)
@@ -162,11 +162,9 @@ In Japanese, the kanji characters may or may not have the same-looking Chinese c
 | 两 | 兩 | 両 | | (both) |
 | 龟 | 龜 | 亀 | カメ | (tortoise) |
 
-It is generally believed that the top priority for Chinese discovery improvements is to equate Traditional characters with simplified characters. For Japanese, there is also a problem of equating Modern Kanji characters with Traditional Kanji characters, but it is not so strong as it is in Chinese where you deal with two different scripts. There is a priority for Japanese discovery improvements to equate all scripts used in the language: Kanji, Hiragana, Katakana, and Romaji.
+It is generally believed that the top priority for Chinese discovery improvements is to equate Traditional characters with simplified characters. For Japanese, equating Modern (*Shinjitai*) and Traditional (*Kyūjitai*) Kanji is also important—particularly for historical texts, proper nouns, and names—and should not be overlooked in normalization pipelines. There is a priority for Japanese discovery improvements to equate all scripts used in the language: Kanji, Hiragana, Katakana, and Romaji.
 
-In Apache Solr, the only other relevant ICU script translation is a mapping between Hiragana and Katakana. This is a straightforward one-to-one character mapping working in both directions.
-
-<small>(Here I mentioned Apache Solr for the first time. For those who are not familiar with Solr, it is one of the most comprehensive opensource search engines. SAP Commerce Cloud uses Apache Solr for product and content search. One of the goals of this article is to give recommendations on how to configure Solr properly for Chinese and Japanese search)</small>
+In Apache Solr, the only other relevant ICU script translation is a mapping between Hiragana and Katakana. This is a straightforward one-to-one character mapping working in both directions. For context, Apache Solr is a widely used open-source search engine platform; the recommendations below assume familiarity with Solr’s analysis pipeline.
 
 Consider making Simplified Chinese and traditional Chinese inter-searchable. If one searches for 计算机 (computer, Simplified) or 電脳 (computer, Traditional) , the results should contain the records with both 计算机 and 電脳. At least measure how often each of these writing systems is used by your customers to make an educated decision on how to make search better.
 
@@ -250,20 +248,17 @@ Solr supports various methods of word segmentation both for Chinese and Japanese
 
 For Chinese,
 
-* **Standard Analyzer** is based on unigram indexing
-* **ChineseAnalyzer** index unigrams,
-* **CJKAnalyzer** indexes bigrams,
-* **SmartChineseAnalyzer** indexes words based on dictionary and heuristics. It only deals with Simplified Chinese.
-* **HanLPTokenizer ([https://github.com/hankcs/hanlp-lucene-plugin](https://github.com/hankcs/hanlp-lucene-plugin), [http://www.hankcs.com/](http://www.hankcs.com/))**
-* **Paoding ([https://stanbol.apache.org/docs/trunk/components/enhancer/nlp/paoding](https://stanbol.apache.org/docs/trunk/components/enhancer/nlp/paoding))** – possibly, it has issues with the latest versions of Apache Solr.
-
+* **Standard Analyzer**: character-based (unigram-like) tokenization; useful as a baseline.
+* **ChineseAnalyzer** (deprecated): retained for backward compatibility in older Lucene/Solr versions and not recommended for new deployments.
+* **CJKAnalyzer**: indexes bigrams; simple and fast, yielding high recall but low precision as noted below.
+* **SmartChineseAnalyzer** (Simplified Chinese only): dictionary + HMM-based; effective for general Simplified Chinese, but limited for Traditional Chinese and often outperformed by modern third‑party libraries.
+* **HanLPTokenizer** ([https://github.com/hankcs/hanlp-lucene-plugin](https://github.com/hankcs/hanlp-lucene-plugin), [http://www.hankcs.com/](http://www.hankcs.com/)): modern algorithms (e.g., Viterbi) with strong support for both Simplified and Traditional Chinese; requires separate installation/configuration and typically provides higher accuracy at increased operational complexity.
+* **Paoding** ([https://stanbol.apache.org/docs/trunk/components/enhancer/nlp/paoding](https://stanbol.apache.org/docs/trunk/components/enhancer/nlp/paoding)) (legacy/third‑party): an older analyzer that is no longer commonly maintained; generally not recommended for recent Solr versions.
 Let’s have a look at how the analyzers split the “我喜欢新西兰花” (from the example above) into terms.
 
 #### Chinese: CJKAnalyzer
 
-This analyzer has a simple bigram tokenizer. This is the fastest option, but the search recall will be the worst.
-
-**Bigramming** doesn’t require any linguistic resources such as dictionaries or statistical tables. Every overlapping two-character sequence is placed into the index. Many bigrams are real words in Chinese and Japanese that may skew the results if the characters from the different words are combined together in the index. There is a common practice is to index Chinese texts simultaneously as words and as overlapping bigrams. The methods can be combined in a weighted fashion to improve accuracy.
+This analyzer has a simple bigram tokenizer. It indexes every overlapping two-character sequence without linguistic resources (e.g., “中国人” → “中国”, “国人”). In practice, this yields *high recall* because many queries will find a matching bigram, but *low precision* because unrelated strings can share bigrams. For example, a search for “京都” (Kyoto) can match “東京都” (Tokyo Metropolis) due to the shared bigram “京都”. Likewise, as discussed earlier, one would not want “国外” to match “中华人民共和国外交部”, but bigramming tends to over‑match in such cases. A common production practice is to index Chinese simultaneously as words and as overlapping bigrams and combine the methods in a weighted fashion to mitigate noise.
 
 ![CJKAnalyzer example](https://hybrismart.com/wp-content/uploads/2019/08/image2.png)
 
@@ -277,7 +272,7 @@ A large training corpus was used to calculate Chinese word frequency probability
 
 This analyzer requires a dictionary to provide statistical data. SmartChineseAnalyzer has an included dictionary out-of-box. The included dictionary data is from [ICTCLAS1.0](http://www.ictclas.org).
 
-***SmartChineseAnalyzer*** creates four terms (I + like + New Zealand (新西兰) + flower).
+***SmartChineseAnalyzer*** creates four terms (I + like + New Zealand (新西兰) + flower). It performs well on general Simplified Chinese but does not support Traditional Chinese as effectively as modern external libraries.
 
 ![SmartChineseAnalyzer example](https://hybrismart.com/wp-content/uploads/2019/08/image3.png)
 
@@ -295,7 +290,16 @@ HanLPTokenizer supports the following algorithms for word segmentation:
 * **Perceptron**: word segmentation, part-of-speech tagging and named entity recognition, support for online learning
 * **N shortest** (nshort): Named entity recognition is slightly better, sacrificing speed
 
-Unlike SmartChineseAnalyzer, HanLPTokenizer can support Traditional Chinese as well.
+Unlike SmartChineseAnalyzer, HanLPTokenizer can support Traditional Chinese as well. Deployments typically require adding HanLP as an external dependency and managing its models, which increases operational complexity relative to built‑in analyzers.
+
+### Domain-Specific Dictionaries and Ongoing Maintenance
+
+A critical determinant of segmentation quality is the dictionary itself. General-purpose lexicons perform poorly on specialized corpora such as e-commerce product catalogs, biomedical texts, or legal documents. Production systems should plan for:  
+(1) *Domain customization*: seed dictionaries with brand names, SKUs, technical terms, and common compounds;  
+(2) *Feedback loops*: mine query and click logs to identify unknown terms and mis-segmentations;  
+(3) *Versioning and evaluation*: maintain curated releases of dictionaries with regression tests to prevent quality drift.
+
+These practices usually yield larger gains than swapping tokenizers alone, and they are essential regardless of the analyzer chosen.
 
 ### Japanese: Tokenizers for Apache Solr (and SAP Commerce Cloud)
 
