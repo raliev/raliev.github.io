@@ -4,9 +4,8 @@ Uses Tailwind only. No external JS dependencies.
 {%- endcomment -%}
 
 <div class="relative">
-    <!-- Toggle button -->
     <button id="tmsTagMenuButton"
-            class="inline-flex items-center rounded-md border px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
+            class="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700"
             aria-haspopup="true" aria-expanded="false">
         Topics
         <svg class="ml-2 h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -14,7 +13,6 @@ Uses Tailwind only. No external JS dependencies.
         </svg>
     </button>
 
-    <!-- Menu panel -->
     <div id="tmsTagMenuPanel"
          class="absolute right-0 mt-2 hidden max-h-[70vh] w-[320px] overflow-y-auto rounded-lg border bg-white p-3 shadow-lg ring-1 ring-black/5 md:w-[520px]">
         {% assign groups = site.data.tag_groups %}

@@ -2,15 +2,16 @@
 layout: post
 title: "The Challenges of Chinese and Japanese Searching"
 date: 2025-09-03
+pdf_link: /pdfs/2025-09-03-chinese-japanese-search.pdf
 tags:
- - Relevance
- - Ranking
- - Indexing
- - Query Processing
- - Lexical Search
- - Keyword Search
- - Query Understanding (NLU)
- - Search UI/UX
+  - Relevance
+  - Ranking
+  - Indexing
+  - Query Processing
+  - Lexical Search
+  - Keyword Search
+  - Query Understanding (NLU)
+  - Search UI/UX
 ---
 
 Today I want to talk about tailoring website search functionality for Chinese and Japanese languages. When it comes to entering “the East”, companies often face many challenges they could not have experienced before. Everything is different in China and Japan including the way how websites are built and how the users interact with them. In this article, I will cover one aspect of these challenges: how to adapt product/content search to work with Japanese and Chinese languages.
