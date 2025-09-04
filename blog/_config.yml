@@ -7,7 +7,7 @@ description: >-
 baseurl: "/blog/_site/" # the subpath of your site
 url: "https://www.testmysearch.com" # the base hostname & protocol for your site
 twitter_username: testmysearch
-github_username: testmysearch
+github_username: raliev
 
 # Build settings
 theme: minima
