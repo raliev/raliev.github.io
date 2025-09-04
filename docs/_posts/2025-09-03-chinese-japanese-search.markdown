@@ -15,6 +15,8 @@ tags:
 
 Today I want to talk about tailoring website search functionality for Chinese and Japanese languages. When it comes to entering “the East”, companies often face many challenges they could not have experienced before. Everything is different in China and Japan including the way how websites are built and how the users interact with them. In this article, I will cover one aspect of these challenges: how to adapt product/content search to work with Japanese and Chinese languages.
 
+Read/Download PDF: [PDF version](/blog/pdfs/2025-09-03-chinese-japanese-search.pdf)
+
 Before I start, I’d like to say a lot of thanks to my co-authors who helped me go through the linguistic quirks and idiosyncrasies, revise and extend this writing, and eventually having me come off looking like a pro. Thanks to **Timofey Klyubin** who is a guru in Japanese, and **Dmitry Antonov** who gave me valuable feedback, great tips, and pointers on Chinese.
 
 ## Table of Contents
