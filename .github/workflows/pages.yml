@@ -33,12 +33,12 @@ jobs:
           source: ./docs
           destination: ./_site
 
-      - name: Fix permissions on _site folder
-        run: sudo chmod -R 777 ./_site
-
-      - name: Copy static files from root
+      - name: Move site to subpath
         run: |
-          rsync -av --exclude='docs' --exclude='_site' --exclude='.git*' --exclude='*.yml' --exclude='README.md' ./ ./_site/
+          mv _site temp_site
+          mkdir -p _site/blog
+          mv temp_site/* _site/blog/
+          rm -rf temp_site
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
