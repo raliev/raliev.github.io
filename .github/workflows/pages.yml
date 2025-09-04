@@ -27,13 +27,15 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Build with Jekyll
+      - name: Build Jekyll site from /docs folder
         uses: actions/jekyll-build-pages@v1
         with:
-          # Указываем, где лежат исходники блога
           source: ./docs
-          # Указываем, куда положить готовый сайт (в корень)
           destination: ./_site
+
+      - name: Copy static files from root
+        run: |
+          rsync -av --exclude='docs' --exclude='_site' --exclude='.git*' --exclude='*.yml' --exclude='README.md' ./ ./_site/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
