@@ -33,6 +33,9 @@ jobs:
           source: ./docs
           destination: ./_site
 
+      - name: Fix permissions on _site folder
+        run: sudo chmod -R 777 ./_site
+
       - name: Copy static files from root
         run: |
           rsync -av --exclude='docs' --exclude='_site' --exclude='.git*' --exclude='*.yml' --exclude='README.md' ./ ./_site/
