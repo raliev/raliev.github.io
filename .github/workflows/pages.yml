@@ -1,9 +1,11 @@
+# .github/workflows/pages.yml
+
 name: Build and Deploy Jekyll Site to Pages
 
 on:
   push:
     branches:
-      - main # Or whatever your default branch is
+      - main # Убедитесь, что это ваша основная ветка
   workflow_dispatch:
 
 permissions:
@@ -21,13 +23,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
+          # Указываем, где лежат исходники блога
           source: ./docs
+          # Указываем, куда положить готовый сайт (в корень)
           destination: ./_site
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
