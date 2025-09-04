@@ -33,6 +33,9 @@ jobs:
           source: ./docs
           destination: ./_site
 
+      - name: Fix permissions
+        run: sudo chown -R $USER:$USER _site
+
       - name: Move site to subpath
         run: |
           mv _site temp_site
