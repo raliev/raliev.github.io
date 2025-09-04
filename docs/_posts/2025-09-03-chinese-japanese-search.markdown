@@ -3,8 +3,14 @@ layout: post
 title: "The Challenges of Chinese and Japanese Searching"
 date: 2025-09-03
 tags:
-  - Ranking
-  - Relevance
+ - Relevance
+ - Ranking
+ - Indexing
+ - Query Processing
+ - Lexical Search
+ - Keyword Search
+ - Query Understanding (NLU)
+ - Search UI/UX
 ---
 
 Today I want to talk about tailoring website search functionality for Chinese and Japanese languages. When it comes to entering “the East”, companies often face many challenges they could not have experienced before. Everything is different in China and Japan including the way how websites are built and how the users interact with them. In this article, I will cover one aspect of these challenges: how to adapt product/content search to work with Japanese and Chinese languages.
@@ -27,7 +33,7 @@ Before I start, I’d like to say a lot of thanks to my co-authors who helped me
     * [Japanese Tokenizers](#JapaneseTokenizers)
         * [JapaneseTokenizer (Kuromoji)](#JapaneseTokenizer)
 * [Word Normalization](#WordNormalization)
-    * [Solr Filters for Chinese and Japanese](#SolrFilters)
+    * [Solr Filters for Chinese and Japanese](#SolrFilters)ф
         * [Japanese Iteration Marks](#JapaneseIterationMarks)
         * [HalfWidth Filter](#HalfWidthFilter)
         * [Japanese Base Form Filter](#JapaneseBaseFormFilter)
