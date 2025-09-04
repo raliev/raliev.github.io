@@ -10,6 +10,7 @@ twitter_username: testmysearch
 github_username: raliev
 
 # Build settings
+destination: ./blog
 theme: minima
 plugins:
   - jekyll-feed
