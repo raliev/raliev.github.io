@@ -3,9 +3,10 @@ layout: default
 ---
 <article class="prose max-w-none rounded-lg bg-white p-8 shadow-lg">
     <header class="mb-8 border-b pb-4">
+        <b class="text-[1.375rem] text-gray-900 md:text-[1.8rem]"> {{ site.author | escape }} </b><br>
         <h1 class="text-4xl font-extrabold text-gray-900 md:text-5xl">{{ page.title | escape }}</h1>
         <p class="text-gray-600">
-            Posted on {{ page.date | date: "%B %-d, %Y" }} by {{ site.author | escape }}
+            {{ page.date | date: "%B %-d, %Y" }}
         </p>
     </header>
 
