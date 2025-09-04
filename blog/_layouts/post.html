@@ -1,0 +1,14 @@
+---
+layout: default
+---
+<article class="prose max-w-none rounded-lg bg-white p-8 shadow-lg">
+    <header class="mb-8 border-b pb-4">
+        <h1 class="text-4xl font-extrabold text-gray-900 md:text-5xl">{{ page.title | escape }}</h1>
+        <p class="text-gray-600">
+            Posted on {{ page.date | date: "%B %-d, %Y" }} by {{ site.author | escape }}
+        </p>
+    </header>
+    <div class="text-gray-700">
+        {{ content }}
+    </div>
+</article>

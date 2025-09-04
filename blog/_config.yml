@@ -1,0 +1,24 @@
+# Site settings
+title: TestMySearch Blog
+author: Rauf Aliev
+description: >-
+  The official blog for TestMySearch. Articles and insights on search quality, 
+  information retrieval, and relevance engineering from Rauf Aliev.
+baseurl: "/blog/_site/" # the subpath of your site
+url: "https://www.testmysearch.com" # the base hostname & protocol for your site
+twitter_username: testmysearch
+github_username: testmysearch
+
+# Build settings
+theme: minima
+plugins:
+  - jekyll-feed
+
+# Exclude from processing
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
