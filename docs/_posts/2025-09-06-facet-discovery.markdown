@@ -1,7 +1,8 @@
 ---
 layout: post
-title: "A Proof-of-Concept for Automatic Facet Discovery in E-Commerce Search"
+title: "Automatic Facet Discovery in E-Commerce Search"
 date: 2025-09-06
+pdf_link: /pdfs/facet-discovery.pdf
 tags:
   - Relevance
   - Indexing
