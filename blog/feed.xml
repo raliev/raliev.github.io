@@ -1,4 +1,144 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://www.testmysearch.com/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.testmysearch.com/blog/" rel="alternate" type="text/html" /><updated>2025-09-04T17:02:14-04:00</updated><id>https://www.testmysearch.com/blog/feed.xml</id><title type="html">TestMySearch Blog</title><subtitle>The official blog for TestMySearch. Articles and insights on search quality,  information retrieval, and relevance engineering from Rauf Aliev.</subtitle><author><name>Rauf Aliev</name></author><entry><title type="html">The Challenges of Chinese and Japanese Searching</title><link href="https://www.testmysearch.com/blog/2025/09/03/chinese-japanese-search.html" rel="alternate" type="text/html" title="The Challenges of Chinese and Japanese Searching" /><published>2025-09-03T00:00:00-04:00</published><updated>2025-09-03T00:00:00-04:00</updated><id>https://www.testmysearch.com/blog/2025/09/03/chinese-japanese-search</id><content type="html" xml:base="https://www.testmysearch.com/blog/2025/09/03/chinese-japanese-search.html"><![CDATA[<p>Today I want to talk about tailoring website search functionality for Chinese and Japanese languages. When it comes to entering “the East”, companies often face many challenges they could not have experienced before. Everything is different in China and Japan including the way how websites are built and how the users interact with them. In this article, I will cover one aspect of these challenges: how to adapt product/content search to work with Japanese and Chinese languages.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://www.testmysearch.com/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.testmysearch.com/blog/" rel="alternate" type="text/html" /><updated>2025-09-06T11:11:00+02:00</updated><id>https://www.testmysearch.com/blog/feed.xml</id><title type="html">TestMySearch Blog</title><subtitle>The official blog for TestMySearch. Articles and insights on search quality,  information retrieval, and relevance engineering from Rauf Aliev.</subtitle><author><name>Rauf Aliev</name></author><entry><title type="html">A Proof-of-Concept for Automatic Facet Discovery in E-Commerce Search</title><link href="https://www.testmysearch.com/blog/2025/09/06/facet-discovery.html" rel="alternate" type="text/html" title="A Proof-of-Concept for Automatic Facet Discovery in E-Commerce Search" /><published>2025-09-06T00:00:00+02:00</published><updated>2025-09-06T00:00:00+02:00</updated><id>https://www.testmysearch.com/blog/2025/09/06/facet-discovery</id><content type="html" xml:base="https://www.testmysearch.com/blog/2025/09/06/facet-discovery.html"><![CDATA[<p>This paper addresses a significant challenge in e-commerce information retrieval: the failure of standard keyword search systems to correctly interpret complex user queries that contain product attributes. Queries such as “blue XL Burton jacket” are often processed as a simple set of keywords, leading to irrelevant results and compelling users to engage in a laborious manual filtering process. We present a proof-of-concept (PoC) for an automatic facet discovery system designed to parse user queries, identify terms corresponding to product facets (e.g., color, brand, size), and apply these filters automatically. This research demonstrates a practical methodology for bridging the semantic gap between unstructured free-text search and structured faceted navigation, thereby enhancing result relevance and improving the overall user experience.</p>
+
+<p>A video demonstration of the system, implemented on the Hybris accelerator platform, is provided below.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+  <iframe src="https://player.vimeo.com/video/223100657" frameborder="0" allowfullscreen="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>Faceted search is an integral feature of modern e-commerce platforms, fundamentally improving the user’s search and discovery experience. From a user-centric perspective, faceted navigation decomposes search results into multiple, orthogonal categories (facets), each with corresponding value counts. This paradigm enables users to iteratively refine, or “drill down,” into the result set by applying filters in any desired sequence.</p>
+
+<p>The utility of this functionality is particularly evident when interacting with large-scale product catalogs, as it substantially improves product findability, mitigates user frustration, and provides a structured navigational framework. Furthermore, faceted search architectures programmatically generate relevant landing pages for long-tail keyword queries, a long-standing strategy in search engine optimization that was traditionally accomplished through static category pages.</p>
+
+<h2 id="2-a-taxonomy-of-user-search-queries">2. A Taxonomy of User Search Queries</h2>
+
+<p>Empirical research from the Baymard Institute classifies user search behavior into 12 distinct query types, the majority of which are inadequately supported by out-of-the-box e-commerce search engines.</p>
+
+<ol>
+  <li><strong>Exact Searches</strong>: Queries for specific products via title or model number (e.g., <em>Keurig K45</em>).</li>
+  <li><strong>Product Type Searches</strong>: Broad queries for product categories (e.g., <em>Sandals</em>).</li>
+  <li><strong>Symptom Searches</strong>: Problem-based queries where the user seeks a product as a solution (e.g., <em>“stained rug”</em>).</li>
+  <li><strong>Non-Product Searches</strong>: Informational queries regarding policies, company details, or help documentation.</li>
+  <li><strong>Feature Searches</strong>: Queries specifying particular product attributes (e.g., <em>Waterproof cameras</em>).</li>
+  <li><strong>Thematic Searches</strong>: Queries for abstract or conceptual categories with ill-defined boundaries (e.g., <em>“Living room rug”</em>).</li>
+  <li><strong>Relational Searches</strong>: Queries based on a product’s association with another entity (e.g., <em>Movies starring Tom Hanks</em>).</li>
+  <li><strong>Compatibility Searches</strong>: Queries for products compatible with another item (e.g., <em>Lenses for Nikon D7000</em>).</li>
+  <li><strong>Subjective Searches</strong>: Queries using non-objective, qualitative terms (e.g., <em>“High-quality kettles”</em>).</li>
+  <li><strong>Slang, Abbreviation, and Symbol Searches</strong>: Queries employing linguistic shortcuts (e.g., <em>Sleeping bag -10 deg</em>).</li>
+  <li><strong>Implicit Searches</strong>: Queries that omit context-dependent qualifiers (e.g., searching <em>Pants</em> when intending <em>Women’s Pants</em>).</li>
+  <li><strong>Natural Language Searches</strong>: Queries formulated in complete sentences rather than keyword sets (e.g., <em>Women’s shoes that are red and available in size 7.5</em>).</li>
+</ol>
+
+<p><img src="http://hybrismart.com/wp-content/uploads/2017/06/ecommerce-search-01-query-support-e26a0c0f33559b8702edfe2f626a3dba-1.png" alt="A chart from Baymard.com illustrating the poor support for various e-commerce search query types." /></p>
+
+<p>While platforms such as Hybris provide foundational support for some of these query types, the implementation often lacks the necessary sophistication for accurate intent interpretation. Neither Hybris nor its underlying SOLR search engine can natively associate query terms with semantic concepts like product features or categories. By default, all input is treated as a simple keyword query. The proposed PoC serves as a semantic bridge between these free-text queries and the platform’s powerful faceted search capabilities, thereby addressing many of the aforementioned query types more effectively.</p>
+
+<h2 id="3-the-challenge-with-conventional-faceted-search">3. The Challenge with Conventional Faceted Search</h2>
+
+<p>Conventional faceted search implementations present known usability challenges. Although platforms like Hybris display facets relevant to an initial query, the presence of attribute-related terms within the query itself can paradoxically cause those same facets to be excluded from the results.</p>
+
+<p>For instance, in the query “blue armada jacket XXL,” a standard search engine processes all four terms as a free-text request, returning only documents containing all four keywords. This approach is fundamentally flawed, as product attributes are often stored internally in structured formats or with distinct internal codes, necessitating duplicate index fields for their textual representations.</p>
+
+<p>The primary issue is the significant divergence between search results and user expectations. A query for “blue armada jacket XXL” will retrieve products that simply contain these keywords in their title or description, a limitation that encourages merchants to engage in keyword stuffing to improve findability. This leads to a cumbersome, multi-step user journey to locate a specific product:</p>
+
+<ol>
+  <li><strong>Execute initial search</strong>: User enters the query “<em>blue female XL Burton jacket</em>.”</li>
+  <li><strong>Apply Color facet</strong>: User locates and selects “blue” from the color facet list.</li>
+  <li><strong>Apply Brand facet</strong>: User locates and selects “Burton” from the brand facet list.</li>
+  <li><strong>Apply Size facet</strong>: User locates and selects “XL” from the size facet list.</li>
+  <li><strong>Apply Gender facet</strong>: User locates and selects “Female” from the gender facet list.</li>
+</ol>
+
+<p><img src="http://hybrismart.com/wp-content/uploads/2017/06/searchimproved10.png" alt="A typical e-commerce interface showing multiple facet categories on a sidebar." /></p>
+
+<p>This iterative process requires multiple user interactions and page reloads. While some platforms like Google Shopping have implemented automatic facet application, this functionality is not standard in most e-commerce solutions.</p>
+
+<p>A default SAP Commerce implementation, for example, yields highly irrelevant results for the query “blue female XL Burton jacket”:</p>
+
+<p><img src="http://hybrismart.com/wp-content/uploads/2017/06/2017-06-25_21h36_23-1.png" alt="Screenshot of a default Hybris search result page showing irrelevant products." />
+<em>How SAP Commerce Cloud works out-of-the-box (the default configuration).</em></p>
+
+<ul>
+  <li><strong>Observation</strong>: The results include items that are not jackets, not blue, not for women, and mostly not from the specified brand.</li>
+</ul>
+
+<p>In contrast, the proposed PoC delivers highly relevant results for the identical query:</p>
+
+<p><img src="http://hybrismart.com/wp-content/uploads/2017/06/2017-06-25_21h39_15-1.png" alt="Screenshot of the PoC search result page showing highly relevant, correctly filtered products." />
+<em>Performance of the proposed PoC for the query “Blue burton female XL jacket”.</em></p>
+
+<ul>
+  <li><strong>Observation</strong>: All resulting products are blue, female jackets from the Burton brand.</li>
+</ul>
+
+<p>This performance improvement is consistent across different product domains. For an electronics catalog, the query “fixed camera lenses from canon” on a standard system yields irrelevant products:</p>
+
+<p><img src="http://hybrismart.com/wp-content/uploads/2017/06/2017-06-25_21h45_27-1.png" alt="Standard Hybris search results for an electronics query, showing incorrect product types." />
+<em>Standard SAP Commerce search performance for the query “Fixed camera lens from Canon”.</em></p>
+
+<p>The proposed system, however, correctly identifies and filters for the requested products:</p>
+
+<p><img src="http://hybrismart.com/wp-content/uploads/2017/06/2017-06-25_21h47_181-1.png" alt="PoC results for the electronics query, showing correctly identified and filtered fixed camera lenses." />
+<em>Performance of the proposed PoC for the query “Fixed camera lens from Canon”.</em></p>
+
+<p>The system can also interpret numerical ranges. A query for “5 mp kodak camera” correctly applies a filter for the “5-5.9 Mp” facet range.</p>
+
+<p><img src="http://hybrismart.com/wp-content/uploads/2017/06/2017-06-25_21h54_03.png" alt="The PoC system correctly interpreting a numerical value and applying a corresponding range facet." />
+<em>The PoC applying a facet range for the query “5 Mp Kodak camera”.</em></p>
+
+<h2 id="4-implementation-strategy-automatic-vs-suggested-queries">4. Implementation Strategy: Automatic vs. Suggested Queries</h2>
+
+<p>While the PoC implements fully automatic query interpretation, a production deployment would benefit from A/B testing to determine the optimal strategy for a specific business context. Factors such as catalog structure, product diversity, and user profiles should inform this decision.</p>
+
+<p>An alternative, non-automatic approach involves presenting the interpreted query as a one-click suggestion alongside the standard keyword search results.</p>
+
+<p><img src="http://hybrismart.com/wp-content/uploads/2017/06/2017-06-26_02h13_24-1.png" alt="A conceptual mockup of a search suggestion panel." /></p>
+
+<p>This method provides user control while still leveraging the benefits of query interpretation. If implemented, the suggestion interface should be designed to be both compact and informative.</p>
+
+<h2 id="5-technical-architecture-and-implementation-details">5. Technical Architecture and Implementation Details</h2>
+
+<p><img src="http://hybrismart.com/wp-content/uploads/2017/06/searchimproved30.png" alt="A diagram illustrating the system architecture for automatic facet discovery." /></p>
+
+<p>The system operates by analyzing the input query to extract terms that correspond to known facet values. A primary technical challenge is resolving ambiguity when a query contains conflicting or mutually exclusive facet terms. For example, the query “<em>Canon flash memory</em>” is ambiguous if the product catalog contains no flash memory manufactured by Canon. The system must then infer user intent: is the brand “Canon” or the category “Flash memory” the primary constraint?</p>
+
+<p>This ambiguity is resolved when the catalog contains products that satisfy all specified attributes. For instance, if the catalog contains Sony-branded flash memory, the query “<em>Sony Flash Memory 32Gb</em>” is unambiguous, allowing the system to confidently apply facets for brand, category, and storage capacity.</p>
+
+<p><img src="http://hybrismart.com/wp-content/uploads/2017/06/2017-06-25_22h24_20-1.png" alt="The system correctly applying multiple facets for an unambiguous query." /></p>
+
+<p>To facilitate this mapping, the system maintains an in-memory representation of all available facet values. These values are retrieved directly from the SOLR index using its built-in “terms” request handler, which provides an efficient method for obtaining a complete and uniform list of facet terms.</p>
+
+<p><img src="http://hybrismart.com/wp-content/uploads/2017/06/2017-06-25_22h33_17-1.png" alt="The SOLR terms component response, listing all values for a given facet field." /></p>
+
+<p>For optimal performance, this technique requires SOLR fields configured with a <code class="language-plaintext highlighter-rouge">KeywordTokenizer</code> (to preserve multi-word facet values) and without stemming filters (to ensure exact matching). This can be achieved by creating dedicated, non-stemmed copy fields or by changing the field type to <code class="language-plaintext highlighter-rouge">string</code>, though the latter may have minor implications for full-text search relevance.</p>
+
+<p>The PoC employs an efficient strategy by only processing facets that are returned by an initial standard keyword search, rather than analyzing all possible facets in the entire catalog.</p>
+
+<p><img src="http://hybrismart.com/wp-content/uploads/2017/06/searchimproved2.png" alt="A diagram showing the two-step process: an initial search returns relevant facets, which are then processed." /></p>
+
+<p>Once terms are mapped to facets, the remaining query words are categorized as stopwords, special commands (e.g., “cheap”), or residual keywords for the free-text search component.</p>
+
+<p><img src="http://hybrismart.com/wp-content/uploads/2017/06/searchimproved3.png" alt="A diagram illustrating the mapping of query terms to facet values." /></p>
+
+<p>The system then constructs a new, hybrid query combining the discovered facet filters with the remaining keywords.</p>
+
+<p><img src="http://hybrismart.com/wp-content/uploads/2017/06/searchimproved4-1.png" alt="The final stage of query construction, combining facet filters with remaining keywords." /></p>
+
+<p>To handle conflicts where a term matches multiple facets (e.g., “red” as a color vs. part of the brand “Red Hat”), the PoC implements a simple disambiguation logic: it executes a count for each interpretation and proceeds with the option that yields a non-zero result set. If both interpretations are valid, or if both yield zero results, the system defaults to a standard keyword search. More advanced implementations could prompt the user for clarification.</p>
+
+<p>The system is designed to support dynamic facet configurations in SAP Commerce without requiring manual reconfiguration. However, it does not yet handle complex natural language constructs (e.g., “with,” “or,” “without”), which would require more advanced natural language processing techniques.</p>
+
+<h2 id="6-conclusion-and-future-work">6. Conclusion and Future Work</h2>
+
+<p>This paper has presented a proof-of-concept for an automatic facet discovery system designed to address a prevalent limitation in e-commerce search engines. By programmatically parsing unstructured user queries to identify and apply corresponding structured facet filters, the proposed system effectively bridges the semantic gap between keyword-based retrieval and faceted navigation. The experimental results demonstrate a significant improvement in result relevance and a more streamlined user experience compared to standard search implementations.</p>
+
+<p>The current implementation, while promising, has several recognized limitations that provide clear directions for future research. The system’s reliance on exact-match string comparisons for facet mapping is inherently brittle and does not account for synonyms, morphological variations, or misspellings. Furthermore, the conflict resolution logic for ambiguous terms is heuristic-based and could be substantially improved. The PoC does not yet support complex linguistic constructs (e.g., conjunctions, prepositions) or handle redundant terminology within queries.</p>
+
+<p>Future work will focus on integrating more sophisticated Natural Language Processing (NLP) techniques to overcome these challenges. The exploration of libraries such as OpenNLP is underway to incorporate capabilities like stemming, synonym expansion, and dependency parsing for a deeper understanding of query syntax and semantics. Further research will also involve developing a more robust disambiguation model, potentially leveraging machine learning trained on historical search logs to predict user intent more accurately. Finally, a quantitative evaluation through rigorous A/B testing and formal user studies is required to measure the system’s impact on key performance indicators, such as search success rate, session duration, and conversion.</p>
+
+<p>Ultimately, the continued development of such intelligent query interpretation systems is a critical step toward creating more intuitive, efficient, and user-centric information retrieval experiences within the e-commerce domain.</p>]]></content><author><name>Rauf Aliev</name></author><category term="Relevance" /><category term="Indexing" /><category term="Query Processing" /><category term="Keyword Search" /><category term="Information Retrieval (IR)" /><category term="Query Understanding (NLU)" /><category term="Faceted Search" /><category term="Filtering" /><category term="Search UI/UX" /><summary type="html"><![CDATA[This paper addresses a significant challenge in e-commerce information retrieval: the failure of standard keyword search systems to correctly interpret complex user queries that contain product attributes. Queries such as “blue XL Burton jacket” are often processed as a simple set of keywords, leading to irrelevant results and compelling users to engage in a laborious manual filtering process. We present a proof-of-concept (PoC) for an automatic facet discovery system designed to parse user queries, identify terms corresponding to product facets (e.g., color, brand, size), and apply these filters automatically. This research demonstrates a practical methodology for bridging the semantic gap between unstructured free-text search and structured faceted navigation, thereby enhancing result relevance and improving the overall user experience.]]></summary></entry><entry><title type="html">The Challenges of Chinese and Japanese Searching</title><link href="https://www.testmysearch.com/blog/2025/09/03/chinese-japanese-search.html" rel="alternate" type="text/html" title="The Challenges of Chinese and Japanese Searching" /><published>2025-09-03T00:00:00+02:00</published><updated>2025-09-03T00:00:00+02:00</updated><id>https://www.testmysearch.com/blog/2025/09/03/chinese-japanese-search</id><content type="html" xml:base="https://www.testmysearch.com/blog/2025/09/03/chinese-japanese-search.html"><![CDATA[<p>Today I want to talk about tailoring website search functionality for Chinese and Japanese languages. When it comes to entering “the East”, companies often face many challenges they could not have experienced before. Everything is different in China and Japan including the way how websites are built and how the users interact with them. In this article, I will cover one aspect of these challenges: how to adapt product/content search to work with Japanese and Chinese languages.</p>
 
 <p>Read/Download PDF: <a href="/pdfs/2025-09-03-chinese-japanese-search.pdf">PDF version</a></p>
 
@@ -1327,7 +1467,7 @@ Let’s have a look at how the analyzers split the “我喜欢新西兰花” (
 
 <p>In the above, we’ve touched different aspects of Japanese and Chinese searching. We demonstrated that the challenges are addressable. We also demonstrated that the solutions are still evolving and there are always matters outstanding for deeper research.</p>
 
-<p>Because of the complexities and irregularities of the Chinese and Japanese writing systems, you need not only computational linguistic tools such as morphological analyzers, but also lexical databases fine-tuned to the needs of particular project goals and content. Both analyzers and databases are constantly improving, and it is important to keep an eye on the latest breakthroughs in information retrieval and apply them to your solution to keep delivering better user experience and</p>]]></content><author><name>Rauf Aliev</name></author><category term="Relevance" /><category term="Ranking" /><category term="Indexing" /><category term="Query Processing" /><category term="Lexical Search" /><category term="Keyword Search" /><category term="Query Understanding (NLU)" /><category term="Search UI/UX" /><summary type="html"><![CDATA[Today I want to talk about tailoring website search functionality for Chinese and Japanese languages. When it comes to entering “the East”, companies often face many challenges they could not have experienced before. Everything is different in China and Japan including the way how websites are built and how the users interact with them. In this article, I will cover one aspect of these challenges: how to adapt product/content search to work with Japanese and Chinese languages.]]></summary></entry><entry><title type="html">Building Trust in Search and Recommendation</title><link href="https://www.testmysearch.com/blog/2025/09/02/search-trust.html" rel="alternate" type="text/html" title="Building Trust in Search and Recommendation" /><published>2025-09-02T00:00:00-04:00</published><updated>2025-09-02T00:00:00-04:00</updated><id>https://www.testmysearch.com/blog/2025/09/02/search-trust</id><content type="html" xml:base="https://www.testmysearch.com/blog/2025/09/02/search-trust.html"><![CDATA[<p>When we think about search engines or recommender systems, the default measure of quality is often relevance: does the system return what I asked for? Yet over time, it has become clear that accuracy alone does not create confidence. These systems don’t just retrieve information—they curate visibility, shape opportunity, and implicitly set the terms of what users come to rely on. That’s why the discussion has shifted toward a broader question: <strong>can we trust the ranking we see?</strong></p>
+<p>Because of the complexities and irregularities of the Chinese and Japanese writing systems, you need not only computational linguistic tools such as morphological analyzers, but also lexical databases fine-tuned to the needs of particular project goals and content. Both analyzers and databases are constantly improving, and it is important to keep an eye on the latest breakthroughs in information retrieval and apply them to your solution to keep delivering better user experience and</p>]]></content><author><name>Rauf Aliev</name></author><category term="Relevance" /><category term="Ranking" /><category term="Indexing" /><category term="Query Processing" /><category term="Lexical Search" /><category term="Keyword Search" /><category term="Query Understanding (NLU)" /><category term="Search UI/UX" /><summary type="html"><![CDATA[Today I want to talk about tailoring website search functionality for Chinese and Japanese languages. When it comes to entering “the East”, companies often face many challenges they could not have experienced before. Everything is different in China and Japan including the way how websites are built and how the users interact with them. In this article, I will cover one aspect of these challenges: how to adapt product/content search to work with Japanese and Chinese languages.]]></summary></entry><entry><title type="html">Building Trust in Search and Recommendation</title><link href="https://www.testmysearch.com/blog/2025/09/02/search-trust.html" rel="alternate" type="text/html" title="Building Trust in Search and Recommendation" /><published>2025-09-02T00:00:00+02:00</published><updated>2025-09-02T00:00:00+02:00</updated><id>https://www.testmysearch.com/blog/2025/09/02/search-trust</id><content type="html" xml:base="https://www.testmysearch.com/blog/2025/09/02/search-trust.html"><![CDATA[<p>When we think about search engines or recommender systems, the default measure of quality is often relevance: does the system return what I asked for? Yet over time, it has become clear that accuracy alone does not create confidence. These systems don’t just retrieve information—they curate visibility, shape opportunity, and implicitly set the terms of what users come to rely on. That’s why the discussion has shifted toward a broader question: <strong>can we trust the ranking we see?</strong></p>
 
 <h2 id="why-trust-matters">Why Trust Matters</h2>
 
