@@ -1,0 +1,73 @@
+@startmindmap
+'--- Styles for A4 Proportions & Readability ---
+<style>
+mindmapDiagram {
+  .green {
+    BackgroundColor #90EE90
+  }
+  .blue {
+    BackgroundColor #ADD8E6
+  }
+  .pink {
+    BackgroundColor #FFB6C1
+  }
+  node {
+    HorizontalAlignment center
+    Margin 10
+    Padding 8
+  }
+  arrow {
+    LineColor #666666
+    LineThickness 1.5
+  }
+}
+</style>
+
+* **Recommendation Algorithms**
+
+**  Interaction-Driven\n//(user–item only)//
+*** **Classic & Neighborhood Models**
+**** UserKNN, ItemKNN
+**** SlopeOne
+*** **Latent Factor Models**\n//(Matrix Factorization)//
+**** Classic Solvers: SVD, ALS
+**** Pairwise Ranking Objective: BPR
+**** Item-based: SLIM, FISM
+*** **Deep Learning Hybrids**\n**& Representation**
+**** Neural Collaborative Filtering: NCF
+**** Factorization Machine-based:\nDeepFM, xDeepFM
+**** Autoencoder-based: DAE, VAE
+*** **Sequential & Session-Based**\n**Models**
+**** RNN-based: GRU4Rec
+**** CNN-based: NextItNet
+**** Attention/Transformer-based:\nSASRec, BERT4Rec, NRMS
+**** With Contrastive Learning: CL4SRec
+*** **Graph-Based Models**\n//(GNNs)//
+**** Standard GNNs: NGCF, LightGCN
+**** Session-based GNNs: SR-GNN
+**** With Contrastive Learning:\nSGL, SimGCL
+*** **Deep Generative Models**
+**** Generative Adversarial Networks (GANs):\nIRGAN, RAGAN
+**** Diffusion for CF: DiffRec
+**** GFlowNets: GFN4Rec
+**** Normalizing Flows: IDNP
+
+**  Text-Driven\n//(LLM & reviews/text)//
+*** **Review-Based**
+**** NARRE, DeepCoNN
+*** **LLM-Based**
+**** Retrieval-based:\nDense Retrieval, Cross-Encoders
+**** Generative / Instruction-Tuned:\nPrompting for recs
+**** RAG & Feature Extraction:\nLLM as a feature enhancer
+**** LLM Agents & Tool Use:\nLLM orchestrates retrieval/APIs
+*** **Conversational RecSys**
+**** Dialogue-based\nPreference Elicitation
+**** Natural Language\nExplanation & Critique
+
+**  Multimodal\n//(image/video/text)//
+*** **Contrastive Learning**
+**** CLIP, ALBEF
+*** **Generative**\n//(for content synthesis)//
+**** Multimodal VAEs,\nMultimodal Diffusion
+
+@endmindmap
