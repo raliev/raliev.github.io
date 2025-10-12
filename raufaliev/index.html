@@ -102,6 +102,22 @@
             font-size: 0.9rem;
             color: #6c757d;
         }
+        .book-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        .book-item img {
+            width: 100px; /* Fixed width for book covers */
+            height: auto; /* Maintain aspect ratio */
+            margin-right: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .book-item .book-details {
+            flex: 1;
+        }
         @media (max-width: 768px) {
             .container {
                 padding: 20px;
@@ -110,6 +126,15 @@
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
+            }
+            .book-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .book-item img {
+                margin-right: 0;
+                margin-bottom: 15px;
             }
         }
     </style>
@@ -197,20 +222,29 @@
             I have authored several books that delve into the practical and theoretical aspects of search technology and recommender systems, aimed at fellow practitioners and engineers.
         </p>
         <ul>
-            <li>
-                <strong>Recommender Algorithms</strong><br>
-                A hands-on guide to the design, implementation, and evaluation of modern recommender systems.<br>
-                <a href="https://a.co/d/44onQG3" target="_blank">Available on Amazon</a>
+            <li class="book-item">
+                <img src="https://m.media-amazon.com/images/I/71Zh88jniAL._SY522_.jpg" alt="Recommender Algorithms Book Cover">
+                <div class="book-details">
+                    <strong>Recommender Algorithms</strong><br>
+                    A hands-on guide to the design, implementation, and evaluation of modern recommender systems.<br>
+                    <a href="https://a.co/d/44onQG3" target="_blank">Available on Amazon</a>
+                </div>
             </li>
-            <li>
-                <strong>Beyond English: Architecting Search for a Global World</strong><br>
-                A comprehensive guide on building multilingual search applications, covering topics from language-specific text analysis to cross-lingual search strategies.<br>
-                <a href="https://a.co/d/8lADEX2" target="_blank">Available on Amazon</a>
+            <li class="book-item">
+                <img src="https://m.media-amazon.com/images/I/612QT7P8EtL._SY522_.jpg" alt="Beyond English Book Cover">
+                <div class="book-details">
+                    <strong>Beyond English: Architecting Search for a Global World</strong><br>
+                    A comprehensive guide on building multilingual search applications, covering topics from language-specific text analysis to cross-lingual search strategies.<br>
+                    <a href="https://a.co/d/2LOB9kw" target="_blank">Available on Amazon</a>
+                </div>
             </li>
-            <li>
-                <strong>Inside Apache Solr and Lucene</strong><br>
-                An in-depth exploration of the internal algorithms and data structures that power the Apache Solr and Lucene search platforms.<br>
-                <a href="https://a.co/d/9tYBboj" target="_blank">Available on Amazon</a>
+            <li class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81fIxYGviGL._SY522_.jpg" alt="Inside Apache Solr and Lucene Book Cover">
+                <div class="book-details">
+                    <strong>Inside Apache Solr and Lucene</strong><br>
+                    An in-depth exploration of the internal algorithms and data structures that power the Apache Solr and Lucene search platforms.<br>
+                    <a href="https://a.co/d/9tYBboj" target="_blank">Available on Amazon</a>
+                </div>
             </li>
         </ul>
     </section>
