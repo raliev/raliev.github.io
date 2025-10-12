@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inside Apache Solr and Lucene: Algorithms and Engineering Deep Dive - Rauf Aliev</title>
+    <meta name="description" content="A deep dive into the core of Apache Solr and Lucene, exploring the architectural decisions, data structures, and algorithms for building high-performance, scalable search systems.">
+
+    <link rel="canonical" href="https://www.testmysearch.com/inside-solr.html">
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <meta property="og:title" content="Inside Apache Solr and Lucene: Algorithms and Engineering Deep Dive - Rauf Aliev">
+    <meta property="og:description" content="A deep dive into the core of Apache Solr and Lucene, exploring the architectural decisions, data structures, and algorithms for building high-performance, scalable search systems.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.testmysearch.com/inside-solr.html">
+    <meta property="og:site_name" content="TestMySearch">
+    <meta property="og:image" content="https://www.testmysearch.com/img/solr-ws.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Inside Apache Solr and Lucene: Algorithms and Engineering Deep Dive - Rauf Aliev">
+    <meta name="twitter:description" content="A deep dive into the core of Apache Solr and Lucene, exploring the architectural decisions, data structures, and algorithms for building high-performance, scalable search systems.">
+    <meta name="twitter:image" content="https://www.testmysearch.com/img/solr-ws.jpg">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .prose ul {
+            list-style-type: disc;
+            padding-left: 1.75rem;
+        }
+        .prose ul li {
+            margin-top: 0.5rem;
+        }
+        .prose ul ul {
+            margin-top: 0.5rem;
+        }
+        .toc-h1 {
+            font-weight:bold
+        }
+        .toc-h2 {
+            font-weight:bold
+        }
+        .toc-h3 {
+            font-weight:normal
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+<header class="sticky top-0 z-50 shadow-sm" style="background-color: #faf8f5;">
+    <nav class="container mx-auto flex items-center justify-between px-6 py-4">
+        <a href="/"><img src="/img/testmysearch-logo.png" alt="TestMySearch Logo" style="height:60px"></a>
+        <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
+            <a href="demos.html" class="text-gray-600 hover:text-indigo-600">Demos</a>
+            <a href="index.html#features" class="text-gray-600 hover:text-indigo-600">Features</a>
+            <a href="index.html#how-it-works" class="text-gray-600 hover:text-indigo-600">How It Works</a>
+            <a href="/blog/" class="text-gray-600 hover:text-indigo-600">Blog</a>
+            <a href="index.html#contact" class="rounded-md bg-indigo-600 px-4 py-2 text-white transition hover:bg-indigo-700">Contact Us</a>
+        </div>
+    </nav>
+</header>
+<main class="container mx-auto px-6 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div class="md-col-span-1">
+            <img src="/img/solr-ws.jpg" alt="Book Cover: Inside Apache Solr and Lucene" class="rounded-lg shadow-lg">
+            <div class="mt-8 space-y-4">
+                <h3 class="text-xl font-bold">Where to Buy</h3>
+                <a href="https://a.co/d/9tYBboj" class="block bg-blue-500 text-white text-center py-2 px-4 rounded hover:bg-blue-600">Amazon</a>
+                <a href="http://localhost:63342/pdfs/books/inside-solr-sample.pdf" class="block bg-red-500 text-white text-center py-2 px-4 rounded hover:bg-red-600">Read Sample (PDF)</a>
+            </div>
+        </div>
+        <div class="md:col-span-2 prose">
+            <h1 class="text-4xl font-extrabold text-gray-900">Inside Apache Solr and Lucene: Algorithms and Engineering Deep Dive</h1>
+            <p><font color="gray" class="text-2xl">Rauf Aliev</font></p>
+
+            <p class="mt-4 text-lg text-gray-600">How can you navigate the complex trade-offs between speed, memory consumption, and disk I/O when handling terabyte-scale data and thousands of concurrent users? This book dives deep into the core of Apache Solr and Lucene, offering answers from a system engineer's perspective. It explores the architectural decisions, data structures, and algorithms that enable these world-class search platforms to deliver exceptional performance and scalability, providing a blueprint for designing high-performance systems.</p>
+
+            <p class="mt-4 text-lg text-gray-600">The insights in this book extend beyond the Solr and Lucene ecosystem. By using these platforms as a masterclass in pragmatic engineering, it offers valuable lessons for building any complex, data-intensive application. Their open-source codebases are a treasure trove of battle-tested solutions to universal challenges in concurrency, data partitioning, and distributed coordination. This book provides a curated tour of that treasure, distilling years of development and thousands of lines of code into core principles and patterns. It offers a unique opportunity to learn from the architectural choices of systems designed for immense scale and load, delivering invaluable lessons for system architects and engineers tasked with building resilient, high-performance software.</p>
+
+            <br><br>
+            <h2 class="text-4xl font-semibold mt-4">Table of Contents</h2>
+            <hr style="color:black;height:2px" size="2" noshade><br>
+
+            <ul id="toc" class="section-nav">
+                <li class="toc-entry toc-h1">
+                    <a hreff="#1-introduction-to-solr-and-lucene-internals">1. Introduction to Solr and Lucene Internals</a>
+                    <ul>
+                        <li class="toc-entry toc-h2"><a hreff="#11-solrs-architecture-overview" class="active">1.1. Solr’s Architecture: Overview</a></li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#a-little-history">A Little History</a>
+                            <ul>
+                                <li class="toc-entry toc-h3"><a hreff="#111-reliance-on-lucene-core">1.1.1. Reliance on Lucene Core</a></li>
+                                <li class="toc-entry toc-h3"><a hreff="#112-solr-as-a-restful-search-platform">1.1.2. Solr as a RESTful Search Platform</a></li>
+                                <li class="toc-entry toc-h3"><a hreff="#113-modular-design">1.1.3. Modular Design</a></li>
+                                <li class="toc-entry toc-h3"><a hreff="#114-deployment-modes">1.1.4. Deployment Modes</a></li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#12-core-components">1.2. Core Components</a>
+                            <ul>
+                                <li class="toc-entry toc-h3"><a hreff="#121-the-inverted-index-the-heart-of-fast-search">1.2.1. The Inverted Index: The Heart of Fast Search</a></li>
+                                <li class="toc-entry toc-h3"><a hreff="#122-segment-based-storage">1.2.2. Segment-Based Storage</a></li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#123-query-execution-pipeline">1.2.3. Query Execution Pipeline</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#1231-the-flaw-of-a-monolithic-approach">1.2.3.1. The Flaw of a Monolithic Approach</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#1232-a-pipeline-of-specialists">1.2.3.2. A Pipeline of Specialists</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#124-inter-component-flow">1.2.4. Inter-Component Flow</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#1241-the-need-for-orchestration">1.2.4.1. The Need for Orchestration</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#1242-a-tale-of-two-pipelines">1.2.4.2. A Tale of Two Pipelines</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#13-engineering-trade-offs">1.3. Engineering trade-offs</a>
+                            <ul>
+                                <li class="toc-entry toc-h3"><a hreff="#131-speed-vs-memory">1.3.1. Speed vs. Memory</a></li>
+                                <li class="toc-entry toc-h3"><a hreff="#132-memory-vs-disk-usage">1.3.2. Memory vs. Disk Usage</a></li>
+                                <li class="toc-entry toc-h3"><a hreff="#133-speed-vs-stability">1.3.3. Speed vs. Stability</a></li>
+                                <li class="toc-entry toc-h3"><a hreff="#134-the-pitfall-of-static-configuration">1.3.4. The Pitfall of Static Configuration</a></li>
+                                <li class="toc-entry toc-h3"><a hreff="#135-solrs-toolkit-for-balance">1.3.5. Solr’s Toolkit for Balance</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="toc-entry toc-h1">
+                    <a hreff="#2-the-index">2. The Index</a>
+                    <ul>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#21-structure-of-the-inverted-index">2.1. Structure of the Inverted Index</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#211-terms-the-vocabulary-of-the-index">2.1.1. Terms: The Vocabulary of the Index</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#2111-the-term-dictionary-as-an-fst">2.1.1.1. The Term Dictionary as an FST</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#2112-metadata-associated-with-each-term">2.1.1.2. Metadata Associated with Each Term</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#2113-the-fundamental-nature-of-a-term">2.1.1.3. The Fundamental Nature of a Term</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#212-posting-lists">2.1.2. Posting Lists</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#2121-the-inefficiency-of-a-simple-list">2.1.2.1. The Inefficiency of a Simple List</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#2122-lucenes-blocked-posting-list">2.1.2.2. Lucene’s Blocked Posting List</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#213-pulsing-codec-inlining-postings-for-rare-terms">2.1.3. Pulsing Codec: Inlining Postings for Rare Terms</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#2131-the-inefficiency-of-dedicated-files-for-rare-terms">2.1.3.1. The Inefficiency of Dedicated Files for Rare Terms</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#2132-the-pulsingpostingsformat-an-elegant-inlining-strategy">2.1.3.2. The PulsingPostingsFormat: An Elegant Inlining Strategy</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#214-encoding-and-compression">2.1.4. Encoding and Compression</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#2141-the-waste-of-absolute-values">2.1.4.1. The Waste of Absolute Values</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#2142-the-power-of-deltas">2.1.4.2. The Power of Deltas</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#215-positions">2.1.5. Positions</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#2151-the-bloat-of-absolute-positions">2.1.5.1. The Bloat of Absolute Positions</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#2152-efficient-encoding-with-position-deltas">2.1.5.2. Efficient Encoding with Position Deltas</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#216-payloads">2.1.6. Payloads</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#2161-the-inefficiency-of-inline-data">2.1.6.1. The Inefficiency of Inline Data</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#2162-payloads-as-a-separate-optional-layer">2.1.6.2. Payloads as a Separate, Optional Layer</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#22-indexing-beyond-text">2.2. Indexing Beyond Text</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#221-bkd-trees-indexing-numeric-and-geospatial-data">2.2.1. BKD Trees: Indexing Numeric and Geospatial Data</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#2211-the-inefficiency-of-the-inverted-index-for-numeric-ranges">2.2.1.1. The Inefficiency of the Inverted Index for Numeric Ranges</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#2212-from-rpt-to-point-values">2.2.1.2. From RPT to Point Values</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#2213-the-bkd-tree-a-space-partitioning-solution">2.2.1.3. The BKD Tree: A Space-Partitioning Solution</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#2214-on-disk-structure-and-query-execution">2.2.1.4. On-Disk Structure and Query Execution</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3"><a hreff="#222-vector-search-and-approximate-nearest-neighbor-ann">2.2.2. Vector Search and Approximate Nearest Neighbor (ANN)</a></li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#223-vector-quantization-vq">2.2.3. Vector Quantization (VQ)</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#2231-the-inefficiency-of-full-precision">2.2.3.1. The Inefficiency of Full Precision</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#2232-the-need-for-principled-compression">2.2.3.2. The Need for Principled Compression</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#2233-scalar-quantization-trading-precision-for-speed-and-scale">2.2.3.3. Scalar Quantization: Trading Precision for Speed and Scale</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#224-hnsw-graph-construction">2.2.4. HNSW Graph Construction</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#2241-the-futility-of-brute-force-and-traditional-trees">2.2.4.1. The Futility of Brute-Force and Traditional Trees</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#2242-the-hnsw-algorithm-a-multi-layered-navigable-graph">2.2.4.2. The HNSW Algorithm: A Multi-Layered Navigable Graph</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#2243-tuning-the-trade-offs-the-three-magic-knobs">2.2.4.3. Tuning the Trade-offs: The Three Magic Knobs</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#2244-the-impact-of-quantization-a-necessary-compromise">2.2.4.4. The Impact of Quantization: A Necessary Compromise</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#2245-hybrid-search-fusing-keywords-and-semantics">2.2.4.5. Hybrid Search: Fusing Keywords and Semantics</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3"><a hreff="#225-lucene-integration-and-hybrid-search">2.2.5. Lucene Integration and Hybrid Search</a></li>
+                                <li class="toc-entry toc-h3"><a hreff="#engineering-trade-offs-the-balance-of-speed-recall-and-memory">Engineering Trade-offs: The Balance of Speed, Recall, and Memory</a></li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#23-compression-techniques-variable-byte-encoding-frame-of-reference-delta-encoding">2.3. Compression techniques: variable-byte encoding, frame-of-reference, delta encoding</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#231-variable-byte-encoding-vint">2.3.1. Variable-Byte Encoding (VInt)</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#2311-the-inefficiency-of-fixed-width-integers">2.3.1.1. The Inefficiency of Fixed-Width Integers</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#2312-vint-a-self-delimiting-variable-byte-scheme">2.3.1.2. VInt: A Self-Delimiting, Variable-Byte Scheme</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#232-frame-of-reference-for-via-packedints">2.3.2. Frame-of-Reference (FOR, via PackedInts)</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#2321-the-limits-of-per-value-encoding">2.3.2.1. The Limits of Per-Value Encoding</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#2322-frame-of-reference-packing-relative-to-a-baseline">2.3.2.2. Frame-of-Reference: Packing Relative to a Baseline</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3"><a hreff="#233-delta-encoding-the-foundation-of-compressibility">2.3.3. Delta Encoding: The Foundation of Compressibility</a></li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#24-segment-immutability-and-merging">2.4. Segment immutability and merging</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#241-segment-creation">2.4.1. Segment Creation</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#2411-the-bottleneck-of-immediate-writes">2.4.1.1. The Bottleneck of Immediate Writes</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#2412-buffered-flushes-to-new-segments">2.4.1.2. Buffered Flushes to New Segments</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#242-immutability-rationale">2.4.2. Immutability Rationale</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#2421-the-perils-of-in-place-edits">2.4.2.1. The Perils of In-Place Edits</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#2422-the-elegance-of-immutability">2.4.2.2. The Elegance of Immutability</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#243-merging-algorithms">2.4.3. Merging Algorithms</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#2431-the-brute-force-optimize">2.4.3.1. The Brute-Force Optimize</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#2432-tiered-merging-an-algorithmic-solution">2.4.3.2. Tiered Merging: An Algorithmic Solution</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#244-consolidation-strategies">2.4.4. Consolidation Strategies</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#2441-the-inefficiency-of-blind-merging">2.4.4.1. The Inefficiency of Blind Merging</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#2442-lucenes-adaptive-consolidation">2.4.4.2. Lucene’s Adaptive Consolidation</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#25-on-disk-formats">2.5. On-Disk Formats</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#251-compound-file-cfs">2.5.1. Compound File (.cfs)</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#2511-the-problem-of-file-proliferation">2.5.1.1. The Problem of File Proliferation</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#2512-the-compound-file-cfs-as-a-virtual-container">2.5.1.2. The Compound File (.cfs) as a Virtual Container</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3"><a hreff="#252-compound-file-entries-cfe">2.5.2. Compound File Entries (.cfe)</a></li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#253-skip-lists-for-fast-access">2.5.3. Skip Lists for Fast Access</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#2531-the-inefficiency-of-linear-scans">2.5.3.1. The Inefficiency of Linear Scans</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#2532-embedded-skip-lists-an-internal-express-lane">2.5.3.2. Embedded Skip Lists: An Internal Express Lane</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3"><a hreff="#254-skip-lists-deeper-dive">2.5.4. Skip Lists: Deeper Dive</a></li>
+                                <li class="toc-entry toc-h3"><a hreff="#255-memory-optimization">2.5.5. Memory Optimization</a></li>
+                                <li class="toc-entry toc-h3"><a hreff="#256-memory-mapped-io-speed-vs-virtual-memory">2.5.6. Memory-Mapped I/O: Speed vs. Virtual Memory</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="toc-entry toc-h1">
+                    <a hreff="#3-indexing-pipeline-from-documents-to-index">3. Indexing Pipeline: From Documents to Index</a>
+                    <ul>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#31-document-ingestion">3.1. Document Ingestion</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#311-document-flow">3.1.1. Document Flow</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#3111-the-gateway-challenge">3.1.1.1. The Gateway Challenge</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#3112-solrs-chained-ingestion-pipeline">3.1.1.2. Solr’s Chained Ingestion Pipeline</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#312-tokenization-basics">3.1.2. Tokenization Basics</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#3121-the-flaw-of-simple-splitting">3.1.2.1. The Flaw of Simple Splitting</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#3122-the-tokenstream-an-attributed-pipeline">3.1.2.2. The TokenStream: An Attributed Pipeline</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#313-analysis-chains">3.1.3. Analysis Chains</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#3131-the-brittleness-of-isolated-operations">3.1.3.1. The Brittleness of Isolated Operations</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#3132-the-tokenstream-pipeline">3.1.3.2. The TokenStream Pipeline</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#314-text-processing-details">3.1.4. Text Processing Details</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#3141-the-limits-of-basic-processing">3.1.4.1. The Limits of Basic Processing</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#3142-solrs-toolkit-for-real-world-data">3.1.4.2. Solr’s Toolkit for Real-World Data</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#32-algorithms-for-term-extraction-and-field-indexing">3.2. Algorithms for Term Extraction and Field Indexing</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#321-term-extraction-algorithm">3.2.1. Term Extraction Algorithm</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#3211-the-challenge-of-harvesting-tokens">3.2.1.1. The Challenge of Harvesting Tokens</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#3212-the-incrementtoken-loop-an-efficient-pull-model">3.2.1.2. The incrementToken() Loop: An Efficient Pull Model</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#322-frequency-and-position-tracking">3.2.2. Frequency and Position Tracking</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#3221-the-flaw-of-simple-counting">3.2.2.1. The Flaw of Simple Counting</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#3222-on-the-fly-attribute-tracking">3.2.2.2. On-the-Fly Attribute Tracking</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#323-field-indexing-mechanics">3.2.3. Field Indexing Mechanics</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#3231-the-wastefulness-of-uniform-treatment">3.2.3.1. The Wastefulness of Uniform Treatment</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#3232-fieldtypes-a-blueprint-for-indexing">3.2.3.2. FieldTypes: A Blueprint for Indexing</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#324-multi-field-handling">3.2.4. Multi-Field Handling</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#3241-the-brittleness-of-manual-copying">3.2.4.1. The Brittleness of Manual Copying</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#3242-declarative-routing-with-copyfield">3.2.4.2. Declarative Routing with copyField</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#33-engineering-optimizations">3.3. Engineering optimizations</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#331-batch-processing">3.3.1. Batch Processing</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#3311-the-thrashing-of-per-doc-commits">3.3.1.1. The Thrashing of Per-Doc Commits</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#3312-queues-and-triggers-solrs-batching-strategy">3.3.1.2. Queues and Triggers: Solr’s Batching Strategy</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#332-thread-pools">3.3.2. Thread Pools</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#3321-the-single-threaded-bottleneck">3.3.2.1. The Single-Threaded Bottleneck</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#3322-a-multi-layered-concurrency-model">3.3.2.2. A Multi-Layered Concurrency Model</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#333-parallel-indexing-with-documentswriterperthread">3.3.3. Parallel Indexing with DocumentsWriterPerThread</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#3331-the-contention-of-a-single-indexwriter">3.3.3.1. The Contention of a Single IndexWriter</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#3332-the-dwpt-model-a-stall-free-highway">3.3.3.2. The DWPT Model: A Stall-Free Highway</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#3333-from-in-memory-buffers-to-flushed-segments">3.3.3.3. From In-Memory Buffers to Flushed Segments</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#334-buffer-management">3.3.4. Buffer Management</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#3341-the-unpredictability-of-unlimited-heaps">3.3.4.1. The Unpredictability of Unlimited Heaps</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#3342-intelligent-buffer-management-in-lucene">3.3.4.2. Intelligent Buffer Management in Lucene</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#335-io-optimizations">3.3.5. I/O Optimizations</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#3351-the-inefficiencies-of-standard-writes">3.3.5.1. The Inefficiencies of Standard Writes</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#3352-lucenes-multi-pronged-io-strategy">3.3.5.2. Lucene’s Multi-Pronged I/O Strategy</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#34-handling-updates-and-deletes">3.4. Handling updates and deletes</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#341-no-true-in-place-updates">3.4.1. No True In-Place Updates</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#3411-the-dangers-of-in-place-edits">3.4.1.1. The Dangers of In-Place Edits</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#3412-the-delete-then-add-proxy">3.4.1.2. The Delete-Then-Add Proxy</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#342-soft-deletes">3.4.2. Soft Deletes</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#3421-the-delay-of-hard-deletes">3.4.2.1. The Delay of Hard Deletes</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#3422-soft-deletes-an-efficient-query-time-mask">3.4.2.2. Soft Deletes: An Efficient Query-Time Mask</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#343-rewrite-strategies">3.4.3. Rewrite Strategies</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#3431-the-paralysis-of-full-rewrites">3.4.3.1. The Paralysis of Full Rewrites</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#3432-a-toolkit-of-selective-rewrites">3.4.3.2. A Toolkit of Selective Rewrites</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#344-versioning-and-concurrency">3.4.4. Versioning and Concurrency</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#3441-the-throughput-killer-pessimistic-locking">3.4.4.1. The Throughput Killer: Pessimistic Locking</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#3442-optimistic-concurrency-with-versioning">3.4.4.2. Optimistic Concurrency with Versioning</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="toc-entry toc-h1">
+                    <a hreff="#4-query-parsing-and-execution">4. Query Parsing and Execution</a>
+                    <ul>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#41-query-parser-architecture-from-user-input-to-lucene-query-objects">4.1. Query parser architecture: from user input to Lucene query objects</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#411-user-input-handling">4.1.1. User Input Handling</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#4111-the-dangers-of-raw-strings">4.1.1.1. The Dangers of Raw Strings</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4112-a-configurable-and-escapable-gateway">4.1.1.2. A Configurable and Escapable Gateway</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#412-lexical-analysis">4.1.2. Lexical Analysis</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#4121-the-failure-of-simple-splitting">4.1.2.1. The Failure of Simple Splitting</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4122-the-javacc-powered-lexer">4.1.2.2. The JavaCC-Powered Lexer</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#413-syntax-tree-construction">4.1.3. Syntax Tree Construction</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#4131-the-limits-of-a-flat-list">4.1.3.1. The Limits of a Flat List</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4132-tructure">4.1.3.2. tructure</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#414-query-object-generation">4.1.4. Query Object Generation</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#4141-the-brittleness-of-direct-instantiation">4.1.4.1. The Brittleness of Direct Instantiation</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4142-a-multi-stage-generation-and-rewrite-process">4.1.4.2. A Multi-Stage Generation and Rewrite Process</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#415-morelikethis-finding-similar-documents">4.1.5. MoreLikeThis: Finding “Similar” Documents</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#4151-the-problem-the-ambiguity-of-similarity">4.1.5.1. The Problem: The Ambiguity of “Similarity”</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4152-a-naive-solution-manual-tagging">4.1.5.2. A Naive Solution: Manual Tagging</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4153-the-complication-unscalable-and-brittle-by-design">4.1.5.3. The Complication: Unscalable and Brittle by Design</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4154-the-solution-a-two-phase-analyze-then-search-algorithm">4.1.5.4. The Solution: A Two-Phase “Analyze-Then-Search” Algorithm</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4155-implementation-details-and-tuning">4.1.5.5. Implementation Details and Tuning</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#416-fuzzy-queries-and-levenshtein-automata">4.1.6. Fuzzy Queries and Levenshtein Automata</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#4161-the-combinatorial-explosion-of-naive-fuzzy-matching">4.1.6.1. The Combinatorial Explosion of Naive Fuzzy Matching</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4162-the-levenshtein-automaton-a-finite-state-recognizer">4.1.6.2. The Levenshtein Automaton: A Finite-State Recognizer</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4163-intersecting-automata-the-key-to-efficiency">4.1.6.3. Intersecting Automata: The Key to Efficiency</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#42-boolean-query-processing">4.2. Boolean Query Processing</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#421-booleanquery-structure">4.2.1. BooleanQuery Structure</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#4211-the-ambiguity-of-a-flat-list">4.2.1.1. The Ambiguity of a Flat List</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4212-the-booleanquery-a-structured-blueprint">4.2.1.2. The BooleanQuery: A Structured Blueprint</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#422-scorer-creation-and-iteration">4.2.2. Scorer Creation and Iteration</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#4221-the-inefficiency-of-sequential-execution">4.2.2.1. The Inefficiency of Sequential Execution</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4222-coordinated-iteration-with-the-booleanscorer">4.2.2.2. Coordinated Iteration with the BooleanScorer</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#423-posting-list-integration">4.2.3. Posting List Integration</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#4231-the-memory-hog-of-in-memory-sets">4.2.3.1. The Memory Hog of In-Memory Sets</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4232-logical-merging-of-sorted-streams">4.2.3.2. Logical Merging of Sorted Streams</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#424-optimization-rules">4.2.4. Optimization Rules</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#4241-the-blindness-of-exhaustive-evaluation">4.2.4.1. The Blindness of Exhaustive Evaluation</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4242-query-rewrites-and-early-termination">4.2.4.2. Query Rewrites and Early Termination</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#43-intersection-algorithms">4.3. Intersection Algorithms</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#431-multi-pointer-merge-conjunctiondisi">4.3.1. Multi-Pointer Merge (ConjunctionDISI)</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#4311-the-catastrophe-of-nested-loops">4.3.1.1. The Catastrophe of Nested Loops</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4312-the-conjunctiondisi-a-multi-pointer-merge">4.3.1.2. The ConjunctionDISI: A Multi-Pointer Merge</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#432-skip-lists-integration">4.3.2. Skip Lists Integration</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#4321-the-inefficiency-of-sequential-stepping">4.3.2.1. The Inefficiency of Sequential Stepping</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4322-hierarchical-leaps-with-skipto">4.3.2.2. Hierarchical Leaps with skipTo()</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#433-simd-optimizations-lucene-9">4.3.3. SIMD Optimizations (Lucene 9+)</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#4331-the-limits-of-scalar-loops">4.3.3.1. The Limits of Scalar Loops</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4332-vectorized-intersections-with-simd-lucene-9">4.3.3.2. Vectorized Intersections with SIMD (Lucene 9+)</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#434-adaptive-selection">4.3.4. Adaptive Selection</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#4341-the-inefficiency-of-flat-multi-merge">4.3.4.1. The Inefficiency of Flat Multi-Merge</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4342-heuristics-for-efficient-pruning">4.3.4.2. Heuristics for Efficient Pruning</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#435-multi-threaded-intra-segment-querying">4.3.5. Multi-Threaded Intra-Segment Querying</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#4351-the-single-threaded-segment-bottleneck">4.3.5.1. The Single-Threaded Segment Bottleneck</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4352-the-complications-of-slicing-a-segment">4.3.5.2. The Complications of Slicing a Segment</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4353-slice-based-intra-segment-parallelism">4.3.5.3. Slice-Based Intra-Segment Parallelism</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#44-disjunction-or-and-exclusion-not-union-and-difference-operations">4.4. Disjunction (OR) and Exclusion (NOT): Union and Difference Operations</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#441-union-operations-disjunctiondisi">4.4.1. Union Operations (DisjunctionDISI)</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#4411-the-inefficiency-of-concatenate-and-sort">4.4.1.1. The Inefficiency of Concatenate-and-Sort</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4412-the-min-heap-merging-sorted-streams">4.4.1.2. The Min-Heap: Merging Sorted Streams</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#442-disjunctionmaxquery-scoring">4.4.2. DisjunctionMaxQuery Scoring</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#4421-the-dilution-of-a-simple-sum">4.4.2.1. The Dilution of a Simple Sum</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4422-disjunctionmaxquery-the-best-field-wins-strategy">4.4.2.2. DisjunctionMaxQuery: The Best-Field-Wins Strategy</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#443-exclusion-not-via-difference">4.4.3. Exclusion (NOT) via Difference</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#4431-the-folly-of-the-full-complement">4.4.3.1. The Folly of the Full Complement</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4432-surgical-exclusion-with-a-filtered-iterator">4.4.3.2. Surgical Exclusion with a Filtered Iterator</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#444-advanced-difference-handling">4.4.4. Advanced Difference Handling</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#4441-the-explosiveness-of-literal-complements">4.4.4.1. The Explosiveness of Literal Complements</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4442-de-morgans-laws-and-roaring-bitmaps">4.4.4.2. De Morgan’s Laws and Roaring Bitmaps</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#445-block-max-wand-pruning-the-search-space-for-disjunctive-queries">4.4.5. Block-Max WAND: Pruning the Search Space for Disjunctive Queries</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#4451-the-inefficiency-of-score-all">4.4.5.1. The Inefficiency of Score-All</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4452-the-need-for-dynamic-pruning">4.4.5.2. The Need for Dynamic Pruning</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#4453-a-weak-and-heuristic-with-block-max-wand">4.4.5.3. A “Weak AND” Heuristic with Block-Max WAND</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="toc-entry toc-h1">
+                    <a hreff="#5-relevance-scoring-and-ranking">5. Relevance Scoring and Ranking</a>
+                    <ul>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#51-scoring-models">5.1. Scoring Models</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#511-tf-idf-classicsimilarity">5.1.1. TF-IDF (ClassicSimilarity)</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#5111-the-challenge-of-ranking">5.1.1.1. The Challenge of Ranking</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#5112-tf-idf-the-classic-vector-space-model">5.1.1.2. TF-IDF: The Classic Vector Space Model</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#512-bm25-defaultsimilarity-since-lucene-60">5.1.2. BM25 (DefaultSimilarity since Lucene 6.0)</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#5121-the-pitfall-of-linear-tf">5.1.2.1. The Pitfall of Linear TF</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#5122-bm25-a-probabilistic-refinement">5.1.2.2. BM25: A Probabilistic Refinement</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#513-custom-scoring-implementations">5.1.3. Custom Scoring Implementations</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#5131-the-trap-of-core-modifications">5.1.3.1. The Trap of Core Modifications</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#5132-extending-the-similarity-class">5.1.3.2. Extending the Similarity Class</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#dfr-similarity-details">DFR Similarity: Details</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#514-augmenting-scores-with-featurefield">5.1.4. Augmenting Scores with FeatureField</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#5141-the-crudeness-of-simple-boosting">5.1.4.1. The Crudeness of Simple Boosting</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#5142-featurefield-a-principled-integration-of-signals">5.1.4.2. FeatureField: A Principled Integration of Signals</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#5143-indexing-features-and-blending-scores">5.1.4.3. Indexing Features and Blending Scores</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#515-advanced-ranking-with-learning-to-rank-ltr">5.1.5. Advanced Ranking with Learning to Rank (LTR)</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#5151-the-core-challenge-why-not-just-use-ml-directly">5.1.5.1. The Core Challenge: Why Not Just Use ML Directly?</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#5152-solrs-feature-store-the-raw-ingredients-for-relevance">5.1.5.2. Solr’s Feature Store: The Raw Ingredients for Relevance</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#5153-a-glimpse-into-the-models-pointwise-pairwise-and-listwise">5.1.5.3. A Glimpse into the Models: Pointwise, Pairwise, and Listwise</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#5154-the-practical-workflow-from-data-to-deployment">5.1.5.4. The Practical Workflow: From Data to Deployment</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3"><a hreff="#516-a-glimpse-into-the-models-pointwise-pairwise-and-listwise">5.1.6. A Glimpse into the Models: Pointwise, Pairwise, and Listwise</a></li>
+                                <li class="toc-entry toc-h3"><a hreff="#517-integration-the-re-ranking-query">5.1.7. Integration: The Re-ranking Query</a></li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#52-engineering-details">5.2. Engineering Details</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#521-floating-point-arithmetic">5.2.1. Floating-Point Arithmetic</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#5211-the-imprecision-of-integers">5.2.1.1. The Imprecision of Integers</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#5212-doubles-clamping-and-simd">5.2.1.2. Doubles, Clamping, and SIMD</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#522-normalization-mechanisms">5.2.2. Normalization Mechanisms</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#5221-the-slowness-of-post-hoc-normalization">5.2.2.1. The Slowness of Post-Hoc Normalization</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#5222-baked-in-normalization-and-pre-computed-stats">5.2.2.2. Baked-In Normalization and Pre-Computed Stats</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#523-precision-trade-offs">5.2.3. Precision Trade-Offs</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#5231-the-cost-of-full-precision">5.2.3.1. The Cost of Full Precision</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#5232-a-configurable-approach-to-precision">5.2.3.2. A Configurable Approach to Precision</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#53-field-weighting-and-boosting">5.3. Field Weighting and Boosting</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#531-field-weighting">5.3.1. Field Weighting</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#5311-the-inefficiency-of-runtime-multipliers">5.3.1.1. The Inefficiency of Runtime Multipliers</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#5312-declarative-weighting-in-the-schema">5.3.1.2. Declarative Weighting in the Schema</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#532-query-time-boosting">5.3.2. Query-Time Boosting</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#5321-the-clumsiness-of-subqueries">5.3.2.1. The Clumsiness of Subqueries</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#5322-a-rich-syntax-for-runtime-boosting">5.3.2.2. A Rich Syntax for Runtime Boosting</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#533-algorithmic-impacts">5.3.3. Algorithmic Impacts</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#5331-the-limits-of-additive-boosting">5.3.3.1. The Limits of Additive Boosting</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#5332-multiplication-with-safeguards">5.3.3.2. Multiplication with Safeguards</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#54-scoring-in-distributed-systems-challenges-of-consistent-scoring-across-shards">5.4. Scoring in Distributed Systems: Challenges of Consistent Scoring Across Shards</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#541-local-vs-global-stats">5.4.1. Local vs. Global Stats</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#5411-the-latency-of-global-consistency">5.4.1.1. The Latency of Global Consistency</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#5412-solrclouds-local-first-default">5.4.1.2. SolrCloud’s “Local First” Default</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#542-coordination-and-re-ranking">5.4.2. Coordination and Re-Ranking</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#5421-the-slowness-of-perfect-global-stats">5.4.2.1. The Slowness of Perfect Global Stats</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#5422-fetch-over-fetch-and-re-rank">5.4.2.2. Fetch, Over-Fetch, and Re-Rank</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#543-engineering-trade-offs">5.4.3. Engineering Trade-Offs</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#5431-the-pitfalls-of-extremes">5.4.3.1. The Pitfalls of Extremes</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#5432-a-spectrum-of-hybrid-solutions">5.4.3.2. A Spectrum of Hybrid Solutions</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#544-mitigation-strategies">5.4.4. Mitigation Strategies</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#5441-the-cost-of-inaction">5.4.4.1. The Cost of Inaction</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#5442-a-proactive-toolkit-for-consistency">5.4.4.2. A Proactive Toolkit for Consistency</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="toc-entry toc-h1">
+                    <a hreff="#6-pagination-and-result-retrieval">6. Pagination and Result Retrieval</a>
+                    <ul>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#61-standard-pagination-top-k-collection-with-priority-queues-min-heap">6.1. Standard Pagination: Top-K Collection with Priority Queues (Min-Heap)</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#611-collector-architecture">6.1.1. Collector Architecture</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#6111-the-folly-of-sort-all">6.1.1.1. The Folly of Sort-All</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#6112-the-min-heap-a-bounded-shortlist">6.1.1.2. The Min-Heap: A Bounded Shortlist</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#612-collection-algorithm">6.1.2. Collection Algorithm</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#6121-the-memory-cost-of-sort-after-collection">6.1.2.1. The Memory Cost of Sort-After-Collection</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#6122-incremental-pruning-with-a-min-heap">6.1.2.2. Incremental Pruning with a Min-Heap</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#613-sort-integration">6.1.3. Sort Integration</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#6131-the-limitation-of-score-only-sorting">6.1.3.1. The Limitation of Score-Only Sorting</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#6132-topfieldcollector-and-comparators">6.1.3.2. TopFieldCollector and Comparators</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#614-memory-footprint">6.1.4. Memory Footprint</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#6141-the-danger-of-unbounded-queues">6.1.4.1. The Danger of Unbounded Queues</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#6142-predictable-bounded-memory">6.1.4.2. Predictable, Bounded Memory</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#62-deep-paging-challenges-performance-bottlenecks-and-memory-usage">6.2. Deep Paging Challenges: Performance Bottlenecks and Memory Usage</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#621-time-complexity-bottleneck">6.2.1. Time Complexity Bottleneck</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#6211-the-instability-of-incremental-paging">6.2.1.1. The Instability of Incremental Paging</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#6212-the-on-log-k-toll-of-the-collector">6.2.1.2. The O(N log K) Toll of the Collector</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#622-io-amplification">6.2.2. I/O Amplification</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#6221-the-illusion-of-lazy-loading">6.2.2.1. The Illusion of Lazy Loading</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#6222-the-reality-of-eager-loading">6.2.2.2. The Reality of Eager Loading</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#623-memory-usage-spikes">6.2.3. Memory Usage Spikes</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#6231-the-non-solution-of-small-heaps">6.2.3.1. The Non-Solution of Small Heaps</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#6232-managing-inherent-spikes">6.2.3.2. Managing Inherent Spikes</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#624-consistency-issues">6.2.4. Consistency Issues</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#6241-the-stale-snapshot">6.2.4.1. The Stale Snapshot</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#6242-the-mechanics-of-page-drift">6.2.4.2. The Mechanics of Page Drift</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#63-cursor-based-pagination">6.3. Cursor-Based Pagination</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#631-cursormark-mechanics">6.3.1. CursorMark Mechanics</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#6311-the-fragility-of-id-offsets">6.3.1.1. The Fragility of ID Offsets</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#6312-cursormark-an-opaque-sort-tuple-anchor">6.3.1.2. CursorMark: An Opaque Sort-Tuple Anchor</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#632-sort-based-filtering">6.3.2. Sort-Based Filtering</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#6321-the-inefficiency-of-post-filtering">6.3.2.1. The Inefficiency of Post-Filtering</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#6322-translating-cursors-to-range-queries">6.3.2.2. Translating Cursors to Range Queries</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#633-incremental-retrieval-algorithm">6.3.3. Incremental Retrieval Algorithm</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#6331-the-inefficiency-of-re-scanning">6.3.3.1. The Inefficiency of Re-Scanning</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#6332-the-incremental-collection-algorithm">6.3.3.2. The Incremental Collection Algorithm</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#634-implementation-details">6.3.4. Implementation Details</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#6341-the-brittleness-of-ad-hoc-solutions">6.3.4.1. The Brittleness of Ad-Hoc Solutions</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#6342-native-searchafter-the-core-of-the-implementation">6.3.4.2. Native searchAfter: The Core of the Implementation</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#64-engineering-trade-offs">6.4. Engineering Trade-Offs</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#641-heap-size-trade-offs">6.4.1. Heap Size Trade-Offs</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#6411-the-peril-of-a-minimal-heap">6.4.1.1. The Peril of a Minimal Heap</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#6412-tunable-bounds-and-smart-storage">6.4.1.2. Tunable Bounds and Smart Storage</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#642-caching-strategies">6.4.2. Caching Strategies</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#6421-the-cost-of-always-being-fresh">6.4.2.1. The Cost of Always Being Fresh</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#6422-solrs-two-tiered-caching-strategy">6.4.2.2. Solr’s Two-Tiered Caching Strategy</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#643-shard-coordination-overhead">6.4.3. Shard Coordination Overhead</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#6431-the-inaccuracy-of-local-only-results">6.4.3.1. The Inaccuracy of Local-Only Results</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#6432-buffered-scatter-gather-with-optional-pruning">6.4.3.2. Buffered Scatter-Gather with Optional Pruning</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#644-overall-balancing">6.4.4. Overall balancing</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#6441-the-fallacy-of-one-size-fits-all">6.4.4.1. The Fallacy of “One Size Fits All”</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#6442-workload-driven-tuning-with-metrics">6.4.4.2. Workload-Driven Tuning with Metrics</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#65-highlighting-and-query-biased-summarization">6.5. Highlighting and Query-Biased Summarization</a>
+                            <ul>
+                                <li class="toc-entry toc-h3"><a hreff="#651-the-challenge-of-query-biased-summarization">6.5.1. The Challenge of Query-Biased Summarization</a></li>
+                                <li class="toc-entry toc-h3"><a hreff="#652-the-original-highlighter-flexible-but-analysis-heavy">6.5.2. The Original Highlighter: Flexible but Analysis-Heavy</a></li>
+                                <li class="toc-entry toc-h3"><a hreff="#653-fastvectorhighlighter-vector-powered-speed-demon">6.5.3. FastVectorHighlighter: Vector-Powered Speed Demon</a></li>
+                                <li class="toc-entry toc-h3"><a hreff="#654-choosing-between-algorithms-trade-offs-and-best-practices">6.5.4. Choosing Between Algorithms: Trade-Offs and Best Practices</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="toc-entry toc-h1">
+                    <a hreff="#7-faceting-and-aggregations">7. Faceting and Aggregations</a>
+                    <ul>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#71-facet-computation-algorithms-for-counting-and-grouping">7.1. Facet Computation: Algorithms for Counting and Grouping</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#711-facetscollector-framework">7.1.1. FacetsCollector Framework</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#7111-the-challenge-of-aggregation">7.1.1.1. The Challenge of Aggregation</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#7112-the-facetscollector-a-single-pass-framework">7.1.1.2. The FacetsCollector: A Single-Pass Framework</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#712-hash-based-counting-sparse-facets">7.1.2. Hash-Based Counting (Sparse Facets)</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#7121-the-infeasibility-of-dense-arrays">7.1.2.1. The Infeasibility of Dense Arrays</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#7122-hash-based-counting-for-sparse-data">7.1.2.2. Hash-Based Counting for Sparse Data</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#713-tree-based-grouping-dense-facets">7.1.3. Tree-Based Grouping (Dense Facets)</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#7131-the-inefficiency-of-hashing-the-known">7.1.3.1. The Inefficiency of Hashing the Known</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#7132-ordinal-based-counting-with-sorteddocvalues">7.1.3.2. Ordinal-Based Counting with SortedDocValues</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#714-hybrid-selection">7.1.4. Hybrid Selection</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#7141-the-inefficiency-of-a-fixed-strategy">7.1.4.1. The Inefficiency of a Fixed Strategy</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#7142-automatic-selection-and-the-json-facet-api">7.1.4.2. Automatic Selection and the JSON Facet API</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#72-field-based-vs-query-based-faceting-implementation-differences">7.2. Field-Based vs. Query-Based Faceting: Implementation Differences</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#721-field-based-faceting-facetfield">7.2.1. Field-Based Faceting (facet.field)</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#7211-the-inefficiency-of-runtime-extraction">7.2.1.1. The Inefficiency of Runtime Extraction</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#7212-direct-scans-of-columnar-data">7.2.1.2. Direct Scans of Columnar Data</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#722-query-based-faceting-facetquery">7.2.2. Query-Based Faceting (facet.query)</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#7221-the-inefficiency-of-external-processing">7.2.2.1. The Inefficiency of External Processing</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#7222-the-boolean-wrapper-method">7.2.2.2. The Boolean-Wrapper Method</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#723-hybrid-use-cases">7.2.3. Hybrid Use Cases</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#7231-the-inefficiency-of-siloed-calls">7.2.3.1. The Inefficiency of Siloed Calls</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#7232-a-unified-facet-api">7.2.3.2. A Unified Facet API</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#724-precision-trade-offs">7.2.4. Precision Trade-Offs</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#7241-the-illusion-of-uniform-precision">7.2.4.1. The Illusion of Uniform Precision</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#7242-choosing-the-right-tool-for-precision">7.2.4.2. Choosing the Right Tool for Precision</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#73-distributed-faceting-merging-facet-counts-across-shards">7.3. Distributed Faceting: Merging Facet Counts Across Shards</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#731-shard-local-computation">7.3.1. Shard-Local Computation</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#7311-the-impracticality-of-global-computation">7.3.1.1. The Impracticality of Global Computation</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#7312-shard-local-computation-a-parallel-first-pass">7.3.1.2. Shard-Local Computation: A Parallel First Pass</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#732-coordinator-merging-algorithm">7.3.2. Coordinator Merging Algorithm</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#7321-the-inefficiency-of-recounting">7.3.2.1. The Inefficiency of Recounting</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#7322-keyed-fusion-the-hashmap-and-heap-approach">7.3.2.2. Keyed Fusion: The HashMap and Heap Approach</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#733-optimization-for-large-facets">7.3.3. Optimization for Large Facets</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#7331-the-inefficiency-of-sending-everything">7.3.3.1. The Inefficiency of Sending Everything</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#7332-a-toolkit-of-pruning-techniques">7.3.3.2. A Toolkit of Pruning Techniques</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#734-consistency-handling">7.3.4. Consistency Handling</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#7341-the-brittleness-of-fail-fast">7.3.4.1. The Brittleness of Fail-Fast</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#7342-tolerant-merging-with-precision-options">7.3.4.2. Tolerant Merging with Precision Options</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#74-performance-optimizations-caching-pre-computed-facets-and-doc-values">7.4. Performance Optimizations: Caching, Pre-Computed Facets, and Doc Values</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#741-facet-caching">7.4.1. Facet Caching</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#7411-the-inefficiency-of-constant-re-computation">7.4.1.1. The Inefficiency of Constant Re-computation</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#7412-solrs-layered-caching-strategy">7.4.1.2. Solr’s Layered Caching Strategy</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#742-pre-computed-facets">7.4.2. Pre-Computed Facets</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#7421-the-inefficiency-of-constant-recalculation">7.4.2.1. The Inefficiency of Constant Recalculation</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#7422-a-toolkit-for-pre-computation">7.4.2.2. A Toolkit for Pre-Computation</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#743-doc-values-usage">7.4.3. Doc Values Usage</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#7431-the-inefficiency-of-stored-fields-and-fieldcache">7.4.3.1. The Inefficiency of Stored Fields and FieldCache</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#7432-doc-values-an-off-heap-columnar-store">7.4.3.2. Doc Values: An Off-Heap Columnar Store</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#744-tuning-trade-offs">7.4.4. Tuning Trade-Offs</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#7441-the-dangers-of-default-settings">7.4.4.1. The Dangers of Default Settings</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#7442-metrics-driven-tuning">7.4.4.2. Metrics-Driven Tuning</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="toc-entry toc-h1">
+                    <a hreff="#8-solrcloud-distributed-search-engineering">8. SolrCloud: Distributed Search Engineering</a>
+                    <ul>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#81-sharding-and-replication-data-partitioning-and-fault-tolerance">8.1. Sharding and Replication: Data Partitioning and Fault Tolerance</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#811-data-partitioning-algorithms">8.1.1. Data Partitioning Algorithms</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#8111-the-challenge-of-even-distribution">8.1.1.1. The Challenge of Even Distribution</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#8112-solrclouds-flexible-routing-algorithms">8.1.1.2. SolrCloud’s Flexible Routing Algorithms</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#812-shard-creation-and-splitting">8.1.2. Shard Creation and Splitting</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#8121-the-rigidity-of-static-sharding">8.1.2.1. The Rigidity of Static Sharding</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#8122-dynamic-splitting-with-splitshard">8.1.2.2. Dynamic Splitting with SPLITSHARD</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#813-replication-mechanics">8.1.3. Replication Mechanics</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#8131-the-inefficiency-of-full-copies">8.1.3.1. The Inefficiency of Full Copies</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#8132-a-hybrid-replication-model">8.1.3.2. A Hybrid Replication Model</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#814-fault-tolerance-mechanisms">8.1.4. Fault Tolerance Mechanisms</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#8141-the-slowness-of-manual-failover">8.1.4.1. The Slowness of Manual Failover</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#8142-automated-zookeeper-monitored-recovery">8.1.4.2. Automated, ZooKeeper-Monitored Recovery</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#82-zookeepers-role-coordination-configuration-and-leader-election">8.2. ZooKeeper’s Role: Coordination, Configuration, and Leader Election</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#821-cluster-coordination">8.2.1. Cluster Coordination</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#8211-the-unreliability-of-gossip">8.2.1.1. The Unreliability of Gossip</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#8212-znodes-and-watches-a-centralized-truth">8.2.1.2. Znodes and Watches: A Centralized Truth</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#822-configuration-management">8.2.2. Configuration Management</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#8221-the-chaos-of-per-node-files">8.2.2.1. The Chaos of Per-Node Files</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#8222-centralized-versioned-configs-in-zookeeper">8.2.2.2. Centralized, Versioned Configs in ZooKeeper</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#823-leader-election">8.2.3. Leader Election</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#8231-the-blindness-of-round-robin">8.2.3.1. The Blindness of Round-Robin</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#8232-quorum-based-election-via-zookeeper">8.2.3.2. Quorum-Based Election via ZooKeeper</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#824-internal-reliability">8.2.4. Internal Reliability</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#8241-the-single-point-of-doom">8.2.4.1. The Single Point of Doom</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#8242-quorum-based-consensus-with-zookeeper">8.2.4.2. Quorum-Based Consensus with ZooKeeper</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#83-distributed-query-execution-scatter-gather-coordinator-overhead-and-load-balancing">8.3. Distributed Query Execution: Scatter-Gather, Coordinator Overhead, and Load Balancing</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#831-scatter-gather-process">8.3.1. Scatter-Gather Process</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#8311-the-slowness-of-sequential-polling">8.3.1.1. The Slowness of Sequential Polling</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#8312-the-asynchronous-scatter-gather-process">8.3.1.2. The Asynchronous Scatter-Gather Process</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#832-coordinator-role-and-overhead">8.3.2. Coordinator Role and Overhead</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#8321-the-failure-of-raw-concatenation">8.3.2.1. The Failure of Raw Concatenation</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#8322-phased-merging-with-tunable-overheads">8.3.2.2. Phased Merging with Tunable Overheads</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#833-load-balancing-strategies">8.3.3. Load Balancing Strategies</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#8331-the-blindness-of-round-robin">8.3.3.1. The Blindness of Round-Robin</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#8332-intelligent-routing-with-preferences">8.3.3.2. Intelligent Routing with Preferences</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#834-shard-selection-for-queries">8.3.4. Shard Selection for Queries</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#8341-the-overkill-of-all-shard-broadcast">8.3.4.1. The Overkill of All-Shard Broadcast</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#8342-directed-routing-and-fault-tolerance">8.3.4.2. Directed Routing and Fault Tolerance</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#84-consistency-vs-performance-trade-offs-in-replication-strategies">8.4. Consistency vs. Performance: Trade-Offs in Replication Strategies</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#841-replication-strategies-overview">8.4.1. Replication Strategies Overview</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#8411-the-simplicity-of-uniform-replicas">8.4.1.1. The Simplicity of Uniform Replicas</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#8412-tiered-replication-for-balanced-resilience">8.4.1.2. Tiered Replication for Balanced Resilience</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#842-consistency-guarantees">8.4.2. Consistency Guarantees</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#8421-the-drag-of-synchronous-replication">8.4.2.1. The Drag of Synchronous Replication</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#8422-asynchronous-propagation-with-safeguards">8.4.2.2. Asynchronous Propagation with Safeguards</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#843-performance-impacts">8.4.3. Performance Impacts</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#8431-the-bottleneck-of-all-nrt-uniformity">8.4.3.1. The Bottleneck of All-NRT Uniformity</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#8432-mixed-replica-strategies-for-balanced-performance">8.4.3.2. Mixed Replica Strategies for Balanced Performance</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#844-tuning-trade-offs">8.4.4. Tuning Trade-Offs</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#8441-the-pitfalls-of-untuned-defaults">8.4.4.1. The Pitfalls of Untuned Defaults</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#8442-configurable-knobs-and-metrics-driven-balance">8.4.4.2. Configurable Knobs and Metrics-Driven Balance</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="toc-entry toc-h1">
+                    <a hreff="#9-performance-optimizations-and-caching">9. Performance Optimizations and Caching</a>
+                    <ul>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#91-query-caching-filter-cache-query-result-cache-and-document-cache">9.1. Query Caching: Filter Cache, Query Result Cache, and Document Cache</a>
+                            <ul>
+                                <li class="toc-entry toc-h3"><a hreff="#911-filter-cache">9.1.1. Filter Cache</a></li>
+                                <li class="toc-entry toc-h3"><a hreff="#the-waste-of-recomputation">The Waste of Recomputation</a></li>
+                                <li class="toc-entry toc-h3"><a hreff="#solrs-lru-filtercache">Solr’s LRU FilterCache</a></li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#912-query-result-cache">9.1.2. Query Result Cache</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#9121-the-waste-of-always-fresh-computation">9.1.2.1. The Waste of Always-Fresh Computation</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#9122-bounded-hash-keyed-caching-with-autowarming">9.1.2.2. Bounded, Hash-Keyed Caching with Autowarming</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#913-document-cache">9.1.3. Document Cache</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#9131-the-drag-of-perpetual-deserialization">9.1.3.1. The Drag of Perpetual Deserialization</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#9132-the-pressures-of-first-fetch-overhead-and-eviction">9.1.3.2. The Pressures of First-Fetch Overhead and Eviction</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#9133-per-searcher-lru-caching-and-tunable-safeguards">9.1.3.3. Per-Searcher LRU Caching and Tunable Safeguards</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#92-index-time-optimizations-doc-values-stored-fields-and-norms">9.2. Index-Time Optimizations: Doc Values, Stored Fields, and Norms</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#921-doc-values">9.2.1. Doc Values</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#9211-the-drag-of-row-wise-stored-fields">9.2.1.1. The Drag of Row-Wise Stored Fields</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#9212-the-columnar-flip-and-its-nuances">9.2.1.2. The Columnar Flip and Its Nuances</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#922-stored-fields">9.2.2. Stored Fields</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#9221-the-waste-of-raw-serialization">9.2.2.1. The Waste of Raw Serialization</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#9222-block-level-compression-and-selective-storage">9.2.2.2. Block-Level Compression and Selective Storage</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#923-norms">9.2.3. Norms</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#9231-the-overhead-of-on-the-fly-normalization">9.2.3.1. The Overhead of On-the-Fly Normalization</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#9232-baked-norms-and-configurable-omissions">9.2.3.2. Baked Norms and Configurable Omissions</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#93-jvm-tuning-garbage-collection-heap-management-and-memory-mapped-io">9.3. JVM Tuning: Garbage Collection, Heap Management, and Memory-Mapped I/O</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#931-garbage-collection">9.3.1. Garbage Collection</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#9311-the-pitfalls-of-untuned-g1gc">9.3.1.1. The Pitfalls of Untuned G1GC</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#9312-low-latency-collectors-and-diagnostic-safeguards">9.3.1.2. Low-Latency Collectors and Diagnostic Safeguards</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#932-heap-management">9.3.2. Heap Management</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#9321-the-perils-of-auto-resizing">9.3.2.1. The Perils of Auto-Resizing</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#9322-fixed-sizing-and-vigilant-monitoring">9.3.2.2. Fixed Sizing and Vigilant Monitoring</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#933-memory-mapped-io">9.3.3. Memory-Mapped I/O</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#9331-the-predictability-of-buffered-io">9.3.3.1. The Predictability of Buffered I/O</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#9332-lucenes-memory-mapped-approach">9.3.3.2. Lucene’s Memory-Mapped Approach</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a hreff="#94-hardware-considerations-ssds-vs-hdds-cpu-vectorization-simd">9.4. Hardware Considerations: SSDs vs. HDDs, CPU Vectorization (SIMD)</a>
+                            <ul>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#941-ssds-vs-hdds">9.4.1. SSDs vs. HDDs</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#9411-the-allure-of-hdds-everywhere">9.4.1.1. The Allure of HDDs Everywhere</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#9412-embracing-flash-ssds-and-nvme">9.4.1.2. Embracing Flash: SSDs and NVMe</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-entry toc-h3">
+                                    <a hreff="#942-cpu-vectorization-simd">9.4.2. CPU Vectorization (SIMD)</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a hreff="#9421-the-single-lane-trap-of-scalar-processing">9.4.2.1. The Single-Lane Trap of Scalar Processing</a></li>
+                                        <li class="toc-entry toc-h4"><a hreff="#9422-vectorized-loops-and-hardware-trade-offs">9.4.2.2. Vectorized Loops and Hardware Trade-Offs</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</main>
+</body>
+</html>

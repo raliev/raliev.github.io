@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beyond English - Rauf Aliev</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .prose ul {
+            list-style-type: disc; /* Возвращает маркеры-точки */
+            padding-left: 1.75rem; /* Добавляет отступ слева */
+        }
+
+        .prose ul li {
+            margin-top: 0.5rem; /* Добавляет отступ сверху для каждого элемента списка */
+        }
+
+        .prose ul ul {
+            margin-top: 0.5rem; /* Добавляет отступ для вложенных списков */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+<header class="sticky top-0 z-50 shadow-sm" style="background-color: #faf8f5;">
+    <nav class="container mx-auto flex items-center justify-between px-6 py-4">
+        <a href="/"><img src="/img/testmysearch-logo.png" alt="TestMySearch Logo" style="height:60px"></a>
+        <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
+            <a href="demos.html" class="text-gray-600 hover:text-indigo-600">Demos</a>
+            <a href="index.html#features" class="text-gray-600 hover:text-indigo-600">Features</a>
+            <a href="index.html#how-it-works" class="text-gray-600 hover:text-indigo-600">How It Works</a> <a href="/blog/" class="text-gray-600 hover:text-indigo-600">Blog</a>
+            <a href="index.html#contact" class="rounded-md bg-indigo-600 px-4 py-2 text-white transition hover:bg-indigo-700">Contact Us</a>
+        </div>
+    </nav>
+</header>
+<main class="container mx-auto px-6 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div class="md:col-span-1">
+            <img src="/img/be-ws.jpg" alt="Book Cover: Beyond English" class="rounded-lg shadow-lg">
+            <div class="mt-8 space-y-4">
+                <h3 class="text-xl font-bold">Where to Buy</h3>
+                <a href="https://a.co/d/2LOB9kw" class="block bg-blue-500 text-white text-center py-2 px-4 rounded hover:bg-blue-600">Amazon</a>
+                <!--<a href="#" class="block bg-green-500 text-white text-center py-2 px-4 rounded hover:bg-green-600">Barnes & Noble</a>
+                <a href="#" class="block bg-gray-700 text-white text-center py-2 px-4 rounded hover:bg-gray-800">Other Retailers</a>
+                -->
+                <a href="/pdfs/books/beyond-english-sample.pdf" class="block bg-red-500 text-white text-center py-2 px-4 rounded hover:bg-red-600">Read Sample (PDF)</a>
+            </div>
+        </div>
+        <div class="md:col-span-2 prose">
+            <h1 class="text-4xl font-extrabold text-gray-900">Beyond English: Architecting Search for a Global World</h1>
+            <p><font color="gray" class="text-2xl">Rauf Aliev</font></p>
+            <p class="mt-4 text-lg text-gray-600">In a world where over half of all web content is non-English, most search systems are still built on a flawed, English-centric foundation. This "monolingual trap" leads to catastrophic failures in global markets, frustrating users and costing businesses dearly.</p>
+
+            <h3 class="text-2xl font-bold mt-8">The Book’s Organizational Framework</h3>
+
+            <h4 class="text-xl font-semibold mt-4">Universal Challenges</h4>
+            <p class="mt-2">The book opens by establishing the universal challenges of multilingual search, introducing the “monolingual trap” — the flawed assumption that all users search like English speakers. It presents striking data showing that over half of web content is non-English and clarifies the distinctions between monolingual, multilingual, and cross-lingual search to build a shared conceptual foundation.</p>
+
+            <h4 class="text-xl font-semibold mt-4">The Core Technical Foundation</h4>
+            <p class="mt-2">Next, the book outlines the “Core Components of a Multilingual Search System,” forming the technical backbone for later chapters. It covers language detection for both queries and documents, then explores the indexing pipeline — tokenization, normalization, stemming, and lemmatization — explaining how each must be adapted to different languages.</p>
+
+            <h4 class="text-xl font-semibold mt-4">The Language Family Chapters</h4>
+            <p class="mt-2">The main body of the book consists of language family–based chapters, each following a consistent structure that highlights distinct linguistic and engineering challenges.</p>
+            <br><br>
+            <img src="/img/be-wordcloud.png">
+            <br><br>
+            <h4 class="text-4xl font-semibold mt-4">Table of Contents</h4>
+            <hr style="color:black;height:2px" size="2" noshade><br>
+            <ul>
+                <li><b>The Monolingual Trap</b>
+                    <ul>
+                        <li>The Inescapable Global User
+                            <ul>
+                                <li>The New Digital Ecosystem: A World of Languages
+                                </li></ul>
+                            <ul>
+                                <li>Why Getting Language Right Isn't Optional
+                                </li></ul>
+                            <ul>
+                                <li>A Glimpse of the Labyrinth: The Challenges Ahead
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Key Concepts: Monolingual, Multilingual, and Cross-Lingual Search
+                            <ul>
+                                <li>Defining the Terms
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>The Anatomy of a Monolingual Search Failure
+                            <ul>
+                                <li>Over-Reliance on English-Based Assumptions
+                                </li></ul>
+                            <ul>
+                                <li>Query Understanding: When Your Search is Lost in Translation
+                                    <ul>
+                                        <li>Ignoring Synonyms and Homophones
+                                        </li></ul>
+                                    <ul>
+                                        <li>Ignoring Regional Variants
+                                        </li></ul>
+                                    <ul>
+                                        <li>Assuming English-centric stop words
+                                        </li></ul>
+                                    <ul>
+                                        <li>Ignoring mixed-language queries
+                                        </li></ul>
+                                </li></ul>
+                            <ul>
+                                <li>Cultural and UI Oversights: A Flawed Experience
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Why Multilingual Search is a Competitive Superpower
+                            <ul>
+                                <li>Improved User Engagement
+                                </li></ul>
+                            <ul>
+                                <li>SEO Advantages
+                                </li></ul>
+                            <ul>
+                                <li>Higher Conversion Rates
+                                </li></ul>
+                            <ul>
+                                <li>Brand Loyalty and Trust
+                                </li></ul>
+                            <ul>
+                                <li>How to Prove It: Metrics to Track
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Global Search Redefines User Expectations
+                            <ul>
+                                <li>Transferred Expectations
+                                </li></ul>
+                            <ul>
+                                <li>Market Dominance by Numbers
+                                    <ul>
+                                        <li>China and Baidu
+                                        </li></ul>
+                                    <ul>
+                                        <li>Russia and Yandex
+                                        </li></ul>
+                                </li></ul>
+                        </li></ul>
+                </li></ul>
+            <ul>
+                <li><b>Architecture and Core Components of a Multilingual Search System</b>
+                    <ul>
+                        <li>Language Detection and Identification
+                            <ul>
+                                <li>Document Language Detection
+                                </li></ul>
+                            <ul>
+                                <li>Query Language Detection
+                                </li></ul>
+                            <ul>
+                                <li>The Engineer's Toolkit
+                                    <ul>
+                                        <li>Statistical Methods
+                                        </li></ul>
+                                    <ul>
+                                        <li>AI-Based Methods
+                                        </li></ul>
+                                    <ul>
+                                        <li>Metadata and Contextual Clues
+                                        </li></ul>
+                                </li></ul>
+                            <ul>
+                                <li>Handling the Polyglot Query
+                                </li></ul>
+                            <ul>
+                                <li>Handling the Poliglot Documents
+                                </li></ul>
+                            <ul>
+                                <li>Tools and Libraries
+                                </li></ul>
+                            <ul>
+                                <li>Challenges and Limitations
+                                </li></ul>
+                            <ul>
+                                <li>Best Practices for Robust Detection
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Building Your Indexing Pipeline
+                            <ul>
+                                <li>Tokenization
+                                </li></ul>
+                            <ul>
+                                <li>Normalization
+                                    <ul>
+                                        <li>Unicase Languages
+                                        </li></ul>
+                                </li></ul>
+                            <ul>
+                                <li>Stemming and Lemmatization
+                                </li></ul>
+                            <ul>
+                                <li>Best Practices for Your Pipeline
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Understanding User Intent Across Languages
+                            <ul>
+                                <li>Parsing and Expansion
+                                </li></ul>
+                            <ul>
+                                <li>Meeting Users Where They Are
+                                </li></ul>
+                            <ul>
+                                <li>The Next Frontier
+                                </li></ul>
+                            <ul>
+                                <li>A Practical Toolkit for Query Processing
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Ranking and Relevance
+                            <ul>
+                                <li>The Neural Era
+                                </li></ul>
+                            <ul>
+                                <li>The Challenge of Multilingual Ranking
+                                </li></ul>
+                            <ul>
+                                <li>Language-Specific Relevance Factors
+                                </li></ul>
+                            <ul>
+                                <li>Script and Variant Handling in Ranking
+                                </li></ul>
+                            <ul>
+                                <li>Accounting for Cultural Relevance
+                                </li></ul>
+                            <ul>
+                                <li>Tools and Techniques
+                                </li></ul>
+                            <ul>
+                                <li>Best Practices for Continuous Improvement
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Scalability for Large Character Sets and Diverse Scripts
+                            <ul>
+                                <li>Architectural Solutions for a Multilingual World
+                                </li></ul>
+                            <ul>
+                                <li>Handling the Nuances of Diverse Scripts
+                                </li></ul>
+                            <ul>
+                                <li>Fine-Tuning for Performance
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Integration with Machine Learning for Deeper Understanding
+                            <ul>
+                                <li>The Role of Machine Learning in Multilingual Search
+                                </li></ul>
+                            <ul>
+                                <li>Key Machine Learning Techniques
+                                    <ul>
+                                        <li>Query Intent Detection
+                                        </li></ul>
+                                    <ul>
+                                        <li>Advanced Word Segmentation
+                                        </li></ul>
+                                    <ul>
+                                        <li>Cross-Lingual Embeddings
+                                        </li></ul>
+                                </li></ul>
+                            <ul>
+                                <li>Integration Approaches
+                                </li></ul>
+                            <ul>
+                                <li>Challenges and Best Practices
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Legal and Ethical Issues
+                            <ul>
+                                <li>Data Privacy in a Global Context
+                                </li></ul>
+                            <ul>
+                                <li>The Hidden Biases in Language Models
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Evaluation in Multilingual Contexts
+                            <ul>
+                                <li>Key Metrics for Search Evaluation
+                                </li></ul>
+                            <ul>
+                                <li>The Multilingual Complication
+                                </li></ul>
+                            <ul>
+                                <li>Strategies for Meaningful Evaluation
+                                </li></ul>
+                            <ul>
+                                <li>Best Practices for Continuous Improvement
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>An Overview of the Modern Search Toolkit
+                            <ul>
+                                <li>Open-Source Search Platforms
+                                </li></ul>
+                            <ul>
+                                <li>Managed Platforms & Overlays
+                                </li></ul>
+                            <ul>
+                                <li>Search-as-a-Service (SaaS) Platforms
+                                </li></ul>
+                        </li></ul>
+                </li></ul>
+            <ul>
+                <li><b>Latin-Based Languages (European and Beyond)</b>
+                    <ul>
+                        <li>Deceptive Simplicity
+                        </li></ul>
+                    <ul>
+                        <li>Challenges in Latin-Based Language Search
+                            <ul>
+                                <li>The Subtle Problem of Accents and Diacritics
+                                </li></ul>
+                            <ul>
+                                <li>Elisions and Contractions
+                                </li></ul>
+                            <ul>
+                                <li>The Compounding Issue of Compound Words
+                                </li></ul>
+                            <ul>
+                                <li>The Richness and Risk of Morphology
+                                </li></ul>
+                            <ul>
+                                <li>Navigating Synonyms and Regional Variants
+                                </li></ul>
+                            <ul>
+                                <li>The Reality of Mixed-Language Queries
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Solutions for Latin-Based Language Search
+                            <ul>
+                                <li>Normalizing Accented Characters with ASCII Folding
+                                </li></ul>
+                            <ul>
+                                <li>Taming Morphology with Stemming and Lemmatization
+                                </li></ul>
+                            <ul>
+                                <li>Advanced Tokenization for Fused Words
+                                </li></ul>
+                            <ul>
+                                <li>Deconstructing Compound Words
+                                </li></ul>
+                            <ul>
+                                <li>Bridging Gaps with Synonyms
+                                </li></ul>
+                            <ul>
+                                <li>Managing Mixed-Language Content and Queries
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>UI/UX Considerations
+                            <ul>
+                                <li>The Keyboard Input Challenge
+                                </li></ul>
+                            <ul>
+                                <li>Solutions for Keyboard Inputs
+                                </li></ul>
+                            <ul>
+                                <li>Autocomplete for Accented Characters
+                                </li></ul>
+                            <ul>
+                                <li>Cultural and Accessibility Considerations
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Solutions per Language
+                            <ul>
+                                <li>German
+                                </li></ul>
+                            <ul>
+                                <li>French
+                                </li></ul>
+                            <ul>
+                                <li>Spanish
+                                </li></ul>
+                            <ul>
+                                <li>Portuguese
+                                </li></ul>
+                            <ul>
+                                <li>Italian
+                                </li></ul>
+                            <ul>
+                                <li>Catalan
+                                </li></ul>
+                            <ul>
+                                <li>Turkish
+                                </li></ul>
+                            <ul>
+                                <li>Scandinavian Languages (Danish, Swedish, Norwegian)
+                                </li></ul>
+                        </li></ul>
+                </li></ul>
+            <ul>
+                <li><b>Slavic and Cyrillic-Based Languages</b>
+                    <ul>
+                        <li>The Hidden Complexities of Slavic and Cyrillic Search
+                            <ul>
+                                <li>Writing system and Alphabets
+                                </li></ul>
+                            <ul>
+                                <li>Cases and Inflections
+                                </li></ul>
+                            <ul>
+                                <li>Free Word Order Paradigm
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>The Duality of Script, Richness of Form, and Transliteration
+                            <ul>
+                                <li>Regional and Political Sensitivities
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Solutions for Slavic and Cyrillic-Based Language Search
+                            <ul>
+                                <li>Taming Morphology with Stemmers and Lemmatizers
+                                </li></ul>
+                            <ul>
+                                <li>Cyrillic and Latin Conversions
+                                </li></ul>
+                            <ul>
+                                <li>Additional Normalization Techniques
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>UI/UX: Query Suggestions and Cultural Nuances
+                            <ul>
+                                <li>Guiding the User with Intelligent Suggestions
+                                </li></ul>
+                            <ul>
+                                <li>Accommodating Different Input Methods
+                                </li></ul>
+                            <ul>
+                                <li>Cultural Considerations in Design
+                                </li></ul>
+                            <ul>
+                                <li>Ensuring Accessibility
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Political Sensitivities in Script Usage
+                            <ul>
+                                <li>The State of the Art and Future Directions
+                                    <ul>
+                                        <li>Named Entity Recognition
+                                        </li></ul>
+                                    <ul>
+                                        <li>Benchmarking Russian IR (Findings from RusBEIR)
+                                        </li></ul>
+                                    <ul>
+                                        <li>Cross-Lingual Models and Low-Resource Languages
+                                        </li></ul>
+                                    <ul>
+                                        <li>The Rise of Embedding-Based and Generative Approaches
+                                        </li></ul>
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Solutions per Language
+                            <ul>
+                                <li>Russian
+                                </li></ul>
+                            <ul>
+                                <li>Polish
+                                </li></ul>
+                            <ul>
+                                <li>Serbian
+                                </li></ul>
+                            <ul>
+                                <li>Ukrainian
+                                </li></ul>
+                            <ul>
+                                <li>Bulgarian
+                                </li></ul>
+                        </li></ul>
+                </li></ul>
+            <ul>
+                <li><b>East Asian Languages (CJK)</b>
+                    <ul>
+                        <li>What Makes CJK Search So Hard?
+                            <ul>
+                                <li>A Labyrinth of Scripts
+                                </li></ul>
+                            <ul>
+                                <li>The Illusion of Words
+                                </li></ul>
+                            <ul>
+                                <li>The Written-Spoken Divide
+                                </li></ul>
+                            <ul>
+                                <li>Shape-Shifters and Sound-Alikes
+                                </li></ul>
+                            <ul>
+                                <li>The Wider Context
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Solutions for CJK Language Search
+                            <ul>
+                                <li>Finding Meaning in the Stream
+                                </li></ul>
+                            <ul>
+                                <li>Normalization
+                                </li></ul>
+                            <ul>
+                                <li>Building Linguistic Bridges
+                                </li></ul>
+                            <ul>
+                                <li>Pronunciation-Based Search
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>The Human Element in CJK Search
+                            <ul>
+                                <li>Input Methods
+                                </li></ul>
+                            <ul>
+                                <li>The Rise of Voice and Visual Search
+                                </li></ul>
+                            <ul>
+                                <li>Designing the Interface
+                                </li></ul>
+                            <ul>
+                                <li>Typography and Accessibility
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>CJK Search in the Wild
+                        </li></ul>
+                    <ul>
+                        <li>Persistent Challenges and Practical User Guidance
+                            <ul>
+                                <li>Chinese, The Reliability of Romanization and Quote Marks
+                                </li></ul>
+                            <ul>
+                                <li>Mastering Chinese E-Commerce at Alibaba
+                                </li></ul>
+                            <ul>
+                                <li>Navigating the Nuances of Japanese Search at Rakuten
+                                </li></ul>
+                            <ul>
+                                <li>Engineering Search for the Korean Language at Naver
+                                </li></ul>
+                            <ul>
+                                <li>The Cross-Lingual Unifier at Amazon
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Solutions per Language
+                            <ul>
+                                <li>Chinese
+                                </li></ul>
+                            <ul>
+                                <li>Japanese
+                                </li></ul>
+                            <ul>
+                                <li>Korean
+                                </li></ul>
+                        </li></ul>
+                </li></ul>
+            <ul>
+                <li><b>Indic and Thai Scripts</b>
+                    <ul>
+                        <li>An Introduction to Indic and Thai Scripts
+                            <ul>
+                                <li>The Cultural and Regional Context
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>The Unique Puzzles of Indic and Thai Scripts
+                            <ul>
+                                <li>A Case Study in Khmer
+                                </li></ul>
+                            <ul>
+                                <li>Complex Scripts and the Abugida Model
+                                </li></ul>
+                            <ul>
+                                <li>The Rendering Trap
+                                </li></ul>
+                            <ul>
+                                <li>The Ambiguity of Tone and Continuous Text
+                                </li></ul>
+                            <ul>
+                                <li>The Reality of Transliteration and Code-Mixing
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Solutions for Indic and Thai Script Search
+                            <ul>
+                                <li>Custom Tokenizers for Complex Scripts
+                                </li></ul>
+                            <ul>
+                                <li>Unicode Normalization
+                                </li></ul>
+                            <ul>
+                                <li>Handling Zero-Width Joiners (ZWJ)
+                                </li></ul>
+                            <ul>
+                                <li>Transliteration, Synonyms, and Mixed Queries
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>UI/UX: Navigating Complex Scripts and Dense Layouts
+                            <ul>
+                                <li>Virtual Keyboards for Complex Scripts
+                                </li></ul>
+                            <ul>
+                                <li>Handling Bidirectional Text
+                                </li></ul>
+                            <ul>
+                                <li>Designing Intelligent Autocomplete and Suggestions
+                                </li></ul>
+                            <ul>
+                                <li>Embracing Dense Layouts and Varied Navigation
+                                </li></ul>
+                            <ul>
+                                <li>A Foundation of Accessibility
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Cultural Notes: Beyond the Algorithm
+                            <ul>
+                                <li>Regional Dialects
+                                </li></ul>
+                            <ul>
+                                <li>Script Preferences and User Behavior
+                                </li></ul>
+                            <ul>
+                                <li>Navigating Cultural Sensitivities
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Solutions per Language
+                            <ul>
+                                <li>Hindi
+                                </li></ul>
+                            <ul>
+                                <li>Thai
+                                </li></ul>
+                            <ul>
+                                <li>Vietnamese
+                                </li></ul>
+                            <ul>
+                                <li>Bengali
+                                </li></ul>
+                            <ul>
+                                <li>Tamil
+                                </li></ul>
+                        </li></ul>
+                </li></ul>
+            <ul>
+                <li><b>Middle Eastern and Right-to-Left (RTL) Languages</b>
+                    <ul>
+                        <li>Focus Languages: Arabic, Hebrew, Persian (Farsi), and Urdu
+                        </li></ul>
+                    <ul>
+                        <li>The Unique Puzzles of Right-to-Left Search
+                            <ul>
+                                <li>The Challenge of Bidirectional Text
+                                </li></ul>
+                            <ul>
+                                <li>Contextual Letter Forms
+                                </li></ul>
+                            <ul>
+                                <li>The Ambiguity of Vowel Omission
+                                </li></ul>
+                            <ul>
+                                <li>Deep Morphological Complexity
+                                </li></ul>
+                            <ul>
+                                <li>Script and Dialect Variations
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Solutions for Right-to-Left Language Search
+                            <ul>
+                                <li>Foundational RTL Support in Indexing
+                                </li></ul>
+                            <ul>
+                                <li>Normalization for a Vocal-Free World
+                                </li></ul>
+                            <ul>
+                                <li>Unlocking Meaning with Root-Based Stemming
+                                </li></ul>
+                            <ul>
+                                <li>Bridging Scripts with Transliteration and Synonym Handling
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>UI/UX: Designing for a Right-to-Left World
+                            <ul>
+                                <li>The Mirrored Interface
+                                </li></ul>
+                            <ul>
+                                <li>Intelligent and Adaptive User Input
+                                </li></ul>
+                            <ul>
+                                <li>Lowering Barriers with Modern Input Methods
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Special Considerations: Navigating Religious and Cultural Nuances
+                            <ul>
+                                <li>Religious Sensitivities in Text Processing
+                                </li></ul>
+                            <ul>
+                                <li>The Cultural and Dialectal Landscape
+                                </li></ul>
+                            <ul>
+                                <li>The Political and Social Context
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Solutions per Language
+                            <ul>
+                                <li>Arabic
+                                </li></ul>
+                            <ul>
+                                <li>Hebrew
+                                </li></ul>
+                            <ul>
+                                <li>Persian (Farsi)
+                                </li></ul>
+                            <ul>
+                                <li>Urdu
+                                </li></ul>
+                        </li></ul>
+                </li></ul>
+            <ul>
+                <li><b>The Next Frontier—Search in African and Emerging Languages</b>
+                    <ul>
+                        <li>Focus Languages: Swahili, Amharic, Yoruba, and Hausa
+                            <ul>
+                                <li>The Frontier of Search: Challenges in African Languages
+                                </li></ul>
+                            <ul>
+                                <li>The Scarcity of NLP Resources
+                                </li></ul>
+                            <ul>
+                                <li>The Nuances of Tonal Languages
+                                </li></ul>
+                            <ul>
+                                <li>A Diverse World of Scripts
+                                </li></ul>
+                            <ul>
+                                <li>The Reality of Code-Switching
+                                </li></ul>
+                            <ul>
+                                <li>Beyond Text: Voice, Vision, and Oral Traditions
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Solutions for the Resource-Scarce Landscape
+                            <ul>
+                                <li>Bootstrapping with Transfer Learning
+                                </li></ul>
+                            <ul>
+                                <li>The Power of Community-Driven Dictionaries
+                                </li></ul>
+                            <ul>
+                                <li>Tailored Tokenization and Stemming
+                                </li></ul>
+                            <ul>
+                                <li>Foundational Unicode Normalization
+                                </li></ul>
+                            <ul>
+                                <li>Integrating Multiple Scripts and Languages
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>UI/UX: Mobile-First Designs, Voice Search for Low-Literacy Users
+                            <ul>
+                                <li>Mobile-First by Necessity
+                                </li></ul>
+                            <ul>
+                                <li>The Power of Voice in Low-Literacy Contexts
+                                </li></ul>
+                            <ul>
+                                <li>Bridging the Input Gap with Keyboards and Autocomplete
+                                </li></ul>
+                            <ul>
+                                <li>Cultural and Accessibility Considerations
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Growth Opportunities: Expanding Search in Underrepresented Markets
+                            <ul>
+                                <li>The Scale of the Market Potential
+                                </li></ul>
+                            <ul>
+                                <li>A Frontier for Technical Innovation
+                                </li></ul>
+                            <ul>
+                                <li>Navigating the Remaining Challenges
+                                </li></ul>
+                        </li></ul>
+                </li></ul>
+            <ul>
+                <li><b>Cross-Lingual and Polyglot Search</b>
+                    <ul>
+                        <li>Introduction to Cross-Lingual and Polyglot Search
+                        </li></ul>
+                    <ul>
+                        <li>Cross-Lingual Techniques: Translation, Embeddings, and Semantic Matching
+                            <ul>
+                                <li>Translation-Based Approaches
+                                </li></ul>
+                            <ul>
+                                <li>Embedding-Based Approaches
+                                </li></ul>
+                            <ul>
+                                <li>Tools and Frameworks
+                                </li></ul>
+                            <ul>
+                                <li>Challenges and Recommended Practices
+                                </li></ul>
+                            <ul>
+                                <li>Defining the Terminology
+                                </li></ul>
+                            <ul>
+                                <li>Real-World Use Cases
+                                </li></ul>
+                            <ul>
+                                <li>The Core Challenges
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Techniques for Searching Across Languages
+                            <ul>
+                                <li>The Direct Approach: Query Translation
+                                </li></ul>
+                            <ul>
+                                <li>A Semantic Bridge: Multilingual Embeddings
+                                </li></ul>
+                            <ul>
+                                <li>Combining Strengths: Hybrid Strategies and Knowledge Bases
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>The Polyglot User: Architecting for Code-Switching
+                            <ul>
+                                <li>Understanding the Phenomenon
+                                </li></ul>
+                            <ul>
+                                <li>The Core Challenges
+                                </li></ul>
+                            <ul>
+                                <li>Architectural Solutions
+                                </li></ul>
+                            <ul>
+                                <li>Designing the User Experience
+                                </li></ul>
+                            <ul>
+                                <li>Guiding Principles for Implementation
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Analytic vs. Holistic Thinking
+                        </li></ul>
+                    <ul>
+                        <li>The Study: Measuring Cultural Search Patterns
+                        </li></ul>
+                    <ul>
+                        <li>Core Findings
+                            <ul>
+                                <li>The American Pattern
+                                </li></ul>
+                            <ul>
+                                <li>The Chinese and Iranian Pattern
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Nuances and Surprising Results
+                        </li></ul>
+                    <ul>
+                        <li>Practical Implications for Search Architects
+                        </li></ul>
+                </li></ul>
+            <ul>
+                <li><b>UI/UX Design for Multilingual Search</b>
+                    <ul>
+                        <li>Introduction to Multilingual UI/UX Design
+                            <ul>
+                                <li>From CJK to a Global Viewpoint
+                                </li></ul>
+                            <ul>
+                                <li>The Core Challenges of Multilingual UI
+                                </li></ul>
+                            <ul>
+                                <li>Our Goals in This Chapter
+                                </li></ul>
+                        </li></ul>
+                    <ul>
+                        <li>Search Bars, Facets, and Autocomplete Across Cultures
+                            <ul>
+                                <li>The Global Search Bar
+                                </li></ul>
+                            <ul>
+                                <li>Faceted Navigation
+                                </li></ul>
+                            <ul>
+                                <li>Autocomplete as Guiding the User's Intent
+                                </li></ul>
+                        </li></ul>
+                </li></ul>
+            <ul>
+                <li><b>Conclusion: The End of the Monolingual Era</b>
+                    <ul>
+                        <li>Beyond the Algorithm: A Recapitulation of the Journey
+                        </li></ul>
+                    <ul>
+                        <li>A Journey Through the World's Scripts: Key Lessons Learned
+                        </li></ul>
+                    <ul>
+                        <li>The Universal Principles of Global Search
+                        </li></ul>
+                    <ul>
+                        <li>The Generative Frontier and the Enduring Importance of Retrieval
+                        </li></ul>
+                    <ul>
+                        <li>The Engineer as an Ambassador
+                        </li></ul>
+                </li></ul>
+
+        </div>
+    </div>
+</main>
+</body>
+</html>

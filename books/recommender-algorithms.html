@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommender Algorithms in 2026: A Practitioner's Guide - Rauf Aliev</title>
+    <meta name="description" content="An essential practitioner's guide to recommender algorithms in 2026, from classic models to deep learning, LLMs, and multimodal systems.">
+
+    <link rel="canonical" href="https://www.testmysearch.com/recommender.html">
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <meta property="og:title" content="Recommender Algorithms in 2026: A Practitioner's Guide - Rauf Aliev">
+    <meta property="og:description" content="An essential practitioner's guide to recommender algorithms in 2026, from classic models to deep learning, LLMs, and multimodal systems.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.testmysearch.com/recommender.html">
+    <meta property="og:site_name" content="TestMySearch">
+    <meta property="og:image" content="https://www.testmysearch.com/img/ra-ws.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Recommender Algorithms in 2026: A Practitioner's Guide - Rauf Aliev">
+    <meta name="twitter:description" content="An essential practitioner's guide to recommender algorithms in 2026, from classic models to deep learning, LLMs, and multimodal systems.">
+    <meta name="twitter:image" content="https://www.testmysearch.com/img/ra-ws.jpg">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .prose ul {
+            list-style-type: disc;
+            padding-left: 1.75rem;
+        }
+        .prose ul li {
+            margin-top: 0.5rem;
+        }
+        .prose ul ul {
+            margin-top: 0.5rem;
+        }
+        .toc-h1 {
+            font-weight:bold
+        }
+        .toc-h2 {
+            font-weight:bold
+        }
+        .toc-h3 {
+            font-weight:normal
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+<header class="sticky top-0 z-50 shadow-sm" style="background-color: #faf8f5;">
+    <nav class="container mx-auto flex items-center justify-between px-6 py-4">
+        <a href="/"><img src="/img/testmysearch-logo.png" alt="TestMySearch Logo" style="height:60px"></a>
+        <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
+            <a href="demos.html" class="text-gray-600 hover:text-indigo-600">Demos</a>
+            <a href="index.html#features" class="text-gray-600 hover:text-indigo-600">Features</a>
+            <a href="index.html#how-it-works" class="text-gray-600 hover:text-indigo-600">How It Works</a>
+            <a href="/blog/" class="text-gray-600 hover:text-indigo-600">Blog</a>
+            <a href="index.html#contact" class="rounded-md bg-indigo-600 px-4 py-2 text-white transition hover:bg-indigo-700">Contact Us</a>
+        </div>
+    </nav>
+</header>
+<main class="container mx-auto px-6 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div class="md:col-span-1">
+            <img src="/img/ra-ws.jpg" alt="Book Cover: Recommender Algorithms in 2026" class="rounded-lg shadow-lg">
+            <div class="mt-8 space-y-4">
+                <h3 class="text-xl font-bold">Where to Buy</h3>
+                <a href="https://a.co/d/44onQG3" class="block bg-blue-500 text-white text-center py-2 px-4 rounded hover:bg-blue-600">Amazon</a>
+                <a href="/pdfs/books/recommenders-sample.pdf" class="block bg-red-500 text-white text-center py-2 px-4 rounded hover:bg-red-600">Read Sample (PDF)</a>
+            </div>
+        </div>
+        <div class="md:col-span-2 prose">
+            <h1 class="text-4xl font-extrabold text-gray-900">Recommender Algorithms in 2026: A Practitioner's Guide</h1>
+            <p><font color="gray" class="text-2xl">Rauf Aliev</font></p>
+
+            <p class="mt-4 text-lg text-gray-600">This book serves as an essential practitioner's guide to the world of recommender algorithms as it stands in early 2026. We begin with the indispensable baselines—from classic neighborhood models to powerful matrix factorization—and build toward the sophisticated deep learning architectures that power today's largest platforms, including hybrids for CTR prediction and state-of-the-art sequential models.</p>
+
+            <p class="mt-4 text-lg text-gray-600">A core theme of this guide is the practical integration of the latest technological breakthroughs. We dedicate significant attention to the transformative impact of Large Language Models (LLMs), offering architectural blueprints for leveraging them as powerful semantic feature extractors, building reliable Retrieval-Augmented Generation (RAG) pipelines, and designing the next wave of generative and conversational recommender agents. Furthermore, we explore the critical role of multimodal models like CLIP for solving visual cold-start problems and provide insights into specialized areas like debiasing and fairness.</p>
+
+            <p class="mt-4 text-lg text-gray-600">This is more than a survey; it is a toolkit for the modern engineer. Each section balances conceptual depth with pragmatic advice on implementation, scalability, and production readiness, making it the definitive resource for professionals tasked with creating value through personalization.</p>
+
+            <br><br>
+            <h2 class="text-4xl font-semibold mt-4">Table of Contents</h2>
+            <hr style="color:black;height:2px" size="2" noshade><br>
+
+            <ul id="toc" class="section-nav">
+                <ul id="toc" class="section-nav">
+                    <li class="toc-entry toc-h1"><a hreff="#abstract" class="active">Abstract</a></li>
+                    <li class="toc-entry toc-h1"><a hreff="#introduction">Introduction</a></li>
+                    <li class="toc-entry toc-h1">
+                        <a hreff="#structure-and-prerequisites"><b>Structure and Prerequisites</b></a>
+                        <ul>
+                            <li class="toc-entry toc-h2"><a hreff="#how-this-book-is-organized">How This Book Is Organized</a></li>
+                            <li class="toc-entry toc-h2">
+                                <a hreff="#essential-mathematical-basics-for-understanding-latent-matrix-models">Essential Mathematical Basics for Understanding Latent Matrix Models</a>
+                                <ul>
+                                    <li class="toc-entry toc-h3"><a hreff="#matrix-representation-in-recommendations">Matrix Representation in Recommendations</a></li>
+                                    <li class="toc-entry toc-h3"><a hreff="#vectors-and-dot-products">Vectors and Dot Products</a></li>
+                                    <li class="toc-entry toc-h3"><a hreff="#matrix-factorization-decomposition">Matrix Factorization (Decomposition)</a></li>
+                                    <li class="toc-entry toc-h3"><a hreff="#loss-functions-and-optimization">Loss Functions and Optimization</a></li>
+                                    <li class="toc-entry toc-h3"><a hreff="#regularization">Regularization</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="toc-entry toc-h1">
+                        <a hreff="#1-foundational-and-heuristic-driven-algorithms">1. Foundational and Heuristic-Driven Algorithms</a>
+                        <ul>
+                            <li class="toc-entry toc-h2">
+                                <a hreff="#11-content-based-filtering">1.1. Content-Based Filtering</a>
+                                <ul>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#111-the-vector-space-model-vsm-a-foundational-framework">1.1.1. The Vector Space Model (VSM): A Foundational Framework</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-of-vsm">Mathematical Foundations of VSM</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#112-tf-idf-a-classic-vsm-weighting-scheme">1.1.2. TF-IDF: A Classic VSM Weighting Scheme</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations">Mathematical Foundations</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#113-embedding-based-similarity-a-latent-approach-to-vsm">1.1.3. Embedding-based Similarity: A Latent Approach to VSM</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#tutorial-1-content-based-similarity-with-feature-embeddings">Tutorial #1: Content-Based Similarity with Feature Embeddings</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3"><a hreff="#114-limitations-of-content-based-filtering">1.1.4. Limitations of Content-Based Filtering</a></li>
+                                    <li class="toc-entry toc-h3"><a hreff="#115-alternative-word2vec-architecture-cbow">1.1.5. Alternative Word2Vec Architecture: CBOW</a></li>
+                                    <li class="toc-entry toc-h3"><a hreff="#116-handling-rare-and-unknown-features-subword-embeddings-fasttext">1.1.6. Handling Rare and Unknown Features: Subword Embeddings (FastText)</a></li>
+                                </ul>
+                            </li>
+                            <li class="toc-entry toc-h2">
+                                <a hreff="#12-rule-based-and-heuristic-systems">1.2. Rule-Based and Heuristic Systems</a>
+                                <ul>
+                                    <li class="toc-entry toc-h3"><a hreff="#121-classic-rule-based-systems">1.2.1. Classic Rule-Based Systems</a></li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#122-heuristic-driven-algorithms">1.2.2. Heuristic-Driven Algorithms</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#1221-top-popular-most-popular">1.2.2.1. Top Popular (Most Popular)</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#123-association-rule-mining">1.2.3. Association Rule Mining</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#1231-frequent-itemset-mining-algorithms">1.2.3.1. Frequent Itemset Mining Algorithms</a></li>
+                                            <li class="toc-entry toc-h4"><a hreff="#1232-rule-generation-and-key-metrics">1.2.3.2. Rule Generation and Key Metrics</a></li>
+                                            <li class="toc-entry toc-h4"><a hreff="#1233-practical-considerations">1.2.3.3. Practical Considerations</a></li>
+                                            <li class="toc-entry toc-h4"><a hreff="#1234-use-cases--production-readiness">1.2.3.4. Use Cases &amp; Production Readiness</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="toc-entry toc-h1">
+                        <a hreff="#2-interaction-driven-recommendation-algorithms">2. Interaction-Driven Recommendation Algorithms</a>
+                        <ul>
+                            <li class="toc-entry toc-h2">
+                                <a hreff="#21-core-properties-of-recommendation-data">2.1. Core Properties of Recommendation Data</a>
+                                <ul>
+                                    <li class="toc-entry toc-h3"><a hreff="#211-types-of-ratings-feedback">2.1.1. Types of Ratings Feedback</a></li>
+                                    <li class="toc-entry toc-h3"><a hreff="#212-the-long-tail-property">2.1.2. The Long-Tail Property</a></li>
+                                </ul>
+                            </li>
+                            <li class="toc-entry toc-h2"><a hreff="#22-recommendation-tasks">2.2. Recommendation Tasks</a></li>
+                            <li class="toc-entry toc-h2">
+                                <a hreff="#23-classic--neighborhood-based-models">2.3. Classic &amp; Neighborhood-Based Models</a>
+                                <ul>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#231-itemknn-item-based-k-nearest-neighbors">2.3.1. ItemKNN (Item-based k-Nearest Neighbors)</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-1">Mathematical Foundations</a></li>
+                                            <li class="toc-entry toc-h4"><a hreff="#tutorial-item-based-k-nn-from-scratch">Tutorial: Item-based k-NN From Scratch</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#232-sar-simple-algorithm-for-recommendations">2.3.2. SAR (Simple Algorithm for Recommendations)</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-2">Mathematical Foundations</a></li>
+                                            <li class="toc-entry toc-h4"><a hreff="#tutorial-sar-simple-algorithm-for-recommendations-from-scratch">Tutorial: SAR (Simple Algorithm for Recommendations) From Scratch</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#233-userknn-user-based-k-nearest-neighbors">2.3.3. UserKNN (User-based k-Nearest Neighbors)</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-3">Mathematical Foundations</a></li>
+                                            <li class="toc-entry toc-h4"><a hreff="#tutorial-user-based-k-nn-from-scratch">Tutorial: User-based k-NN From Scratch</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3"><a hreff="#234-comparing-user-based-and-item-based-approaches">2.3.4. Comparing User-Based and Item-Based Approaches</a></li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#235-slopeone">2.3.5. SlopeOne</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-4">Mathematical Foundations</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3"><a hreff="#236-attribute-aware-k-nearest-neighbors">2.3.6. Attribute-Aware k-Nearest Neighbors</a></li>
+                                </ul>
+                            </li>
+                            <li class="toc-entry toc-h2">
+                                <a hreff="#24-latent-factor-models-matrix-factorization">2.4. Latent Factor Models (Matrix Factorization)</a>
+                                <ul>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#241-classic-singular-value-decomposition-svd">2.4.1. Classic Singular Value Decomposition (SVD)</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#five-whys">Five WHYs</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#242-funksvd-biased-matrix-factorization">2.4.2. FunkSVD (Biased Matrix Factorization)</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-5">Mathematical Foundations</a></li>
+                                            <li class="toc-entry toc-h4"><a hreff="#five-whys-1">Five WHYs</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#243-probabilistic-matrix-factorization-pmf">2.4.3. Probabilistic Matrix Factorization (PMF)</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-6">Mathematical Foundations</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#244-weighted-regularized-matrix-factorization-wrmf">2.4.4. Weighted Regularized Matrix Factorization (WRMF)</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-7">Mathematical Foundations</a></li>
+                                            <li class="toc-entry toc-h4"><a hreff="#tutorial-wrmf-from-scratch">Tutorial: WRMF from Scratch</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3"><a hreff="#245-pairwise-ranking-objective-bpr-bayesian-personalized-ranking">2.4.5. Pairwise Ranking Objective: BPR (Bayesian Personalized Ranking)</a></li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#246-svd">2.4.6. SVD++</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-8">Mathematical Foundations</a></li>
+                                            <li class="toc-entry toc-h4"><a hreff="#tutorial-svd-biased-matrix-factorization-from-scratch">Tutorial: SVD++ (Biased Matrix Factorization) From Scratch</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#247-timesvd-time-aware-svd">2.4.7. TimeSVD++ (Time-aware SVD++)</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-9">Mathematical Foundations</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#248-item-based-latent-models-slim--fism">2.4.8. Item-based Latent Models: SLIM &amp; FISM</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-of-slim">Mathematical Foundations of SLIM</a></li>
+                                            <li class="toc-entry toc-h4"><a hreff="#tutorial-slim-for-top-n-recommendation-from-scratch">Tutorial: SLIM for Top-N Recommendation From Scratch</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#249-non-negative-matrix-factorization-nonnegmf">2.4.9. Non-Negative Matrix Factorization (NonNegMF)</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-10">Mathematical Foundations</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#2410-collaborative-metric-learning-cml">2.4.10. Collaborative Metric Learning (CML)</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-11">Mathematical Foundations</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="toc-entry toc-h2">
+                                <a hreff="#25-deep-learning-hybrids--representation-learning">2.5. Deep Learning Hybrids &amp; Representation Learning</a>
+                                <ul>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#251-neural-collaborative-filtering-ncf-framework-and-neumf">2.5.1. Neural Collaborative Filtering (NCF) Framework and NeuMF</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#neural-matrix-factorization-neumf-the-fused-model">Neural Matrix Factorization (NeuMF): The Fused Model</a></li>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-of-neumf">Mathematical Foundations of NeuMF</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#252-factorization-machine-based-deepfm--xdeepfm">2.5.2. Factorization Machine-based: DeepFM &amp; xDeepFM</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-12">Mathematical Foundations</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#253-autoencoder-based-dae--vae">2.5.3. Autoencoder-based: DAE &amp; VAE</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-13">Mathematical Foundations</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#254-a-modern-baseline-for-cf-simplex">2.5.4. A Modern Baseline for CF: SimpleX</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-14">Mathematical Foundations</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#255-ease-embarrassingly-shallow-autoencoders">2.5.5. EASE (Embarrassingly Shallow Autoencoders)</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-15">Mathematical Foundations</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="toc-entry toc-h2">
+                                <a hreff="#26-sequential--session-based-models">2.6. Sequential &amp; Session-Based Models</a>
+                                <ul>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#261-rnn-based-gru4rec">2.6.1. RNN-based: GRU4Rec</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-16">Mathematical Foundations</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#262-cnn-based-nextitnet">2.6.2. CNN-based: NextItNet</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-17">Mathematical Foundations</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#263-attentiontransformer-based-sasrec--bert4rec">2.6.3. Attention/Transformer-based: SASRec &amp; BERT4Rec</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-18">Mathematical Foundations</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#264-with-contrastive-learning-cl4srec">2.6.4. With Contrastive Learning: CL4SRec</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-19">Mathematical Foundations</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#265-generative-adversarial-networks-gans-irgan">2.6.5. Generative Adversarial Networks (GANs): IRGAN</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-20">Mathematical Foundations</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#266-diffusion-for-cf-diffrec">2.6.6. Diffusion for CF: DiffRec</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-21">Mathematical Foundations</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#267-gflownets-gfn4rec">2.6.7. GFlowNets: GFN4Rec</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-22">Mathematical Foundations</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#268-normalizing-flows-idnp">2.6.8. Normalizing Flows: IDNP</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-23">Mathematical Foundations</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="toc-entry toc-h1">
+                        <a hreff="#3-context-aware-recommendation-algorithms">3. Context-Aware Recommendation Algorithms</a>
+                        <ul>
+                            <li class="toc-entry toc-h2">
+                                <a hreff="#31-factorization-machine-family">3.1. Factorization Machine Family</a>
+                                <ul>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#311-factorization-machines-fm">3.1.1. Factorization Machines (FM)</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-24">Mathematical Foundations</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3"><a hreff="#312-amf-attentional-factorization-machine">3.1.2. AMF (Attentional Factorization Machine)</a></li>
+                                </ul>
+                            </li>
+                            <li class="toc-entry toc-h2">
+                                <a hreff="#32-cross-network-models">3.2. Cross-Network Models</a>
+                                <ul>
+                                    <li class="toc-entry toc-h3"><a hreff="#321-wide--deep">3.2.1. Wide &amp; Deep</a></li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#322-mathematical--engineering-foundations-of-wide--deep">3.2.2. Mathematical &amp; Engineering Foundations of Wide &amp; Deep</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-25">Mathematical Foundations</a></li>
+                                            <li class="toc-entry toc-h4"><a hreff="#engineering-pipeline">Engineering Pipeline</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="toc-entry toc-h2">
+                                <a hreff="#33-tree-based-models-for-ctr-prediction">3.3. Tree-Based Models for CTR Prediction</a>
+                                <ul>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#331-lightgbm-light-gradient-boosting-machine">3.3.1. LightGBM (Light Gradient Boosting Machine)</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-26">Mathematical Foundations</a></li>
+                                            <li class="toc-entry toc-h4"><a hreff="#tutorial-lightgbm-for-ctr-prediction">Tutorial: LightGBM for CTR Prediction</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="toc-entry toc-h1">
+                        <a hreff="#4-text-driven-recommendation-algorithms">4. Text-Driven Recommendation Algorithms</a>
+                        <ul>
+                            <li class="toc-entry toc-h2">
+                                <a hreff="#41-review-based-models">4.1. Review-Based Models</a>
+                                <ul>
+                                    <li class="toc-entry toc-h3"><a hreff="#411-deepconn-deep-cooperative-neural-networks">4.1.1. DeepCoNN (Deep Cooperative Neural Networks)</a></li>
+                                    <li class="toc-entry toc-h3"><a hreff="#412-narre-neural-attentional-rating-regression-with-review-level-explanations">4.1.2. NARRE (Neural Attentional Rating Regression with Review-level Explanations)</a></li>
+                                </ul>
+                            </li>
+                            <li class="toc-entry toc-h2">
+                                <a hreff="#42-large-language-model-llm-based-paradigms">4.2. Large Language Model (LLM)-Based Paradigms</a>
+                                <ul>
+                                    <li class="toc-entry toc-h3"><a hreff="#421-retrieval-based-dense-retrieval--cross-encoders">4.2.1. Retrieval-based: Dense Retrieval &amp; Cross-Encoders</a></li>
+                                    <li class="toc-entry toc-h3"><a hreff="#422-generative--instruction-tuned">4.2.2. Generative / Instruction-Tuned</a></li>
+                                    <li class="toc-entry toc-h3"><a hreff="#423-rag--feature-extraction">4.2.3. RAG &amp; Feature Extraction</a></li>
+                                    <li class="toc-entry toc-h3"><a hreff="#424-llm-agents--tool-use">4.2.4. LLM Agents &amp; Tool Use</a></li>
+                                </ul>
+                            </li>
+                            <li class="toc-entry toc-h2">
+                                <a hreff="#43-conversational-recommender-systems">4.3. Conversational Recommender Systems</a>
+                                <ul>
+                                    <li class="toc-entry toc-h3"><a hreff="#431-dialogue-based-preference-elicitation">4.3.1. Dialogue-based Preference Elicitation</a></li>
+                                    <li class="toc-entry toc-h3"><a hreff="#432-natural-language-explanation--critique">4.3.2. Natural Language Explanation &amp; Critique</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="toc-entry toc-h1">
+                        <a hreff="#5-multimodal-recommendation-algorithms">5. Multimodal Recommendation Algorithms</a>
+                        <ul>
+                            <li class="toc-entry toc-h2">
+                                <a hreff="#51-contrastive-learning-for-multimodal-alignment">5.1. Contrastive Learning for Multimodal Alignment</a>
+                                <ul>
+                                    <li class="toc-entry toc-h3"><a hreff="#511-clip-contrastive-language-image-pre-training">5.1.1. CLIP (Contrastive Language-Image Pre-Training)</a></li>
+                                    <li class="toc-entry toc-h3"><a hreff="#512-albef-align-before-fuse">5.1.2. ALBEF (Align Before Fuse)</a></li>
+                                </ul>
+                            </li>
+                            <li class="toc-entry toc-h2">
+                                <a hreff="#52-generative-multimodal-models">5.2. Generative Multimodal Models</a>
+                                <ul>
+                                    <li class="toc-entry toc-h3"><a hreff="#521-multimodal-vaes">5.2.1. Multimodal VAEs</a></li>
+                                    <li class="toc-entry toc-h3"><a hreff="#522-multimodal-diffusion">5.2.2. Multimodal Diffusion</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="toc-entry toc-h1">
+                        <a hreff="#6-knowledge-aware-recommendation-algorithms">6. Knowledge-Aware Recommendation Algorithms</a>
+                        <ul>
+                            <li class="toc-entry toc-h2">
+                                <a hreff="#61-graph-neural-networks-for-cf-ngcf--lightgcn">6.1. Graph Neural Networks for CF: NGCF &amp; LightGCN</a>
+                                <ul>
+                                    <li class="toc-entry toc-h3"><a hreff="#611-ngcf-neural-graph-collaborative-filtering">6.1.1. NGCF (Neural Graph Collaborative Filtering)</a></li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#612-lightgcn-light-graph-convolution-network">6.1.2. LightGCN (Light Graph Convolution Network)</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-27">Mathematical Foundations</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#613-self-supervised-graph-learning-for-cf-sgl">6.1.3. Self-Supervised Graph Learning for CF: SGL</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#mathematical-foundations-28">Mathematical Foundations</a></li>
+                                            <li class="toc-entry toc-h4"><a hreff="#production-ready--frameworks">Production Ready &amp; Frameworks</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="toc-entry toc-h2"><a hreff="#62-embedding-based--path-based-models">6.2. Embedding-based &amp; Path-based Models</a></li>
+                        </ul>
+                    </li>
+                    <li class="toc-entry toc-h1">
+                        <a hreff="#7-specialized-recommendation-tasks">7. Specialized Recommendation Tasks</a>
+                        <ul>
+                            <li class="toc-entry toc-h2"><a hreff="#71-debiasing--fairness">7.1. Debiasing &amp; Fairness</a></li>
+                            <li class="toc-entry toc-h2"><a hreff="#72-cross-domain-recommendation">7.2. Cross-Domain Recommendation</a></li>
+                            <li class="toc-entry toc-h2"><a hreff="#73-meta-learning-for-cold-start">7.3. Meta-Learning for Cold Start</a></li>
+                        </ul>
+                    </li>
+                    <li class="toc-entry toc-h1">
+                        <a hreff="#8-new-algorithmic-paradigms-in-recommender-systems">8. New Algorithmic Paradigms in Recommender Systems</a>
+                        <ul>
+                            <li class="toc-entry toc-h2">
+                                <a hreff="#81-reinforcement-learning-rl-for-recsys">8.1. Reinforcement Learning (RL) for RecSys</a>
+                                <ul>
+                                    <li class="toc-entry toc-h3"><a hreff="#811-core-idea">8.1.1. Core Idea</a></li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#812-key-concepts--algorithms">8.1.2. Key Concepts &amp; Algorithms</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#8121-multi-armed-bandits-mab--contextual-bandits">8.1.2.1. Multi-Armed Bandits (MAB) &amp; Contextual Bandits</a></li>
+                                            <li class="toc-entry toc-h4"><a hreff="#8122-deep-reinforcement-learning-eg-dqn-actor-critic">8.1.2.2. Deep Reinforcement Learning (e.g., DQN, Actor-Critic)</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="toc-entry toc-h2">
+                                <a hreff="#82-causal-inference-in-recommender-systems">8.2. Causal Inference in Recommender Systems</a>
+                                <ul>
+                                    <li class="toc-entry toc-h3"><a hreff="#821-core-idea">8.2.1. Core Idea</a></li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#822-key-concepts--algorithms">8.2.2. Key Concepts &amp; Algorithms</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#8221-uplift-modeling">8.2.2.1. Uplift Modeling</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toc-entry toc-h3"><a hreff="#823-mathematical-foundations">8.2.3. Mathematical Foundations</a></li>
+                                </ul>
+                            </li>
+                            <li class="toc-entry toc-h2">
+                                <a hreff="#83-explainable-ai-xai-for-recsys">8.3. Explainable AI (XAI) for RecSys</a>
+                                <ul>
+                                    <li class="toc-entry toc-h3"><a hreff="#831-core-idea">8.3.1. Core Idea</a></li>
+                                    <li class="toc-entry toc-h3">
+                                        <a hreff="#832-key-concepts--algorithms">8.3.2. Key Concepts &amp; Algorithms</a>
+                                        <ul>
+                                            <li class="toc-entry toc-h4"><a hreff="#8321-graph-based-explanations">8.3.2.1. Graph-Based Explanations</a></li>
+                                            <li class="toc-entry toc-h4"><a hreff="#8322-feature-based-explanations">8.3.2.2. Feature-Based Explanations</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="toc-entry toc-h1">
+                        <a hreff="#9-evaluating-recommender-systems">9. Evaluating Recommender Systems</a>
+                        <ul>
+                            <li class="toc-entry toc-h2">
+                                <a hreff="#91-metrics-for-rating-prediction">9.1. Metrics for Rating Prediction</a>
+                                <ul>
+                                    <li class="toc-entry toc-h3"><a hreff="#911-root-mean-squared-error-rmse">9.1.1. Root Mean Squared Error (RMSE)</a></li>
+                                    <li class="toc-entry toc-h3"><a hreff="#912-mean-absolute-error-mae">9.1.2. Mean Absolute Error (MAE)</a></li>
+                                </ul>
+                            </li>
+                            <li class="toc-entry toc-h2">
+                                <a hreff="#92-metrics-for-top-n-ranking">9.2. Metrics for Top-N Ranking</a>
+                                <ul>
+                                    <li class="toc-entry toc-h3"><a hreff="#921-precisionk-and-recallk">9.2.1. Precision@k and Recall@k</a></li>
+                                    <li class="toc-entry toc-h3"><a hreff="#922-mean-average-precision-mapk">9.2.2. Mean Average Precision (MAP@k)</a></li>
+                                    <li class="toc-entry toc-h3"><a hreff="#923-normalized-discounted-cumulative-gain-ndcgk">9.2.3. Normalized Discounted Cumulative Gain (nDCG@k)</a></li>
+                                </ul>
+                            </li>
+                            <li class="toc-entry toc-h2">
+                                <a hreff="#93-beyond-accuracy-metrics">9.3. Beyond-Accuracy Metrics</a>
+                                <ul>
+                                    <li class="toc-entry toc-h3"><a hreff="#931-diversity">9.3.1. Diversity</a></li>
+                                </ul>
+                            </li>
+                            <li class="toc-entry toc-h2">
+                                <a hreff="#94-metrics-for-classification-tasks-in-recommendation">9.4. Metrics for Classification Tasks in Recommendation</a>
+                                <ul>
+                                    <li class="toc-entry toc-h3"><a hreff="#941-confusion-matrix">9.4.1. Confusion Matrix</a></li>
+                                    <li class="toc-entry toc-h3"><a hreff="#942-matthews-correlation-coefficient-mcc">9.4.2. Matthews Correlation Coefficient (MCC)</a></li>
+                                    <li class="toc-entry toc-h3"><a hreff="#943-log-loss-binary-cross-entropy">9.4.3. Log Loss (Binary Cross-Entropy)</a></li>
+                                    <li class="toc-entry toc-h3"><a hreff="#944-roc-curve-and-auc-score">9.4.4. ROC Curve and AUC Score</a></li>
+                                    <li class="toc-entry toc-h3"><a hreff="#945-f-beta-score">9.4.5. F-beta Score</a></li>
+                                    <li class="toc-entry toc-h3"><a hreff="#946-cohens-kappa">9.4.6. Cohen’s Kappa</a></li>
+                                    <li class="toc-entry toc-h3"><a hreff="#947-brier-score">9.4.7. Brier Score</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="toc-entry toc-h1"><a hreff="#conclusion">Conclusion</a></li>
+
+        </div>
+    </div>
+</main>
+</body>
+</html>
