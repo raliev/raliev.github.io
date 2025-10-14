@@ -25,6 +25,8 @@ tags:
 ---
 This paper provides a systematic and exhaustive review of recommendation algorithms, charting their evolution from foundational collaborative filtering techniques to the sophisticated deep learning and generative models of the modern era. We organize the landscape into three primary categories based on the dominant data modality: Interaction-Driven, Text-Driven, and Multimodal algorithms. For each paradigm and its key algorithms, we distill the core concepts, highlight key differentiators, identify primary use cases, and offer practical guidance for implementation. Our analysis reveals a recurring tension between model complexity and performance, the transformative impact of self-supervised learning, and the paradigm-shifting potential of Large Language Models. This survey is intended as a cornerstone reference for engineers and researchers seeking to navigate the complex, dynamic, and powerful field of recommender systems.
 
+**IMPORTANT: The structure and content of this blog post partially overlap with my book [Recommender Algorithms](https://testmysearch.com/books/recommender-algorithms.html), but it is far, far behind in terms of detail and depth of explanations. Many concepts are explained in the book more thoroughly and accessibly. I don’t rule out the possibility that some inaccuracies in the post below were corrected in the book—I simply didn’t have the energy to work on both the book and keeping this post up to date. On the book’s page, you can view the first 40 pages and form your own impression.**
+
 ## Table of Contents
 * [Abstract](#Abstract)
 * [Introduction](#Introduction)
