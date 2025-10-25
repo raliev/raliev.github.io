@@ -59,14 +59,55 @@
     <nav class="container mx-auto flex items-center justify-between px-6 py-4">
         <a href="/"><img src="/img/testmysearch-logo.png" alt="TestMySearch Logo" style="height:60px"></a>
         <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
-            <a href="/demos.html" class="text-gray-600 hover:text-indigo-600">Demos</a>
-            <a href="/index.html#features" class="text-gray-600 hover:text-indigo-600">Features</a>
-            <a href="/index.html#how-it-works" class="text-gray-600 hover:text-indigo-600">How It Works</a>
-            <a href="/blog/" class="text-gray-600 hover:text-indigo-600">Blog</a>
             <a href="/index.html#contact" class="rounded-md bg-indigo-600 px-4 py-2 text-white transition hover:bg-indigo-700">Contact Us</a>
         </div>
     </nav>
 </header>
+<section class="bg-gray-800 text-gray-200 py-4 shadow-md">
+    <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+            <div class="text-center md:text-left mb-3 md:mb-0">
+                <h3 class="text-lg font-semibold text-white">Books by Rauf Aliev</h3>
+                <p class="text-sm text-gray-400">Explore our four books on search and recommender systems.<br><a href="/my-books.html" class="text-indigo-300 hover:text-indigo-200 underline">View all books &rarr;</a></p>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-2">
+                <a href="/books/beyond-english.html" class="flex items-center space-x-2 group p-1 rounded hover:bg-gray-700 transition-colors">
+                    <img src="/img/be-ws.jpg" alt="Beyond English" class="h-14 w-10 object-cover rounded-sm flex-shrink-0">
+                    <span class="text-xs font-medium text-white group-hover:text-indigo-300">Beyond English:<br/>Architecting Search for a Global World
+                        <span class="hidden md:block">
+                            <br/><font color="gray"><small>Sample PDF, Amazon, Worldwide delivery<br>Paperback & E-book</small></font>
+                        </span>
+                    </span>
+                </a>
+                <a href="/books/recommender-algorithms.html" class="flex items-center space-x-2 group p-1 rounded hover:bg-gray-700 transition-colors">
+                    <img src="/img/ra-ws.jpg" alt="Recommender Algorithms" class="h-14 w-10 object-cover rounded-sm flex-shrink-0">
+                    <span class="text-xs font-medium text-white group-hover:text-indigo-300">Recommender Algorithms:<br>50+ Algorithms, SOTA 2026
+                        <span class="hidden md:block">
+                            <br/><font color="gray"><small>Sample PDF, Amazon, Worldwide delivery<br>Hardcover, Paperback</small></font>
+                        </span>
+                    </span>
+                </a>
+                <a href="/books/inside-solr.html" class="flex items-center space-x-2 group p-1 rounded hover:bg-gray-700 transition-colors">
+                    <img src="/img/solr-ws.jpg" alt="Inside Apache Solr" class="h-14 w-10 object-cover rounded-sm flex-shrink-0">
+                    <span class="text-xs font-medium text-white group-hover:text-indigo-300">Inside Apache Solr:<br>Engineering Deep Dive
+                        <span class="hidden md:block">
+                            <br/><font color="gray"><small>Sample PDF, Amazon, Worldwide delivery<br>Paperback & E-book</small></font>
+                        </span>
+                    </span>
+                </a>
+                <a href="/books/anatomy-of-ecommerce-search.html" class="flex items-center space-x-2 group p-1 rounded hover:bg-gray-700 transition-colors">
+                    <img src="/img/ecom-search.png" alt="Anatomy of E-commerce Search" class="h-14 w-10 object-cover rounded-sm flex-shrink-0">
+                    <span class="text-xs font-medium text-white group-hover:text-indigo-300">Anatomy of E-commerce Search:<br>Blueprint for Engineers/Architects
+                        <span class="hidden md:block">
+                            <br/><font color="gray"><small>Sample PDF, Soon: Amazon, Worldwide delivery<br>Hardcover, Paperback, E-book</small></font>
+                        </span>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
 <main class="container mx-auto px-6 py-16">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
         <div class="md:col-span-1">
@@ -744,7 +785,55 @@
         </div>
     </div>
 </main>
+<section id="my-books" class="bg-white py-20">
+    <div class="container mx-auto px-6">
+        <div class="mb-16 text-center">
+            <h2 class="text-4xl font-bold text-gray-900"><a class="text-4xl font-bold text-gray-900" href="/my-books.html">Rauf Aliev's Books</a></h2>
+            <p class="mx-auto mt-4 max-w-2xl text-gray-600">A collection of my published and upcoming books on search, recommenders, and e-commerce. See <a href="/my-books.html"><u>all books</u></a></p>
+        </div>
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            <div class="block rounded-lg bg-gray-50 p-8 shadow-md transition hover:shadow-xl hover:-translate-y-1">
+                <a href="/books/beyond-english.html">
+                    <img class="w-full h-auto object-cover object-top border-b border-gray-200 bg-gray-100 mb-4" src="/img/be-ws.jpg" width="485" alt="Book Cover: Beyond English">
+                    <h3 class="mb-2 text-xl font-bold">Beyond English: Architecting Search for a Global World. Linguistics and Engineering</h3>
+                </a>
+                <a href="/pdfs/books/beyond-english-sample.pdf" class="text-indigo-600 hover:underline">Read Sample (PDF)</a><br>
+                <a href="https://a.co/d/2LOB9kw" class="text-indigo-600 hover:underline">Buy on Amazon</a>
 
+            </div>
+
+            <div class="block rounded-lg bg-gray-50 p-8 shadow-md transition hover:shadow-xl hover:-translate-y-1">
+                <a href="/books/recommender-algorithms.html">
+                    <img class="w-full h-auto object-cover object-top border-b border-gray-200 bg-gray-100 mb-4" src="/img/ra-ws.jpg" width="485" alt="Book Cover: Recommenders">
+                    <h3 class="mb-2 text-xl font-bold">Recommender Algorithms in 2026. Math foundations and engineering</h3>
+                </a>
+                <a href="/pdfs/books/recommenders-sample.pdf" class="text-indigo-600 hover:underline">Read Sample (PDF)</a><br>
+                <a href="https://a.co/d/44onQG3" class="text-indigo-600 hover:underline">Buy on Amazon</a>
+                <a href="https://www.barnesandnoble.com/w/recommender-algorithms-rauf-aliev/1148513570?ean=9798232638405" class="text-indigo-600 hover:underline">Buy on Barnes&Noble</a>
+            </div>
+
+            <div class="block rounded-lg bg-gray-50 p-8 shadow-md transition hover:shadow-xl hover:-translate-y-1">
+                <a href="/books/inside-solr.html">
+                    <img class="w-full h-auto object-cover object-top border-b border-gray-200 bg-gray-100 mb-4" src="/img/solr-ws.jpg" width="485" alt="Book Cover: Inside Solr">
+                    <h3 class="mb-2 text-xl font-bold">Inside Apache Solr and Lucene. Algorithms and Engineering Deep Dive.</h3>
+                </a>
+                <a href="/pdfs/books/inside-solr-sample.pdf" class="text-indigo-600 hover:underline">Read Sample (PDF)</a><br>
+                <a href="https://a.co/d/9tYBboj" class="text-indigo-600 hover:underline">Buy on Amazon</a><br>
+                <a href="https://www.barnesandnoble.com/w/inside-apache-solr-and-lucene-rauf-aliev/1148488349?ean=2940181819412" class="text-indigo-600 hover:underline">Buy on Barnes&Noble</a><br>
+                <a href="https://books.apple.com/us/book/inside-apache-solr-and-lucene/id6753773588" class="text-indigo-600 hover:underline">Buy on Apple Books</a><br>
+            </div>
+
+            <div class="block rounded-lg bg-gray-50 p-8 shadow-md transition hover:shadow-xl hover:-translate-y-1">
+                <a href="/books/anatomy-of-ecommerce-search.html">
+                    <img class="w-full h-auto object-cover object-top border-b border-gray-200 bg-gray-100 mb-4" src="/img/ecom-search.png" width="485" alt="Book Cover: Anatomy of E-commerce Search">
+                    <h3 class="mb-2 text-xl font-bold">Anatomy of eCommerce Search: A Practical Blueprint</h3>
+                </a>
+                <a href="/pdfs/books/ecomsearch-preview.pdf" class="text-indigo-600 hover:underline">Read Sample (PDF)</a><br><br>
+                <a href="/books/anatomy-of-ecommerce-search.html#notify-form" class="text-indigo-600 hover:underline font-semibold">Notify Me When Released &rarr;</a>
+            </div>
+        </div>
+    </div>
+</section>
 <section id="notify-form" class="bg-gray-100 py-20 scroll-mt-20"> <div class="container mx-auto grid gap-12 px-6 md:grid-cols-2">
     <div>
         <h2 class="text-4xl font-bold text-gray-900">Get Notified on Release</h2>
