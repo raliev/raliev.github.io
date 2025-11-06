@@ -115,18 +115,18 @@
                 <a href="https://books.apple.com/us/book/beyond-english-architecting-search-for-a-global-world/id6753904938" class="block bg-green-500 text-white text-center py-2 px-4 rounded hover:bg-red-600">Apple Books (EPUB)</a><br>
                 <a href="/pdfs/books/beyond-english-sample.pdf" class="block bg-red-500 text-white text-center py-2 px-4 rounded hover:bg-red-600">Read Sample (PDF)</a>
 
-                <form action="https://www.paypal.com/cgi-bin/webscr" id="paypalForm" method="post" target="_top">
-                    <input type="hidden" name="cmd" value="_s-xclick" />
-                    <input type="hidden" name="hosted_button_id" value="YLTM5NNK3TN48" />
-                    <input type="hidden" name="currency_code" value="USD" />
-                    <input type="hidden" name="item_number" value="BEYOND-001" />
-                    <input type="hidden" name="custom" value="BEYOND-001">
-                </form>
+                <br>
+                Pay for the PDF and I'll send it to you by e-mail:
+                <script
+                        src="https://www.paypal.com/sdk/js?client-id=BAAucKYkaFgogd-Jr0BmElerETj5kRnUdsqSn73oqHmLrPyhOVifdoSjlIq_WzXYqUfWAhFkvqMXkTyZKM&components=hosted-buttons&enable-funding=venmo&currency=USD">
+                </script>
 
-                <a href="javascript:document.getElementById('paypalForm').submit();"
-                   class="block bg-blue-500 text-white text-center py-2 px-4 rounded hover:bg-blue-600">
-                    Pay via Paypal and get PDF for $9.99
-                </a>
+                <div id="paypal-container-NHFWU8HGSTR4E"></div>
+                <script>
+                    paypal.HostedButtons({
+                        hostedButtonId: "NHFWU8HGSTR4E",
+                    }).render("#paypal-container-NHFWU8HGSTR4E")
+                </script>
 
             </div>
         </div>

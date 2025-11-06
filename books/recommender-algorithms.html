@@ -124,19 +124,15 @@
 
                 <br>
                 Pay for the PDF and I'll send it to you by e-mail:
-                <form action="https://www.paypal.com/cgi-bin/webscr" id="paypalForm" method="post" target="_top">
-                    <input type="hidden" name="cmd" value="_s-xclick" />
-                    <input type="hidden" name="hosted_button_id" value="YLTM5NNK3TN48" />
-                    <input type="hidden" name="currency_code" value="USD" />
-                    <input type="hidden" name="item_number" value="RECSYS-001" />
-                    <input type="hidden" name="custom" value="RECSYS-001">
-                </form>
-
-                <a href="javascript:document.getElementById('paypalForm').submit();"
-                   class="block bg-blue-500 text-white text-center py-2 px-4 rounded hover:bg-blue-600">
-                    Pay via Paypal and get PDF for $9.99
-                </a>
-
+                <script
+                        src="https://www.paypal.com/sdk/js?client-id=BAAucKYkaFgogd-Jr0BmElerETj5kRnUdsqSn73oqHmLrPyhOVifdoSjlIq_WzXYqUfWAhFkvqMXkTyZKM&components=hosted-buttons&enable-funding=venmo&currency=USD">
+                </script>
+                <div id="paypal-container-GNWEJYRRCUY2J"></div>
+                <script>
+                    paypal.HostedButtons({
+                        hostedButtonId: "GNWEJYRRCUY2J",
+                    }).render("#paypal-container-GNWEJYRRCUY2J")
+                </script>
             </div>
         </div>
         <div class="md:col-span-2 prose">
