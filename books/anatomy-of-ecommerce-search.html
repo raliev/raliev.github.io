@@ -147,7 +147,52 @@
             <a href="/pdfs/books/ecomsearch-preview.pdf" class="block bg-red-500 text-white text-center py-2 px-4 rounded hover:bg-red-600">Read Sample (PDF)</a>
 
             <br><br>
-            <h2 class="text-4xl font-semibold mt-4">Table of Contents</h2>
+
+            <h2 class="text-4xl font-semibold mt-4">Table of Contents (Top-Level Chapters)</h2>
+
+            <hr style="color:black;height:2px" size="2" noshade><br>
+
+            <ul>
+                <li>Foundations of the Modern Search Stack
+                    <p style="font-size: smaller;">This chapter covers the basic principles of search technology, its critical role in e-commerce, the unique characteristics of e-commerce search compared to general information retrieval, and suggestions for further reading.</p></li>
+                <li>E-commerce Search Market Landscape
+                    <p style="font-size: smaller;">This chapter explores the architectural choices between open-source and SaaS solutions, evaluates leading SaaS vendors, discusses platform ecosystems and integration strategies, and analyzes core technologies along with future market trends.</p></li>
+                <li>Blueprint for the Modern Search Stack
+                    <p style="font-size: smaller;">This chapter provides a high-level architecture for building a contemporary search system, including the search microservice, data ecosystem models, the canonical search pipeline stages, core engineering trade-offs, and additional resources.</p></li>
+                <li>Query and User Intent Understanding
+                    <p style="font-size: smaller;">This chapter delves into processing and transforming user queries, deconstructing intent through advanced techniques, leveraging contextual information, exploring new interaction modes like conversational search, and scaling architectures for query understanding.</p></li>
+                <li>Advanced Product Understanding
+                    <p style="font-size: smaller;">This chapter defines product intelligence, differentiates explicit and implicit knowledge, structures catalogs with taxonomies and PIM systems, and addresses complexities in handling product variants and building knowledge graphs.</p></li>
+                <li>Candidate Retrieval Architectures
+                    <p style="font-size: smaller;">This chapter examines lexical, semantic, and behavioral retrieval methods, hybrid approaches, ensemble architectures combining multiple signals, and explains why ensembles are essential for overcoming limitations in e-commerce search.</p></li>
+                <li>The Ranking Engine
+                    <p style="font-size: smaller;">This chapter discusses heuristic and learning-to-rank approaches, implementing various ranking models including deep learning and LLMs, handling multi-objective optimization, system architecture considerations, and evaluation methods for ranking performance.</p></li>
+                <li>Search Suggestions
+                    <p style="font-size: smaller;">This chapter highlights the importance of suggestions, categorizes modern suggestion types, details candidate generation and ranking techniques, describes high-performance autocomplete system architecture, and explores evolving user interfaces for suggestions.</p></li>
+                <li>Facets
+                    <p style="font-size: smaller;">This chapter explains the role of facets in user navigation, compares attribute and needs-based faceting, covers calculation mechanics, performance optimizations, edge cases, personalization, system architecture, testing, locale support, and best practices.</p></li>
+                <li>Recommenders in E-commerce Search
+                    <p style="font-size: smaller;">This chapter discusses the integration of search and recommendations, strategies for contextual recommendations, modern algorithms, unification techniques, implementation patterns, business constraints, advanced use cases, and future directions in recommendation systems.</p></li>
+                <li>Measurement and Operations
+                    <p style="font-size: smaller;">This chapter focuses on evaluation frameworks including offline and online metrics and A/B testing, as well as system architecture and MLOps practices for search microservices, indexing, and monitoring.</p></li>
+                <li>Offline Search Evaluation and A/B Testing
+                    <p style="font-size: smaller;">This chapter presents the framework for offline evaluation, test harness architecture, AI-assisted scaling of evaluations, and a practical implementation example for testing search configurations.</p></li>
+                <li>Search Analytics
+                    <p style="font-size: smaller;">This chapter emphasizes the strategic value of search analytics in e-commerce, covers data collection and processing, key metrics across queries, products, and user interactions, report generation, and using insights for continuous improvement.</p></li>
+                <li>User Experience and Future of Search
+                    <p style="font-size: smaller;">This chapter addresses engineering the search UI, conversational search paradigms, future trends in generative UI and agents, detailed UI requirements for search bars, and further reading on UX topics.</p></li>
+                <li>The Agentic E-commerce Engine
+                    <p style="font-size: smaller;">This chapter transitions from traditional search to autonomous systems, compares RAG and agentic AI, explores strategic implications, real-world agent implementations, academic foundations, technical architectures, and challenges in agentic commerce.</p></li>
+                <li>Architectural Blueprints for Challenging Verticals
+                    <p style="font-size: smaller;">This chapter provides tailored search architectures for specific industries like fashion, grocery, electronics, automotive, home goods, industrial supplies, digital media, and multi-vendor marketplaces, focusing on data modeling, query processing, ranking, and UX integrations.</p></li>
+                <li>Securing the Search Platform
+                    <p style="font-size: smaller;">This chapter identifies attack surfaces in e-commerce search, applies threat modeling frameworks, and details defenses against scraping, injection attacks, resource exhaustion, and information leakage.</p></li>
+                <li>Recommended Reading
+                    <p style="font-size: smaller;">This section suggests resources on foundational information retrieval theory, user experience and interface design, and modern relevance engineering practices to deepen understanding of the topics covered.</p></li>
+                </ul>
+
+
+            <h2 class="text-4xl font-semibold mt-4">Table of Contents (FULL)</h2>
             <hr style="color:black;height:2px" size="2" noshade><br>
 
             <ul id="toc" class="section-nav">
@@ -235,9 +280,9 @@
                                     </ul>
                                 </li>
                                 <li class="toc-entry toc-h3"><a href="#the-trajectory-toward-managed-services-paas-and-saas">The Trajectory Toward Managed Services (PaaS and SaaS)</a></li>
+                                <li class="toc-entry toc-h3"><a href="#strategic-recommendations-and-future-outlook">Strategic Recommendations and Future Outlook</a></li>
                             </ul>
                         </li>
-                        <li class="toc-entry toc-h2"><a href="#strategic-recommendations-and-future-outlook">Strategic Recommendations and Future Outlook</a></li>
                     </ul>
                 </li>
                 <li class="toc-entry toc-h1">
@@ -278,6 +323,7 @@
                                 <li class="toc-entry toc-h3"><a href="#latency-vs-relevance">Latency vs. Relevance</a></li>
                             </ul>
                         </li>
+                        <li class="toc-entry toc-h2"><a href="#further-reading">Further Reading</a></li>
                     </ul>
                 </li>
                 <li class="toc-entry toc-h1">
@@ -290,6 +336,17 @@
                                 <li class="toc-entry toc-h3"><a href="#language-identification">Language Identification</a></li>
                                 <li class="toc-entry toc-h3"><a href="#foundational-text-processing">Foundational Text Processing</a></li>
                                 <li class="toc-entry toc-h3"><a href="#text-tagging">Text Tagging</a></li>
+                                <li class="toc-entry toc-h3">
+                                    <a href="#lexical-spell-correction-and-fuzzy-search">Lexical Spell Correction and Fuzzy Search</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a href="#index-time-vs-query-time-tolerance">Index-Time vs. Query-Time Tolerance</a></li>
+                                        <li class="toc-entry toc-h4"><a href="#foundational-algorithms">Foundational Algorithms</a></li>
+                                        <li class="toc-entry toc-h4"><a href="#edit-distance-phonetics-and-n-grams">Edit Distance, Phonetics, and N-Grams</a></li>
+                                        <li class="toc-entry toc-h4"><a href="#query-time-mechanisms">Query-Time Mechanisms</a></li>
+                                        <li class="toc-entry toc-h4"><a href="#implementation-index-time-mechanisms">Implementation: Index-Time Mechanisms</a></li>
+                                        <li class="toc-entry toc-h4"><a href="#solving-the-worse-results-problem">Solving the "Worse Results" Problem</a></li>
+                                    </ul>
+                                </li>
                                 <li class="toc-entry toc-h3"><a href="#advanced-spell-correction-with-rag">Advanced Spell Correction with RAG</a></li>
                                 <li class="toc-entry toc-h3">
                                     <a href="#query-expansion-and-rewriting">Query Expansion and Rewriting</a>
@@ -311,11 +368,10 @@
                                     <a href="#the-challenge-of-complex-and-negative-queries">The Challenge of Complex and Negative Queries</a>
                                     <ul>
                                         <li class="toc-entry toc-h4"><a href="#deconstructing-complex-query-types">Deconstructing Complex Query Types</a></li>
+                                        <li class="toc-entry toc-h5"><a href="#queries-with-negations-compositionality-and-relational-constraints">Queries with Negations, Compositionality, and Relational Constraints</a></li>
+                                        <li class="toc-entry toc-h5"><a href="#comparative-and-analytical-queries">Comparative and Analytical Queries</a></li>
                                     </ul>
                                 </li>
-                                <li class="toc-entry toc-h3"><a href="#queries-with-negations-compositionality-and-relational-constraints">Queries with Negations, Compositionality, and Relational Constraints</a></li>
-                                <li class="toc-entry toc-h3"><a href="#vague-occasion-based-and-high-consideration-queries">Vague, Occasion-based, and High-Consideration Queries</a></li>
-                                <li class="toc-entry toc-h3"><a href="#comparative-and-analytical-queries">Comparative and Analytical Queries</a></li>
                                 <li class="toc-entry toc-h3"><a href="#intent-classification">Intent Classification</a></li>
                             </ul>
                         </li>
@@ -323,14 +379,7 @@
                             <a href="#leveraging-user-context">Leveraging User Context</a>
                             <ul>
                                 <li class="toc-entry toc-h3"><a href="#session-aware-query-interpretation">Session-Aware Query Interpretation</a></li>
-                                <li class="toc-entry toc-h3">
-                                    <a href="#deep-dive-the-session-embedding-model">Deep Dive: The "Session Embedding" Model</a>
-                                    <ul>
-                                        <li class="toc-entry toc-h4"><a href="#defining-the-session-embedding">Defining the Session Embedding</a></li>
-                                        <li class="toc-entry toc-h4"><a href="#constructing-the-embedding-the-inputs">Constructing the Embedding: The Inputs</a></li>
-                                        <li class="toc-entry toc-h4"><a href="#the-runtime-flow-a-practical-example">The Runtime Flow: A Practical Example</a></li>
-                                    </ul>
-                                </li>
+                                <li class="toc-entry toc-h3"><a href="#deep-dive-the-session-embedding-model">Deep Dive: The "Session Embedding" Model</a></li>
                                 <li class="toc-entry toc-h3"><a href="#deep-personalization-and-the-relevance-flywheel">Deep Personalization and the Relevance Flywheel</a></li>
                             </ul>
                         </li>
@@ -366,8 +415,6 @@
                                     <a href="#product-taxonomy">Product Taxonomy</a>
                                     <ul>
                                         <li class="toc-entry toc-h4"><a href="#dual-role-of-taxonomy">Dual Role of Taxonomy</a></li>
-                                        <li class="toc-entry toc-h4"><a href="#serving-the-human-navigation">Serving the Human (Navigation)</a></li>
-                                        <li class="toc-entry toc-h4"><a href="#serving-the-machine-search">Serving the Machine (Search)</a></li>
                                         <li class="toc-entry toc-h4"><a href="#architectural-design-patterns-for-search-optimized-taxonomies">Architectural Design Patterns for Search-Optimized Taxonomies</a></li>
                                         <li class="toc-entry toc-h4"><a href="#taxonomy-as-a-core-search-signal">Taxonomy as a Core Search Signal</a></li>
                                         <li class="toc-entry toc-h4"><a href="#the-curation-maintenance-lifecycle">The Curation & Maintenance Lifecycle</a></li>
@@ -523,7 +570,12 @@
                         <li class="toc-entry toc-h2">
                             <a href="#candidate-generation-for-suggestions">Candidate Generation for Suggestions</a>
                             <ul>
-                                <li class="toc-entry toc-h3"><a href="#foundational-prefix-based-retrieval">Foundational Prefix-Based Retrieval</a></li>
+                                <li class="toc-entry toc-h3">
+                                    <a href="#foundational-prefix-based-retrieval">Foundational Prefix-Based Retrieval</a>
+                                    <ul>
+                                        <li class="toc-entry toc-h4"><a href="#typo-tolerant-suggestion-retrieval">Typo-Tolerant Suggestion Retrieval</a></li>
+                                    </ul>
+                                </li>
                                 <li class="toc-entry toc-h3"><a href="#semantic-retrieval-for-non-prefix-and-conceptual-suggestions">Semantic Retrieval for Non-Prefix and Conceptual Suggestions</a></li>
                                 <li class="toc-entry toc-h3"><a href="#generative-suggestions-with-llms">Generative Suggestions with LLMs</a></li>
                             </ul>
@@ -555,7 +607,6 @@
                 <li class="toc-entry toc-h1">
                     <a href="#facets">Facets</a>
                     <ul>
-                        <li class="toc-entry toc-h2"><a href="#the-strategic-role-of-facets">The Strategic Role of Facets</a></li>
                         <li class="toc-entry toc-h2"><a href="#the-impact-on-the-user-journey">The Impact on the User Journey</a></li>
                         <li class="toc-entry toc-h2"><a href="#attribute-based-vs-needs-based-faceting">Attribute-based vs. Needs-based Faceting</a></li>
                         <li class="toc-entry toc-h2">
@@ -712,6 +763,11 @@
                                 <li class="toc-entry toc-h3"><a href="#edge-ai-and-on-device-recommendations">Edge AI and On-device Recommendations</a></li>
                             </ul>
                         </li>
+                    </ul>
+                </li>
+                <li class="toc-entry toc-h1">
+                    <a href="#measurement-and-operations">Measurement and Operations</a>
+                    <ul>
                         <li class="toc-entry toc-h2">
                             <a href="#evaluation-frameworks">Evaluation Frameworks</a>
                             <ul>
@@ -894,7 +950,7 @@
                                     <a href="#activation-state-on-focus">Activation State (On-Focus)</a>
                                     <ul>
                                         <li class="toc-entry toc-h4"><a href="#search-bar">Search Bar</a></li>
-                                        <li class="toc-entry toc-h4"><a href="#placeholder-on-focus">Placeholder (On-Focus)</a></li>
+                                        <li class="toc-entry toc-h4"><a href="#placeholder">Placeholder</a></li>
                                         <li class="toc-entry toc-h4"><a href="#cursor">Cursor</a></li>
                                         <li class="toc-entry toc-h4"><a href="#clear-button">Clear Button</a></li>
                                         <li class="toc-entry toc-h4"><a href="#suggestion-list-on-focus">Suggestion List (On-Focus)</a></li>
@@ -904,14 +960,13 @@
                                 <li class="toc-entry toc-h3">
                                     <a href="#query-input-and-autocomplete">Query Input and Autocomplete</a>
                                     <ul>
-                                        <li class="toc-entry toc-h4"><a href="#search-bar-input">Search Bar (Input)</a></li>
-                                        <li class="toc-entry toc-h4"><a href="#placeholder-input">Placeholder (Input)</a></li>
-                                        <li class="toc-entry toc-h4"><a href="#cursor-input">Cursor (Input)</a></li>
+                                        <li class="toc-entry toc-h4"><a href="#search-bar">Search Bar</a></li>
+                                        <li class="toc-entry toc-h4"><a href="#placeholder">Placeholder</a></li>
+                                        <li class="toc-entry toc-h4"><a href="#cursor">Cursor</a></li>
                                         <li class="toc-entry toc-h4"><a href="#supported-queries-functional">Supported Queries (Functional)</a></li>
-                                        <li class="toc-entry toc-h4"><a href="#suggestion-list-autocomplete">Suggestion List (Autocomplete)</a></li>
                                         <li class="toc-entry toc-h4"><a href="#products-in-suggestion-list">Products in Suggestion List</a></li>
                                         <li class="toc-entry toc-h4"><a href="#all-results-link">"All Results" Link</a></li>
-                                        <li class="toc-entry toc-h4"><a href="#clear-button-input">Clear Button (Input)</a></li>
+                                        <li class="toc-entry toc-h4"><a href="#clear-button">Clear Button</a></li>
                                         <li class="toc-entry toc-h4"><a href="#voice-search-button">Voice Search Button</a></li>
                                         <li class="toc-entry toc-h4"><a href="#visual-search-button">Visual Search Button</a></li>
                                     </ul>
@@ -919,18 +974,76 @@
                                 <li class="toc-entry toc-h3">
                                     <a href="#navigating-suggestions">Navigating Suggestions</a>
                                     <ul>
-                                        <li class="toc-entry toc-h4"><a href="#suggestion-list-nav">Suggestion List (Nav)</a></li>
-                                        <li class="toc-entry toc-h4"><a href="#search-bar-nav">Search Bar (Nav)</a></li>
+                                        <li class="toc-entry toc-h4"><a href="#suggestion-list">Suggestion List</a></li>
+                                        <li class="toc-entry toc-h4"><a href="#search-bar">Search Bar</a></li>
                                     </ul>
                                 </li>
                                 <li class="toc-entry toc-h3">
                                     <a href="#activating-the-search">Activating the Search</a>
                                     <ul>
-                                        <li class="toc-entry toc-h4"><a href="#suggestion-list-activate">Suggestion List (Activate)</a></li>
-                                        <li class="toc-entry toc-h4"><a href="#search-bar-activate">Search Bar (Activate)</a></li>
+                                        <li class="toc-entry toc-h4"><a href="#suggestion-list">Suggestion List</a></li>
+                                        <li class="toc-entry toc-h4"><a href="#search-bar">Search Bar</a></li>
                                         <li class="toc-entry toc-h4"><a href="#search-button">Search Button</a></li>
                                     </ul>
                                 </li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2"><a href="#further-reading">Further Reading</a></li>
+                    </ul>
+                </li>
+                <li class="toc-entry toc-h1">
+                    <a href="#the-agentic-e-commerce-engine">The Agentic E-commerce Engine</a>
+                    <ul>
+                        <li class="toc-entry toc-h2"><a href="#from-search-to-autonomy">From Search to Autonomy</a></li>
+                        <li class="toc-entry toc-h2">
+                            <a href="#rag-vs-agentic-ai">RAG vs. Agentic AI</a>
+                            <ul>
+                                <li class="toc-entry toc-h3"><a href="#the-rise-of-agentic-rag-rag-as-an-agents-tool">The Rise of "Agentic RAG": RAG as an Agent's Tool</a></li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a href="#the-agentic-commerce-paradigm-a-new-strategic-landscape">The Agentic Commerce Paradigm: A New Strategic Landscape</a>
+                            <ul>
+                                <li class="toc-entry toc-h3"><a href="#ai-as-the-primary-customer">AI as the Primary Customer</a></li>
+                                <li class="toc-entry toc-h3"><a href="#the-economic-opportunity">The Economic Opportunity</a></li>
+                                <li class="toc-entry toc-h3"><a href="#disintermediation-and-the-background-utility">Disintermediation and the "Background Utility"</a></li>
+                                <li class="toc-entry toc-h3"><a href="#agentic-seo-and-exploitable-biases">"Agentic SEO" and Exploitable Biases</a></li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a href="#ai-agents-in-production-from-research-to-reality">AI Agents in Production — From Research to Reality</a>
+                            <ul>
+                                <li class="toc-entry toc-h3"><a href="#amazon-rufus-the-conversational-marketplace">Amazon Rufus: The Conversational Marketplace</a></li>
+                                <li class="toc-entry toc-h3"><a href="#alibabas-b2b-agent-ecosystem-accio-marco">Alibaba's B2B Agent Ecosystem (Accio & Marco)</a></li>
+                                <li class="toc-entry toc-h3"><a href="#shopifys-democratized-ai-sidekick-app-ecosystem">Shopify's Democratized AI (Sidekick & App Ecosystem)</a></li>
+                                <li class="toc-entry toc-h3"><a href="#instacarts-cart-assistant-bridging-digital-and-physical">Instacart's Cart Assistant: Bridging Digital and Physical</a></li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a href="#academic-foundations-and-core-agent-architectures">Academic Foundations and Core Agent Architectures</a>
+                            <ul>
+                                <li class="toc-entry toc-h3"><a href="#synergizing-reasoning-and-acting-react-framework">Synergizing Reasoning and Acting — ReAct Framework</a></li>
+                                <li class="toc-entry toc-h3"><a href="#benchmarking-the-agent-webshop-and-shoppingbench">Benchmarking the Agent: WebShop and ShoppingBench</a></li>
+                                <li class="toc-entry toc-h3"><a href="#multi-agent-systems-specialized-task-decomposition">Multi-Agent Systems: Specialized Task Decomposition</a></li>
+                                <li class="toc-entry toc-h3"><a href="#specialized-vs-general-models">Specialized vs. General Models</a></li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a href="#technical-architecture-of-a-modern-shopping-agent">Technical Architecture of a Modern Shopping Agent</a>
+                            <ul>
+                                <li class="toc-entry toc-h3"><a href="#retrieval-augmented-generation-rag-as-a-core-tool">Retrieval-Augmented Generation (RAG) as a Core Tool</a></li>
+                                <li class="toc-entry toc-h3"><a href="#function-calling-and-tool-use-enabling-action">Function Calling and Tool Use: Enabling Action</a></li>
+                                <li class="toc-entry toc-h3"><a href="#multi-modal-understanding-visual-product-search">Multi-modal Understanding: Visual Product Search</a></li>
+                                <li class="toc-entry toc-h3"><a href="#agent-orchestration-frameworks-managing-complexity">Agent Orchestration Frameworks: Managing Complexity</a></li>
+                            </ul>
+                        </li>
+                        <li class="toc-entry toc-h2">
+                            <a href="#core-challenges-and-the-future-of-agentic-commerce">Core Challenges and the Future of Agentic Commerce</a>
+                            <ul>
+                                <li class="toc-entry toc-h3"><a href="#the-agentic-trilemma-cost-latency-and-accuracy">The "Agentic Trilemma" — Cost, Latency, and Accuracy</a></li>
+                                <li class="toc-entry toc-h3"><a href="#the-new-attack-surface">The New Attack Surface</a></li>
+                                <li class="toc-entry toc-h3"><a href="#governed-autonomy-and-human-in-the-loop-hitl">Governed Autonomy and Human-in-the-Loop (HITL)</a></li>
+                                <li class="toc-entry toc-h3"><a href="#a-new-protocol-stack">A New Protocol Stack</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -970,7 +1083,7 @@
                             <a href="#grocery-and-consumables">Grocery and Consumables</a>
                             <ul>
                                 <li class="toc-entry toc-h3">
-                                    <a href="#index-and-data-modeling-grocery">Index and Data Modeling</a>
+                                    <a href="#index-and-data-modeling">Index and Data Modeling</a>
                                     <ul>
                                         <li class="toc-entry toc-h4"><a href="#unit-of-measure-uom-normalization">Unit of Measure (UoM) Normalization</a></li>
                                         <li class="toc-entry toc-h4"><a href="#modeling-substitution-and-relationship-graphs">Modeling Substitution and Relationship Graphs</a></li>
@@ -978,7 +1091,7 @@
                                     </ul>
                                 </li>
                                 <li class="toc-entry toc-h3">
-                                    <a href="#query-processing-grocery">Query Processing</a>
+                                    <a href="#query-processing">Query Processing</a>
                                     <ul>
                                         <li class="toc-entry toc-h4"><a href="#the-nlu-pipeline-ner-and-quantity-parsing">The NLU Pipeline: NER and Quantity Parsing</a></li>
                                         <li class="toc-entry toc-h4"><a href="#intent-based-abstract-query-handling">Intent-Based & Abstract Query Handling</a></li>
@@ -992,14 +1105,14 @@
                                         <li class="toc-entry toc-h4"><a href="#substitution-ranking">Substitution Ranking</a></li>
                                     </ul>
                                 </li>
-                                <li class="toc-entry toc-h3"><a href="#key-ux-integrations-grocery">Key UX Integrations</a></li>
+                                <li class="toc-entry toc-h3"><a href="#key-ux-integrations">Key UX Integrations</a></li>
                             </ul>
                         </li>
                         <li class="toc-entry toc-h2">
                             <a href="#consumer-electronics">Consumer Electronics</a>
                             <ul>
                                 <li class="toc-entry toc-h3">
-                                    <a href="#index-and-data-modeling-electronics">Index and Data Modeling</a>
+                                    <a href="#index-and-data-modeling">Index and Data Modeling</a>
                                     <ul>
                                         <li class="toc-entry toc-h4"><a href="#nested-spec-document">Nested Spec Document</a></li>
                                         <li class="toc-entry toc-h4"><a href="#alias-management">Alias Management</a></li>
@@ -1014,7 +1127,7 @@
                                     </ul>
                                 </li>
                                 <li class="toc-entry toc-h3">
-                                    <a href="#ranking-strategy-electronics">Ranking Strategy</a>
+                                    <a href="#ranking-strategy">Ranking Strategy</a>
                                     <ul>
                                         <li class="toc-entry toc-h4"><a href="#exact-match-boost">Exact Match Boost</a></li>
                                         <li class="toc-entry toc-h4"><a href="#spec-driven-ranking">Spec-Driven Ranking</a></li>
@@ -1022,10 +1135,10 @@
                                     </ul>
                                 </li>
                                 <li class="toc-entry toc-h3">
-                                    <a href="#key-ux-integrations-electronics">Key UX Integrations</a>
+                                    <a href="#key-ux-integrations">Key UX Integrations</a>
                                     <ul>
                                         <li class="toc-entry toc-h4"><a href="#compare-feature">"Compare" Feature</a></li>
-                                        <li class="toc-entry toc-h4"><a href="#parametric-specification-facets">Parametric/Specification Facets</a></li>
+                                        <li class="toc-entry toc-h4"><a href="#parametricspecification-facets">Parametric/Specification Facets</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -1034,14 +1147,14 @@
                             <a href="#automotive-parts">Automotive Parts</a>
                             <ul>
                                 <li class="toc-entry toc-h3">
-                                    <a href="#index-and-data-modeling-auto">Index and Data Modeling</a>
+                                    <a href="#index-and-data-modeling">Index and Data Modeling</a>
                                     <ul>
                                         <li class="toc-entry toc-h4"><a href="#the-ymmt-database-fitment-data">The YMMT Database (Fitment Data)</a></li>
                                         <li class="toc-entry toc-h4"><a href="#modeling-part-relationships">Modeling Part Relationships</a></li>
                                     </ul>
                                 </li>
                                 <li class="toc-entry toc-h3">
-                                    <a href="#query-processing-auto">Query Processing</a>
+                                    <a href="#query-processing">Query Processing</a>
                                     <ul>
                                         <li class="toc-entry toc-h4"><a href="#pre-search-fitment-the-vehicle-context">Pre-Search Fitment (The "Vehicle Context")</a></li>
                                         <li class="toc-entry toc-h4"><a href="#part-number-and-terminology-search">Part Number and Terminology Search</a></li>
@@ -1056,7 +1169,7 @@
                                     </ul>
                                 </li>
                                 <li class="toc-entry toc-h3">
-                                    <a href="#key-ux-integrations-auto">Key UX Integrations</a>
+                                    <a href="#key-ux-integrations">Key UX Integrations</a>
                                     <ul>
                                         <li class="toc-entry toc-h4"><a href="#my-garage-vehicle-selector">"My Garage" / Vehicle Selector</a></li>
                                         <li class="toc-entry toc-h4"><a href="#interactive-schematics-diagram-search">Interactive Schematics (Diagram Search)</a></li>
@@ -1068,7 +1181,7 @@
                             <a href="#home-goods-and-furniture">Home Goods and Furniture</a>
                             <ul>
                                 <li class="toc-entry toc-h3">
-                                    <a href="#index-and-data-modeling-home">Index and Data Modeling</a>
+                                    <a href="#index-and-data-modeling">Index and Data Modeling</a>
                                     <ul>
                                         <li class="toc-entry toc-h4"><a href="#queryable-dimensions">Queryable Dimensions</a></li>
                                         <li class="toc-entry toc-h4"><a href="#material-finish-and-style-attributes">Material, Finish, and Style Attributes</a></li>
@@ -1077,7 +1190,7 @@
                                     </ul>
                                 </li>
                                 <li class="toc-entry toc-h3">
-                                    <a href="#query-processing-home">Query Processing</a>
+                                    <a href="#query-processing">Query Processing</a>
                                     <ul>
                                         <li class="toc-entry toc-h4"><a href="#dimensional-nlp-parsing">Dimensional NLP (Parsing)</a></li>
                                         <li class="toc-entry toc-h4"><a href="#room-and-project-query-handling">"Room" and "Project" Query Handling</a></li>
@@ -1092,7 +1205,7 @@
                                     </ul>
                                 </li>
                                 <li class="toc-entry toc-h3">
-                                    <a href="#key-ux-integrations-home">Key UX Integrations</a>
+                                    <a href="#key-ux-integrations">Key UX Integrations</a>
                                     <ul>
                                         <li class="toc-entry toc-h4"><a href="#dimensional-range-sliders">Dimensional Range Sliders</a></li>
                                         <li class="toc-entry toc-h4"><a href="#shop-the-room-galleries">"Shop the Room" Galleries</a></li>
@@ -1105,7 +1218,7 @@
                             <a href="#industrial-scientific-supplies-mro-b2b">Industrial & Scientific Supplies (MRO & B2B)</a>
                             <ul>
                                 <li class="toc-entry toc-h3">
-                                    <a href="#index-and-data-modeling-b2b">Index and Data Modeling</a>
+                                    <a href="#index-and-data-modeling">Index and Data Modeling</a>
                                     <ul>
                                         <li class="toc-entry toc-h4"><a href="#sku-level-primacy">SKU-Level Primacy</a></li>
                                         <li class="toc-entry toc-h4"><a href="#specification-as-data">Specification-as-Data</a></li>
@@ -1114,7 +1227,7 @@
                                     </ul>
                                 </li>
                                 <li class="toc-entry toc-h3">
-                                    <a href="#query-processing-b2b">Query Processing</a>
+                                    <a href="#query-processing">Query Processing</a>
                                     <ul>
                                         <li class="toc-entry toc-h4"><a href="#the-part-number-analyzer">The Part Number Analyzer</a></li>
                                         <li class="toc-entry toc-h4"><a href="#the-specification-parser">The Specification Parser</a></li>
@@ -1129,7 +1242,7 @@
                                     </ul>
                                 </li>
                                 <li class="toc-entry toc-h3">
-                                    <a href="#key-ux-integrations-b2b">Key UX Integrations</a>
+                                    <a href="#key-ux-integrations">Key UX Integrations</a>
                                     <ul>
                                         <li class="toc-entry toc-h4"><a href="#quick-order-pad">Quick Order Pad</a></li>
                                         <li class="toc-entry toc-h4"><a href="#schematic-hotspot-search">Schematic "Hotspot" Search</a></li>
@@ -1142,7 +1255,7 @@
                             <a href="#digital-goods-media-software-stock-photos-ebooks">Digital Goods & Media (Software, Stock Photos, Ebooks)</a>
                             <ul>
                                 <li class="toc-entry toc-h3">
-                                    <a href="#index-and-data-modeling-digital">Index and Data Modeling</a>
+                                    <a href="#index-and-data-modeling">Index and Data Modeling</a>
                                     <ul>
                                         <li class="toc-entry toc-h4"><a href="#license-and-rights-management">License and Rights Management</a></li>
                                         <li class="toc-entry toc-h4"><a href="#file-metadata">File Metadata</a></li>
@@ -1151,7 +1264,7 @@
                                     </ul>
                                 </li>
                                 <li class="toc-entry toc-h3">
-                                    <a href="#query-processing-digital">Query Processing</a>
+                                    <a href="#query-processing">Query Processing</a>
                                     <ul>
                                         <li class="toc-entry toc-h4"><a href="#tag-expansion-subjective-search">Tag Expansion (Subjective Search)</a></li>
                                         <li class="toc-entry toc-h4"><a href="#intent-parsing-technical-search">Intent Parsing (Technical Search)</a></li>
@@ -1162,11 +1275,11 @@
                                     <ul>
                                         <li class="toc-entry toc-h4"><a href="#popularity-and-downloads">Popularity and Downloads</a></li>
                                         <li class="toc-entry toc-h4"><a href="#more-from-this-artist-boost">"More From This Artist" Boost</a></li>
-                                        <li class="toc-entry toc-h4"><a href="#visually-aurally-similar-vector-search">"Visually/Aurally Similar" (Vector Search)</a></li>
+                                        <li class="toc-entry toc-h4"><a href="#visuallyaurally-similar-vector-search">"Visually/Aurally Similar" (Vector Search)</a></li>
                                     </ul>
                                 </li>
                                 <li class="toc-entry toc-h3">
-                                    <a href="#key-ux-integrations-digital">Key UX Integrations</a>
+                                    <a href="#key-ux-integrations">Key UX Integrations</a>
                                     <ul>
                                         <li class="toc-entry toc-h4"><a href="#instant-preview">Instant Preview</a></li>
                                         <li class="toc-entry toc-h4"><a href="#license-selector">License Selector</a></li>
@@ -1179,7 +1292,7 @@
                             <a href="#multi-vendor-marketplaces">Multi-Vendor Marketplaces</a>
                             <ul>
                                 <li class="toc-entry toc-h3">
-                                    <a href="#index-and-data-modeling-marketplace">Index and Data Modeling</a>
+                                    <a href="#index-and-data-modeling">Index and Data Modeling</a>
                                     <ul>
                                         <li class="toc-entry toc-h4"><a href="#the-product-listing-duality">The Product-Listing Duality</a></li>
                                         <li class="toc-entry toc-h4"><a href="#seller-denormalization">Seller Denormalization</a></li>
@@ -1187,7 +1300,7 @@
                                     </ul>
                                 </li>
                                 <li class="toc-entry toc-h3">
-                                    <a href="#query-processing-marketplace">Query Processing</a>
+                                    <a href="#query-processing">Query Processing</a>
                                     <ul>
                                         <li class="toc-entry toc-h4"><a href="#attribute-extraction-nlp">Attribute Extraction (NLP)</a></li>
                                         <li class="toc-entry toc-h4"><a href="#query-to-product-matching">Query-to-Product Matching</a></li>
@@ -1195,15 +1308,15 @@
                                     </ul>
                                 </li>
                                 <li class="toc-entry toc-h3">
-                                    <a href="#ranking-strategy-marketplace">Ranking Strategy</a>
+                                    <a href="#ranking-strategy">Ranking Strategy</a>
                                     <ul>
                                         <li class="toc-entry toc-h4"><a href="#the-buy-box-function">The "Buy Box" Function</a></li>
                                         <li class="toc-entry toc-h4"><a href="#trust-as-a-signal">Trust as a Signal</a></li>
-                                        <li class="toc-entry toc-h4"><a href="#handmade-niche-boost">Handmade/Niche Boost</a></li>
+                                        <li class="toc-entry toc-h4"><a href="#handmadeniche-boost">Handmade/Niche Boost</a></li>
                                     </ul>
                                 </li>
                                 <li class="toc-entry toc-h3">
-                                    <a href="#key-ux-integrations-marketplace">Key UX Integrations</a>
+                                    <a href="#key-ux-integrations">Key UX Integrations</a>
                                     <ul>
                                         <li class="toc-entry toc-h4"><a href="#group-by-product-toggle">"Group by Product" Toggle</a></li>
                                         <li class="toc-entry toc-h4"><a href="#condition-and-fulfillment-filters">Condition and Fulfillment Filters</a></li>
@@ -1274,7 +1387,13 @@
                         <li class="toc-entry toc-h2"><a href="#modern-relevance-engineering-practice">Modern Relevance Engineering Practice</a></li>
                     </ul>
                 </li>
-                <li class="toc-entry toc-h1"><a href="#conclusion">Conclusion</a></li> </ul>
+                <li class="toc-entry toc-h1">
+                    <a href="#conclusion">Conclusion</a>
+                    <ul>
+                        <li class="toc-entry toc-h2"><a href="#conclusion-the-future-of-e-commerce-search-as-a-proactive-autonomous-system">Conclusion: The Future of E-commerce Search as a Proactive, Autonomous System</a></li>
+                    </ul>
+                </li>
+            </ul>
 
         </div>
     </div>
