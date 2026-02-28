@@ -8,9 +8,9 @@
 <link rel="manifest" href="/site.webmanifest" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Posts tagged: Data Engineering - TestMySearch Blog</title>
-    <meta name="description" content="The official blog for TestMySearch. Articles and insights on search quality, information retrieval, and relevance engineering from Rauf Aliev.">
-    <link rel="canonical" href="https://www.testmysearch.com/blog/tags-data-engineering/">
+    <title>Gemini API offers significant architectural and functional advantages over GPT-4 API, particularly when handling complex, multi-page scientific document - TestMySearch Blog</title>
+    <meta name="description" content="Gemini API offers significant architectural and functional advantages over GPT-4 API, particularly when handling complex, multi-page scientific documents">
+    <link rel="canonical" href="https://www.testmysearch.com/blog/2026/02/27/gemini-chatgpt.html">
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -791,23 +791,163 @@
 <main class="container mx-auto px-6 py-16">
     <div class="mx-auto max-w-4xl">
         <article class="prose max-w-none rounded-lg bg-white p-8 shadow-lg">
-    <header class="mb-6 border-b pb-4">
-        <h1 class="text-3xl font-extrabold text-gray-900">
-            Posts tagged: Data Engineering
-        </h1>
+    <header class="mb-8 border-b pb-4">
+        <b class="text-[1.375rem] text-gray-900 md:text-[1.8rem]"> Rauf Aliev </b><br>
+        <h1 class="text-4xl font-extrabold text-gray-900 md:text-5xl">Gemini API offers significant architectural and functional advantages over GPT-4 API, particularly when handling complex, multi-page scientific document</h1>
         <p class="text-gray-600">
-            
-            0 post(s)
+            February 27, 2026
         </p>
+        
+        <a href="/pdfs/gemini-vs-gpt4-multimodal-analysis.pdf" style="color:white" class="mt-4 inline-flex items-center rounded-md bg-red-600 px-4 py-2 text-base font-medium text-white no-underline hover:bg-red-700" target="_blank" rel="noopener noreferrer">
+            <i class="fa-solid fa-file-pdf mr-2"></i>
+            Download PDF
+        </a>
+        
     </header>
 
-    
-    
-    <div class="rounded-md border border-dashed bg-gray-50 p-6 text-gray-700">
-        <p class="text-base">
-            No posts for <strong>Data Engineering</strong> yet — but more are coming soon!
-        </p>
+    <div class="text-gray-700">
+        <h1 id="gemini-api-offers-significant-architectural-and-functional-advantages-over-gpt-4-api-particularly-when-handling-complex-multi-page-scientific-documents">Gemini API offers significant architectural and functional advantages over GPT-4 API, particularly when handling complex, multi-page scientific documents</h1>
+
+<p>The core task was to take a large volume PDF, load it once, and ask several questions across separate, independent sessions. The goal was to avoid re-uploading the file and paying for the same input tokens every time by utilizing existing API caching mechanisms. Additionally, it was critical that the LLM processes both text and embedded images accurately from these large documents.</p>
+
+<p>To test this, I analyzed a 39-page research paper (<a href="https://arxiv.org/abs/2310.01783">arXiv:2310.01783</a>) using both Gemini and OpenAI GPT-4. The results highlight fundamental differences in how these systems “see”, “remember”, and handle pricing for large documents.</p>
+
+<p>Here are the key takeaways from the comparison.</p>
+
+<h3 id="1-native-multi-modal-understanding-vs-textual-rag">1. Native Multi-Modal Understanding vs. Textual RAG</h3>
+
+<p>Scientific papers are not just text; they are a synthesis of formulas, charts, and diagrams. When working with large volume PDFs, it is essential that the model effortlessly understands both text and images together.</p>
+
+<p>OpenAI’s Assistants API handles PDFs primarily through File Search (a Retrieval-Augmented Generation, or RAG, approach). GPT-4o extracts the text and stores it in a vector database. To get the API to “see” a diagram, you have to manually crop it, convert it to an image, and send it via the Vision API. For large documents, this workaround is slow, expensive, and breaks context. <em>(Note: ChatGPT functions differently as an agentic system, but the API relies on this extraction method).</em></p>
+
+<p><strong>Gemini’s Advantage:</strong> While the exact internal mechanics of how Gemini processes PDFs are not exhaustively documented, available documentation indicates it still parses the PDF into text and images within the pipeline, feeding both directly into its multimodal model. The true advantage is that this mechanism is built natively into Gemini and operates significantly faster than the manual, multi-step image cropping and separate database extraction required for the OpenAI GPT-4 API. This integrated, out-of-the-box multimodal approach makes Gemini exceptionally efficient and well-suited for processing large volume PDFs.</p>
+
+<h3 id="2-visual-accuracy">2. Visual Accuracy</h3>
+
+<p>To test visual reasoning, I asked both models to analyze Figure 3 in the document—a complex log-frequency ratio diagram.</p>
+
+<p><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdr5Cdzh217dPnNJGNBw7MNG3XfYScxLKUeXwqqGHYx7c3_vzSsnJXxp06UOMO9yh8xBZ56WakPWSnKko4urEoXPRDj7WL_4VpUosbDPADbuyF4STdMcJ3P221m74JsHsqf7UXGr1s9s84y0QYpvXOykgUrbw?key=1miJacsJFi0g4LKmYfBfaA" alt="The diagram about which I asked the LLMs providing the PDF containing this diagram at the page 17" /></p>
+
+<ul>
+  <li><strong>Gemini</strong> correctly identified the specific color coding of the diagram (“The primary colors used are shades of blue, purple, and red (specifically a reddish-pink or salmon color)… Blue/Deep Purple is used for aspects more frequently mentioned by human reviewers… Red/Pink is used for aspects more frequently mentioned by GPT-4.”). This proves it is performing true visual reasoning on the document’s content.</li>
+  <li><strong>OpenAI GPT-4o</strong>, despite having access to the file via its Assistant storage, provided a generic response about “shades of blue and red.” It guessed standard chart colors based on the parsed text, failing to actually “see” the diagram.</li>
+</ul>
+
+<h3 id="3-context-caching-vs-vector-stores">3. Context Caching vs. Vector Stores</h3>
+
+<p>The way these models maintain “memory” and handle pricing for ongoing, separate sessions is fundamentally different.</p>
+
+<ul>
+  <li><strong>OpenAI (Assistants API):</strong> To maintain a session, you must upload files to a Vector Store, manage a Thread ID, and manually delete files later to avoid storage costs. It is a “search-and-retrieve” architecture. The model only sees snippets of text relevant to your question, often missing the broader context of the paper. When querying the full length of a document directly without Vector stores, you end up paying full price for the input tokens every single time.</li>
+  <li><strong>Gemini (Context Caching):</strong> Gemini allows you to upload a file and create a Context Cache. This keeps the large document in “warm” memory. You can return a day later, in a completely separate session, ask a follow-up question, and the model immediately responds with the full context already loaded. Because of its specific pricing mechanisms, you pay significantly less for “cached tokens” compared to passing the document from scratch each time. There is no repetitive token billing for the full document, no “indexing” delay, and no “search” phase—it is a true, cost-effective persistent session.</li>
+</ul>
+
+<h3 id="4-workflow-integrity">4. Workflow Integrity</h3>
+
+<p>To mimic Gemini’s native performance with OpenAI, you would have to convert all 39 pages into 39 high-resolution images and send them in a single session. This often exceeds token limits and is remarkably inefficient.</p>
+
+<p>With Gemini, you simply attach the PDF. The model handles the text, the complex mathematical notations, and the logical flow of the paper’s imagery in one go.</p>
+
+<p>While ChatGPT is excellent at processing extracted text, between the two tested models, <strong>Gemini was the only API model capable of natively performing a “visual” peer review.</strong> It understands not just what the researchers <em>wrote</em>, but what they <em>plotted</em>.</p>
+
+<h3 id="5-other-vendors-claude-and-others">5. Other Vendors (Claude and others)</h3>
+
+<p>It is worth noting that other options exist in the market, such as Anthropic’s Claude 3.5 models. According to their documentation, Claude also offers <a href="https://docs.anthropic.com/en/docs/build-with-claude/pdf-support">native PDF support featuring visual understanding</a> and <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching">Prompt Caching</a> mechanisms which similarly reduce latency and token costs for large contexts across separate queries.</p>
+
+<p><em>Please note: No direct testing was conducted on Claude for this specific workflow, and these capabilities are mentioned based purely on their official documentation.</em></p>
+
+<hr />
+
+<h3 id="the-proof-testing-the-models">The Proof: Testing the Models</h3>
+
+<p>I asked both models to analyze a specific diagram from the paper to see how they handled visual data.</p>
+
+<h4 id="test-1-gemini-native-pdf-upload">Test 1: Gemini (Native PDF Upload)</h4>
+
+<blockquote>
+  <p><strong>User:</strong> Please analyze the log frequency ratio diagram in this PDF.</p>
+
+  <p><strong>Gemini:</strong> Based on page 17 of the document, Figure 3 is a horizontal dot plot titled “LLM based feedback emphasizes certain aspects more than humans.”</p>
+  <ul>
+    <li><strong>Y-axis:</strong> Lists 11 categorized aspects of scientific feedback…</li>
+    <li><strong>X-axis:</strong> Labeled “log Frequency Ratio (GPT-4/Human)”, ranging from -1 to 1.</li>
+    <li><strong>Position &amp; Color:</strong> Dots to the right (pink/red) are mentioned more frequently by GPT-4. Dots to the left (blue/purple) are mentioned more frequently by humans…</li>
+    <li><strong>Key Findings:</strong> GPT-4 is over 10 times less likely to comment on novelty but over 7 times more likely to discuss research implications compared to human reviewers.</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <p><strong>User:</strong> What are the primary colors used in the log frequency ratio diagram?</p>
+
+  <p><strong>Gemini:</strong> The primary colors used are shades of blue, purple, and red (specifically a reddish-pink or salmon color)… Blue/Deep Purple is used for aspects more frequently mentioned by human reviewers… Red/Pink is used for aspects more frequently mentioned by GPT-4.</p>
+</blockquote>
+
+<p><em>Result: Flawless visual and contextual understanding.</em></p>
+
+<h4 id="test-2-gpt-4o-api-pdf-uploaded-as-file">Test 2: GPT-4o API (PDF Uploaded as File)</h4>
+
+<blockquote>
+  <p><strong>User:</strong> Please analyze the log frequency ratio diagram in this PDF.</p>
+
+  <p><strong>GPT-4o:</strong> The log frequency ratio diagram… compares how frequently GPT-4 comments on various aspects… The circle sizes denote the prevalence of each aspect in human feedback… <em>(Proceeds to summarize text accurately but misses visual layout).</em></p>
+</blockquote>
+
+<blockquote>
+  <p><strong>User:</strong> What are the primary colors used in the log frequency ratio diagram?</p>
+
+  <p><strong>GPT-4o:</strong> The primary colors used… are shades of blue and shades of red. Blue shades represent aspects where GPT-4 comments more frequently… while red shades indicate aspects where GPT-4 comments less frequently.</p>
+</blockquote>
+
+<p><em>Result: GPT-4o hallucinated the color mapping, guessing based on standard heat-map conventions and getting the assignments backward.</em></p>
+
+<h4 id="test-3-gpt-4o-api-diagram-uploaded-manually-as-jpg">Test 3: GPT-4o API (Diagram Uploaded Manually as JPG)</h4>
+
+<blockquote>
+  <p><strong>User:</strong> What are the primary colors used in the log frequency ratio diagram?</p>
+
+  <p><strong>GPT-4o:</strong> The primary colors used in the log frequency ratio diagram are purple and blue. There is also a small red dot indicating a data point.</p>
+</blockquote>
+
+<p><em>Result: Even when force-fed the image, GPT-4o struggled to accurately describe the distinct blue-to-pink/red gradient that Gemini easily identified.</em></p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>For academic work where a log-frequency ratio diagram is as important as the written conclusion, Gemini provides a level of visual accuracy and architectural simplicity that the OpenAI Assistants API currently cannot match.</p>
+
     </div>
+
+    
+    <footer class="mt-8 border-t pt-4">
+        <div class="flex flex-wrap gap-2">
+            
+            <a href="/blog/tags-retrieval-augmented-generation-rag/"
+               class="inline-block rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-700 hover:bg-gray-200">
+                Retrieval-Augmented Generation (RAG)
+            </a>
+            
+            <a href="/blog/tags-multimodal-search-text-image-audio/"
+               class="inline-block rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-700 hover:bg-gray-200">
+                Multimodal Search (Text, Image, Audio)
+            </a>
+            
+            <a href="/blog/tags-algorithms-models/"
+               class="inline-block rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-700 hover:bg-gray-200">
+                Algorithms & Models
+            </a>
+            
+            <a href="/blog/tags-information-retrieval-ir/"
+               class="inline-block rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-700 hover:bg-gray-200">
+                Information Retrieval (IR)
+            </a>
+            
+        </div>
+    </footer> <script async src="https://www.googletagmanager.com/gtag/js?id=G-L74BQSCQC3"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L74BQSCQC3');
+</script>
     
 </article>
     </div>

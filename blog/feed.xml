@@ -1,4 +1,110 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://www.testmysearch.com/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.testmysearch.com/blog/" rel="alternate" type="text/html" /><updated>2025-10-14T11:32:23-04:00</updated><id>https://www.testmysearch.com/blog/feed.xml</id><title type="html">TestMySearch Blog</title><subtitle>The official blog for TestMySearch. Articles and insights on search quality,  information retrieval, and relevance engineering from Rauf Aliev.</subtitle><author><name>Rauf Aliev</name></author><entry><title type="html">Automatic Facet Discovery in E-Commerce Search</title><link href="https://www.testmysearch.com/blog/2025/09/06/facet-discovery.html" rel="alternate" type="text/html" title="Automatic Facet Discovery in E-Commerce Search" /><published>2025-09-06T00:00:00-04:00</published><updated>2025-09-06T00:00:00-04:00</updated><id>https://www.testmysearch.com/blog/2025/09/06/facet-discovery</id><content type="html" xml:base="https://www.testmysearch.com/blog/2025/09/06/facet-discovery.html"><![CDATA[<p>This paper addresses a significant challenge in e-commerce information retrieval: the failure of standard keyword search systems to correctly interpret complex user queries that contain product attributes. Queries such as “blue XL Burton jacket” are often processed as a simple set of keywords, leading to irrelevant results and compelling users to engage in a laborious manual filtering process. We present a proof-of-concept (PoC) for an automatic facet discovery system designed to parse user queries, identify terms corresponding to product facets (e.g., color, brand, size), and apply these filters automatically. This research demonstrates a practical methodology for bridging the semantic gap between unstructured free-text search and structured faceted navigation, thereby enhancing result relevance and improving the overall user experience.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://www.testmysearch.com/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.testmysearch.com/blog/" rel="alternate" type="text/html" /><updated>2026-02-27T20:56:03-05:00</updated><id>https://www.testmysearch.com/blog/feed.xml</id><title type="html">TestMySearch Blog</title><subtitle>The official blog for TestMySearch. Articles and insights on search quality,  information retrieval, and relevance engineering from Rauf Aliev.</subtitle><author><name>Rauf Aliev</name></author><entry><title type="html">Gemini API offers significant architectural and functional advantages over GPT-4 API, particularly when handling complex, multi-page scientific document</title><link href="https://www.testmysearch.com/blog/2026/02/27/gemini-chatgpt.html" rel="alternate" type="text/html" title="Gemini API offers significant architectural and functional advantages over GPT-4 API, particularly when handling complex, multi-page scientific document" /><published>2026-02-27T00:00:00-05:00</published><updated>2026-02-27T00:00:00-05:00</updated><id>https://www.testmysearch.com/blog/2026/02/27/gemini-chatgpt</id><content type="html" xml:base="https://www.testmysearch.com/blog/2026/02/27/gemini-chatgpt.html"><![CDATA[<h1 id="gemini-api-offers-significant-architectural-and-functional-advantages-over-gpt-4-api-particularly-when-handling-complex-multi-page-scientific-documents">Gemini API offers significant architectural and functional advantages over GPT-4 API, particularly when handling complex, multi-page scientific documents</h1>
+
+<p>The core task was to take a large volume PDF, load it once, and ask several questions across separate, independent sessions. The goal was to avoid re-uploading the file and paying for the same input tokens every time by utilizing existing API caching mechanisms. Additionally, it was critical that the LLM processes both text and embedded images accurately from these large documents.</p>
+
+<p>To test this, I analyzed a 39-page research paper (<a href="https://arxiv.org/abs/2310.01783">arXiv:2310.01783</a>) using both Gemini and OpenAI GPT-4. The results highlight fundamental differences in how these systems “see”, “remember”, and handle pricing for large documents.</p>
+
+<p>Here are the key takeaways from the comparison.</p>
+
+<h3 id="1-native-multi-modal-understanding-vs-textual-rag">1. Native Multi-Modal Understanding vs. Textual RAG</h3>
+
+<p>Scientific papers are not just text; they are a synthesis of formulas, charts, and diagrams. When working with large volume PDFs, it is essential that the model effortlessly understands both text and images together.</p>
+
+<p>OpenAI’s Assistants API handles PDFs primarily through File Search (a Retrieval-Augmented Generation, or RAG, approach). GPT-4o extracts the text and stores it in a vector database. To get the API to “see” a diagram, you have to manually crop it, convert it to an image, and send it via the Vision API. For large documents, this workaround is slow, expensive, and breaks context. <em>(Note: ChatGPT functions differently as an agentic system, but the API relies on this extraction method).</em></p>
+
+<p><strong>Gemini’s Advantage:</strong> While the exact internal mechanics of how Gemini processes PDFs are not exhaustively documented, available documentation indicates it still parses the PDF into text and images within the pipeline, feeding both directly into its multimodal model. The true advantage is that this mechanism is built natively into Gemini and operates significantly faster than the manual, multi-step image cropping and separate database extraction required for the OpenAI GPT-4 API. This integrated, out-of-the-box multimodal approach makes Gemini exceptionally efficient and well-suited for processing large volume PDFs.</p>
+
+<h3 id="2-visual-accuracy">2. Visual Accuracy</h3>
+
+<p>To test visual reasoning, I asked both models to analyze Figure 3 in the document—a complex log-frequency ratio diagram.</p>
+
+<p><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdr5Cdzh217dPnNJGNBw7MNG3XfYScxLKUeXwqqGHYx7c3_vzSsnJXxp06UOMO9yh8xBZ56WakPWSnKko4urEoXPRDj7WL_4VpUosbDPADbuyF4STdMcJ3P221m74JsHsqf7UXGr1s9s84y0QYpvXOykgUrbw?key=1miJacsJFi0g4LKmYfBfaA" alt="The diagram about which I asked the LLMs providing the PDF containing this diagram at the page 17" /></p>
+
+<ul>
+  <li><strong>Gemini</strong> correctly identified the specific color coding of the diagram (“The primary colors used are shades of blue, purple, and red (specifically a reddish-pink or salmon color)… Blue/Deep Purple is used for aspects more frequently mentioned by human reviewers… Red/Pink is used for aspects more frequently mentioned by GPT-4.”). This proves it is performing true visual reasoning on the document’s content.</li>
+  <li><strong>OpenAI GPT-4o</strong>, despite having access to the file via its Assistant storage, provided a generic response about “shades of blue and red.” It guessed standard chart colors based on the parsed text, failing to actually “see” the diagram.</li>
+</ul>
+
+<h3 id="3-context-caching-vs-vector-stores">3. Context Caching vs. Vector Stores</h3>
+
+<p>The way these models maintain “memory” and handle pricing for ongoing, separate sessions is fundamentally different.</p>
+
+<ul>
+  <li><strong>OpenAI (Assistants API):</strong> To maintain a session, you must upload files to a Vector Store, manage a Thread ID, and manually delete files later to avoid storage costs. It is a “search-and-retrieve” architecture. The model only sees snippets of text relevant to your question, often missing the broader context of the paper. When querying the full length of a document directly without Vector stores, you end up paying full price for the input tokens every single time.</li>
+  <li><strong>Gemini (Context Caching):</strong> Gemini allows you to upload a file and create a Context Cache. This keeps the large document in “warm” memory. You can return a day later, in a completely separate session, ask a follow-up question, and the model immediately responds with the full context already loaded. Because of its specific pricing mechanisms, you pay significantly less for “cached tokens” compared to passing the document from scratch each time. There is no repetitive token billing for the full document, no “indexing” delay, and no “search” phase—it is a true, cost-effective persistent session.</li>
+</ul>
+
+<h3 id="4-workflow-integrity">4. Workflow Integrity</h3>
+
+<p>To mimic Gemini’s native performance with OpenAI, you would have to convert all 39 pages into 39 high-resolution images and send them in a single session. This often exceeds token limits and is remarkably inefficient.</p>
+
+<p>With Gemini, you simply attach the PDF. The model handles the text, the complex mathematical notations, and the logical flow of the paper’s imagery in one go.</p>
+
+<p>While ChatGPT is excellent at processing extracted text, between the two tested models, <strong>Gemini was the only API model capable of natively performing a “visual” peer review.</strong> It understands not just what the researchers <em>wrote</em>, but what they <em>plotted</em>.</p>
+
+<h3 id="5-other-vendors-claude-and-others">5. Other Vendors (Claude and others)</h3>
+
+<p>It is worth noting that other options exist in the market, such as Anthropic’s Claude 3.5 models. According to their documentation, Claude also offers <a href="https://docs.anthropic.com/en/docs/build-with-claude/pdf-support">native PDF support featuring visual understanding</a> and <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching">Prompt Caching</a> mechanisms which similarly reduce latency and token costs for large contexts across separate queries.</p>
+
+<p><em>Please note: No direct testing was conducted on Claude for this specific workflow, and these capabilities are mentioned based purely on their official documentation.</em></p>
+
+<hr />
+
+<h3 id="the-proof-testing-the-models">The Proof: Testing the Models</h3>
+
+<p>I asked both models to analyze a specific diagram from the paper to see how they handled visual data.</p>
+
+<h4 id="test-1-gemini-native-pdf-upload">Test 1: Gemini (Native PDF Upload)</h4>
+
+<blockquote>
+  <p><strong>User:</strong> Please analyze the log frequency ratio diagram in this PDF.</p>
+
+  <p><strong>Gemini:</strong> Based on page 17 of the document, Figure 3 is a horizontal dot plot titled “LLM based feedback emphasizes certain aspects more than humans.”</p>
+  <ul>
+    <li><strong>Y-axis:</strong> Lists 11 categorized aspects of scientific feedback…</li>
+    <li><strong>X-axis:</strong> Labeled “log Frequency Ratio (GPT-4/Human)”, ranging from -1 to 1.</li>
+    <li><strong>Position &amp; Color:</strong> Dots to the right (pink/red) are mentioned more frequently by GPT-4. Dots to the left (blue/purple) are mentioned more frequently by humans…</li>
+    <li><strong>Key Findings:</strong> GPT-4 is over 10 times less likely to comment on novelty but over 7 times more likely to discuss research implications compared to human reviewers.</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <p><strong>User:</strong> What are the primary colors used in the log frequency ratio diagram?</p>
+
+  <p><strong>Gemini:</strong> The primary colors used are shades of blue, purple, and red (specifically a reddish-pink or salmon color)… Blue/Deep Purple is used for aspects more frequently mentioned by human reviewers… Red/Pink is used for aspects more frequently mentioned by GPT-4.</p>
+</blockquote>
+
+<p><em>Result: Flawless visual and contextual understanding.</em></p>
+
+<h4 id="test-2-gpt-4o-api-pdf-uploaded-as-file">Test 2: GPT-4o API (PDF Uploaded as File)</h4>
+
+<blockquote>
+  <p><strong>User:</strong> Please analyze the log frequency ratio diagram in this PDF.</p>
+
+  <p><strong>GPT-4o:</strong> The log frequency ratio diagram… compares how frequently GPT-4 comments on various aspects… The circle sizes denote the prevalence of each aspect in human feedback… <em>(Proceeds to summarize text accurately but misses visual layout).</em></p>
+</blockquote>
+
+<blockquote>
+  <p><strong>User:</strong> What are the primary colors used in the log frequency ratio diagram?</p>
+
+  <p><strong>GPT-4o:</strong> The primary colors used… are shades of blue and shades of red. Blue shades represent aspects where GPT-4 comments more frequently… while red shades indicate aspects where GPT-4 comments less frequently.</p>
+</blockquote>
+
+<p><em>Result: GPT-4o hallucinated the color mapping, guessing based on standard heat-map conventions and getting the assignments backward.</em></p>
+
+<h4 id="test-3-gpt-4o-api-diagram-uploaded-manually-as-jpg">Test 3: GPT-4o API (Diagram Uploaded Manually as JPG)</h4>
+
+<blockquote>
+  <p><strong>User:</strong> What are the primary colors used in the log frequency ratio diagram?</p>
+
+  <p><strong>GPT-4o:</strong> The primary colors used in the log frequency ratio diagram are purple and blue. There is also a small red dot indicating a data point.</p>
+</blockquote>
+
+<p><em>Result: Even when force-fed the image, GPT-4o struggled to accurately describe the distinct blue-to-pink/red gradient that Gemini easily identified.</em></p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>For academic work where a log-frequency ratio diagram is as important as the written conclusion, Gemini provides a level of visual accuracy and architectural simplicity that the OpenAI Assistants API currently cannot match.</p>]]></content><author><name>Rauf Aliev</name></author><category term="Retrieval-Augmented Generation (RAG)" /><category term="Multimodal Search (Text, Image, Audio)" /><category term="Algorithms &amp; Models" /><category term="Information Retrieval (IR)" /><summary type="html"><![CDATA[Gemini API offers significant architectural and functional advantages over GPT-4 API, particularly when handling complex, multi-page scientific documents]]></summary></entry><entry><title type="html">Automatic Facet Discovery in E-Commerce Search</title><link href="https://www.testmysearch.com/blog/2025/09/06/facet-discovery.html" rel="alternate" type="text/html" title="Automatic Facet Discovery in E-Commerce Search" /><published>2025-09-06T00:00:00-04:00</published><updated>2025-09-06T00:00:00-04:00</updated><id>https://www.testmysearch.com/blog/2025/09/06/facet-discovery</id><content type="html" xml:base="https://www.testmysearch.com/blog/2025/09/06/facet-discovery.html"><![CDATA[<p>This paper addresses a significant challenge in e-commerce information retrieval: the failure of standard keyword search systems to correctly interpret complex user queries that contain product attributes. Queries such as “blue XL Burton jacket” are often processed as a simple set of keywords, leading to irrelevant results and compelling users to engage in a laborious manual filtering process. We present a proof-of-concept (PoC) for an automatic facet discovery system designed to parse user queries, identify terms corresponding to product facets (e.g., color, brand, size), and apply these filters automatically. This research demonstrates a practical methodology for bridging the semantic gap between unstructured free-text search and structured faceted navigation, thereby enhancing result relevance and improving the overall user experience.</p>
 
 <p>A video demonstration of the system, implemented on the Hybris accelerator platform, is provided below.</p>
 
