@@ -2,7 +2,6 @@
 layout: post
 title: "Gemini API offers significant architectural and functional advantages over GPT-4 API, particularly when handling complex, multi-page scientific document"
 date: 2026-02-27
-pdf_link: /pdfs/gemini-vs-gpt4-multimodal-analysis.pdf
 tags:
   - Retrieval-Augmented Generation (RAG)
   - Multimodal Search (Text, Image, Audio)
@@ -99,7 +98,3 @@ I asked both models to analyze a specific diagram from the paper to see how they
 > **GPT-4o:** The primary colors used in the log frequency ratio diagram are purple and blue. There is also a small red dot indicating a data point.
 
 *Result: Even when force-fed the image, GPT-4o struggled to accurately describe the distinct blue-to-pink/red gradient that Gemini easily identified.*
-
-### Conclusion
-
-For academic work where a log-frequency ratio diagram is as important as the written conclusion, Gemini provides a level of visual accuracy and architectural simplicity that the OpenAI Assistants API currently cannot match.
